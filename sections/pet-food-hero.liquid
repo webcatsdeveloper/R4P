@@ -68,6 +68,11 @@
     position: relative;
   }
 
+  .pet-hero__heading-sub-inner {
+    display: inline-block;
+    position: relative;
+  }
+
   .pet-hero__heading-line3 {
     display: block;
     position: relative;
@@ -79,6 +84,8 @@
     margin-bottom: {{ section.settings.l3_margin_bottom }}px;
     {% if section.settings.l3_font_family == 'caveat' %}
       font-family: 'Caveat', cursive;
+    {% elsif section.settings.l3_font_family == 'georgia' %}
+      font-family: 'Georgia', serif;
     {% else %}
       font-family: 'Outfit', sans-serif;
     {% endif %}
@@ -124,22 +131,21 @@
     {% if section.settings.wr_right != "unset" %}right: {{ section.settings.wr_right }}%;{% else %}right: auto;{% endif %}
   }
 
-  /* 3. Sparkle Star Left */
   .decor-sparkle-left {
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%) translate(-12px, 0);
     width: {{ section.settings.sl_width }}px;
-    {% if section.settings.sl_top != "unset" %}top: {{ section.settings.sl_top }}%;{% else %}top: auto;{% endif %}
-    {% if section.settings.sl_bottom != "unset" %}bottom: {{ section.settings.sl_bottom }}%;{% else %}bottom: auto;{% endif %}
-    {% if section.settings.sl_left != "unset" %}left: {{ section.settings.sl_left }}%;{% else %}left: auto;{% endif %}
-    {% if section.settings.sl_right != "unset" %}right: {{ section.settings.sl_right }}%;{% else %}right: auto;{% endif %}
   }
 
   /* 4. Sparkle Star Right */
   .decor-sparkle-right {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%) translate(12px, 0);
     width: {{ section.settings.sr_width }}px;
-    {% if section.settings.sr_top != "unset" %}top: {{ section.settings.sr_top }}%;{% else %}top: auto;{% endif %}
-    {% if section.settings.sr_bottom != "unset" %}bottom: {{ section.settings.sr_bottom }}%;{% else %}bottom: auto;{% endif %}
-    {% if section.settings.sr_left != "unset" %}left: {{ section.settings.sr_left }}%;{% else %}left: auto;{% endif %}
-    {% if section.settings.sr_right != "unset" %}right: {{ section.settings.sr_right }}%;{% else %}right: auto;{% endif %}
   }
 
   /* 5. Bowl Burst Left */
@@ -211,6 +217,15 @@
     transform: rotate({{ section.settings.flake_3_rotation }}deg);
   }
 
+  .flake-4 {
+    width: {{ section.settings.flake_4_size }}px;
+    {% if section.settings.flake_4_top != "unset" %}top: {{ section.settings.flake_4_top }}px;{% else %}top: auto;{% endif %}
+    {% if section.settings.flake_4_bottom != "unset" %}bottom: {{ section.settings.flake_4_bottom }}px;{% else %}bottom: auto;{% endif %}
+    {% if section.settings.flake_4_left != "unset" %}left: {{ section.settings.flake_4_left }}%;{% else %}left: auto;{% endif %}
+    {% if section.settings.flake_4_right != "unset" %}right: {{ section.settings.flake_4_right }}%;{% else %}right: auto;{% endif %}
+    transform: rotate({{ section.settings.flake_4_rotation }}deg);
+  }
+
   .pet-hero__bowl-img {
     width: 100%;
     height: auto;
@@ -274,7 +289,13 @@
     .pet-hero__heading-line3 { font-size: calc({{ section.settings.l3_font_size }}px * 0.65); }
     .pet-hero__heading-highlight { font-size: calc({{ section.settings.highlight_font_size }}px * 0.65); }
     .pet-hero__decor { transform: scale(0.7); animation: none !important; }
+    .decor-sparkle-left { transform: translateY(-50%) translate(-8px, 0) scale(0.7) !important; }
+    .decor-sparkle-right { transform: translateY(-50%) translate(8px, 0) scale(0.7) !important; }
     .pet-hero__flake { transform: scale(0.75) !important; animation: none !important; }
+    .flake-1 { {% if section.settings.flake_1_top != "unset" %}top: calc({{ section.settings.flake_1_top }}px * 0.55) !important;{% endif %} }
+    .flake-2 { {% if section.settings.flake_2_top != "unset" %}top: calc({{ section.settings.flake_2_top }}px * 0.55) !important;{% endif %} }
+    .flake-3 { {% if section.settings.flake_3_top != "unset" %}top: calc({{ section.settings.flake_3_top }}px * 0.55) !important;{% endif %} }
+    .flake-4 { {% if section.settings.flake_4_top != "unset" %}top: calc({{ section.settings.flake_4_top }}px * 0.55) !important;{% endif %} }
     .pet-hero__graphics-wrapper { top: auto !important; bottom: auto !important; left: auto !important; right: auto !important; margin: 0 auto 20px auto !important; }
   }
 </style>
@@ -290,17 +311,20 @@
 
   <div class="pet-hero__container">
     <div class="pet-hero__content">
-      
-      {% if section.settings.sparkle_left != blank %}
-        <div class="pet-hero__decor decor-sparkle-left"><img src="{{ section.settings.sparkle_left | image_url: width: 150 }}" alt=""></div>
-      {% endif %}
-      {% if section.settings.sparkle_right != blank %}
-        <div class="pet-hero__decor decor-sparkle-right"><img src="{{ section.settings.sparkle_right | image_url: width: 150 }}" alt=""></div>
-      {% endif %}
 
       <h2 class="pet-hero__heading">
         <span class="pet-hero__heading-main">{{ section.settings.heading_line_1 }}</span>
-        <span class="pet-hero__heading-sub">{{ section.settings.heading_line_2 }}</span>
+        <span class="pet-hero__heading-sub">
+          <span class="pet-hero__heading-sub-inner">
+            {% if section.settings.sparkle_left != blank %}
+              <span class="pet-hero__decor decor-sparkle-left"><img src="{{ section.settings.sparkle_left | image_url: width: 150 }}" alt=""></span>
+            {% endif %}
+            {{ section.settings.heading_line_2 }}
+            {% if section.settings.sparkle_right != blank %}
+              <span class="pet-hero__decor decor-sparkle-right"><img src="{{ section.settings.sparkle_right | image_url: width: 150 }}" alt=""></span>
+            {% endif %}
+          </span>
+        </span>
         {% if section.settings.heading_line_3 != blank %}
           <span class="pet-hero__heading-line3">{{ section.settings.heading_line_3 }}</span>
         {% endif %}
@@ -313,6 +337,7 @@
           <div class="pet-hero__flake flake-1" style="--base-rot: {{ section.settings.flake_1_rotation }}deg;"><img src="{{ section.settings.food_flake_image | image_url: width: 100 }}" alt=""></div>
           <div class="pet-hero__flake flake-2" style="--base-rot: {{ section.settings.flake_2_rotation }}deg;"><img src="{{ section.settings.food_flake_image | image_url: width: 100 }}" alt=""></div>
           <div class="pet-hero__flake flake-3" style="--base-rot: {{ section.settings.flake_3_rotation }}deg;"><img src="{{ section.settings.food_flake_image | image_url: width: 100 }}" alt=""></div>
+          <div class="pet-hero__flake flake-4" style="--base-rot: {{ section.settings.flake_4_rotation }}deg;"><img src="{{ section.settings.food_flake_image | image_url: width: 100 }}" alt=""></div>
         {% endif %}
 
         {% if section.settings.burst_left != blank %}
@@ -457,7 +482,8 @@
       "label": "Font Family",
       "options": [
         { "value": "outfit", "label": "Outfit (Geometric Sans)" },
-        { "value": "caveat", "label": "Caveat (Handwritten/Script)" }
+        { "value": "caveat", "label": "Caveat (Handwritten/Script)" },
+        { "value": "georgia", "label": "Georgia (Classic Serif)" }
       ],
       "default": "outfit"
     },
@@ -751,6 +777,54 @@
       "unit": "deg",
       "label": "Flake 3 Rotation Spin",
       "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Flake 4 Layout Controls"
+    },
+    {
+      "type": "range",
+      "id": "flake_4_size",
+      "min": 10,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Flake 4 Width Size",
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "flake_4_top",
+      "label": "Flake 4 Top (px)",
+      "default": "40"
+    },
+    {
+      "type": "text",
+      "id": "flake_4_bottom",
+      "label": "Flake 4 Bottom (px)",
+      "default": "unset"
+    },
+    {
+      "type": "text",
+      "id": "flake_4_left",
+      "label": "Flake 4 Left (%)",
+      "default": "45"
+    },
+    {
+      "type": "text",
+      "id": "flake_4_right",
+      "label": "Flake 4 Right (%)",
+      "default": "unset"
+    },
+    {
+      "type": "range",
+      "id": "flake_4_rotation",
+      "min": -180,
+      "max": 180,
+      "step": 5,
+      "unit": "deg",
+      "label": "Flake 4 Rotation Spin",
+      "default": 15
     },
     {
       "type": "header",
