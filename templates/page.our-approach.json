@@ -239,22 +239,50 @@
     "you_bring_the_love_7rpmFw": {
       "type": "you-bring-the-love",
       "blocks": {
-        "feature_8p8Uwc": {
+        "feature_1": {
           "type": "feature",
           "settings": {
             "icon_type": "drop",
             "custom_icon": "shopify://shop_images/Layer_1_10.png",
-            "text": "Feature description here"
+            "text": "Controlled low-temperature\ndehydration"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "shield",
+            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "text": "Helps retain\nessential amino\nacids and\nmicronutrients"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "heat",
+            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "text": "Avoids nutrient\ndegradation\ncaused by high-\nheat processing"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "molecule",
+            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "text": "Maintains structural integrity\nof ingredients"
           }
         }
       },
       "block_order": [
-        "feature_8p8Uwc"
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
       ],
       "name": "Pet Science Info Circle",
       "settings": {
-        "bg_color": "#f8c86a",
-        "text_color": "#000000",
+        "bg_color": "#ffcd68",
+        "title_color": "#000000",
+        "text_color": "#222222",
         "arc_color": "#ffffff",
         "intro_heading": "You bring the love.\nWe bring the science.",
         "intro_subtext": "<p>A way of feeding that's built around what their bodies actually need, made practical for everyday life.<br/><strong>So what actually makes it different?</strong></p>",
