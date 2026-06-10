@@ -1,678 +1,303 @@
-{% comment %}
-  Custom Section: Pet Science Features Section with Arc Layout and Animations
-  Author: AI Collaborator
-{% endcomment %}
-
-<div class="pet-science-section color-{{ section.settings.color_scheme }}" id="PetScience-{{ section.id }}">
-  <div class="pet-science-container">
-    
-    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
-      <div class="pet-science-header animate-fade-in-up">
-        {%- if section.settings.heading != blank -%}
-          <h2 class="pet-science-main-heading">
-            {%- assign heading_html = section.settings.heading | newline_to_br -%}
-            {%- if heading_html contains '<br />' -%}
-              {%- assign heading_lines = heading_html | split: '<br />' -%}
-            {%- elsif heading_html contains '<br>' -%}
-              {%- assign heading_lines = heading_html | split: '<br>' -%}
-            {%- else -%}
-              {%- assign heading_lines = heading_html | split: '
-' -%}
-            {%- endif -%}
-            {%- if heading_lines.size > 1 -%}
-              <span class="heading-line-1">{{ heading_lines[0] | strip_html | strip }}</span>
-              <span class="heading-line-2">{{ heading_lines[1] | strip_html | strip }}</span>
-            {%- else -%}
-              {{ section.settings.heading | newline_to_br }}
-            {%- endif -%}
-          </h2>
-        {%- endif -%}
-        {%- if section.settings.subheading != blank -%}
-          <div class="pet-science-subheading">{{ section.settings.subheading | newline_to_br }}</div>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-
-    <div class="pet-science-content-grid">
-      
-      <div class="pet-science-left animate-slide-in-left">
-        {%- if section.settings.left_statement != blank -%}
-          <h3 class="pet-science-statement">{{ section.settings.left_statement | newline_to_br }}</h3>
-        {%- endif -%}
-      </div>
-
-      <div class="pet-science-right">
-        <div class="pet-science-interactive-wrapper">
-          
-          <div class="pet-bowl-image-container animate-scale-in">
-            {%- if section.settings.center_image != blank -%}
-              {{ section.settings.center_image | image_url: width: 600 | image_tag: 
-                loading: 'lazy', 
-                class: 'pet-bowl-img', 
-                widths: '300, 450, 600', 
-                alt: section.settings.center_image.alt | default: "Pet Food Bowl" 
-              }}
-            {%- else -%}
-              <div class="pet-bowl-placeholder">
-                <span>Bowl Image</span>
-              </div>
-            {%- endif -%}
-          </div>
-
-          <svg class="pet-science-arc-svg" viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 340 76.8 A 200 200 0 0 1 340 423.2" stroke="{{ section.settings.arc_color }}" stroke-width="2.5"/>
-          </svg>
-
-          <div class="pet-science-benefits-list">
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'benefit_item' -%}
-                <div class="pet-benefit-item animate-fade-in-right pet-benefit-item-{{ forloop.index }}" style="--animation-delay: {{ forloop.index | multiply: 0.15 }}s;" {{ block.shopify_attributes }}>
-                  
-                  <div class="pet-benefit-icon-wrapper">
-                    {%- if block.settings.icon_image != blank -%}
-                      {{ block.settings.icon_image | image_url: width: 60 | image_tag: loading: 'lazy', class: 'pet-benefit-icon' }}
-                    {%- else -%}
-                      <div class="pet-benefit-icon-fallback"></div>
-                    {%- endif -%}
-                  </div>
-
-                  <div class="pet-benefit-text-wrapper">
-                    {%- if block.settings.title != blank -%}
-                      <h4 class="pet-benefit-title">{{ block.settings.title }}</h4>
-                    {%- endif -%}
-                    {%- if block.settings.description != blank -%}
-                      <p class="pet-benefit-desc">{{ block.settings.description | newline_to_br }}</p>
-                    {%- endif -%}
-                  </div>
-
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<style>
-  /* --- Global Design Rules --- */
-  #PetScience-{{ section.id }} {
-    --bg-color: {{ section.settings.bg_color }};
-    --text-color: {{ section.settings.text_color }};
-    --heading-color: {{ section.settings.heading_color }};
-    --accent-color: {{ section.settings.accent_color }};
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-    overflow: hidden;
-    font-family: 'Degular Demo', sans-serif !important;
-  }
-
-  .pet-science-container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding-left: {{ section.settings.padding_left }}px;
-    padding-right: {{ section.settings.padding_right }}px;
-  }
-
-  /* --- Header Formatting --- */
-  .pet-science-header {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 3rem auto;
-  }
-  .pet-science-main-heading {
-    font-size: clamp(32px, 3.5vw, 46px);
-    line-height: 1.15;
-    margin: 0 0 1rem 0;
-    color: var(--heading-color);
-    letter-spacing: -0.02em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .pet-science-main-heading .heading-line-1 {
-    font-weight: 500;
-  }
-  .pet-science-main-heading .heading-line-2 {
-    font-weight: 800;
-  }
-  .pet-science-subheading {
-    font-size: clamp(1rem, 1.4vw, 1.2rem);
-    line-height: 1.6;
-    font-weight: 400;
-    opacity: 0.85;
-  }
-  .pet-science-subheading b,
-  .pet-science-subheading strong {
-    font-weight: 600 !important;
-  }
-
-  /* --- Layout Split Settings --- */
-  .pet-science-content-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3.5rem;
-    align-items: center;
-  }
-
-  @media (min-width: 990px) {
-    .pet-science-content-grid {
-      grid-template-columns: 4.2fr 7.8fr;
-      gap: 2rem;
-    }
-  }
-
-  .pet-science-statement {
-    font-family: 'Degular Demo', sans-serif !important;
-    font-size: clamp(2.8rem, 5.2vw, 5.2rem);
-    font-weight: 900;
-    line-height: 0.98;
-    color: var(--heading-color);
-    margin: 0;
-    letter-spacing: -0.03em;
-  }
-
-  /* --- Interactive Wrap Area --- */
-  .pet-science-interactive-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    aspect-ratio: 600 / 500;
-    margin: 0 auto;
-  }
-
-  /* Bowl Containment & Sizing */
-  .pet-bowl-image-container {
-    position: absolute;
-    left: 40%;
-    top: 50%;
-    width: 42%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  .pet-bowl-image-container:hover {
-    transform: translate(-50%, -50%) scale(1.03) rotate(1deg);
-  }
-  .pet-bowl-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    filter: drop-shadow(0 25px 45px rgba(0,0,0,0.15));
-  }
-  .pet-bowl-placeholder {
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: #e5e5e5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Solid Curved Guide Line */
-  .pet-science-arc-svg {
-    display: none;
-  }
-  @media (min-width: 990px) {
-    .pet-science-arc-svg {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
-    }
-  }
-
-  /* --- Dynamic Arc List Mapping (Reduced Size Gaps) --- */
-  .pet-science-benefits-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: 100%;
-    z-index: 4;
-  }
-
-  @media (min-width: 990px) {
-    .pet-science-benefits-list {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 3;
-      gap: 0;
-    }
-
-    /* Absolute curved tracking offset paths */
-    .pet-benefit-item {
-      position: absolute !important;
-      pointer-events: auto;
-    }
-    .pet-benefit-item-1 { left: 56.67%; top: 15.36%; }
-    .pet-benefit-item-2 { left: 71.33%; top: 36.32%; }
-    .pet-benefit-item-3 { left: 71.33%; top: 63.68%; }
-    .pet-benefit-item-4 { left: 56.67%; top: 84.64%; }
-  }
-
-  /* Benefit Items Layout styling */
-  .pet-benefit-item {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    transition: transform 0.3s ease;
-    width: max-content;
-  }
-  @media (min-width: 990px) {
-    .pet-benefit-item {
-      transform: translate(-26px, -26px);
-    }
-  }
-
-  /* Icon Formatting */
-  .pet-benefit-icon-wrapper {
-    background: #ffffff;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    min-width: 52px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    z-index: 2;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    padding: 0.7rem;
-    box-sizing: border-box;
-  }
-  .pet-benefit-item:hover .pet-benefit-icon-wrapper {
-    background-color: var(--accent-color);
-    transform: scale(1.08);
-  }
-  .pet-benefit-icon {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-  .pet-benefit-icon-fallback {
-    width: 14px;
-    height: 14px;
-    background: var(--text-color);
-    border-radius: 50%;
-  }
-
-  /* Text Wrapper Typography */
-  .pet-benefit-text-wrapper {
-    display: flex;
-    flex-direction: column;
-    max-width: 280px;
-  }
-  .pet-benefit-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin: 0 0 0.15rem 0;
-    color: var(--heading-color);
-  }
-  .pet-benefit-desc {
-    font-size: 15px;
-    line-height: 1.35;
-    margin: 0;
-    font-weight: 500;
-    color: #2b2b2b;
-  }
-
-  /* --- Smooth Scroll Animations --- */
-  @media (prefers-reduced-motion: no-preference) {
-    .animate-fade-in-up,
-    .animate-slide-in-left,
-    .animate-scale-in,
-    .animate-fade-in-right {
-      opacity: 0;
-      transform: translateY(25px);
-      transition: opacity 0.85s cubic-bezier(0.215, 0.61, 0.355, 1), 
-                  transform 0.85s cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-
-    .animate-slide-in-left { transform: translateX(-45px); }
-    .animate-scale-in { transform: scale(0.85); }
-    .pet-bowl-image-container.animate-scale-in { transform: translate(-50%, -50%) scale(0.85); }
-
-    @media (min-width: 990px) {
-      .pet-benefit-item.animate-fade-in-right {
-        opacity: 0;
-        transform: translate(15px, -26px);
-        transition: opacity 0.85s cubic-bezier(0.215, 0.61, 0.355, 1), 
-                    transform 0.85s cubic-bezier(0.215, 0.61, 0.355, 1);
-        transition-delay: var(--animation-delay, 0s);
-      }
-    }
-
-    /* Active visibility triggers */
-    .is-visible.animate-fade-in-up { opacity: 1; transform: translateY(0); }
-    .is-visible.animate-slide-in-left { opacity: 1; transform: translateX(0); }
-    .is-visible.animate-scale-in { opacity: 1; transform: scale(1); }
-    .is-visible.pet-bowl-image-container.animate-scale-in { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    
-    @media (min-width: 990px) {
-      .pet-benefit-item.animate-fade-in-right.is-visible { 
-        opacity: 1; 
-        transform: translate(-26px, -26px); 
-      }
-      .pet-benefit-item.animate-fade-in-right.is-visible:hover {
-        transform: translate(-26px, -26px) translateX(8px);
-      }
-    }
-    @media (max-width: 989px) {
-      .is-visible.animate-fade-in-right { opacity: 1; transform: translateY(0); }
-    }
-  }
-
-  /* ==========================================================================
-     MOBILE RESPONSIVE HANDLING - CLEAN STACKED OPTIMIZATION
-     ========================================================================== */
-  @media (max-width: 989px) {
-    #PetScience-{{ section.id }} {
-      padding-top: 60px !important;
-      padding-bottom: 60px !important;
-    }
-    
-    .pet-science-container {
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-    }
-
-    .pet-science-header {
-      margin-bottom: 3.5rem;
-    }
-
-    .pet-science-main-heading {
-      font-size: 28px;
-    }
-
-    .pet-science-content-grid {
-      gap: 2.5rem;
-    }
-
-    .pet-science-statement {
-      font-size: 2.4rem;
-      text-align: left;
-      padding-left: 0;
-    }
-
-    .pet-science-subheading { 
-      font-size: clamp(1rem, 1.4vw, 1.2rem); 
-      line-height: 1.6; 
-      font-weight: 400; 
-      opacity: 0.85; 
-      padding: 0 20px;
-    }
-
-    .pet-science-interactive-wrapper {
-      height: auto;
-      aspect-ratio: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2.5rem;
-    }
-
-    /* Reset desktop left overflow alignments seamlessly */
-    .pet-bowl-image-container {
-      position: relative;
-      left: 0 !important;
-      top: 0 !important;
-      width: 100%;
-      max-width: 280px !important;
-      transform: none !important;
-      margin: 0 auto;
-    }
-    
-    .pet-bowl-img {
-      position: static;
-      transform: none;
-    }
-
-    .pet-science-benefits-list {
-      gap: 1.5rem;
-      margin-left: 0 !important;
-      position: static;
-      height: auto;
-    }
-
-    .pet-benefit-item {
-      position: static !important;
-      transform: none !important;
-      text-align: left;
-      align-items: center;
-      width: 100% !important;
-    }
-
-    .pet-benefit-icon-wrapper {
-      width: 46px;
-      height: 46px;
-      min-width: 46px;
-      padding: 0.6rem;
-    }
-
-    .pet-benefit-title {
-      font-size: 1.05rem;
-    }
-
-    .pet-benefit-desc {
-      font-size: 0.9rem;
-    }
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const animationObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          animationObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: "0px 0px -30px 0px"
-    });
-
-    const itemsToAnimate = document.querySelectorAll([
-      '#PetScience-{{ section.id }} .animate-fade-in-up',
-      '#PetScience-{{ section.id }} .animate-slide-in-left',
-      '#PetScience-{{ section.id }} .animate-scale-in',
-      '#PetScience-{{ section.id }} .animate-fade-in-right'
-    ].join(','));
-
-    itemsToAnimate.forEach((element) => {
-      animationObserver.observe(element);
-    });
-  });
-</script>
-
 {% schema %}
 {
-  "name": "Pet Science Features",
+  "name": "Science Feeding",
   "settings": [
     {
-      "type": "header",
-      "content": "Typography & Headings"
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFCD6B"
     },
     {
-      "type": "textarea",
-      "id": "heading",
-      "label": "Section Heading",
+      "type": "text",
+      "id": "heading_top",
+      "label": "Top Heading",
       "default": "You bring the love.\nWe bring the science."
     },
     {
-      "type": "textarea",
-      "id": "subheading",
-      "label": "Subheading Paragraph",
-      "default": "A way of feeding that's built around what their bodies actually need, made practical for everyday life.\nSo what actually makes it different?"
+      "type": "richtext",
+      "id": "subtext_top",
+      "label": "Top Subtext",
+      "default": "<p><a href=\"#\">A way of feeding that's built around what their bodies actually need, made practical for everyday life.</a></p><p><a href=\"#\">So what actually makes it different?</a></p>"
     },
     {
-      "type": "textarea",
-      "id": "left_statement",
-      "label": "Big Left Statement",
+      "type": "text",
+      "id": "heading_left",
+      "label": "Left Heading",
       "default": "Preserving\nwhat\nmatters."
     },
     {
-      "type": "header",
-      "content": "Media Elements"
-    },
-    {
       "type": "image_picker",
-      "id": "center_image",
-      "label": "Center Bowl/Product Image"
-    },
-    {
-      "type": "header",
-      "content": "Color Schemes"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background Color",
-      "default": "#FCD062"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text/Description Color",
-      "default": "#222222"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Icon Hover Background Accent",
-      "default": "#FFF5D1"
-    },
-    {
-      "type": "color",
-      "id": "arc_color",
-      "label": "Arc Guide Line Color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "header",
-      "content": "Section Padding Controls"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 40,
-      "max": 160,
-      "step": 10,
-      "unit": "px",
-      "label": "Padding Top",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 40,
-      "max": 160,
-      "step": 10,
-      "unit": "px",
-      "label": "Padding Bottom",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "padding_left",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "label": "Padding Left (Desktop)",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "padding_right",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "label": "Padding Right (Desktop)",
-      "default": 40
+      "id": "bowl_image",
+      "label": "Center Image (Bowl)"
     }
   ],
   "blocks": [
     {
-      "type": "benefit_item",
-      "name": "Benefit Feature",
+      "type": "feature",
+      "name": "Feature Point",
       "limit": 4,
       "settings": [
         {
           "type": "image_picker",
-          "id": "icon_image",
-          "label": "Feature Icon Image"
+          "id": "icon",
+          "label": "Icon Image"
         },
         {
-          "type": "text",
-          "id": "title",
-          "label": "Benefit Title Focus"
-        },
-        {
-          "type": "text",
-          "id": "description",
-          "label": "Benefit Subtitle/Details"
+          "type": "richtext",
+          "id": "text",
+          "label": "Feature Text",
+          "default": "<p>Feature description here</p>"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Pet Science Features",
+      "name": "Science Feeding Section",
       "blocks": [
-        {
-          "type": "benefit_item",
-          "settings": {
-            "title": "Controlled low-",
-            "description": "temperature dehydration"
-          }
-        },
-        {
-          "type": "benefit_item",
-          "settings": {
-            "title": "Helps retain essential amino",
-            "description": "acids and micronutrients"
-          }
-        },
-        {
-          "type": "benefit_item",
-          "settings": {
-            "title": "Avoids nutrient degradation",
-            "description": "caused by high-heat processing"
-          }
-        },
-        {
-          "type": "benefit_item",
-          "settings": {
-            "title": "Maintains structural",
-            "description": "integrity of ingredients"
-          }
-        }
+        { "type": "feature" },
+        { "type": "feature" },
+        { "type": "feature" },
+        { "type": "feature" }
       ]
     }
   ]
 }
 {% endschema %}
+
+<style>
+  .science-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: 100px 20px;
+    font-family: inherit;
+    overflow: hidden;
+  }
+  .science-container-{{ section.id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Top Content */
+  .science-top-{{ section.id }} {
+    text-align: center;
+    margin-bottom: 90px;
+  }
+  .science-top-{{ section.id }} h2 {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: #000;
+  }
+  .science-top-{{ section.id }} .subtext {
+    font-size: 1.1rem;
+    color: #333;
+  }
+  .science-top-{{ section.id }} .subtext a {
+    color: #0047AB; /* Standard hyperlink blue */
+    text-decoration: underline;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 5px;
+    text-underline-offset: 4px;
+  }
+
+  /* Main Graphic Area */
+  .science-main-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    gap: 40px;
+  }
+  
+  /* Left Heading */
+  .science-left-{{ section.id }} {
+    flex: 0 0 30%;
+    z-index: 2;
+  }
+  .science-left-{{ section.id }} h3 {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: #000;
+    margin: 0;
+  }
+
+  /* Center Graphic (Bowl + Arc) */
+  .science-center-{{ section.id }} {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  .science-bowl-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    z-index: 2;
+  }
+  .science-bowl-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 50%;
+  }
+
+  /* The Perfect Right-Sided Arc */
+  .science-arc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 125%; 
+    aspect-ratio: 1 / 1;
+    border: 2px solid transparent;
+    border-right-color: #fff;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  /* Feature Positioning on the Arc */
+  .science-feature-item {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 280px; 
+    transform: translate(-25px, -25px); /* Centers the 50px icon exactly onto the line */
+  }
+
+  /* Exact trigonometric mapping to match the curve */
+  .science-feature-item:nth-child(1) { top: 15%; left: 85%; }
+  .science-feature-item:nth-child(2) { top: 38%; left: 98.5%; }
+  .science-feature-item:nth-child(3) { top: 62%; left: 98.5%; }
+  .science-feature-item:nth-child(4) { top: 85%; left: 85%; }
+
+  .feature-icon-{{ section.id }} {
+    flex: 0 0 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    padding: 12px;
+  }
+  .feature-icon-{{ section.id }} img, 
+  .feature-icon-{{ section.id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .feature-text-{{ section.id }} {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #222;
+  }
+  .feature-text-{{ section.id }} p { margin: 0; }
+
+  /* Responsive Mobile Breakpoint */
+  @media (max-width: 1100px) {
+    .science-main-{{ section.id }} {
+      flex-direction: column;
+      text-align: center;
+    }
+    .science-left-{{ section.id }} h3 {
+      text-align: center;
+    }
+    .science-center-{{ section.id }} {
+      width: 100%;
+      margin-top: 40px;
+    }
+    .science-arc {
+      display: none; 
+    }
+    .science-mobile-features {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 40px;
+      width: 100%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .science-feature-item {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+      transform: none;
+      width: 100%;
+      text-align: left;
+    }
+  }
+  @media (min-width: 1101px) {
+     .science-mobile-features { display: none; }
+  }
+</style>
+
+<div class="science-section-{{ section.id }}">
+  <div class="science-container-{{ section.id }}">
+    
+    <div class="science-top-{{ section.id }}">
+      <h2>{{ section.settings.heading_top | newline_to_br }}</h2>
+      <div class="subtext">
+        {{ section.settings.subtext_top }}
+      </div>
+    </div>
+
+    <div class="science-main-{{ section.id }}">
+      <div class="science-left-{{ section.id }}">
+        <h3>{{ section.settings.heading_left | newline_to_br }}</h3>
+      </div>
+
+      <div class="science-center-{{ section.id }}">
+        <div class="science-bowl-wrapper">
+          {% if section.settings.bowl_image %}
+            <img src="{{ section.settings.bowl_image | image_url: width: 600 }}" alt="{{ section.settings.bowl_image.alt | escape }}" loading="lazy">
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+          
+          <div class="science-arc">
+            {% for block in section.blocks %}
+              <div class="science-feature-item" {{ block.shopify_attributes }}>
+                <div class="feature-icon-{{ section.id }}">
+                  {% if block.settings.icon %}
+                    <img src="{{ block.settings.icon | image_url: width: 100 }}" alt="" loading="lazy">
+                  {% else %}
+                     <div style="width:20px;height:20px;background:#e0e0e0;border-radius:50%;"></div>
+                  {% endif %}
+                </div>
+                <div class="feature-text-{{ section.id }}">
+                  {{ block.settings.text }}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="science-mobile-features">
+       {% for block in section.blocks %}
+         <div class="science-feature-item" {{ block.shopify_attributes }}>
+           <div class="feature-icon-{{ section.id }}">
+             {% if block.settings.icon %}
+               <img src="{{ block.settings.icon | image_url: width: 100 }}" alt="" loading="lazy">
+             {% else %}
+               <div style="width:20px;height:20px;background:#e0e0e0;border-radius:50%;"></div>
+             {% endif %}
+           </div>
+           <div class="feature-text-{{ section.id }}">
+             {{ block.settings.text }}
+           </div>
+         </div>
+       {% endfor %}
+    </div>
+
+  </div>
+</div>
