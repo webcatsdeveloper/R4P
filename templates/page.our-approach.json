@@ -239,60 +239,24 @@
     "you_bring_the_love_7rpmFw": {
       "type": "you-bring-the-love",
       "blocks": {
-        "benefit_item_U9edE4": {
-          "type": "benefit_item",
+        "feature_8p8Uwc": {
+          "type": "feature",
           "settings": {
-            "icon_image": "shopify://shop_images/Layer_1_10.png",
-            "title": "",
-            "description": "Controlled low-temperature\ndehydration"
-          }
-        },
-        "benefit_item_6hEdiL": {
-          "type": "benefit_item",
-          "settings": {
-            "icon_image": "shopify://shop_images/Layer_1_10.png",
-            "title": "",
-            "description": "Helps retain\nessential amino\nacids and\nmicronutrients"
-          }
-        },
-        "benefit_item_X88jT4": {
-          "type": "benefit_item",
-          "settings": {
-            "icon_image": "shopify://shop_images/Layer_1_10.png",
-            "title": "",
-            "description": "Avoids nutrient\ndegradation\ncaused by high-\nheat processing"
-          }
-        },
-        "benefit_item_kw6E7b": {
-          "type": "benefit_item",
-          "settings": {
-            "icon_image": "shopify://shop_images/Layer_1_10.png",
-            "title": "",
-            "description": "Maintains structural integrity\nof ingredients"
+            "icon": "shopify://shop_images/Layer_1_10.png",
+            "text": "<p>Feature description here</p>"
           }
         }
       },
       "block_order": [
-        "benefit_item_U9edE4",
-        "benefit_item_6hEdiL",
-        "benefit_item_X88jT4",
-        "benefit_item_kw6E7b"
+        "feature_8p8Uwc"
       ],
       "name": "Pet Science Info Circle",
       "settings": {
-        "heading": "You bring the love.\nWe bring the science.",
-        "subheading": "A way of feeding that's built around what their bodies actually need, made practical for everyday life.\n<b>So what actually makes it different?</b>",
-        "left_statement": "Preserving\nwhat\nmatters.",
-        "center_image": "shopify://shop_images/4_1.png",
-        "bg_color": "#ffcd68",
-        "heading_color": "#000000",
-        "text_color": "#222222",
-        "accent_color": "#fff5d1",
-        "arc_color": "#ffffff",
-        "padding_top": 120,
-        "padding_bottom": 120,
-        "padding_left": 100,
-        "padding_right": 100
+        "background_color": "#ffcd6b",
+        "heading_top": "You bring the love.We bring the science.",
+        "subtext_top": "<p><a href=\"#\">A way of feeding that's built around what their bodies actually need, made practical for everyday life.</a></p><p><a href=\"#\">So what actually makes it different?</a></p>",
+        "heading_left": "Preservingwhatmatters.",
+        "bowl_image": "shopify://shop_images/4_1.png"
       }
     },
     "pet_benefits_slider_XeT6Pj": {
