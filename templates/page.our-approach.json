@@ -151,7 +151,7 @@
         "br_right_range": -6,
         "description": "Energy, health, and even the years you get to spend together, all traces back to nutrition.",
         "desc_color": "#555555",
-        "desc_font_size": 18,
+        "desc_font_size": 16,
         "desc_max_width": 480
       }
     },
