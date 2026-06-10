@@ -294,19 +294,6 @@
 <div id="PetInfo-{{ section.id }}">
   <div class="pet-info__container">
     <div class="pet-info__grid">
-      
-      {% if section.settings.hearts_image != blank %}
-        <div class="pet-info__decor pet-info__hearts pet-js-animate">
-          <img src="{{ section.settings.hearts_image | image_url: width: 300 }}" alt="" loading="lazy">
-        </div>
-      {% endif %}
-
-      {% if section.settings.bheart_image != blank %}
-        <div class="pet-info__decor pet-info__black-heart pet-js-animate">
-          <img src="{{ section.settings.bheart_image | image_url: width: 300 }}" alt="" loading="lazy">
-        </div>
-      {% endif %}
-
       <div class="pet-info__content">
         <div class="pet-info__heading-wrapper pet-js-animate">
           <h2 class="pet-info__heading">
@@ -333,6 +320,18 @@
 
       <div class="pet-info__media">
         <div class="pet-info__main-image-wrapper pet-js-animate">
+          {% if section.settings.hearts_image != blank %}
+            <div class="pet-info__decor pet-info__hearts pet-js-animate">
+              <img src="{{ section.settings.hearts_image | image_url: width: 300 }}" alt="" loading="lazy">
+            </div>
+          {% endif %}
+
+          {% if section.settings.bheart_image != blank %}
+            <div class="pet-info__decor pet-info__black-heart pet-js-animate">
+              <img src="{{ section.settings.bheart_image | image_url: width: 300 }}" alt="" loading="lazy">
+            </div>
+          {% endif %}
+
           {% if section.settings.main_image != blank %}
             <img src="{{ section.settings.main_image | image_url: width: 1200 }}" alt="Owner and Pet Frame" class="pet-info__main-img" loading="lazy">
           {% else %}
