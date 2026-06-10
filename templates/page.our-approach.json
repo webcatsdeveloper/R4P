@@ -85,7 +85,7 @@
         "accent_color_red": "#d92b2b",
         "bowl_image": "shopify://shop_images/Group_59508.png",
         "bowl_max_width": 600,
-        "bowl_margin_bottom": 40,
+        "bowl_margin_bottom": 20,
         "bowl_top": "0",
         "bowl_bottom": "unset",
         "bowl_left": "unset",
@@ -151,7 +151,7 @@
         "br_right_range": -6,
         "description": "Energy, health, and even the years you get to spend together, all traces back to nutrition.",
         "desc_color": "#555555",
-        "desc_font_size": 14,
+        "desc_font_size": 18,
         "desc_max_width": 480
       }
     },
