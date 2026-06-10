@@ -326,9 +326,21 @@
           </span>
         </span>
         {% if section.settings.heading_line_3 != blank %}
-          <span class="pet-hero__heading-line3">{{ section.settings.heading_line_3 }}</span>
+          <span class="pet-hero__heading-line3">
+            {%- if section.settings.heading_highlight != blank -%}
+              {{ section.settings.heading_line_3 | remove: "Bowl?" | remove: "bowl?" | remove: "Bowl" | remove: "bowl" | strip }}
+            {%- else -%}
+              {{ section.settings.heading_line_3 }}
+            {%- endif -%}
+          </span>
         {% endif %}
-        <span class="pet-hero__heading-line4">{{ section.settings.heading_line_4 }}</span>
+        <span class="pet-hero__heading-line4">
+          {%- if section.settings.heading_highlight != blank -%}
+            {{ section.settings.heading_line_4 | remove: "Bowl?" | remove: "bowl?" | remove: "Bowl" | remove: "bowl" | strip }}
+          {%- else -%}
+            {{ section.settings.heading_line_4 }}
+          {%- endif -%}
+        </span>
         <span class="pet-hero__heading-highlight">{{ section.settings.heading_highlight }}</span>
       </h2>
 
