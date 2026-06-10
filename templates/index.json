@@ -1,0 +1,541 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_hero_DND8Ed": {
+      "type": "custom-hero",
+      "blocks": {
+        "slide_WGFHtG": {
+          "type": "slide",
+          "settings": {
+            "bg_image": "shopify://shop_images/Homepage_1.png",
+            "hero_heading": "You love them like family.",
+            "hero_description": "And that’s why every choice matters, especially what goes into their bowl.",
+            "button_text": "WHAT’S IN A BOWL?",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_WGFHtG"
+      ],
+      "name": "Custom Hero",
+      "settings": {
+        "autoplay_speed": 5
+      }
+    },
+    "pet_selector_section_f4ghHB": {
+      "type": "pet-selector-section",
+      "blocks": {
+        "pet_card_GyXGrN": {
+          "type": "pet_card",
+          "settings": {
+            "image": "shopify://shop_images/Group_59478.png",
+            "title": "DOGS",
+            "link": ""
+          }
+        },
+        "pet_card_AXLDzG": {
+          "type": "pet_card",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_8.png",
+            "title": "CATS",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "pet_card_GyXGrN",
+        "pet_card_AXLDzG"
+      ],
+      "name": "Pet Selector Section",
+      "settings": {
+        "heading": "Let's find what's right for your little one",
+        "subheading": "Tell us a bit about them and we'll guide you to the right nutrition plan!",
+        "left_curve": "shopify://shop_images/Vector_5.png",
+        "right_curve": "shopify://shop_images/Isolation_Mode_1.png"
+      }
+    },
+    "pet_brand_MLPYAG": {
+      "type": "pet-brand",
+      "name": "Pet Brand Hero",
+      "settings": {
+        "heading": "We all want to do",
+        "heading_highlight": "right by them.",
+        "subtext": "But when it comes to food, it's not always clear what \"right\" really means.",
+        "subtext_bold": "You bring the love. We bring the science.",
+        "button_label": "HERE'S OUR STORY",
+        "button_link": "",
+        "image": "shopify://shop_images/Group_59480.png",
+        "wave_image": "shopify://shop_images/Vector_6_2.png",
+        "accent_color": "#d12b2b"
+      }
+    },
+    "the_science_jhjWpE": {
+      "type": "the-science",
+      "blocks": {
+        "feature_VYCMfW": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_1.png",
+            "label": "Lab-tested",
+            "text": "Independent third-party verification."
+          }
+        },
+        "feature_tGHzci": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_2.png",
+            "label": "Real ingredients",
+            "text": "No fillers. Sourcedfrom supplierswe've vetted."
+          }
+        },
+        "feature_Kxt4gn": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Layer_1_3.png",
+            "label": "Vet-formulated",
+            "text": "Designed with veterinary nutritionists, not marketers."
+          }
+        }
+      },
+      "block_order": [
+        "feature_VYCMfW",
+        "feature_tGHzci",
+        "feature_Kxt4gn"
+      ],
+      "name": "The Science Section",
+      "settings": {
+        "accent_color": "#d12b2b",
+        "image": "shopify://shop_images/Group_59486.png",
+        "title": "Built with the same precision as space-grade nutrition",
+        "description": "The way we prepare our food is inspired by how astronaut meals are handled, preserving nutrients without damaging them. \n\nBecause when it comes to your pet’s health, every detail matters.",
+        "link": "",
+        "left_curve": "shopify://shop_images/Vector_8.png",
+        "right_curve": "shopify://shop_images/Vector_7.png"
+      }
+    },
+    "product_grid_section_wXrYt3": {
+      "type": "product-grid-section",
+      "blocks": {
+        "category_tab_4r9PNP": {
+          "type": "category_tab",
+          "settings": {
+            "title": "All",
+            "collection": "frontpage"
+          }
+        },
+        "category_tab_Xy86jK": {
+          "type": "category_tab",
+          "settings": {
+            "title": "For Dogs",
+            "collection": "frontpage"
+          }
+        },
+        "category_tab_xrdJHz": {
+          "type": "category_tab",
+          "settings": {
+            "title": "For Cats",
+            "collection": "frontpage"
+          }
+        }
+      },
+      "block_order": [
+        "category_tab_4r9PNP",
+        "category_tab_Xy86jK",
+        "category_tab_xrdJHz"
+      ],
+      "name": "Product Grid Selection",
+      "settings": {
+        "heading": "Who are we shopping for today?",
+        "view_all_link": ""
+      }
+    },
+    "instagram_reels_section_wPLexg": {
+      "type": "instagram-reels-section",
+      "blocks": {
+        "reel_aeC46P": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/b546c9ef711af7846e87f9f3aa87a26c57c486da.png",
+            "video_url": ""
+          }
+        },
+        "reel_LqUiLH": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/9fd9744dd9c1e4504778e6c89078593c823e208d.png",
+            "video_url": ""
+          }
+        },
+        "reel_q7Cpbp": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/a4648c94134e110969bce360504dba1ee4b45f80.png",
+            "video_url": ""
+          }
+        },
+        "reel_iQxeAY": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/62bbd6a15548046769cd6767b9f75e822f95f802.png",
+            "video_url": ""
+          }
+        },
+        "reel_G3FyxN": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/9fd9744dd9c1e4504778e6c89078593c823e208d.png",
+            "video_url": ""
+          }
+        },
+        "reel_dhbEdV": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/62bbd6a15548046769cd6767b9f75e822f95f802.png",
+            "video_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "reel_aeC46P",
+        "reel_LqUiLH",
+        "reel_q7Cpbp",
+        "reel_iQxeAY",
+        "reel_G3FyxN",
+        "reel_dhbEdV"
+      ],
+      "name": "Instagram Reels",
+      "settings": {
+        "heading": "Real pets. Real outcomes.",
+        "subtext": "From improved energy to visible health changes, here’s what pet parents have experienced over time with Right 4 Paws."
+      }
+    },
+    "blog_post_grid_HzRG4x": {
+      "type": "blog-post-grid",
+      "blocks": {
+        "post_XTDBfT": {
+          "type": "post",
+          "settings": {
+            "article": "news/201-beautiful-female-dog-names-you-ll-fall-in-love-with",
+            "title": ""
+          }
+        },
+        "post_cNqieG": {
+          "type": "post",
+          "settings": {
+            "article": "news/black-boxer-dogs-personality-traits-and-care-tips",
+            "title": ""
+          }
+        },
+        "post_AJbjcg": {
+          "type": "post",
+          "settings": {
+            "article": "news/beagle-dog-breed-your-expert-guide-to-health-care-and-training",
+            "title": ""
+          }
+        },
+        "post_yE4njk": {
+          "type": "post",
+          "settings": {
+            "article": "news/dog-fever-symptoms-every-pet-parent-should-notice-early",
+            "title": ""
+          }
+        },
+        "post_A9MNnN": {
+          "type": "post",
+          "settings": {
+            "article": "news/labrador-health-problems-early-signs-and-prevention-tips",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "post_XTDBfT",
+        "post_cNqieG",
+        "post_AJbjcg",
+        "post_yE4njk",
+        "post_A9MNnN"
+      ],
+      "name": "Blog Posts Grid",
+      "settings": {
+        "bg_color": "#d72329",
+        "padding_top": 100,
+        "view_more_link": ""
+      }
+    },
+    "instagram_campaign_section_UxpLiM": {
+      "type": "instagram-campaign-section",
+      "blocks": {
+        "image_block_gaVCnf": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/ebc72c40e01dfe4b447c49a588f9347fca4d2069.png"
+          }
+        },
+        "image_block_4qzDQ3": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/3ace08e38ed42e2ca8003f951acad4217a087001.png"
+          }
+        },
+        "image_block_fCMegp": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/49fbf12ca31c79b6983b64eb90610fafc8a9ee94.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_block_gaVCnf",
+        "image_block_4qzDQ3",
+        "image_block_fCMegp"
+      ],
+      "name": "Instagram Campaign",
+      "settings": {
+        "button_text": "FOLLOW US ON INSTAGRAM",
+        "insta_link": ""
+      }
+    },
+    "community_banner_section_8dc7TM": {
+      "type": "community-banner-section",
+      "name": "Community Banner",
+      "settings": {
+        "person_image": "shopify://shop_images/Group_59485.png",
+        "curve_image": "shopify://shop_images/Mask_group_1.png",
+        "heading": "For pet parents<br> who want to do things right.",
+        "subtext": "Be a part of a space where pet parents come together to learn, share, and care better.",
+        "btn_label": "JOIN OUR COMMUNITY",
+        "btn_link": ""
+      }
+    },
+    "trust_section_nPJYKx": {
+      "type": "trust-section",
+      "name": "Trust Section",
+      "settings": {
+        "heading": "They trust you with everything.",
+        "subtext": "Be a part of a space where pet parents come together to learn, share, and care better.",
+        "btn1_label": "EXPLORE PRODUCTS",
+        "btn1_link": "",
+        "btn2_label": "START WITH YOUR PET",
+        "btn2_link": "",
+        "image": "shopify://shop_images/Group_59487.png"
+      }
+    },
+    "product_list_fa6P9H": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_YFtzcL": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_MWeP9V": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_YFtzcL",
+            "product_list_button_MWeP9V"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "disabled": true,
+      "name": "Featured collection",
+      "settings": {
+        "collection": "all",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    }
+  },
+  "order": [
+    "custom_hero_DND8Ed",
+    "pet_selector_section_f4ghHB",
+    "pet_brand_MLPYAG",
+    "the_science_jhjWpE",
+    "product_grid_section_wXrYt3",
+    "instagram_reels_section_wPLexg",
+    "blog_post_grid_HzRG4x",
+    "instagram_campaign_section_UxpLiM",
+    "community_banner_section_8dc7TM",
+    "trust_section_nPJYKx",
+    "product_list_fa6P9H"
+  ]
+}

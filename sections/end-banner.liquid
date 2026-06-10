@@ -1,0 +1,305 @@
+{%- style -%}
+  .cta-banner-section-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 130px {{ section.settings.padding_bottom }}px 130px;
+    background-color: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .cta-banner-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    background-color: {{ section.settings.bg_color }};
+    border-radius: 40px;
+    position: relative;
+    /* Extra top margin allows the overlapping image to break cleanly out of the box */
+    margin-top: 80px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 380px;
+    padding: 40px 60px;
+    overflow: visible; /* Crucial to let the image hang out of the box */
+  }
+
+  /* Abstract Yellow Squiggle Vector Graphic */
+  .cta-banner-squiggles {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Left Side Text Content & Buttons */
+  .cta-content-column {
+    width: 50%;
+    position: relative;
+    z-index: 3;
+  }
+
+  .cta-banner-heading {
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 35px 0;
+    letter-spacing: -0.02em;
+    max-width: 500px;
+  }
+
+  .cta-buttons-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .cta-pill-button {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    display: inline-block;
+  }
+
+  .cta-pill-button:hover {
+    background-color: #1a1a1a;
+    transform: translateY(-2px);
+  }
+
+  /* Right Side Overlapping Model Container */
+  .cta-image-column {
+    width: 50%;
+    position: absolute;
+    right: 40px;
+    bottom: 0;
+    height: calc(100% + 80px); /* Height spans higher than the box boundary */
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .cta-image-column img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: bottom right;
+  }
+
+  /* ==========================================================================
+     MOBILE RESPONSIVE HANDLING - TAILORED EXACTLY TO REFERENCE DESIGN MOCK
+     ========================================================================== */
+  @media (max-width: 991px) {
+    .cta-banner-section-{{ section.id }} {
+      padding: 20px 15px; /* Adds comfortable outer structural viewport spacing */
+    }
+
+    .cta-banner-wrapper {
+      margin-top: 0;
+      flex-direction: column;
+      padding: 50px 24px 0 24px;
+      text-align: center;
+      min-height: auto;
+      overflow: hidden; /* Clips the ribbon background perfectly to the card layout edge */
+      border-radius: 36px;
+    }
+
+    .cta-content-column {
+      width: 100%;
+      margin-bottom: 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .cta-banner-heading {
+      font-size: 2.1rem;
+      max-width: 100%;
+      margin: 0 auto 30px auto;
+      line-height: 1.2;
+    }
+
+    /* Vertical full-width stacked layouts for modern app button styling */
+    .cta-buttons-group {
+      flex-direction: column;
+      width: 100%;
+      gap: 14px;
+      max-width: 290px;
+      margin-bottom: 35px;
+    }
+
+    .cta-pill-button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 16px 20px;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    /* Binds ribbon paths explicitly across full card display areas on screen */
+    .cta-banner-squiggles {
+      width: 100%;
+      height: 100%;
+      bottom: 0;
+      right: 0;
+      opacity: 0.85;
+      z-index: 1;
+    }
+
+    .cta-banner-squiggles svg {
+      object-fit: cover;
+    }
+
+    /* Centers illustration content neatly inside baseline foundations */
+    .cta-image-column {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      height: 270px;
+      right: auto;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      z-index: 2;
+      margin-top: auto;
+    }
+
+    .cta-image-column img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: bottom center;
+    }
+  }
+{%- endstyle -%}
+
+<div class="cta-banner-section-{{ section.id }}">
+  <div class="cta-banner-wrapper">
+    
+    <div class="cta-banner-squiggles">
+      <svg width="100%" height="100%" viewBox="0 0 600 380" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5,378 C60,250 40,160 80,180 C130,210 120,380 200,380 C310,380 340,120 400,130 C450,140 430,300 480,240 C520,180 500,10 600,160" 
+              stroke="{{ section.settings.ribbon_color }}" 
+              stroke-width="8" 
+              stroke-linecap="round" 
+              fill="none"/>
+      </svg>
+    </div>
+
+    <div class="cta-content-column">
+      <h2 class="cta-banner-heading">{{ section.settings.heading }}</h2>
+      <div class="cta-buttons-group">
+        {% if section.settings.btn1_text != blank %}
+          <a href="{{ section.settings.btn1_link }}" class="cta-pill-button">
+            {{ section.settings.btn1_text }}
+          </a>
+        {% endif %}
+        {% if section.settings.btn2_text != blank %}
+          <a href="{{ section.settings.btn2_link }}" class="cta-pill-button">
+            {{ section.settings.btn2_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="cta-image-column">
+      {% if section.settings.model_image != blank %}
+        <img src="{{ section.settings.model_image | img_url: '800x800' }}" alt="Get Started Banner Image" loading="lazy">
+      {% else %}
+        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "CTA Overlap Banner",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Card Color",
+      "default": "#7d75b3"
+    },
+    {
+      "type": "color",
+      "id": "ribbon_color",
+      "label": "Ribbon Vector Line Color",
+      "default": "#f4cb55"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Banner Headline Text",
+      "default": "So, ready to find what’s right for them?"
+    },
+    {
+      "type": "text",
+      "id": "btn1_text",
+      "label": "Button 1 Text Label",
+      "default": "Start With Your Pet"
+    },
+    {
+      "type": "url",
+      "id": "btn1_link",
+      "label": "Button 1 Web Link"
+    },
+    {
+      "type": "text",
+      "id": "btn2_text",
+      "label": "Button 2 Text Label",
+      "default": "Explore Products"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Button 2 Web Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "model_image",
+      "label": "Overlapping Character Image (Transparent PNG highly recommended)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 140,
+      "step": 5,
+      "unit": "px",
+      "label": "Outer Layout Top Margin Spacer",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 140,
+      "step": 5,
+      "unit": "px",
+      "label": "Outer Layout Bottom Margin Spacer",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "CTA Overlap Banner"
+    }
+  ]
+}
+{% endschema %}

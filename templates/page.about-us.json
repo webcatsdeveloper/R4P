@@ -1,0 +1,292 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "about_hero_dynamic_TdxwdM": {
+      "type": "about-hero-dynamic",
+      "name": "About Us Hero Section",
+      "settings": {
+        "bg_color_top": "#e8f5f8",
+        "bg_color_bottom": "#e8f5f8",
+        "split_bg_ratio": 64,
+        "heading_color": "#111111",
+        "accent_color": "#d92b2b",
+        "text_color": "#444444",
+        "container_max_width": 1000,
+        "container_padding_side": 40,
+        "global_padding_top": 152,
+        "global_padding_bottom": 80,
+        "row_gap": 80,
+        "text_col_width": 50,
+        "media_box_max_width": 520,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40,
+        "mobile_row_gap": 60,
+        "mobile_heading_font_size": 36,
+        "top_row_text_offset": 40,
+        "row1_heading_l1": "Let's go",
+        "row1_heading_l2_accent": "back in time",
+        "row1_heading_l2_end": ",",
+        "row1_heading_l3": "shall we?",
+        "heading_font_size": 64,
+        "heading_line_height": "1.1",
+        "heading_margin_bottom": 32,
+        "row1_desc": "<p>The Right4Paws journey began with <strong>Dhanu Abraham Roy</strong>, a dog sport enthusiast and breeder with over 30 years of experience.<br/>For years, his life revolved around dogs. Raising them, training them, and competing at championships across India. Like most pet parents, we relied on commercial kibble. It felt practical, consistent, and easy to rely on.<br/><br/></p>",
+        "desc_font_size": 16,
+        "desc_line_height": "1.6",
+        "desc_max_width": 420,
+        "row1_main_img": "shopify://shop_images/1_42.png",
+        "row1_img_w": 100,
+        "row1_img_x": 0,
+        "row1_img_y": 0,
+        "mobile_row1_img_w": 100,
+        "mobile_row1_img_x": -30,
+        "mobile_row1_img_y": 0,
+        "blob_img": "shopify://shop_images/Isolation_Mode_7.png",
+        "blob_w": 90,
+        "blob_x": 15,
+        "blob_y": 0,
+        "mobile_blob_w": 100,
+        "mobile_blob_x": 0,
+        "mobile_blob_y": 0,
+        "crown_img": "shopify://shop_images/Isolation_Mode_12.png",
+        "crown_w": 48,
+        "crown_x": 20,
+        "crown_y": 36,
+        "mobile_crown_w": 36,
+        "mobile_crown_x": 10,
+        "mobile_crown_y": 36,
+        "hearts_img": "shopify://shop_images/Isolation_Mode_9.png",
+        "hearts_w": 76,
+        "hearts_x": 78,
+        "hearts_y": 6,
+        "mobile_hearts_w": 46,
+        "mobile_hearts_x": 70,
+        "mobile_hearts_y": 10,
+        "spring_img": "shopify://shop_images/Isolation_Mode_10.png",
+        "spring_w": 70,
+        "spring_x": 94,
+        "spring_y": 42,
+        "mobile_spring_w": 50,
+        "mobile_spring_x": 86,
+        "mobile_spring_y": 40,
+        "lines_img": "shopify://shop_images/Isolation_Mode_11.png",
+        "lines_w": 40,
+        "lines_x": 40,
+        "lines_y": 14,
+        "mobile_lines_w": 30,
+        "mobile_lines_x": 26,
+        "mobile_lines_y": 16,
+        "bottom_row_text_offset": 160,
+        "row2_desc": "<p>Soon enough, <strong>Kenath Sameer Achan</strong> joined the journey, bringing with him experience in building and scaling businesses, along with a shared focus on the holistic well-being of pets.<br/><br/><strong>And for a while, things seemed to work.But over time, the gaps became harder to ignore.</strong></p>",
+        "row2_main_img": "shopify://shop_images/1_42.png",
+        "row2_img_w": 100,
+        "row2_img_x": 0,
+        "row2_img_y": 0,
+        "mobile_row2_img_w": 100,
+        "mobile_row2_img_x": -30,
+        "mobile_row2_img_y": 0,
+        "f_wave_l_img": "shopify://shop_images/Vector_5_2.png",
+        "f_wave_l_w": 180,
+        "f_wave_l_x": 0,
+        "f_wave_l_y": 25,
+        "mobile_f_wave_l_w": 100,
+        "mobile_f_wave_l_x": 0,
+        "mobile_f_wave_l_y": 80,
+        "f_wave_r_img": "shopify://shop_images/Isolation_Mode_8.png",
+        "f_wave_r_w": 210,
+        "f_wave_r_x": 0,
+        "f_wave_r_y": 15,
+        "mobile_f_wave_r_w": 100,
+        "mobile_f_wave_r_x": 0,
+        "mobile_f_wave_r_y": 30,
+        "f_wave_b_img": "shopify://shop_images/Vector_7_d1c11351-978a-4b49-a4e9-214942517611.png",
+        "f_wave_b_w": 120,
+        "f_wave_b_x": 0,
+        "f_wave_b_y": 82,
+        "mobile_f_wave_b_w": 70,
+        "mobile_f_wave_b_x": 0,
+        "mobile_f_wave_b_y": 94
+      }
+    },
+    "aboutus_we_found_cQRw7M": {
+      "type": "aboutus-we-found",
+      "name": "Pet Feature Section",
+      "settings": {
+        "bg_color": "#e8f5f8",
+        "heading_text_left": "We found ourselves doing",
+        "heading_text_accent": "different things for different dogs.",
+        "heading_accent_color": "#e63946",
+        "composite_pet_image": "shopify://shop_images/Group_59510.png",
+        "pet_image_width": 600,
+        "accent_top_left": "shopify://shop_images/Vector_8_1.png",
+        "wave_bottom_graphic": "shopify://shop_images/Vector_2_1.png",
+        "wave_vertical_offset": -10
+      }
+    },
+    "as_we_moved_jnyeWR": {
+      "type": "as-we-moved",
+      "blocks": {
+        "card_P3Hjzp": {
+          "type": "card",
+          "settings": {
+            "is_featured": false
+          }
+        },
+        "card_frixhX": {
+          "type": "card",
+          "settings": {
+            "is_featured": false
+          }
+        },
+        "card_M3VgPA": {
+          "type": "card",
+          "settings": {
+            "is_featured": false
+          }
+        },
+        "card_daVw78": {
+          "type": "card",
+          "settings": {
+            "is_featured": false
+          }
+        },
+        "card_N3qN99": {
+          "type": "card",
+          "settings": {
+            "is_featured": false
+          }
+        },
+        "card_mVtAK3": {
+          "type": "card",
+          "settings": {
+            "is_featured": false
+          }
+        }
+      },
+      "block_order": [
+        "card_P3Hjzp",
+        "card_frixhX",
+        "card_M3VgPA",
+        "card_daVw78",
+        "card_N3qN99",
+        "card_mVtAK3"
+      ],
+      "name": "Nutrition Story & Cards",
+      "settings": {
+        "color_bg": "#766fb4",
+        "scroll_speed": 26,
+        "color_text": "#ffffff",
+        "desc_max_width": 840,
+        "desc_font_size": 18,
+        "desc_font_style": "normal",
+        "bold_font_size": 24,
+        "color_featured_border": "#00b4d8",
+        "text_p1": "As we moved into international competitions, expectations changed. Better nutrition became more important, but also more difficult to access.",
+        "text_p2": "Around the same time, a few of our dogs began facing serious health challenges. Some didn't make it through, and others developed long-term conditions.",
+        "text_p3": "That made us pause and look closer.",
+        "text_p4": "At what we were feeding them. At how it was made."
+      }
+    },
+    "aboutus_purple_third_section_dJwmez": {
+      "type": "aboutus-purple-third-section",
+      "name": "Asymmetric Story Block",
+      "settings": {
+        "color_bg": "#766fb4",
+        "color_heading": "#ffffff",
+        "heading_max_width": 480,
+        "title_font_size": 28,
+        "question_font_size": 36,
+        "heading_font_style": "normal",
+        "color_body": "#ffffff",
+        "body_max_width": 540,
+        "body_font_size": 15,
+        "body_font_style": "normal",
+        "text_title": "And we kept circling back to one simple question:",
+        "text_question": "If this doesn't work for us, why would it work for them?",
+        "image_1": "shopify://shop_images/ChatGPT_Image_May_20_2026_12_32_31_PM_1.png",
+        "image_2": "shopify://shop_images/3_1.png",
+        "html_body_text": "<p>So we moved away from kibble, and began working with raw, locally available ingredients. What started as an attempt to do better turned into years of trial, learning, and experimentation. Over time, the process became more structured. Together, we began working with veterinarians and specialists in canine nutrition, grounding what we had learned in science.</p><p>Not to create something new, but to arrive at something that made sense.</p><p>After more than a decade of this work, Right4Paws came into being.</p><p>A way to make this approach more accessible, practical, and easier for everyday pet parents to trust and adopt.</p>"
+      }
+    },
+    "about_us_last_section_rwPK9B": {
+      "type": "about-us-last-section",
+      "name": "Thinking Features Split",
+      "settings": {
+        "bg_color": "#ffffff",
+        "color_heading_1": "#000000",
+        "color_heading_2": "#d32f2f",
+        "title_top": "Today, the thinking",
+        "title_bottom": "remains the same.",
+        "main_image": "shopify://shop_images/5_1.png",
+        "point_1": "Do what's right for them.",
+        "point_2": "Make it simple.",
+        "point_3": "Make it something you can trust.",
+        "paragraph_text": "<p>Because when it comes to them, getting it right shouldn't feel complicated.</p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "about_hero_dynamic_TdxwdM",
+    "aboutus_we_found_cQRw7M",
+    "as_we_moved_jnyeWR",
+    "aboutus_purple_third_section_dJwmez",
+    "about_us_last_section_rwPK9B"
+  ]
+}

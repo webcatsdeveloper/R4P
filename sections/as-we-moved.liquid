@@ -1,0 +1,444 @@
+{%- style -%}
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.color_bg }};
+  }
+  
+  /* Description Typography Controls */
+  #section-{{ section.id }} .purp-section-content {
+    max-width: {{ section.settings.desc_max_width }}px;
+    color: {{ section.settings.color_text }};
+  }
+  
+  #section-{{ section.id }} .purp-section-content p {
+    font-size: {{ section.settings.desc_font_size }}px;
+    font-style: {{ section.settings.desc_font_style }};
+    line-height: 1;
+  }
+  
+  #section-{{ section.id }} .purp-section-content .purp-p4 {
+    font-size: {{ section.settings.bold_font_size }}px;
+  }
+
+  /* Selected/Featured Card Border Accent */
+  #section-{{ section.id }} .purp-card.purp-card-featured {
+    border: 4px solid {{ section.settings.color_featured_border }};
+  }
+
+  /* Auto-Scroll Speed Control */
+  #section-{{ section.id }} .purp-marquee-track {
+    animation: purpMarquee {{ section.settings.scroll_speed }}s linear infinite;
+  }
+{%- endstyle -%}
+
+<div id="section-{{ section.id }}" class="purp-section">
+  <div class="purp-section-container">
+    {% comment %} <div class="purp-dot purp-dot-tl"></div>
+    <div class="purp-dot purp-dot-tr"></div> {% endcomment %}
+
+    <div class="purp-section-content">
+      {% if section.settings.text_p1 != blank %}
+        <p class="purp-p1 purp-scroll-animate stagger-1">{{ section.settings.text_p1 }}</p>
+      {% endif %}
+      {% if section.settings.text_p2 != blank %}
+        <p class="purp-p2 purp-scroll-animate stagger-2">{{ section.settings.text_p2 }}</p>
+      {% endif %}
+      {% if section.settings.text_p3 != blank %}
+        <p class="purp-p3 purp-scroll-animate stagger-3">{{ section.settings.text_p3 }}</p>
+      {% endif %}
+      {% if section.settings.text_p4 != blank %}
+        <p class="purp-p4 purp-scroll-animate stagger-4"><strong>{{ section.settings.text_p4 }}</strong></p>
+      {% endif %}
+    </div>
+
+    <div class="purp-marquee-viewport purp-scroll-animate stagger-5">
+      <div class="purp-marquee-track">
+        
+        <div class="purp-marquee-group">
+          {% for block in section.blocks %}
+            {% if block.type == 'card' %}
+              {% assign card_index = forloop.index | modulo: 6 | plus: 1 %}
+              <div class="purp-card purp-card-{{ card_index }} {% if block.settings.is_featured %}purp-card-featured{% else %}purp-card-vertical{% endif %}" {{ block.shopify_attributes }}>
+                <div class="purp-card-inner">
+                  {% if block.settings.image != blank %}
+                    {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.image.alt, class: 'purp-card-img' }}
+                  {% else %}
+                    {{ 'collection-1' | placeholder_svg_tag: 'purp-card-placeholder' }}
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="purp-marquee-group" aria-hidden="true">
+          {% for block in section.blocks %}
+            {% if block.type == 'card' %}
+              {% assign card_index = forloop.index | modulo: 6 | plus: 1 %}
+              <div class="purp-card purp-card-{{ card_index }} {% if block.settings.is_featured %}purp-card-featured{% else %}purp-card-vertical{% endif %}">
+                <div class="purp-card-inner">
+                  {% if block.settings.image != blank %}
+                    {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.image.alt, class: 'purp-card-img' }}
+                  {% else %}
+                    {{ 'collection-1' | placeholder_svg_tag: 'purp-card-placeholder' }}
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<style>
+  /* --- Section structural layouts --- */
+  .purp-section {
+    padding: 100px 0 20px 0 !important;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .purp-section-container {
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* White Corner Accents */
+  .purp-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    top: -40px;
+    z-index: 20;
+  }
+  .purp-dot-tl { left: 40px; }
+  .purp-dot-tr { right: 40px; }
+
+  /* Description Box Styles */
+  .purp-section-content {
+    text-align: center;
+    margin: 0 auto 60px auto;
+    padding: 0 20px;
+    z-index: 10;
+    position: relative;
+  }
+  .purp-section-content p {
+    margin: 0 auto 1.4em auto;
+    font-weight:0;
+  }
+  .purp-section-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* --- Carousel Marquee Engine --- */
+  .purp-marquee-viewport {
+    width: 100%;
+    overflow: hidden;
+    padding: 60px 0;
+    position: relative;
+    display: flex;
+  }
+
+  .purp-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .purp-marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .purp-marquee-group {
+    display: flex;
+    align-items: flex-end; /* Keeps alignment flat along baseline */
+    justify-content: space-around;
+  }
+
+  /* Individual Card Base Setup */
+  .purp-card {
+    background-color: #e5e5e5;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    position: relative;
+    border-radius: 6px;
+    margin: 0 28px; 
+    flex-shrink: 0;
+    transition: transform 0.3s ease, border 0.2s ease;
+  }
+
+  /* Standard Base Cards = Vertical Shape */
+  .purp-card-vertical {
+    width: 230px;
+    height: 320px;
+  }
+
+  /* Selected Card Configuration = Horizontal Shape */
+  .purp-card.purp-card-featured {
+    width: 320px;
+    height: 230px;
+    z-index: 15 !important;
+    /* Elevated scale, slight angle pop, and lifted elevation offset */
+    transform: scale(1.08) rotate(5deg) translateY(-20px) !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+  }
+
+  .purp-card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+
+  .purp-card img,
+  .purp-card-placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Precise fanned transformation offsets to match screenshot curves */
+  .purp-card-1 { transform: rotate(-13deg) translateY(20px); }
+  .purp-card-2 { transform: rotate(-7deg) translateY(5px); }
+  .purp-card-3 { transform: rotate(-2deg) translateY(0px); }
+  .purp-card-4 { transform: rotate(5deg) translateY(8px); }
+  .purp-card-5 { transform: rotate(11deg) translateY(22px); }
+  .purp-card-6 { transform: rotate(16deg) translateY(36px); }
+
+  /* Infinite Scrolling CSS Marquee Engine Keyframes */
+  @keyframes purpMarquee {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+
+  /* =========================================
+     SCROLL ANIMATION ENGINE STYLES
+     ========================================= */
+  .purp-scroll-animate {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1), transform 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+    will-change: opacity, transform;
+  }
+
+  .purp-scroll-animate.is-animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Dynamic Stagger Delays for storytelling flow */
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.25s; }
+  .stagger-3 { transition-delay: 0.4s; }
+  .stagger-4 { transition-delay: 0.55s; }
+  .stagger-5 { transition-delay: 0.7s; } /* Carousel fades up cleanly last */
+
+  /* Responsive Scaling Adjustments */
+  @media screen and (max-width: 767px) {
+    .purp-card-vertical {
+      width: 160px;
+      height: 220px;
+    }
+    .purp-card.purp-card-featured {
+      width: 220px;
+      height: 160px;
+      transform: scale(1.05) rotate(4deg) translateY(-10px) !important;
+    }
+    .purp-card {
+      margin: 0 15px;
+    }
+    .purp-card-1 { transform: rotate(-10deg) translateY(12px); }
+    .purp-card-2 { transform: rotate(-5deg) translateY(4px); }
+    .purp-card-3 { transform: rotate(-1deg) translateY(0px); }
+    .purp-card-4 { transform: rotate(4deg) translateY(4px); }
+    .purp-card-5 { transform: rotate(8deg) translateY(12px); }
+    .purp-card-6 { transform: rotate(12deg) translateY(20px); }
+    
+    .purp-dot { top: -20px; }
+    .purp-dot-tl { left: 20px; }
+    .purp-dot-tr { right: 20px; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const purpAnimationObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-animated');
+          purpAnimationObserver.unobserve(entry.target); // Animates once
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.12, // Triggers when 12% visible
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('#section-{{ section.id }} .purp-scroll-animate').forEach(el => {
+      purpAnimationObserver.observe(el);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Nutrition Story & Cards",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Background"
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background Color",
+      "default": "#7B6FBE"
+    },
+    {
+      "type": "header",
+      "content": "Auto Scroll Controls"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "s",
+      "label": "Scroll Animation Duration",
+      "info": "Lower values crawl faster; higher numbers slide slower and smoother.",
+      "default": 26
+    },
+    {
+      "type": "header",
+      "content": "Description Typography"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Description Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "desc_max_width",
+      "min": 400,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "label": "Description Max Width",
+      "default": 840
+    },
+    {
+      "type": "range",
+      "id": "desc_font_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "desc_font_style",
+      "label": "Font Style",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "bold_font_size",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Bold Line Font Size",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Featured Card Design"
+    },
+    {
+      "type": "color",
+      "id": "color_featured_border",
+      "label": "Featured Border Color",
+      "default": "#00B4D8"
+    },
+    {
+      "type": "header",
+      "content": "Story Text Settings"
+    },
+    {
+      "type": "text",
+      "id": "text_p1",
+      "label": "Paragraph 1 Text",
+      "default": "As we moved into international competitions, expectations changed. Better nutrition became more important, but also more difficult to access."
+    },
+    {
+      "type": "text",
+      "id": "text_p2",
+      "label": "Paragraph 2 Text",
+      "default": "Around the same time, a few of our dogs began facing serious health challenges. Some didn't make it through, and others developed long-term conditions."
+    },
+    {
+      "type": "text",
+      "id": "text_p3",
+      "label": "Paragraph 3 Text",
+      "default": "That made us pause and look closer."
+    },
+    {
+      "type": "text",
+      "id": "text_p4",
+      "label": "Bold Line Text",
+      "default": "At what we were feeding them. At how it was made."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Picture Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_featured",
+          "label": "Select/Feature This Card (Turns Horizontal)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nutrition Infinite Carousel",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card", "settings": { "is_featured": true } },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

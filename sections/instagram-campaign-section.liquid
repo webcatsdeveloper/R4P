@@ -1,0 +1,356 @@
+{% comment %}
+  Instagram Campaign Section
+  - ONLY 3 CARDS VISIBLE
+  - Perfect Center Alignment
+  - One by One Carousel
+  - Infinite Loop
+  - Scroll Reveal Animation
+{% endcomment %}
+
+{%- style -%}
+
+.insta-campaign-{{ section.id }} {
+  padding: 0 0 120px;
+  position: relative;
+  overflow: hidden;
+  font-family: "Degular Demo", sans-serif;
+
+  opacity: 0;
+  transform: translateY(80px);
+  transition: all 1s ease;
+}
+
+.insta-campaign-{{ section.id }}.show-section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* TOP */
+.insta-campaign-top {
+  background: #D72329;
+  height: 10px;
+  position: relative;
+  width: 100%;
+}
+
+/* CURVE */
+.insta-curve-svg {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  fill: #D72329;
+  margin-top: -1px;
+  z-index: 1;
+}
+
+/* CONTAINER */
+.insta-campaign-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+  margin-top: 10px;
+}
+
+/* ===== CAROUSEL ===== */
+
+.insta-carousel-wrapper {
+  width: 1190px; /* EXACT 3 CARDS */
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+}
+
+.insta-campaign-grid {
+  display: flex;
+  gap: 34px;
+  width: max-content;
+
+  animation: instaSlide 12s infinite ease-in-out;
+}
+
+/* ONE BY ONE */
+@keyframes instaSlide {
+
+  0%,20% {
+    transform: translateX(0);
+  }
+
+  25%,45% {
+    transform: translateX(-408px);
+  }
+
+  50%,70% {
+    transform: translateX(-816px);
+  }
+
+  75%,95% {
+    transform: translateX(-1224px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* CARD */
+.insta-campaign-card {
+  width: 374px;
+  height: 468px;
+  flex: 0 0 374px;
+
+  border-radius: 22px;
+  overflow: hidden;
+
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+
+  opacity: 0;
+  transform: translateY(60px) scale(.95);
+
+  transition: all .8s ease;
+}
+
+.insta-campaign-{{ section.id }}.show-section .insta-campaign-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.insta-campaign-card:hover {
+  transform: translateY(-10px) scale(1.03) !important;
+}
+
+.insta-campaign-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* FOOTER */
+.insta-campaign-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+
+  opacity: 0;
+  transform: translateY(30px);
+
+  transition: all .8s ease .4s;
+}
+
+.insta-campaign-{{ section.id }}.show-section .insta-campaign-footer {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* BUTTON */
+.insta-follow-btn {
+  background: #000;
+  color: #fff;
+
+  padding: 20px 55px;
+  border-radius: 100px;
+
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+
+  letter-spacing: .03em;
+  text-transform: uppercase;
+
+  transition: all .3s ease;
+
+  font-family: 'Degular Demo' !important;
+}
+
+.insta-follow-btn:hover {
+  transform: translateY(-4px);
+  background: #111;
+}
+
+/* MOBILE */
+@media(max-width: 1200px){
+
+  .insta-carousel-wrapper{
+    width: 100%;
+    padding-left: 20px;
+  }
+
+  .insta-campaign-card{
+    width: 280px;
+    height: 360px;
+    flex: 0 0 280px;
+  }
+
+  .insta-campaign-grid{
+    gap: 20px;
+  }
+
+  @keyframes instaSlide {
+
+    0%,20%{
+      transform: translateX(0);
+    }
+
+    25%,45%{
+      transform: translateX(-300px);
+    }
+
+    50%,70%{
+      transform: translateX(-600px);
+    }
+
+    75%,95%{
+      transform: translateX(-900px);
+    }
+
+    100%{
+      transform: translateX(0);
+    }
+  }
+}
+
+{%- endstyle -%}
+
+<section class="insta-campaign-{{ section.id }}">
+
+  <div class="insta-campaign-top">
+
+    <svg class="insta-curve-svg"
+      viewBox="0 0 1440 280"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg">
+
+      <path d="M0,0 L0,120 C180,120 280,280 432,280 C584,280 620,60 720,60 C820,60 856,280 1008,280 C1160,280 1260,120 1440,120 L1440,0 Z"></path>
+
+    </svg>
+
+  </div>
+
+  <div class="insta-campaign-container">
+
+    <div class="insta-carousel-wrapper">
+
+      <div class="insta-campaign-grid">
+
+        {% for block in section.blocks %}
+
+          <div class="insta-campaign-card" {{ block.shopify_attributes }}>
+
+            {% if block.settings.image != blank %}
+
+              <img
+                src="{{ block.settings.image | img_url: '800x1000' }}"
+                alt="Instagram Campaign"
+                loading="lazy">
+
+            {% endif %}
+
+          </div>
+
+        {% endfor %}
+
+        {% for block in section.blocks %}
+
+          <div class="insta-campaign-card duplicate-card">
+
+            {% if block.settings.image != blank %}
+
+              <img
+                src="{{ block.settings.image | img_url: '800x1000' }}"
+                alt="Instagram Campaign"
+                loading="lazy">
+
+            {% endif %}
+
+          </div>
+
+        {% endfor %}
+
+      </div>
+
+    </div>
+
+    <div class="insta-campaign-footer">
+
+      <a href="{{ section.settings.insta_link }}"
+         class="insta-follow-btn">
+
+         {{ section.settings.button_text }}
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const section = document.querySelector(".insta-campaign-{{ section.id }}");
+
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if(entry.isIntersecting){
+        section.classList.add("show-section");
+      }
+
+    });
+
+  }, {
+    threshold: 0.2
+  });
+
+  observer.observe(section);
+
+});
+</script>
+
+{% schema %}
+{
+  "name": "Instagram Campaign",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "FOLLOW US ON INSTAGRAM"
+    },
+    {
+      "type": "url",
+      "id": "insta_link",
+      "label": "Instagram Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_block",
+      "name": "Campaign Image",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select Card Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Campaign",
+      "blocks": [
+        { "type": "image_block" },
+        { "type": "image_block" },
+        { "type": "image_block" }
+      ]
+    }
+  ]
+}
+{% endschema %}

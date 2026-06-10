@@ -1,0 +1,305 @@
+<!doctype html>
+<html
+  {% if request.design_mode %}
+    class="shopify-design-mode"
+  {% endif %}
+  lang="{{ request.locale.iso_code }}"
+>
+  <head>
+    {%- if settings.favicon != blank -%}
+      <link
+        rel="icon"
+        type="image/png"
+        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
+      >
+    {%- endif -%}
+
+    {% # theme-check-disable RemoteAsset %}
+    {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
+    {% if settings.transition_to_main_product or settings.page_transition_enabled %}
+      <link
+        rel="expect"
+        href="#MainContent"
+        blocking="render"
+        id="view-transition-render-blocker"
+      >
+    {% endif %}
+
+    {%- render 'meta-tags' -%}
+    {%- render 'stylesheets' -%}
+    {%- render 'fonts' -%}
+    {%- render 'scripts' -%}
+    {%- render 'theme-styles-variables' -%}
+    {%- render 'color-schemes' -%}
+
+    {% if request.design_mode %}
+      {%- render 'theme-editor' -%}
+    {% endif %}
+
+    {{ content_for_header }}
+    {% # theme-check-enable RemoteAsset %}
+
+<style>
+#preloader{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease;
+}
+
+.loader-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.paw-loader img{
+    width: 120px;
+    animation: pawBounce 1.2s infinite ease-in-out;
+}
+
+/* Loading Text */
+.loading-text{
+    margin-top: 12px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #000000;
+    font-family: "Degular Demo", sans-serif;
+    letter-spacing: 0;
+    animation: blink 1.5s infinite;
+}
+
+/* Paw Animation */
+@keyframes pawBounce{
+    0%,100%{
+        transform: translateY(0px) scale(1);
+    }
+    50%{
+        transform: translateY(-8px) scale(1.05);
+    }
+}
+
+/* Text Blink Animation */
+@keyframes blink{
+    0%,100%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.4;
+    }
+}
+
+
+</style>
+
+
+<style>
+@font-face {
+  font-family: 'Degular Demo';
+  src: url('https://cdn.shopify.com/s/files/1/0684/4959/9593/files/DegularDemo-Regular.otf?v=1778499482') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular Demo';
+  src: url('https://cdn.shopify.com/s/files/1/0684/4959/9593/files/DegularDemo-Semibold.otf?v=1778499482') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neusa Next Std';
+  src: url('https://cdn.shopify.com/s/files/1/0684/4959/9593/files/fonnts.com-Neusa_Next_Std_Regular.otf?v=1778510159') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neusa Next Std';
+  src: url('https://cdn.shopify.com/s/files/1/0684/4959/9593/files/fonnts.com-Neusa_Next_Std_Medium.otf?v=1778510159') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neusa Next Std';
+  src: url('https://cdn.shopify.com/s/files/1/0684/4959/9593/files/fonnts.com-Neusa_Next_Std_Bold.otf?v=1778510159') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+body,
+p,
+div,
+a,
+li,
+ul,
+ol,
+button,
+input,
+textarea,
+label,
+small,
+strong,
+em
+{
+  font-family: 'Degular Demo', sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,span  {
+  font-family: 'Neusa Next Std', sans-serif !important;
+}
+</style>
+  </head>
+
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+
+
+<!-- Preloader -->
+{% comment %} <div id="preloader">
+  
+  <div class="loader-wrapper">
+
+    <div class="paw-loader">
+      <img src="https://cdn.shopify.com/s/files/1/0684/4959/9593/files/Group_1.png?v=1778146744" alt="Loading">
+    </div>
+
+    <div class="loading-text">
+      LOADING...
+    </div>
+
+  </div> {% endcomment %}
+
+</div>
+
+    {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
+    <div id="header-group">
+      {% sections 'header-group' %}
+    </div>
+
+    <script>
+      // Inline header height and menu style calculations to prevent layout shift
+      // Note: Updates in calculateHeaderGroupHeight(), updateTransparentHeaderOffset() and setHeaderMenuStyle() utilities.js should be kept in sync with this function
+      (function setHeaderHeighCustomProperties() {
+        /*
+         * Header calculation functions for maintaining CSS variables
+         * Mimic calculateHeaderGroupHeight() in utilities.js
+         */
+        const header = document.querySelector('header-component');
+        const headerGroup = document.querySelector('#header-group');
+        const hasHeaderSection = headerGroup?.querySelector('.header-section');
+
+        if (!header || !headerGroup) return;
+
+        const headerTopRow = header.querySelector('.header__row--top');
+        const headerHeight = header.offsetHeight;
+
+        // Calculate the total height of the header group
+        let headerGroupHeight = 0;
+        const children = headerGroup.children;
+        for (let i = 0; i < children.length; i++) {
+          const element = children[i];
+          if (element === header || !(element instanceof HTMLElement)) continue;
+          headerGroupHeight += element.offsetHeight;
+        }
+
+        // Check for transparent header special case
+        if (header.hasAttribute('transparent') && header.parentElement?.nextElementSibling) {
+          headerGroupHeight += headerHeight;
+        }
+
+        // Set CSS variables
+        document.body.style.setProperty('--header-height', `${headerHeight}px`);
+        document.body.style.setProperty('--header-group-height', `${headerGroupHeight}px`);
+
+        if (headerTopRow) {
+          window.requestAnimationFrame(function () {
+            document.body.style.setProperty('--top-row-height', `${headerTopRow.offsetHeight}px`);
+          });
+        }
+
+        /**
+         * Updates CSS custom properties for transparent header offset calculation
+         * Mimic updateTransparentHeaderOffset() in utilities.js
+         */
+
+        if (!hasHeaderSection || !header?.hasAttribute('transparent')) {
+          document.body.style.setProperty('--transparent-header-offset-boolean', '0');
+          return;
+        }
+
+        const hasImmediateSection = hasHeaderSection.nextElementSibling?.classList.contains('shopify-section');
+
+        const shouldApplyOffset = !hasImmediateSection ? '1' : '0';
+        document.body.style.setProperty('--transparent-header-offset-boolean', shouldApplyOffset);
+      })();
+
+      (function setHeaderMenuStyle() {
+        const headerComponent = document.querySelector('#header-component');
+        if (headerComponent) {
+          const isTouchDevice = 'ontouchstart' in window && navigator.maxTouchPoints > 0;
+          const overflowList = headerComponent?.querySelector('overflow-list');
+          const hasReachedMinimum = overflowList && overflowList.hasAttribute('minimum-reached');
+          headerComponent.dataset.menuStyle = isTouchDevice || hasReachedMinimum ? 'drawer' : 'menu';
+        }
+      })();
+    </script>
+
+    <main
+      id="MainContent"
+      class="content-for-layout"
+      role="main"
+      data-page-transition-enabled="{{ settings.page_transition_enabled }}"
+      data-product-transition="{{ settings.transition_to_main_product }}"
+      data-template="{{ template }}"
+    >
+      {{ content_for_layout }}
+    </main>
+
+    <footer>
+      {% sections 'footer-group' %}
+    </footer>
+
+    {% render 'search-modal' %}
+
+    {% if settings.quick_add or settings.mobile_quick_add %}
+      {% render 'quick-add-modal' %}
+    {% endif %}
+
+
+<script>
+window.addEventListener("load", function () {
+    const preloader = document.getElementById("preloader");
+
+    setTimeout(() => {
+        preloader.style.opacity = "0";
+        preloader.style.visibility = "hidden";
+
+        setTimeout(() => {
+            preloader.style.display = "none";
+        }, 500);
+
+    }, 800);
+});
+</script>
+  </body>
+</html>

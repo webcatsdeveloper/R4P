@@ -1,0 +1,296 @@
+{% comment %}
+  Raw Made Right - Overlay Grid Section
+  Positions the 7 distinct feature points perfectly on top of Rectangle 68.jpg
+{% endcomment %}
+
+<!-- Import geometric sans-serif for sharp text reproduction -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+{% style %}
+  .rmr-overlay-section {
+    padding: 60px 4%;
+    background-color: #ffffff;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .rmr-banner-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    border-radius: 32px;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    aspect-ratio: 2 / 1; /* Matches the exact aspect ratio footprint of Rectangle 68.jpg */
+    display: flex;
+    align-items: center;
+  }
+
+  /* Absolute background handler layer for the raw asset image file */
+  .rmr-background-asset {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Grid wrapper mapped directly to the empty layout region of your banner */
+  .rmr-content-overlay-layer {
+    position: relative;
+    z-index: 2;
+    width: 80%; /* Confines text strictly into the left empty content column space */
+    padding: 40px 0 0 70px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    column-gap: 0px;
+    row-gap: 35px;
+    margin-left:30px;
+    margin-top: 40px; /* Shifts layout block down cleanly below the static embedded main header text */
+  }
+
+  .rmr-point-node {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    width: 80%;
+  }
+
+  .rmr-icon-white-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  }
+
+  .rmr-icon-white-circle svg,
+  .rmr-icon-white-circle img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    color: #111111;
+  }
+
+  .rmr-text-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .rmr-point-title {
+    font-size: 13px;
+    font-weight: 400;
+    color: #111111;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.1px;
+  }
+
+  .rmr-point-desc {
+    font-size: 13px;
+    font-weight: 400;
+    color: #222222;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Responsive Adaptations for Smaller Device Profiles */
+  @media (max-width: 1150px) {
+    .rmr-content-overlay-layer {
+      width: 70%;
+      padding-left: 40px;
+      column-gap: 25px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .rmr-banner-container {
+      aspect-ratio: auto;
+      background-color: #fca0a6; /* Preserves organic color theme structure if image drops down */
+      display: block;
+    }
+    .rmr-background-asset {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+    .rmr-content-overlay-layer {
+      width: 100%;
+      padding: 30px 24px 40px 24px;
+      margin-top: 0;
+      background-color: #fca0a6;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .rmr-overlay-section {
+      padding: 20px 10px;
+    }
+    .rmr-banner-container {
+      border-radius: 20px;
+    }
+    .rmr-content-overlay-layer {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+  }
+{% endstyle %}
+
+<section class="rmr-overlay-section" id="RmrOverlaySection-{{ section.id }}">
+  <div class="rmr-banner-container">
+    
+    <!-- Dynamic Banner Image Background Layer -->
+    {%- if section.settings.base_banner_image != blank -%}
+      <img class="rmr-background-asset" src="{{ section.settings.base_banner_image | image_url: width: 1500 }}" alt="Raw Made Right Layout Banner Base">
+    {%- else -%}
+      {% comment %} Fallback placeholder logic mimicking the layout parameters of Rectangle 68.jpg if unassigned {% endcomment %}
+      <img class="rmr-background-asset" src="https://cdn.shopify.com/s/files/1/0817/3990/7350/files/Rectangle_68_mock.png?v=1710000005" alt="Rectangle 68 Default Context File Target">
+    {%- endif -%}
+
+    <!-- Responsive Text Columns Layer -->
+    <div class="rmr-content-overlay-layer">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="rmr-point-node" {{ block.shopify_attributes }}>
+            <div class="rmr-icon-white-circle">
+              {%- if block.settings.point_icon != blank -%}
+                <img src="{{ block.settings.point_icon | image_url: width: 50 }}" alt="{{ block.settings.title_text | escape }} Icon Accent">
+              {%- else -%}
+                {% comment %} Clean structural inline SVGs matching the point list assignments {% endcomment %}
+                {%- assign loop_index = forloop.index0 -%}
+                {%- case loop_index -%}
+                  {%- when 0 -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v8L4.72 19.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45L14 10V2z"></path><path d="M6 14h12"></path></svg>
+                  {%- when 1 -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 14.14 14.14"></path></svg>
+                  {%- when 2 -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  {%- when 3 -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><line x1="9" y1="15" x2="15" y2="15"></line><line x1="9" y1="11" x2="15" y2="11"></line><path d="M16 2v4"></path><path d="M8 2v4"></path></svg>
+                  {%- when 4 -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-13-7-13S5 10.7 5 15a7 7 0 0 0 7 7z"></path></svg>
+                  {%- when 5 -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                  {%- when 6 -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><circle cx="11.5" cy="15.5" r="2.5"></circle><line x1="16" y1="20" x2="13.25" y2="17.25"></line></svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+            <div class="rmr-text-stack">
+              <h3 class="rmr-point-title">{{ block.settings.title_text }}</h3>
+              <p class="rmr-point-desc">{{ block.settings.description_text }}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Raw Overlay Grid Panel",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "base_banner_image",
+      "label": "Upload Rectangle 68.jpg Base Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "grid_point",
+      "name": "Feature Bullet Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title_text",
+          "label": "Item Bold Title",
+          "default": "Feature Title:"
+        },
+        {
+          "type": "textarea",
+          "id": "description_text",
+          "label": "Item Description Body Copy",
+          "default": "Add descriptive summary points text properties cleanly here."
+        },
+        {
+          "type": "image_picker",
+          "id": "point_icon",
+          "label": "Custom White Circle Bullet Icon (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Raw Made Right Exactly 7 Points Overlay Layout",
+      "blocks": [
+        {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Formulation:",
+            "description_text": "Raw human-grade Ingredients, FEDIAF, Zero Synthetic Additives, Fillers, Starch and Palatants"
+          }
+        },
+        {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Pathogen Control:",
+            "description_text": "3 Stage, Natural and Biological"
+          }
+        },
+        {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Periodic Audits:",
+            "description_text": "Batch wise Palatability and Traceability"
+          }
+        },
+        {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "AAFCO Trials:",
+            "description_text": "Modified for long term health impact"
+          }
+        },
+        {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Multi Factor Controlled Dehydration (MFCD):",
+            "description_text": "Removes moisture, Preserves natural nutrients, stable output"
+          }
+        },
+        {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Packing:",
+            "description_text": "Vacuum & Flushing, Long shelf life"
+          }
+        },
+        {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Value Proposition:",
+            "description_text": "Pricing, Convinience, Clean labelling and Disclosure"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

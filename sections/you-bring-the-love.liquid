@@ -1,0 +1,625 @@
+{% comment %}
+  Custom Section: Pet Science Features Section with Arc Layout and Animations
+  Author: AI Collaborator
+{% endcomment %}
+
+<div class="pet-science-section color-{{ section.settings.color_scheme }}" id="PetScience-{{ section.id }}">
+  <div class="pet-science-container">
+    
+    <div class="pet-science-header animate-fade-in-up">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pet-science-main-heading">{{ section.settings.heading | newline_to_br }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <div class="pet-science-subheading">{{ section.settings.subheading | newline_to_br }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="pet-science-content-grid">
+      
+      <div class="pet-science-left animate-slide-in-left">
+        {%- if section.settings.left_statement != blank -%}
+          <h3 class="pet-science-statement">{{ section.settings.left_statement | newline_to_br }}</h3>
+        {%- endif -%}
+      </div>
+
+      <div class="pet-science-right">
+        <div class="pet-science-interactive-wrapper">
+          
+          <div class="pet-bowl-image-container animate-scale-in">
+            {%- if section.settings.center_image != blank -%}
+              {{ section.settings.center_image | image_url: width: 600 | image_tag: 
+                loading: 'lazy', 
+                class: 'pet-bowl-img', 
+                widths: '300, 450, 600', 
+                alt: section.settings.center_image.alt | default: "Pet Food Bowl" 
+              }}
+            {%- else -%}
+              <div class="pet-bowl-placeholder">
+                <span>Bowl Image</span>
+              </div>
+            {%- endif -%}
+
+            <svg class="pet-science-arc-svg" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 10 10 A 185 185 0 0 1 10 390" stroke="{{ section.settings.arc_color }}" stroke-width="2.5"/>
+            </svg>
+          </div>
+
+          <div class="pet-science-benefits-list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'benefit_item' -%}
+                <div class="pet-benefit-item animate-fade-in-right pet-benefit-item-{{ forloop.index }}" style="--animation-delay: {{ forloop.index | multiply: 0.15 }}s;" {{ block.shopify_attributes }}>
+                  
+                  <div class="pet-benefit-icon-wrapper">
+                    {%- if block.settings.icon_image != blank -%}
+                      {{ block.settings.icon_image | image_url: width: 60 | image_tag: loading: 'lazy', class: 'pet-benefit-icon' }}
+                    {%- else -%}
+                      <div class="pet-benefit-icon-fallback"></div>
+                    {%- endif -%}
+                  </div>
+
+                  <div class="pet-benefit-text-wrapper">
+                    {%- if block.settings.title != blank -%}
+                      <h4 class="pet-benefit-title">{{ block.settings.title }}</h4>
+                    {%- endif -%}
+                    {%- if block.settings.description != blank -%}
+                      <p class="pet-benefit-desc">{{ block.settings.description }}</p>
+                    {%- endif -%}
+                  </div>
+
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  /* --- Global Design Rules --- */
+  #PetScience-{{ section.id }} {
+    --bg-color: {{ section.settings.bg_color }};
+    --text-color: {{ section.settings.text_color }};
+    --heading-color: {{ section.settings.heading_color }};
+    --accent-color: {{ section.settings.accent_color }};
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .pet-science-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: {{ section.settings.padding_left }}px;
+    padding-right: {{ section.settings.padding_right }}px;
+  }
+
+  /* --- Header Formatting --- */
+  .pet-science-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 5rem auto;
+  }
+  .pet-science-main-heading {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0 0 1.5rem 0;
+    color: var(--heading-color);
+    letter-spacing: -0.02em;
+  }
+  .pet-science-subheading {
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    line-height: 1.6;
+    font-weight: 400;
+    opacity: 0.85;
+  }
+
+  /* --- Layout Split Settings --- */
+  .pet-science-content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 990px) {
+    .pet-science-content-grid {
+      grid-template-columns: 4.2fr 7.8fr;
+      gap: 1rem;
+    }
+  }
+
+  .pet-science-statement {
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--heading-color);
+    margin: 0;
+    letter-spacing: -0.03em;
+  }
+
+  /* --- Interactive Wrap Area --- */
+  .pet-science-interactive-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  @media (min-width: 990px) {
+    .pet-science-interactive-wrapper {
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0;
+      min-height: 520px;
+    }
+  }
+
+  /* Bowl Containment & Sizing */
+  .pet-bowl-image-container {
+    position: relative;
+    left:-100px;
+    z-index: 3;
+    width: 100%;
+    max-width: 600px !important;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  @media (min-width: 990px) {
+    .pet-bowl-image-container {
+      max-width: 380px;
+      margin-left: 1.5rem;
+    }
+  }
+  .pet-bowl-image-container:hover {
+    transform: scale(1.03) rotate(1deg);
+  }
+  .pet-bowl-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 25px 45px rgba(0,0,0,0.15));
+  }
+  .pet-bowl-placeholder {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Solid Curved Guide Line */
+  .pet-science-arc-svg {
+    display: none;
+  }
+  @media (min-width: 990px) {
+    .pet-science-arc-svg {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%);
+        height: 130%;
+        width: auto;
+        pointer-events: none;
+        z-index: 1;
+    }
+  }
+
+  /* --- Dynamic Arc List Mapping (Reduced Size Gaps) --- */
+  .pet-science-benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    z-index: 4;
+  }
+
+  @media (min-width: 990px) {
+    .pet-science-benefits-list {
+      position: relative;
+      height: 450px;
+      margin-left: -14.5rem; /* Tighter item clustering closer to bowl */
+      flex: 1;
+      gap: 0;
+    }
+
+    /* Absolute curved tracking offset paths */
+    .pet-benefit-item {
+      position: absolute !important;
+      left: 0;
+      width: 100%;
+      max-width: 440px;
+    }
+    .pet-benefit-item-1 { top: 0%; left: -10px; }
+    .pet-benefit-item-2 { top: 26%; left: 42px; }
+    .pet-benefit-item-3 { top: 56%; left: 42px; }
+    .pet-benefit-item-4 { top: 82%; left: -10px; }
+  }
+
+  /* Benefit Items Layout styling */
+  .pet-benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+  @media (min-width: 990px) {
+    .pet-benefit-item:hover {
+      transform: translateX(8px);
+    }
+  }
+
+  /* Icon Formatting */
+  .pet-benefit-icon-wrapper {
+    background: #ffffff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+    z-index: 2;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    padding: 0.7rem;
+  }
+  .pet-benefit-item:hover .pet-benefit-icon-wrapper {
+    background-color: var(--accent-color);
+    transform: scale(1.08);
+  }
+  .pet-benefit-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .pet-benefit-icon-fallback {
+    width: 14px;
+    height: 14px;
+    background: var(--text-color);
+    border-radius: 50%;
+  }
+
+  /* Text Wrapper Typography */
+  .pet-benefit-text-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .pet-benefit-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 0.15rem 0;
+    color: var(--heading-color);
+  }
+  .pet-benefit-desc {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  /* --- Smooth Scroll Animations --- */
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-fade-in-up,
+    .animate-slide-in-left,
+    .animate-scale-in,
+    .animate-fade-in-right {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.85s cubic-bezier(0.215, 0.61, 0.355, 1), 
+                  transform 0.85s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    .animate-slide-in-left { transform: translateX(-45px); }
+    .animate-scale-in { transform: scale(0.85); }
+
+    @media (min-width: 990px) {
+      .animate-fade-in-right {
+        transform: translateX(35px);
+        transition-delay: var(--animation-delay, 0s);
+      }
+    }
+
+    /* Active visibility triggers */
+    .is-visible.animate-fade-in-up { opacity: 1; transform: translateY(0); }
+    .is-visible.animate-slide-in-left { opacity: 1; transform: translateX(0); margin:-300px 0px 0px 100px; }
+    .is-visible.animate-scale-in { opacity: 1; transform: scale(1); }
+    .is-visible.animate-fade-in-right { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ==========================================================================
+     MOBILE RESPONSIVE HANDLING - CLEAN STACKED OPTIMIZATION
+     ========================================================================== */
+  @media (max-width: 989px) {
+    #PetScience-{{ section.id }} {
+      padding-top: 60px !important;
+      padding-bottom: 60px !important;
+    }
+    
+    .pet-science-container {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+
+    .pet-science-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .pet-science-main-heading {
+      font-size: 28px;
+    }
+
+    .pet-science-content-grid {
+      gap: 2.5rem;
+    }
+
+    .pet-science-statement {
+      font-size: 2.4rem;
+      text-align: left;
+      padding-left:20px;
+    }
+
+    .pet-science-subheading { 
+      font-size: clamp(1rem, 1.4vw, 1.2rem); 
+      line-height: 1.6; 
+      font-weight: 400; 
+      opacity: 0.85; 
+      padding:0 40px;
+    }
+
+    /* Reset desktop left overflow alignments seamlessly */
+    .pet-bowl-image-container {
+      left: 0 !important;
+      max-width: 280px !important;
+      margin: 0 auto;
+    }
+
+    /* Prevent animation conflict issues crashing stack orders on small devices */
+    .is-visible.animate-slide-in-left {
+      margin: 0 !important;
+    }
+
+    .pet-science-benefits-list {
+      gap: 1.5rem;
+      margin-left: 0 !important;
+    }
+
+    .pet-benefit-item {
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    .pet-benefit-icon-wrapper {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      padding: 0.6rem;
+    }
+
+    .pet-benefit-title {
+      font-size: 1.05rem;
+    }
+
+    .pet-benefit-desc {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const animationObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          animationObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: "0px 0px -30px 0px"
+    });
+
+    const itemsToAnimate = document.querySelectorAll([
+      '#PetScience-{{ section.id }} .animate-fade-in-up',
+      '#PetScience-{{ section.id }} .animate-slide-in-left',
+      '#PetScience-{{ section.id }} .animate-scale-in',
+      '#PetScience-{{ section.id }} .animate-fade-in-right'
+    ].join(','));
+
+    itemsToAnimate.forEach((element) => {
+      animationObserver.observe(element);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Pet Science Features",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Typography & Headings"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "You bring the love.\nWe bring the science."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading Paragraph",
+      "default": "A way of feeding that's built around what their bodies actually need, made practical for everyday life.\nSo what actually makes it different?"
+    },
+    {
+      "type": "textarea",
+      "id": "left_statement",
+      "label": "Big Left Statement",
+      "default": "Preserving\nwhat\nmatters."
+    },
+    {
+      "type": "header",
+      "content": "Media Elements"
+    },
+    {
+      "type": "image_picker",
+      "id": "center_image",
+      "label": "Center Bowl/Product Image"
+    },
+    {
+      "type": "header",
+      "content": "Color Schemes"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FCD062"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text/Description Color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Icon Hover Background Accent",
+      "default": "#FFF5D1"
+    },
+    {
+      "type": "color",
+      "id": "arc_color",
+      "label": "Arc Guide Line Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding Controls"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Left (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Right (Desktop)",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_item",
+      "name": "Benefit Feature",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Feature Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Benefit Title Focus"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Benefit Subtitle/Details"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pet Science Features",
+      "blocks": [
+        {
+          "type": "benefit_item",
+          "settings": {
+            "title": "Controlled low-",
+            "description": "temperature dehydration"
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "title": "Helps retain essential amino",
+            "description": "acids and micronutrients"
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "title": "Avoids nutrient degradation",
+            "description": "caused by high-heat processing"
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "title": "Maintains structural",
+            "description": "integrity of ingredients"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

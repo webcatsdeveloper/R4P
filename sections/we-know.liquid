@@ -1,0 +1,1026 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  /* --- BASE SECTION AND CONTAINER STRUCTURE --- */
+  #PetInfo-{{ section.id }} {
+    position: relative;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+    overflow: hidden;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    min-height: 600px;
+  }
+
+  .pet-info__container {
+    width: 100%;
+    max-width: {{ section.settings.container_max_width }}px;
+    margin: 0 auto;
+    padding-left: {{ section.settings.container_padding_left }}px;
+    padding-right: {{ section.settings.container_padding_right }}px;
+    position: relative;
+    z-index: 3;
+    box-sizing: border-box;
+  }
+
+  .pet-info__grid {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: {{ section.settings.center_gap_width }}px;
+    position: relative;
+  }
+
+  /* --- LEFT COLUMN: CONTENT ENGINE WITH 4-AXIS OVERRIDES --- */
+  .pet-info__content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 4;
+    
+    {% if section.settings.content_top != "unset" and section.settings.content_top != "" %}top: {{ section.settings.content_top }}px;{% else %}top: auto;{% endif %}
+    {% if section.settings.content_bottom != "unset" and section.settings.content_bottom != "" %}bottom: {{ section.settings.content_bottom }}px;{% else %}bottom: auto;{% endif %}
+    {% if section.settings.content_left != "unset" and section.settings.content_left != "" %}left: {{ section.settings.content_left }}px;{% else %}left: auto;{% endif %}
+    {% if section.settings.content_right != "unset" and section.settings.content_right != "" %}right: {{ section.settings.content_right }}px;{% else %}right: auto;{% endif %}
+  }
+
+  .pet-info__heading-wrapper {
+    max-width: {{ section.settings.heading_max_width }}px;
+    margin-bottom: {{ section.settings.heading_margin_bottom }}px;
+  }
+
+  .pet-info__heading {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: {{ section.settings.heading_font_size }}px;
+    line-height: {{ section.settings.heading_line_height }};
+    color: {{ section.settings.heading_color }};
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .pet-info__heading span {
+    display: block;
+  }
+
+  .pet-info__heading-line4 {
+    color: {{ section.settings.line4_color }} !important;
+  }
+
+  /* Fixed Red Text Settings Override Framework Matrix */
+  .pet-info__content .pet-info__line5 {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: {{ section.settings.line_5_font_size }}px !important;
+    line-height: {{ section.settings.heading_line_height }} !important;
+    color: {{ section.settings.line5_color }} !important;
+    margin: 0 0 {{ section.settings.line5_margin_bottom }}px 0 !important;
+    letter-spacing: -0.02em !important;
+    display: block !important;
+  }
+
+  .pet-info__desc-block {
+    max-width: {{ section.settings.desc_max_width }}px;
+  }
+
+  .pet-info__desc-p1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: {{ section.settings.p1_font_size }}px;
+    color: {{ section.settings.p1_color }};
+    line-height: 1.5;
+    font-weight: 400;
+    margin: 0 0 {{ section.settings.p1_margin_bottom }}px 0;
+  }
+
+  .pet-info__desc-p2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: {{ section.settings.p2_font_size }}px;
+    color: {{ section.settings.p2_color }};
+    line-height: 1.5;
+    font-weight: 400;
+    margin: 0;
+  }
+  
+  .pet-info__desc-p2 strong {
+    font-weight: 800;
+    color: {{ section.settings.p2_strong_color }};
+  }
+
+  /* --- RIGHT COLUMN: VISUAL MEDIA CANVAS WITH 4-AXIS OVERRIDES --- */
+  .pet-info__media {
+    flex: 0 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .pet-info__main-image-wrapper {
+    width: 100%;
+    max-width: {{ section.settings.image_max_width }}px;
+    position: relative;
+    z-index: 3;
+    
+    {% if section.settings.media_top != "unset" and section.settings.media_top != "" %}top: {{ section.settings.media_top }}px;{% else %}top: auto;{% endif %}
+    {% if section.settings.media_bottom != "unset" and section.settings.media_bottom != "" %}bottom: {{ section.settings.media_bottom }}px;{% else %}bottom: auto;{% endif %}
+    {% if section.settings.media_left != "unset" and section.settings.media_left != "" %}left: {{ section.settings.media_left }}px;{% else %}left: auto;{% endif %}
+    {% if section.settings.media_right != "unset" and section.settings.media_right != "" %}right: {{ section.settings.media_right }}px;{% else %}right: auto;{% endif %}
+  }
+
+  .pet-info__main-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* --- ABSOLUTE LAYER DECORATION ENGINES --- */
+  .pet-info__decor {
+    position: absolute;
+    pointer-events: none;
+  }
+  .pet-info__decor img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .pet-info__hearts {
+    z-index: 5;
+    width: {{ section.settings.hearts_width }}px;
+    {% if section.settings.hearts_top != "unset" and section.settings.hearts_top != "" %}top: {{ section.settings.hearts_top }}%;{% else %}top: auto;{% endif %}
+    {% if section.settings.hearts_bottom != "unset" and section.settings.hearts_bottom != "" %}bottom: {{ section.settings.hearts_bottom }}%;{% else %}bottom: auto;{% endif %}
+    {% if section.settings.hearts_left != "unset" and section.settings.hearts_left != "" %}left: {{ section.settings.hearts_left }}%;{% else %}left: auto;{% endif %}
+    {% if section.settings.hearts_right != "unset" and section.settings.hearts_right != "" %}right: {{ section.settings.hearts_right }}%;{% else %}right: auto;{% endif %}
+  }
+
+  .pet-info__black-heart {
+    z-index: 5;
+    width: {{ section.settings.bheart_width }}px;
+    {% if section.settings.bheart_top != "unset" and section.settings.bheart_top != "" %}top: {{ section.settings.bheart_top }}%;{% else %}top: auto;{% endif %}
+    {% if section.settings.bheart_bottom != "unset" and section.settings.bheart_bottom != "" %}bottom: {{ section.settings.bheart_bottom }}%;{% else %}bottom: auto;{% endif %}
+    {% if section.settings.bheart_left != "unset" and section.settings.bheart_left != "" %}left: {{ section.settings.bheart_left }}%;{% else %}left: auto;{% endif %}
+    {% if section.settings.bheart_right != "unset" and section.settings.bheart_right != "" %}right: {{ section.settings.bheart_right }}%;{% else %}right: auto;{% endif %}
+  }
+
+  .pet-info__bg-curve {
+    z-index: 1;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  /* --- PREMIUM SCROLL ANIMATION SUITE ENGINE --- */
+  .pet-js-animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+
+  .pet-js-animate.pet-animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger delays for left content elements */
+  .pet-info__heading-wrapper.pet-js-animate { transition-delay: 0.1s; }
+  .pet-info__line5.pet-js-animate { transition-delay: 0.25s; }
+  .pet-info__desc-block.pet-js-animate { transition-delay: 0.4s; }
+
+  /* Smooth reveal engine for main image */
+  .pet-info__main-image-wrapper.pet-js-animate {
+    transform: translateY(60px) scale(0.97);
+    transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pet-info__main-image-wrapper.pet-js-animate.pet-animated {
+    transform: translateY(0) scale(1);
+  }
+
+  /* Fun bounce mechanics for floating vector elements */
+  .pet-info__decor.pet-js-animate {
+    transform: scale(0) rotate(-15deg);
+    transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .pet-info__decor.pet-js-animate.pet-animated {
+    transform: scale(1) rotate(0deg);
+  }
+  .pet-info__hearts.pet-js-animate { transition-delay: 0.6s; }
+  .pet-info__black-heart.pet-js-animate { transition-delay: 0.75s; }
+
+  /* --- RESPONSIVE LAYOUT ENGINE FOR MOBILE COHESION (SEPARATE ENGINE CONTROLS) --- */
+  @media screen and (max-width: 991px) {
+    #PetInfo-{{ section.id }} { 
+      padding-top: {{ section.settings.mobile_padding_top }}px; 
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px; 
+    }
+    .pet-info__grid { 
+      flex-direction: column; 
+      gap: {{ section.settings.mobile_center_gap }}px; 
+    }
+    .pet-info__content { 
+      top: 0 !important; 
+      bottom: 0 !important; 
+      left: 0 !important; 
+      right: 0 !important; 
+      text-align: {{ section.settings.mobile_text_alignment }}; 
+      align-items: {% if section.settings.mobile_text_alignment == 'center' %}center{% else %}flex-start{% endif %}; 
+      padding: 0 {{ section.settings.mobile_side_padding }}px;
+    }
+    .pet-info__heading-wrapper, 
+    .pet-info__desc-block { 
+      margin-left: 0; 
+      margin-right: 0; 
+      max-width: 100%;
+    }
+    .pet-info__heading { 
+      font-size: {{ section.settings.mobile_heading_font_size }}px !important; 
+      line-height: 1.15;
+    }
+    .pet-info__content .pet-info__line5 { 
+      font-size: {{ section.settings.mobile_line5_font_size }}px !important; 
+      margin-bottom: {{ section.settings.mobile_line5_margin_bottom }}px !important;
+      line-height: 1.15 !important;
+    }
+    .pet-info__desc-p1, 
+    .pet-info__desc-p2 {
+      font-size: {{ section.settings.mobile_desc_font_size }}px !important;
+      line-height: 1.5;
+    }
+    .pet-info__desc-p1 {
+      margin-bottom: {{ section.settings.mobile_p1_margin_bottom }}px !important;
+    }
+    .pet-info__main-image-wrapper {
+      top: 0 !important; 
+      bottom: 0 !important; 
+      left: 0 !important; 
+      right: 0 !important;
+      max-width: 100%;
+      padding: 0 {{ section.settings.mobile_side_padding }}px;
+    }
+    
+    /* Floating Decorative Vector Placements mapped to Mobile controls */
+    .pet-info__hearts {
+      width: {{ section.settings.mobile_hearts_width }}px !important;
+      {% if section.settings.mobile_hearts_top != "unset" and section.settings.mobile_hearts_top != "" %}top: {{ section.settings.mobile_hearts_top }}% !important;{% else %}top: auto !important;{% endif %}
+      {% if section.settings.mobile_hearts_bottom != "unset" and section.settings.mobile_hearts_bottom != "" %}bottom: {{ section.settings.mobile_hearts_bottom }}% !important;{% else %}bottom: auto !important;{% endif %}
+      {% if section.settings.mobile_hearts_left != "unset" and section.settings.mobile_hearts_left != "" %}left: {{ section.settings.mobile_hearts_left }}% !important;{% else %}left: auto !important;{% endif %}
+      {% if section.settings.mobile_hearts_right != "unset" and section.settings.mobile_hearts_right != "" %}right: {{ section.settings.mobile_hearts_right }}% !important;{% else %}right: auto !important;{% endif %}
+    }
+    .pet-info__black-heart {
+      width: {{ section.settings.mobile_bheart_width }}px !important;
+      {% if section.settings.mobile_bheart_top != "unset" and section.settings.mobile_bheart_top != "" %}top: {{ section.settings.mobile_bheart_top }}% !important;{% else %}top: auto !important;{% endif %}
+      {% if section.settings.mobile_bheart_bottom != "unset" and section.settings.mobile_bheart_bottom != "" %}bottom: {{ section.settings.mobile_bheart_bottom }}% !important;{% else %}bottom: auto !important;{% endif %}
+      {% if section.settings.mobile_bheart_left != "unset" and section.settings.mobile_bheart_left != "" %}left: {{ section.settings.mobile_bheart_left }}% !important;{% else %}left: auto !important;{% endif %}
+      {% if section.settings.mobile_bheart_right != "unset" and section.settings.mobile_bheart_right != "" %}right: {{ section.settings.mobile_bheart_right }}% !important;{% else %}right: auto !important;{% endif %}
+    }
+    .pet-info__container { 
+      padding-left: 0px; 
+      padding-right: 0px; 
+    }
+  }
+</style>
+
+<div id="PetInfo-{{ section.id }}">
+  <div class="pet-info__container">
+    <div class="pet-info__grid">
+      
+      {% if section.settings.hearts_image != blank %}
+        <div class="pet-info__decor pet-info__hearts pet-js-animate">
+          <img src="{{ section.settings.hearts_image | image_url: width: 300 }}" alt="" loading="lazy">
+        </div>
+      {% endif %}
+
+      {% if section.settings.bheart_image != blank %}
+        <div class="pet-info__decor pet-info__black-heart pet-js-animate">
+          <img src="{{ section.settings.bheart_image | image_url: width: 300 }}" alt="" loading="lazy">
+        </div>
+      {% endif %}
+
+      <div class="pet-info__content">
+        <div class="pet-info__heading-wrapper pet-js-animate">
+          <h2 class="pet-info__heading">
+            {% if section.settings.heading_line_1 != blank %}<span>{{ section.settings.heading_line_1 }}</span>{% endif %}
+            {% if section.settings.heading_line_2 != blank %}<span>{{ section.settings.heading_line_2 }}</span>{% endif %}
+            {% if section.settings.heading_line_3 != blank %}<span>{{ section.settings.heading_line_3 }}</span>{% endif %}
+            {% if section.settings.heading_line_4 != blank %}<span class="pet-info__heading-line4">{{ section.settings.heading_line_4 }}</span>{% endif %}
+          </h2>
+        </div>
+
+        {% if section.settings.line_5_text != blank %}
+          <span class="pet-info__line5 pet-js-animate">{{ section.settings.line_5_text }}</span>
+        {% endif %}
+
+        <div class="pet-info__desc-block pet-js-animate">
+          {% if section.settings.p1_content != blank %}
+            <p class="pet-info__desc-p1">{{ section.settings.p1_content }}</p>
+          {% endif %}
+          {% if section.settings.p2_content != blank %}
+            <p class="pet-info__desc-p2">{{ section.settings.p2_content }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="pet-info__media">
+        <div class="pet-info__main-image-wrapper pet-js-animate">
+          {% if section.settings.main_image != blank %}
+            <img src="{{ section.settings.main_image | image_url: width: 1200 }}" alt="Owner and Pet Frame" class="pet-info__main-img" loading="lazy">
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'pet-info__main-img' }}
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {% if section.settings.curve_image != blank %}
+    <div class="pet-info__decor pet-info__bg-curve">
+      <img src="{{ section.settings.curve_image | image_url: width: 2800 }}" alt="" loading="lazy">
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const petAnimItems = document.querySelectorAll('#PetInfo-{{ section.id }} .pet-js-animate');
+    
+    if ('IntersectionObserver' in window) {
+      const petObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('pet-animated');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '0px 0px -8% 0px',
+        threshold: 0.05
+      });
+
+      petAnimItems.forEach(item => petObserver.observe(item));
+    } else {
+      petAnimItems.forEach(item => item.classList.add('pet-animated'));
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Pet Info Canvas Pro",
+  "settings": [
+    {
+      "type": "header",
+      "content": "1. Layout Gaps and Width"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color Base",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Layout Max Width Base",
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "container_padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Outer Edge Gap: Left Side",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "container_padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Outer Edge Gap: Right Side",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "center_gap_width",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Center Gap Between Columns",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Spacing Padding",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Spacing Padding",
+      "default": 120
+    },
+    {
+      "type": "header",
+      "content": "2. Text Area Position Sliders"
+    },
+    {
+      "type": "text",
+      "id": "content_top",
+      "label": "Shift Up/Down: Top Offset (px)",
+      "default": "0"
+    },
+    {
+      "type": "text",
+      "id": "content_bottom",
+      "label": "Shift Up/Down: Bottom Offset (px)",
+      "default": "unset"
+    },
+    {
+      "type": "text",
+      "id": "content_left",
+      "label": "Shift Left/Right: Left Offset (px)",
+      "default": "0"
+    },
+    {
+      "type": "text",
+      "id": "content_right",
+      "label": "Shift Left/Right: Right Offset (px)",
+      "default": "unset"
+    },
+    {
+      "type": "header",
+      "content": "3. Heading Settings (Lines 1-3)"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading Line 1 Content",
+      "default": "We know"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading Line 2 Content",
+      "default": "how much"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Heading Line 3 Content",
+      "default": "you want to"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 30,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 64
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Base Lines 1-3 Text Color",
+      "default": "#111111"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_height",
+      "label": "Heading Line Height Scale Ratio",
+      "default": "1.05"
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Heading Width Fence Limit",
+      "default": 480
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap Below Main Heading Group",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "3b. Black Heading Settings (Line 4)"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_4",
+      "label": "Black Heading Line 4 Content",
+      "default": "get it right."
+    },
+    {
+      "type": "color",
+      "id": "line4_color",
+      "label": "Line 4 Text Color",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "line4_max_width",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Line 4 Controlled Width",
+      "default": 480
+    },
+    {
+      "type": "range",
+      "id": "line4_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Line 4 Top Padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "line4_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Line 4 Bottom Padding",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "4. Red Text Controls"
+    },
+    {
+      "type": "text",
+      "id": "line_5_text",
+      "label": "Line 5 Text Content",
+      "default": "We do too."
+    },
+    {
+      "type": "range",
+      "id": "line_5_font_size",
+      "min": 20,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Line 5 Font Size",
+      "default": 64
+    },
+    {
+      "type": "color",
+      "id": "line5_color",
+      "label": "Line 5 Custom Color Picker",
+      "default": "#D92B2B"
+    },
+    {
+      "type": "range",
+      "id": "line5_margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap Below Line 5 Block",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "5. Description Content Styling"
+    },
+    {
+      "type": "range",
+      "id": "desc_max_width",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Paragraph Width Fence Limit",
+      "default": 420
+    },
+    {
+      "type": "textarea",
+      "id": "p1_content",
+      "label": "Paragraph 1 Main Body Content",
+      "default": "But when it comes to food, there's a lot to choose from, and not all of it is built the same way."
+    },
+    {
+      "type": "range",
+      "id": "p1_font_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Paragraph 1 Font Size",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "p1_color",
+      "label": "Paragraph 1 Text Color",
+      "default": "#555555"
+    },
+    {
+      "type": "range",
+      "id": "p1_margin_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap Between Paragraphs",
+      "default": 24
+    },
+    {
+      "type": "textarea",
+      "id": "p2_content",
+      "label": "Paragraph 2 Content",
+      "default": "<strong>They're not built like us.</strong> So their food shouldn't be either."
+    },
+    {
+      "type": "range",
+      "id": "p2_font_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Paragraph 2 Font Size",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "p2_color",
+      "label": "Paragraph 2 General Text Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "p2_strong_color",
+      "label": "Paragraph 2 Bold Text Override",
+      "default": "#111111"
+    },
+    {
+      "type": "header",
+      "content": "6. Photo Box 4-Axis Position Sliders"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Human + Dog Image Asset"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "min": 200,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "label": "Image Presentation Max Width",
+      "default": 560
+    },
+    {
+      "type": "text",
+      "id": "media_top",
+      "label": "Shift Up/Down: Top Offset (px)",
+      "default": "0"
+    },
+    {
+      "type": "text",
+      "id": "media_bottom",
+      "label": "Shift Up/Down: Bottom Offset (px)",
+      "default": "unset"
+    },
+    {
+      "type": "text",
+      "id": "media_left",
+      "label": "Shift Left/Right: Left Offset (px)",
+      "default": "0"
+    },
+    {
+      "type": "text",
+      "id": "media_right",
+      "label": "Shift Left/Right: Right Offset (px)",
+      "default": "unset"
+    },
+    {
+      "type": "header",
+      "content": "7. Red Hearts Position Engine"
+    },
+    {
+      "type": "image_picker",
+      "id": "hearts_image",
+      "label": "Red Hearts Graphic Asset"
+    },
+    {
+      "type": "range",
+      "id": "hearts_width",
+      "min": 20,
+      "max": 220,
+      "step": 2,
+      "unit": "px",
+      "label": "Red Hearts Display Width",
+      "default": 64
+    },
+    {
+      "type": "text",
+      "id": "hearts_top",
+      "label": "Red Hearts Y Axis: Top (%)",
+      "default": "12"
+    },
+    {
+      "type": "text",
+      "id": "hearts_bottom",
+      "label": "Red Hearts Y Axis: Bottom (%)",
+      "default": "unset"
+    },
+    {
+      "type": "text",
+      "id": "hearts_left",
+      "label": "Red Hearts X Axis: Left (%)",
+      "default": "54"
+    },
+    {
+      "type": "text",
+      "id": "hearts_right",
+      "label": "Red Hearts X Axis: Right (%)",
+      "default": "unset"
+    },
+    {
+      "type": "header",
+      "content": "8. Black Heart Position Engine"
+    },
+    {
+      "type": "image_picker",
+      "id": "bheart_image",
+      "label": "Black Thought Heart Graphic Asset"
+    },
+    {
+      "type": "range",
+      "id": "bheart_width",
+      "min": 20,
+      "max": 220,
+      "step": 2,
+      "unit": "px",
+      "label": "Black Heart Display Width",
+      "default": 80
+    },
+    {
+      "type": "text",
+      "id": "bheart_top",
+      "label": "Black Heart Y Axis: Top (%)",
+      "default": "45"
+    },
+    {
+      "type": "text",
+      "id": "bheart_bottom",
+      "label": "Black Heart Y Axis: Bottom (%)",
+      "default": "unset"
+    },
+    {
+      "type": "text",
+      "id": "bheart_left",
+      "label": "Black Heart X Axis: Left (%)",
+      "default": "unset"
+    },
+    {
+      "type": "text",
+      "id": "bheart_right",
+      "label": "Black Heart X Axis: Right (%)",
+      "default": "15"
+    },
+    {
+      "type": "header",
+      "content": "9. Background Curve Vector Base"
+    },
+    {
+      "type": "image_picker",
+      "id": "curve_image",
+      "label": "Bottom Yellow Asymmetric Curve Asset"
+    },
+    {
+      "type": "header",
+      "content": "📱 MOBILE SETUP MATRIX ENGINE"
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Mobile Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "mobile_side_padding",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Container Outer Side Gaps",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 10,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Spacing: Top Padding",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 10,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Spacing: Bottom Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "mobile_center_gap",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Center Gap Between Stacked Blocks",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_font_size",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "mobile_line5_font_size",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Line 5 Font Size",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "mobile_line5_margin_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap Below Line 5 Block",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_desc_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Paragraph Font Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_p1_margin_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap Between Paragraphs",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "❤️ Mobile Red Hearts Placement Engine"
+    },
+    {
+      "type": "range",
+      "id": "mobile_hearts_width",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Red Hearts Display Width",
+      "default": 46
+    },
+    {
+      "type": "text",
+      "id": "mobile_hearts_top",
+      "label": "Red Hearts Y Axis: Top (%)",
+      "default": "38"
+    },
+    {
+      "type": "text",
+      "id": "mobile_hearts_bottom",
+      "label": "Red Hearts Y Axis: Bottom (%)",
+      "default": "unset"
+    },
+    {
+      "type": "text",
+      "id": "mobile_hearts_left",
+      "label": "Red Hearts X Axis: Left (%)",
+      "default": "32"
+    },
+    {
+      "type": "text",
+      "id": "mobile_hearts_right",
+      "label": "Red Hearts X Axis: Right (%)",
+      "default": "unset"
+    },
+    {
+      "type": "header",
+      "content": "🖤 Mobile Black Heart Placement Engine"
+    },
+    {
+      "type": "range",
+      "id": "mobile_bheart_width",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Black Heart Display Width",
+      "default": 56
+    },
+    {
+      "type": "text",
+      "id": "mobile_bheart_top",
+      "label": "Black Heart Y Axis: Top (%)",
+      "default": "66"
+    },
+    {
+      "type": "text",
+      "id": "mobile_bheart_bottom",
+      "label": "Black Heart Y Axis: Bottom (%)",
+      "default": "unset"
+    },
+    {
+      "type": "text",
+      "id": "mobile_bheart_left",
+      "label": "Black Heart X Axis: Left (%)",
+      "default": "unset"
+    },
+    {
+      "type": "text",
+      "id": "mobile_bheart_right",
+      "label": "Black Heart X Axis: Right (%)",
+      "default": "12"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pet Info Section"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,711 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "grid",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "none",
+            "slideshow_controls_style": "counter",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "right",
+            "thumbnail_width": 44,
+            "thumbnail_radius": 0,
+            "aspect_ratio": "adapt",
+            "constrain_to_viewport": true,
+            "media_fit": "contain",
+            "media_radius": 0,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 28,
+            "sticky_details_desktop": true,
+            "inherit_color_scheme": true,
+            "color_scheme": "scheme-1",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_icgrde": {
+              "type": "group",
+              "name": "Header",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_xrnftG": {
+                  "type": "text",
+                  "name": "Product title",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-primary--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_tVjtKg": {
+                  "type": "price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_xrnftG",
+                "price_tVjtKg"
+              ]
+            },
+            "divider_VJhene": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "variant_picker_R3rGDr": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "text_aEtTtq": {
+              "type": "text",
+              "name": "Product description",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "group_icgrde",
+            "divider_VJhene",
+            "variant_picker_R3rGDr",
+            "buy_buttons_eYQEYi",
+            "text_aEtTtq"
+          ]
+        }
+      },
+      "disabled": true,
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": false,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "product_recommendations_qggXJq": {
+      "type": "product-recommendations",
+      "blocks": {
+        "text_cbcgyb": {
+          "type": "text",
+          "name": "t:names.header",
+          "settings": {
+            "text": "<h3>You may also like </h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h4",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_DNizbJ": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_M7MJkb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_gLWgA6": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_DNizbJ",
+            "product_title_M7MJkb",
+            "price_gLWgA6"
+          ]
+        }
+      },
+      "block_order": [
+        "text_cbcgyb"
+      ],
+      "disabled": true,
+      "name": "t:names.product_recommendations",
+      "settings": {
+        "product": "{{ closest.product }}",
+        "recommendation_type": "related",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "new_main_product_hero_iMpxqL": {
+      "type": "new-main-product-hero",
+      "blocks": {
+        "review_slide_j4PWHA": {
+          "type": "review_slide",
+          "settings": {
+            "quote_text": "We noticed a visible difference in my puppy's digestion and energy within weeks.",
+            "author_name": "Ranjani Divakar",
+            "customer_image": "shopify://shop_images/ChatGPT_Image_May_23_2026_01_02_39_PM_1.png"
+          }
+        },
+        "review_slide_ptGjUA": {
+          "type": "review_slide",
+          "settings": {
+            "quote_text": "We noticed a visible difference in my puppy's digestion and energy within weeks.",
+            "author_name": "jerusha",
+            "customer_image": "shopify://shop_images/ChatGPT_Image_May_23_2026_01_02_39_PM_1.png"
+          }
+        }
+      },
+      "block_order": [
+        "review_slide_j4PWHA",
+        "review_slide_ptGjUA"
+      ],
+      "name": "Main Product Hero",
+      "settings": {
+        "uploaded_feeding_guide_pdf": "https://cdn.shopify.com/s/files/1/0684/4959/9593/files/screencapture-right4p-myshopify-products-taster-pack-adult-all-breeds-2026-06-06-17_11_24.pdf?v=1780746113"
+      }
+    },
+    "product_page_midbanner_6VMjyr": {
+      "type": "product-page-midbanner",
+      "blocks": {
+        "grid_point_8btpjU": {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Formulation:",
+            "description_text": "Raw human-grade Ingredients, FEDIAF, Zero Synthetic Additives, Fillers, Starch and Palatants",
+            "point_icon": "shopify://shop_images/Layer_1.svg"
+          }
+        },
+        "grid_point_UiypDr": {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Multi Factor Controlled Dehydration (MFCD):",
+            "description_text": "Removes moisture, Preserves natural nutrients, stable output",
+            "point_icon": "shopify://shop_images/Layer_1_1.svg"
+          }
+        },
+        "grid_point_TiYApG": {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Pathogen Control:",
+            "description_text": "3 Stage, Natural and Biological",
+            "point_icon": "shopify://shop_images/Layer_1_2.svg"
+          }
+        },
+        "grid_point_Y4mzXa": {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Packing:",
+            "description_text": "Vacuum & Flushing, Long shelf life",
+            "point_icon": "shopify://shop_images/Layer_1_3.svg"
+          }
+        },
+        "grid_point_GXnPwn": {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Periodic Audits:",
+            "description_text": "Batch wise Palatability and Traceability",
+            "point_icon": "shopify://shop_images/Layer_1_4.svg"
+          }
+        },
+        "grid_point_U93HtB": {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "Value Proposition:",
+            "description_text": "Pricing, Convinience, Clean labelling and Disclosure",
+            "point_icon": "shopify://shop_images/Layer_1_5.svg"
+          }
+        },
+        "grid_point_rDVcae": {
+          "type": "grid_point",
+          "settings": {
+            "title_text": "AAFCO Trials:",
+            "description_text": "Modified for long term health impact",
+            "point_icon": "shopify://shop_images/Layer_1_6.svg"
+          }
+        }
+      },
+      "block_order": [
+        "grid_point_8btpjU",
+        "grid_point_UiypDr",
+        "grid_point_TiYApG",
+        "grid_point_Y4mzXa",
+        "grid_point_GXnPwn",
+        "grid_point_U93HtB",
+        "grid_point_rDVcae"
+      ],
+      "name": "Raw Made Right Dynamic Panel Layout",
+      "settings": {
+        "base_banner_image": "shopify://shop_images/Rectangle_68.png"
+      }
+    },
+    "behind_the_product_jbGP4Y": {
+      "type": "behind-the-product",
+      "name": "Science Behind It",
+      "settings": {
+        "dog_hero_image": "shopify://shop_images/Rectangle_124.png",
+        "raw_product_image": "shopify://shop_images/Rectangle_129.png",
+        "heading_text": "The<br>Science<br>Behind It",
+        "node_text_1": "MFC<br>process",
+        "node_text_2": "Better<br>nutrient<br>retention",
+        "node_text_3": "Improved<br>digestibility<br>and<br>absorption",
+        "feat_label_1": "Controlled low-temperature dehydration",
+        "feat_label_2": "Preserves amino acids & micronutrients",
+        "feat_label_3": "Reduced nutrient loss",
+        "feat_label_4": "Higher nutritional density"
+      }
+    },
+    "1780768721094785e6": {
+      "type": "_blocks",
+      "blocks": {
+        "judge_me_reviews_preview_badge_m4F9Ae": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        },
+        "judge_me_reviews_review_widget_kW3jD3": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_preview_badge_m4F9Ae",
+        "judge_me_reviews_review_widget_kW3jD3"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "instagram_reels_section_aiqM4g": {
+      "type": "instagram-reels-section",
+      "blocks": {
+        "reel_FE8cnt": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/b546c9ef711af7846e87f9f3aa87a26c57c486da.png",
+            "video_url": ""
+          }
+        },
+        "reel_M9JGnY": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/9fd9744dd9c1e4504778e6c89078593c823e208d.png",
+            "video_url": ""
+          }
+        },
+        "reel_3nBedy": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/a4648c94134e110969bce360504dba1ee4b45f80.png",
+            "video_url": ""
+          }
+        },
+        "reel_hDtXzA": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/62bbd6a15548046769cd6767b9f75e822f95f802.png",
+            "video_url": ""
+          }
+        },
+        "reel_xNK4xe": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/9fd9744dd9c1e4504778e6c89078593c823e208d.png",
+            "video_url": ""
+          }
+        },
+        "reel_hiiPcN": {
+          "type": "reel",
+          "settings": {
+            "image": "shopify://shop_images/62bbd6a15548046769cd6767b9f75e822f95f802.png",
+            "video_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "reel_FE8cnt",
+        "reel_M9JGnY",
+        "reel_3nBedy",
+        "reel_hDtXzA",
+        "reel_xNK4xe",
+        "reel_hiiPcN"
+      ],
+      "name": "Instagram Reels",
+      "settings": {
+        "heading": "Real pets. Real outcomes.",
+        "subtext": "From improved energy to visible health changes, here’s what pet parents have experienced over time with Right 4 Paws."
+      }
+    },
+    "faq_product_LkVLUB": {
+      "type": "faq-product",
+      "blocks": {
+        "faq_entry_tQ3cem": {
+          "type": "faq_entry",
+          "settings": {
+            "question": "Why is Right4Paws pet food called the \"Next Gen Pet Food\"",
+            "answer": "<p>It is an alternative approach to provide nutrition to your furry babies using whole foods.</p><p>Right for Paws Pet food is the next generation of pet food as it is minimally processed using the sophisticated Multi Factor Controlled Dehydration (MFCD) Technique where the food is gently dehydrated while preserving the characteristics and nutrients of the ingredients. It combines benefits of natural food with the convenience (open &amp; serve) offered by commercial dry-kibble pet food.</p><p>Right4Paws pet food is versatile whereby, it can be served dry or in re-hydrated form which is akin to fresh food.</p><p>Right4Paws pet food is vet formulated, complete &amp; balanced and species &amp; biologically appropriate food made using human grade ingredients. It does not use any synthetic preservative or supplements. It is the goodness of nature delivered in an easy to use package.</p>"
+          }
+        },
+        "faq_entry_e89DGj": {
+          "type": "faq_entry",
+          "settings": {
+            "question": "What is species and biologically appropriate food",
+            "answer": "<p>Detailed response data layer content layout structure goes here placeholder.</p>"
+          }
+        },
+        "faq_entry_EexbUX": {
+          "type": "faq_entry",
+          "settings": {
+            "question": "What is the Multi Factor Controlled Dehydration (MFCD) Technique used for dehydration of Right4Paws Pet Food",
+            "answer": "<p>Detailed response data layer content layout structure goes here placeholder.</p>"
+          }
+        },
+        "faq_entry_kTQKH6": {
+          "type": "faq_entry",
+          "settings": {
+            "question": "What are the different types of pet food",
+            "answer": "<p>Detailed response data layer content layout structure goes here placeholder.</p>"
+          }
+        },
+        "faq_entry_JTxQy7": {
+          "type": "faq_entry",
+          "settings": {
+            "question": "What is human grade Whole food",
+            "answer": "<p>Detailed response data layer content layout structure goes here placeholder.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_entry_tQ3cem",
+        "faq_entry_e89DGj",
+        "faq_entry_EexbUX",
+        "faq_entry_kTQKH6",
+        "faq_entry_JTxQy7"
+      ],
+      "name": "Custom FAQ Block",
+      "settings": {
+        "title": "Frequently Asked Questions",
+        "open_first": true,
+        "show_cta": true,
+        "cta_text": "View All",
+        "cta_link": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product_recommendations_qggXJq",
+    "new_main_product_hero_iMpxqL",
+    "product_page_midbanner_6VMjyr",
+    "behind_the_product_jbGP4Y",
+    "1780768721094785e6",
+    "instagram_reels_section_aiqM4g",
+    "faq_product_LkVLUB"
+  ]
+}

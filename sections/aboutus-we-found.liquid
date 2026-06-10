@@ -1,0 +1,273 @@
+<div class="custom-pet-banner-wrapper" id="PetBanner-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
+  
+  {% if section.settings.accent_top_left != blank %}
+    <div class="pet-banner-swirl-accent pet-scroll-trigger">
+      {{ section.settings.accent_top_left | image_url: width: 300 | image_tag: loading: 'lazy' }}
+    </div>
+  {% endif %}
+
+  <div class="pet-banner-inner-container">
+    
+    <h2 class="pet-banner-main-title pet-scroll-trigger delay-1">
+      {{ section.settings.heading_text_left }} 
+      <span style="color: {{ section.settings.heading_accent_color }};">
+        {{ section.settings.heading_text_accent }}
+      </span>
+    </h2>
+
+    <div class="pet-banner-graphic-frame pet-scroll-trigger delay-2">
+      {% if section.settings.composite_pet_image != blank %}
+        {{ section.settings.composite_pet_image | image_url: width: 1200 | image_tag: class: 'pet-composite-img', loading: 'eager', alt: 'Pet layout graphic' }}
+      {% else %}
+        <div class="pet-banner-placeholder-box">
+          {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          <p>Upload your full layout/pet composite graphic image here</p>
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+
+  {% if section.settings.wave_bottom_graphic != blank %}
+    <div class="pet-banner-wave-footer pet-scroll-trigger delay-3">
+      {{ section.settings.wave_bottom_graphic | image_url: width: 1920 | image_tag: loading: 'lazy', alt: 'Bottom wave divider' }}
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  #PetBanner-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    padding: 80px 20px 0px 20px !important; /* Space for the wave */
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Abstract Swirl */
+  .pet-banner-swirl-accent {
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    width: 120px;
+    height: auto;
+    z-index: 1;
+    opacity: 0.8;
+  }
+  .pet-banner-swirl-accent img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .pet-banner-inner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  /* Main Headline */
+  .pet-banner-main-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: #2c2c2c;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+  }
+
+  /* Centerpiece Image graphic constraints */
+  .pet-banner-graphic-frame {
+    width: 100%;
+    max-width: {{ section.settings.pet_image_width }}px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+  }
+  .pet-composite-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .pet-banner-placeholder-box {
+    padding: 60px;
+    background: #f4f4f4;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+  }
+  .pet-banner-placeholder-box svg {
+    width: 100px;
+    height: 100px;
+    fill: #999;
+    margin-bottom: 15px;
+  }
+
+  /* Reverted to Image Upload for Wave, with Alignment Settings */
+  .pet-banner-wave-footer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    pointer-events: none;
+    /* This controls the dynamic top/bottom alignment from your settings */
+    bottom: {{ section.settings.wave_vertical_offset }}px; 
+  }
+  .pet-banner-wave-footer img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* =========================================
+     SCROLL ANIMATION STYLES 
+     ========================================= */
+  .pet-scroll-trigger {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+  }
+  .pet-scroll-trigger.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    z-index:0 !important;
+  }
+  /* Delays for a staggered effect */
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.3s; }
+  .delay-3 { transition-delay: 0.5s; }
+
+  @media (max-width: 767px) {
+    #PetBanner-{{ section.id }} {
+      padding: 50px 15px 80px 15px;
+    }
+    .pet-banner-swirl-accent { width: 70px; top: 15px; left: 0px; }
+    .pet-banner-main-title { font-size: 24px; margin-bottom: 30px; padding: 0 10px; }
+    .pet-banner-graphic-frame { max-width: 100%; }
+    
+    /* Adjust bottom wave position slightly for mobile if needed */
+    .pet-banner-wave-footer {
+      bottom: calc({{ section.settings.wave_vertical_offset }}px / 2);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15 // Triggers when 15% of the element is visible
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target); // Runs only once per element
+        }
+      });
+    }, observerOptions);
+
+    // Select only elements within this specific section
+    const triggers = document.querySelectorAll('#PetBanner-{{ section.id }} .pet-scroll-trigger');
+    triggers.forEach(trigger => {
+      observer.observe(trigger);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Pet Custom Graphic Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Manual Section Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading_text_left",
+      "label": "Heading Text (Normal)",
+      "default": "We found ourselves doing"
+    },
+    {
+      "type": "text",
+      "id": "heading_text_accent",
+      "label": "Heading Text (Colored Highlight)",
+      "default": "different things for different dogs."
+    },
+    {
+      "type": "color",
+      "id": "heading_accent_color",
+      "label": "Highlight Text Accent Color",
+      "default": "#e63946"
+    },
+    {
+      "type": "header",
+      "content": "Image Assets & Sizing"
+    },
+    {
+      "type": "image_picker",
+      "id": "composite_pet_image",
+      "label": "1. Main Composite Image Asset"
+    },
+    {
+      "type": "range",
+      "id": "pet_image_width",
+      "min": 300,
+      "max": 1200,
+      "step": 10,
+      "unit": "px",
+      "label": "Pet Image Display Width Control",
+      "default": 850
+    },
+    {
+      "type": "image_picker",
+      "id": "accent_top_left",
+      "label": "2. Top Left Abstract Accent Vector Graphic"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Wave Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "wave_bottom_graphic",
+      "label": "3. Bottom Wave Image Upload"
+    },
+    {
+      "type": "range",
+      "id": "wave_vertical_offset",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Wave Vertical Alignment (Up/Down)",
+      "info": "Use this slider to push the wave image up into the section or pull it down to overlap the section below perfectly.",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pet Custom Graphic Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1446 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --bg-color-top: {{ section.settings.bg_color_top }};
+    --bg-color-bottom: {{ section.settings.bg_color_bottom }};
+    --heading-color: {{ section.settings.heading_color }};
+    --accent-color: {{ section.settings.accent_color }};
+    --text-color: {{ section.settings.text_color }};
+    --container-max-width: {{ section.settings.container_max_width }}px;
+    
+    /* Main Image Controls: Row 1 */
+    --r1-img-w: {{ section.settings.row1_img_w }}%;
+    --r1-img-x: {{ section.settings.row1_img_x }}px;
+    --r1-img-y: {{ section.settings.row1_img_y }}px;
+
+    /* Main Image Controls: Row 2 */
+    --r2-img-w: {{ section.settings.row2_img_w }}%;
+    --r2-img-x: {{ section.settings.row2_img_x }}px;
+    --r2-img-y: {{ section.settings.row2_img_y }}px;
+
+    /* Mobile Engine Core Defaults (Desktop Values inherited unless overridden in Media query) */
+    --blob-w: {{ section.settings.blob_w }}%;
+    --blob-x: {{ section.settings.blob_x }}%;
+    --blob-y: {{ section.settings.blob_y }}%;
+
+    --crown-w: {{ section.settings.crown_w }}px;
+    --crown-x: {{ section.settings.crown_x }}%;
+    --crown-y: {{ section.settings.crown_y }}%;
+
+    --hearts-w: {{ section.settings.hearts_w }}px;
+    --hearts-x: {{ section.settings.hearts_x }}%;
+    --hearts-y: {{ section.settings.hearts_y }}%;
+
+    --spring-w: {{ section.settings.spring_w }}px;
+    --spring-x: {{ section.settings.spring_x }}%;
+    --spring-y: {{ section.settings.spring_y }}%;
+
+    --lines-w: {{ section.settings.lines_w }}px;
+    --lines-x: {{ section.settings.lines_x }}%;
+    --lines-y: {{ section.settings.lines_y }}%;
+
+    --f-wave-l-w: {{ section.settings.f_wave_l_w }}px;
+    --f-wave-l-x: {{ section.settings.f_wave_l_x }}%;
+    --f-wave-l-y: {{ section.settings.f_wave_l_y }}%;
+
+    --f-wave-r-w: {{ section.settings.f_wave_r_w }}px;
+    --f-wave-r-x: {{ section.settings.f_wave_r_x }}%;
+    --f-wave-r-y: {{ section.settings.f_wave_r_y }}%;
+
+    --f-wave-b-w: {{ section.settings.f_wave_b_w }}px;
+    --f-wave-b-x: {{ section.settings.f_wave_b_x }}%;
+    --f-wave-b-y: {{ section.settings.f_wave_b_y }}%;
+  }
+
+  .combined-about-hero-section {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    font-family: inherit;
+    padding-top: {{ section.settings.global_padding_top }}px;
+    padding-bottom: {{ section.settings.global_padding_bottom }}px;
+  }
+
+  /* Split Background System */
+  .combined-about-hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: {{ section.settings.split_bg_ratio }}%;
+    background-color: var(--bg-color-top);
+    z-index: 1;
+  }
+  .combined-about-hero-section::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: {{ 100 | minus: section.settings.split_bg_ratio }}%;
+    background-color: var(--bg-color-bottom);
+    z-index: 1;
+  }
+
+  .about-master-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 {{ section.settings.container_padding_side }}px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Row Structural System */
+  .about-layout-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+  }
+  
+  .row-top {
+    margin-bottom: {{ section.settings.row_gap }}px;
+  }
+  
+  .row-bottom {
+    flex-direction: row-reverse;
+  }
+
+  /* Column Scaling Engines */
+  .about-col-text {
+    flex: 0 0 {{ section.settings.text_col_width }}%;
+    max-width: {{ section.settings.text_col_width }}%;
+    position: relative;
+    left: 80px;
+    z-index: 3;
+  }
+
+  .about-col-text.act {
+    margin-left: -60px;
+  }
+  
+  .row-top .about-col-text { padding-top: {{ section.settings.top_row_text_offset }}px; }
+  .row-bottom .about-col-text { padding-top: {{ section.settings.bottom_row_text_offset }}px; }
+
+  .about-col-media {
+    flex: 0 0 {{ 100 | minus: section.settings.text_col_width }}%;
+    max-width: {{ 100 | minus: section.settings.text_col_width }}%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* Typography Design Tokens */
+  .about-master-heading {
+    font-size: {{ section.settings.heading_font_size }}px;
+    line-height: {{ section.settings.heading_line_height }};
+    font-weight: 700;
+    color: var(--heading-color);
+    margin: 0 0 {{ section.settings.heading_margin_bottom }}px 0;
+  }
+  .about-master-heading span.accent-focus { color: var(--accent-color); }
+
+  .about-master-desc {
+    font-size: {{ section.settings.desc_font_size }}px;
+    line-height: {{ section.settings.desc_line_height }};
+    color: var(--text-color);
+    max-width: {{ section.settings.desc_max_width }}px;
+  }
+
+  /* Composition Containers */
+  .composition-box {
+    position: relative;
+    width: 100%;
+    max-width: {{ section.settings.media_box_max_width }}px;
+  }
+
+  /* Transform Metric Overrides via CSS Variables */
+  .row-top .main-portrait-render {
+    width: var(--r1-img-w) !important;
+    transform: translate(var(--r1-img-x), var(--r1-img-y));
+  }
+  .row-bottom .main-portrait-render {
+    width: var(--r2-img-w) !important;
+    transform: translate(var(--r2-img-x), var(--r2-img-y));
+  }
+
+  .main-portrait-render {
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 5;
+    transition: transform 0.3s ease-out;
+  }
+
+  /* Dynamic Coordinate Positional Layer Matrix */
+  .pos-absolute-vector {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  /* Vector Assignments Routed via Dynamic CSS Matrix */
+  .v-blob-bg {
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    width: var(--blob-w);
+    top: var(--blob-y);
+    left: var(--blob-x);
+  }
+  .v-crown {
+    z-index: 6;
+    width: var(--crown-w);
+    top: var(--crown-y);
+    left: var(--crown-x);
+  }
+  .v-hearts {
+    z-index: 6;
+    width: var(--hearts-w);
+    top: var(--hearts-y);
+    left: var(--hearts-x);
+  }
+  .v-spring {
+    z-index: 6;
+    width: var(--spring-w);
+    top: var(--spring-y);
+    left: var(--spring-x);
+  }
+  .v-lines {
+    z-index: 4;
+    width: var(--lines-w);
+    top: var(--lines-y);
+    left: var(--lines-x);
+  }
+
+  /* Global Framing Structural Curve Waves */
+  .v-frame-wave {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .f-wave-left {
+    width: var(--f-wave-l-w);
+    top: var(--f-wave-l-y);
+    left: var(--f-wave-l-x);
+  }
+  .f-wave-right {
+    width: var(--f-wave-r-w);
+    top: var(--f-wave-r-y);
+    right: var(--f-wave-r-x);
+  }
+  .f-wave-bottom {
+    width: var(--f-wave-b-w);
+    top: var(--f-wave-b-y);
+    right: var(--f-wave-b-x);
+  }
+
+  /* Animations */
+  @keyframes revealHero {
+    0% { opacity: 0; transform: translateY(40px); filter: blur(8px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+  @keyframes vectorFloat {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+  }
+
+  .about-animate {
+    opacity: 0;
+  }
+  .about-animate.is-revealed {
+    animation: revealHero 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .about-animate.delay-1 { animation-delay: 0.15s; }
+  .about-animate.delay-2 { animation-delay: 0.3s; }
+  .about-animate.delay-vector { animation-delay: 0.5s; }
+
+  .is-revealed .v-crown, .is-revealed .v-hearts {
+    animation: vectorFloat 4s ease-in-out infinite alternate;
+  }
+  .is-revealed .v-spring, .is-revealed .v-lines {
+    animation: vectorFloat 5s ease-in-out infinite alternate-reverse;
+  }
+
+  /* Mobile Responsive Engine Switch Overrides */
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} {
+      /* Re-assigning Variable Hooks to Mobile Settings Fields */
+      --blob-w: {{ section.settings.mobile_blob_w }}%;
+      --blob-x: {{ section.settings.mobile_blob_x }}%;
+      --blob-y: {{ section.settings.mobile_blob_y }}%;
+
+      --crown-w: {{ section.settings.mobile_crown_w }}px;
+      --crown-x: {{ section.settings.mobile_crown_x }}%;
+      --crown-y: {{ section.settings.mobile_crown_y }}%;
+
+      --hearts-w: {{ section.settings.mobile_hearts_w }}px;
+      --hearts-x: {{ section.settings.mobile_hearts_x }}%;
+      --hearts-y: {{ section.settings.mobile_hearts_y }}%;
+
+      --spring-w: {{ section.settings.mobile_spring_w }}px;
+      --spring-x: {{ section.settings.mobile_spring_x }}%;
+      --spring-y: {{ section.settings.mobile_spring_y }}%;
+
+      --lines-w: {{ section.settings.mobile_lines_w }}px;
+      --lines-x: {{ section.settings.mobile_lines_x }}%;
+      --lines-y: {{ section.settings.mobile_lines_y }}%;
+
+      --f-wave-l-w: {{ section.settings.mobile_f_wave_l_w }}px;
+      --f-wave-l-x: {{ section.settings.mobile_f_wave_l_x }}%;
+      --f-wave-l-y: {{ section.settings.mobile_f_wave_l_y }}%;
+
+      --f-wave-r-w: {{ section.settings.mobile_f_wave_r_w }}px;
+      --f-wave-r-x: {{ section.settings.mobile_f_wave_r_x }}%;
+      --f-wave-r-y: {{ section.settings.mobile_f_wave_r_y }}%;
+
+      --f-wave-b-w: {{ section.settings.mobile_f_wave_b_w }}px;
+      --f-wave-b-x: {{ section.settings.mobile_f_wave_b_x }}%;
+      --f-wave-b-y: {{ section.settings.mobile_f_wave_b_y }}%;
+    }
+
+    .combined-about-hero-section {
+      padding-top: {{ section.settings.mobile_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+    .about-layout-row {
+      flex-direction: column !important;
+      align-items: center;
+      text-align: center;
+    }
+    .row-top {
+      margin-bottom: {{ section.settings.mobile_row_gap }}px;
+    }
+    .about-col-text, .about-col-media {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+    .about-col-text, .about-col-text.act {
+      left: 0 !important;
+      margin-left: 0 !important;
+      margin-bottom: 30px;
+      padding-top: 0 !important;
+    }
+    .about-master-heading {
+      font-size: {{ section.settings.mobile_heading_font_size }}px !important;
+    }
+    .about-master-desc { 
+      margin: 0 auto; 
+    }
+    
+    .row-top .main-portrait-render {
+      width: {{ section.settings.mobile_row1_img_w }}% !important;
+      transform: translate({{ section.settings.mobile_row1_img_x }}px, {{ section.settings.mobile_row1_img_y }}px) !important;
+    }
+    .row-bottom .main-portrait-render {
+      width: {{ section.settings.mobile_row2_img_w }}% !important;
+      transform: translate({{ section.settings.mobile_row2_img_x }}px, {{ section.settings.mobile_row2_img_y }}px) !important;
+    }
+  }
+</style>
+
+<div class="combined-about-hero-section">
+  
+  {%- if section.settings.f_wave_l_img != blank -%}
+    <img src="{{ section.settings.f_wave_l_img | img_url: '500x' }}" class="v-frame-wave f-wave-left" alt="" loading="lazy">
+  {%- endif -%}
+
+  {%- if section.settings.f_wave_r_img != blank -%}
+    <img src="{{ section.settings.f_wave_r_img | img_url: '500x' }}" class="v-frame-wave f-wave-right" alt="" loading="lazy">
+  {%- endif -%}
+
+  {%- if section.settings.f_wave_b_img != blank -%}
+    <img src="{{ section.settings.f_wave_b_img | img_url: '500x' }}" class="v-frame-wave f-wave-bottom" alt="" loading="lazy">
+  {%- endif -%}
+
+  <div class="about-master-container">
+    
+    <div class="about-layout-row row-top about-animate">
+      <div class="about-col-text act about-animate delay-1">
+        <h1 class="about-master-heading">
+          {{ section.settings.row1_heading_l1 }}<br>
+          <span class="accent-focus">{{ section.settings.row1_heading_l2_accent }}</span>{{ section.settings.row1_heading_l2_end }}<br>
+          {{ section.settings.row1_heading_l3 }}
+        </h1>
+        <div class="about-master-desc">
+          {{ section.settings.row1_desc }}
+        </div>
+      </div>
+      
+      <div class="about-col-media about-animate delay-2">
+        <div class="composition-box">
+          {%- if section.settings.blob_img != blank -%}
+            <img src="{{ section.settings.blob_img | img_url: '1000x' }}" class="pos-absolute-vector v-blob-bg about-animate delay-vector" alt="" loading="eager">
+          {%- endif -%}
+
+          {%- if section.settings.row1_main_img != blank -%}
+            <img src="{{ section.settings.row1_main_img | img_url: '800x' }}" class="main-portrait-render" alt="Founder Story Portrait">
+          {%- endif -%}
+
+          {%- if section.settings.crown_img != blank -%}
+            <img src="{{ section.settings.crown_img | img_url: '150x' }}" class="pos-absolute-vector v-crown" alt="" loading="lazy">
+          {%- endif -%}
+          
+          {%- if section.settings.hearts_img != blank -%}
+            <img src="{{ section.settings.hearts_img | img_url: '200x' }}" class="pos-absolute-vector v-hearts" alt="" loading="lazy">
+          {%- endif -%}
+          
+          {%- if section.settings.spring_img != blank -%}
+            <img src="{{ section.settings.spring_img | img_url: '150x' }}" class="pos-absolute-vector v-spring" alt="" loading="lazy">
+          {%- endif -%}
+          
+          {%- if section.settings.lines_img != blank -%}
+            <img src="{{ section.settings.lines_img | img_url: '150x' }}" class="pos-absolute-vector v-lines" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="about-layout-row row-bottom about-animate">
+      <div class="about-col-text about-animate delay-1">
+        <div class="about-master-desc">
+          {{ section.settings.row2_desc }}
+        </div>
+      </div>
+      
+      <div class="about-col-media about-animate delay-2">
+        <div class="composition-box">
+          {%- if section.settings.row2_main_img != blank -%}
+            <img src="{{ section.settings.row2_main_img | img_url: '800x' }}" class="main-portrait-render" alt="Founder Journey Continuation">
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.12
+    };
+
+    const targetSections = document.querySelectorAll('.about-animate');
+    const scrollObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    targetSections.forEach(section => {
+      scrollObserver.observe(section);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "About Us Unified Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🎨 Section Theme Canvas Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_top",
+      "label": "Top Row Canvas Background",
+      "default": "#E8F5F8"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_bottom",
+      "label": "Bottom Row Canvas Background",
+      "default": "#E8F5F8"
+    },
+    {
+      "type": "range",
+      "id": "split_bg_ratio",
+      "min": 10,
+      "max": 90,
+      "step": 2,
+      "unit": "%",
+      "label": "Top to Bottom Canvas Split Height",
+      "default": 64
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Text Base",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Emphasis Keyword Highlight",
+      "default": "#D92B2B"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description Narrative Body",
+      "default": "#444444"
+    },
+    {
+      "type": "header",
+      "content": "📐 Framework Layout Metrics (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Max Container Bound Fence Width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "container_padding_side",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gutter Box Edge Lateral Margin",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "global_padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Global Top Padding Spacing",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "global_padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Global Bottom Padding Spacing",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "min": 20,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Vertical Row Interstitial Gap",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "text_col_width",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "label": "Text Column Share Ratio Grid Width",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "media_box_max_width",
+      "min": 300,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Max Bound Portrait Image Box Width",
+      "default": 520
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile Structural Layout Engine Controls"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Top Padding Spacing",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Bottom Padding Spacing",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_row_gap",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Row Segment Gap",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_font_size",
+      "min": 18,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Heading Font Size",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "✍️ Top Row Text Alignment & Content"
+    },
+    {
+      "type": "range",
+      "id": "top_row_text_offset",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Row Text Drop Down Offset Alignment",
+      "default": 40
+    },
+    {
+      "type": "text",
+      "id": "row1_heading_l1",
+      "label": "Heading Line 1",
+      "default": "Let's go"
+    },
+    {
+      "type": "text",
+      "id": "row1_heading_l2_accent",
+      "label": "Heading Line 2 Accent Focus",
+      "default": "back in time"
+    },
+    {
+      "type": "text",
+      "id": "row1_heading_l2_end",
+      "label": "Heading Line 2 End Token",
+      "default": ","
+    },
+    {
+      "type": "text",
+      "id": "row1_heading_l3",
+      "label": "Heading Line 3",
+      "default": "shall we?"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 24,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Font Scale Size",
+      "default": 64
+    },
+    {
+      "type": "text",
+      "id": "heading_line_height",
+      "label": "Heading Line Height Proportional Ratio",
+      "default": "1.1"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "min": 8,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap Under Heading Block",
+      "default": 24
+    },
+    {
+      "type": "richtext",
+      "id": "row1_desc",
+      "label": "Top Story Narrative Body Paragraph",
+      "default": "<p>The Right4Paws journey began with Dhanu Abraham Roy, a dog sport enthusiast and breeder with over 30 years of experience...</p>"
+    },
+    {
+      "type": "range",
+      "id": "desc_font_size",
+      "min": 12,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Body Font Size",
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "desc_line_height",
+      "label": "Description Line Height Scale Ratio",
+      "default": "1.6"
+    },
+    {
+      "type": "range",
+      "id": "desc_max_width",
+      "min": 300,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Paragraph Structural Box Boundary Width",
+      "default": 480
+    },
+    {
+      "type": "header",
+      "content": "📸 Row 1 Main Portrait Transform Array"
+    },
+    {
+      "type": "image_picker",
+      "id": "row1_main_img",
+      "label": "Row 1 Main Portrait"
+    },
+    {
+      "type": "range",
+      "id": "row1_img_w",
+      "min": 30,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Desktop Image Width Size",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "row1_img_x",
+      "min": -200,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Horizontal Offset (X)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "row1_img_y",
+      "min": -200,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Vertical Offset (Y)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_row1_img_w",
+      "min": 30,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Image Width Size",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "mobile_row1_img_x",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Horizontal Offset (X)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_row1_img_y",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Vertical Offset (Y)",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "🟡 Yellow Blob Vector Spatial Array"
+    },
+    {
+      "type": "image_picker",
+      "id": "blob_img",
+      "label": "Organic Background Shape Blob Graphic"
+    },
+    {
+      "type": "range",
+      "id": "blob_w",
+      "min": 40,
+      "max": 160,
+      "step": 2,
+      "unit": "%",
+      "label": "Blob Vector Scaling Width Size Ratio",
+      "default": 104
+    },
+    {
+      "type": "range",
+      "id": "blob_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Blob Placement Horizontal Coordinate Axis X",
+      "default": 54
+    },
+    {
+      "type": "range",
+      "id": "blob_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Blob Placement Vertical Coordinate Axis Y",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile 🟡 Yellow Blob Control Module"
+    },
+    {
+      "type": "range",
+      "id": "mobile_blob_w",
+      "min": 20,
+      "max": 200,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Blob Width Ratio",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "mobile_blob_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Blob X Axis Coordinate",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "mobile_blob_y",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Blob Y Axis Coordinate",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "👑 Overlay Asset 1: Crown Positional Array"
+    },
+    {
+      "type": "image_picker",
+      "id": "crown_img",
+      "label": "Crown Graphic Asset"
+    },
+    {
+      "type": "range",
+      "id": "crown_w",
+      "min": 10,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Crown Graphic Scale Width Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "crown_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Crown Horizontal Coordinate Axis X",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "crown_y",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Crown Vertical Coordinate Axis Y",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile 👑 Crown Control Module"
+    },
+    {
+      "type": "range",
+      "id": "mobile_crown_w",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Crown Width",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "mobile_crown_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Crown X Axis Coordinate",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_crown_y",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Crown Y Axis Coordinate",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "❤️ Overlay Asset 2: Flying Cluster Hearts Array"
+    },
+    {
+      "type": "image_picker",
+      "id": "hearts_img",
+      "label": "Hearts Asset Layer"
+    },
+    {
+      "type": "range",
+      "id": "hearts_w",
+      "min": 10,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Hearts Graphic Scale Width Size",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "hearts_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Hearts Horizontal Coordinate Axis X",
+      "default": 78
+    },
+    {
+      "type": "range",
+      "id": "hearts_y",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Hearts Vertical Coordinate Axis Y",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile ❤️ Hearts Control Module"
+    },
+    {
+      "type": "range",
+      "id": "mobile_hearts_w",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Hearts Width",
+      "default": 46
+    },
+    {
+      "type": "range",
+      "id": "mobile_hearts_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Hearts X Axis Coordinate",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "mobile_hearts_y",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Hearts Y Axis Coordinate",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "🌀 Overlay Asset 3: Spring Spiral Loop Array"
+    },
+    {
+      "type": "image_picker",
+      "id": "spring_img",
+      "label": "Spring Loop Vector"
+    },
+    {
+      "type": "range",
+      "id": "spring_w",
+      "min": 10,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Spring Graphic Scale Width Size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "spring_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Spring Horizontal Coordinate Axis X",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "spring_y",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Spring Vertical Coordinate Axis Y",
+      "default": 42
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile 🌀 Spring Control Module"
+    },
+    {
+      "type": "range",
+      "id": "mobile_spring_w",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Spring Width",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "mobile_spring_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Spring X Axis Coordinate",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_spring_y",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Spring Y Axis Coordinate",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "┆ Overlay Asset 4: Triple Strike Lines Array"
+    },
+    {
+      "type": "image_picker",
+      "id": "lines_img",
+      "label": "Triple Line Element Vector"
+    },
+    {
+      "type": "range",
+      "id": "lines_w",
+      "min": 10,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Triple Line Scale Width Size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "lines_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Triple Line Horizontal Coordinate Axis X",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "lines_y",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Triple Line Vertical Coordinate Axis Y",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile ┆ Triple Lines Control Module"
+    },
+    {
+      "type": "range",
+      "id": "mobile_lines_w",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Lines Width",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_lines_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Lines X Axis Coordinate",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "mobile_lines_y",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Lines Y Axis Coordinate",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "✍️ Bottom Row Text Alignment & Content"
+    },
+    {
+      "type": "range",
+      "id": "bottom_row_text_offset",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Row Text Drop Down Offset Alignment",
+      "default": 60
+    },
+    {
+      "type": "richtext",
+      "id": "row2_desc",
+      "label": "Bottom Story Narrative Body Paragraph",
+      "default": "<p>Soon enough, Kenath Sameer Achan joined the journey, bringing with him experience in building and scaling businesses...</p>"
+    },
+    {
+      "type": "header",
+      "content": "📸 Row 2 Main Portrait Transform Array"
+    },
+    {
+      "type": "image_picker",
+      "id": "row2_main_img",
+      "label": "Row 2 Main Portrait"
+    },
+    {
+      "type": "range",
+      "id": "row2_img_w",
+      "min": 30,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Desktop Image Width Size",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "row2_img_x",
+      "min": -200,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Horizontal Offset (X)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "row2_img_y",
+      "min": -200,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Vertical Offset (Y)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_row2_img_w",
+      "min": 30,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Image Width Size",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "mobile_row2_img_x",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Horizontal Offset (X)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_row2_img_y",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Vertical Offset (Y)",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "〰️ Outer Frame Structural Curves Array"
+    },
+    {
+      "type": "image_picker",
+      "id": "f_wave_l_img",
+      "label": "Left Marginal Asymmetric Curve Wave Element"
+    },
+    {
+      "type": "range",
+      "id": "f_wave_l_w",
+      "min": 20,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Left Curve Width",
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "f_wave_l_x",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Left Curve Coordinate Horizon X",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "f_wave_l_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Left Curve Coordinate Vertical Y",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile 〰️ Left Curve Wave Control Module"
+    },
+    {
+      "type": "range",
+      "id": "mobile_f_wave_l_w",
+      "min": 10,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Left Curve Width",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "mobile_f_wave_l_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Left Curve Horizon X",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_f_wave_l_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Left Curve Vertical Y",
+      "default": 35
+    },
+    {
+      "type": "image_picker",
+      "id": "f_wave_r_img",
+      "label": "Right Upper Yellow Curve Wave Element"
+    },
+    {
+      "type": "range",
+      "id": "f_wave_r_w",
+      "min": 20,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Right Upper Curve Width",
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "f_wave_r_x",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Right Upper Curve Coordinate Horizon X",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "f_wave_r_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Right Upper Curve Coordinate Vertical Y",
+      "default": 22
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile 〰️ Right Upper Curve Control Module"
+    },
+    {
+      "type": "range",
+      "id": "mobile_f_wave_r_w",
+      "min": 10,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Right Upper Width",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "mobile_f_wave_r_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Right Upper Horizon X",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_f_wave_r_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Right Upper Vertical Y",
+      "default": 12
+    },
+    {
+      "type": "image_picker",
+      "id": "f_wave_b_img",
+      "label": "Right Lower Green Curve Wave Element"
+    },
+    {
+      "type": "range",
+      "id": "f_wave_b_w",
+      "min": 20,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Right Lower Curve Width",
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "f_wave_b_x",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Right Lower Curve Coordinate Horizon X",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "f_wave_b_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Right Lower Curve Coordinate Vertical Y",
+      "default": 82
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile 〰️ Right Lower Curve Control Module"
+    },
+    {
+      "type": "range",
+      "id": "mobile_f_wave_b_w",
+      "min": 10,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Right Lower Width",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "mobile_f_wave_b_x",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Right Lower Horizon X",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_f_wave_b_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Right Lower Vertical Y",
+      "default": 85
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us Unified Hero"
+    }
+  ]
+}
+{% endschema %}

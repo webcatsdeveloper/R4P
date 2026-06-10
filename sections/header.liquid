@@ -1,0 +1,323 @@
+{% liquid
+  # Capture blocks from section settings
+  capture logo
+    content_for 'block', type: '_header-logo', id: 'header-logo'
+  endcapture
+
+  capture menu
+    content_for 'block', type: '_header-menu', id: 'header-menu'
+  endcapture
+%}
+
+<header-component id="header-component" class="header-floating-bar">
+  <div class="header-pill-wrapper">
+    
+    <!-- LOGO COLUMN - LEFT ALIGNED -->
+    <div class="header-column column-left">
+      <div class="header-logo">
+        <a href="/" class="header-logo-link">
+          {{ logo }}
+        </a>
+      </div>
+    </div>
+    
+    <!-- NAVIGATION COLUMN - CENTERED -->
+    <div class="header-column column-center">
+      <nav class="header-menu-nav">
+        {{ menu }}
+      </nav>
+    </div>
+    
+    <!-- ICONS/ACTIONS COLUMN - RIGHT ALIGNED -->
+    <div class="header-column column-right">
+      <div class="header-actions-group">
+
+        <!-- ACCOUNT ICON -->
+        <a href="/account" class="header-icon-action custom-icon-link">
+          <img 
+            src="https://cdn.shopify.com/s/files/1/0684/4959/9593/files/account.png?v=1778496051"
+            alt="Account"
+            class="header-custom-icon"
+          >
+        </a>
+
+        <!-- CART ICON -->
+        <a href="/cart" class="header-icon-action custom-icon-link cart-icon-wrapper">
+
+          <img 
+            src="https://cdn.shopify.com/s/files/1/0684/4959/9593/files/cartmain.png?v=1778496051"
+            alt="Cart"
+            class="header-custom-icon"
+          >
+
+          <!-- CART COUNT -->
+          {% if cart.item_count > 0 %}
+            <span class="cart-count-badge">
+              {{ cart.item_count }}
+            </span>
+          {% endif %}
+
+        </a>
+
+      </div>
+    </div>
+  </div>
+</header-component>
+
+<style>
+
+/* ======================================= */
+/* ORIGINAL HEADER (UNCHANGED) */
+/* ======================================= */
+
+#header-component {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 1725px;
+    height: 70px;
+    background: #ffffff !important;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+
+    transition:
+      background 0.4s ease,
+      backdrop-filter 0.4s ease,
+      border 0.4s ease,
+      box-shadow 0.4s ease,
+      top 0.4s ease;
+}
+
+/* ======================================= */
+/* GLASS EFFECT ONLY AFTER STICKY */
+/* ======================================= */
+
+#header-component.scrolled {
+    position: fixed;
+    top: 16px;
+
+    background: rgba(255,255,255,0.12) !important;
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.12),
+      inset 0 1px 1px rgba(255,255,255,0.25);
+
+    overflow: hidden;
+}
+
+/* GLASS LIGHT EFFECT */
+#header-component.scrolled::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.28) 0%,
+        rgba(255,255,255,0.08) 45%,
+        rgba(255,255,255,0.02) 100%
+      );
+
+    pointer-events: none;
+}
+
+/* SOFT GLOW */
+#header-component.scrolled::after {
+    content: "";
+    position: absolute;
+
+    width: 40%;
+    height: 120%;
+
+    top: -10%;
+    left: -20%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(255,255,255,0.18) 0%,
+        transparent 70%
+      );
+
+    pointer-events: none;
+}
+
+/* ======================================= */
+/* LAYOUT */
+/* ======================================= */
+
+.header-pill-wrapper {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+    padding: 0 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.header-column.column-left {
+    justify-content: flex-start;
+    display: flex;
+    width:100%!important;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo img {
+    height: 90px !important;
+    width: 75px !important;
+    max-height: none !important;
+    max-width: none !important;
+    display: block;
+    object-fit: contain;
+    margin-left:20px;
+}
+
+/* ICONS STYLING */
+.header-actions-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+}
+
+.custom-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.custom-icon-link:hover {
+    transform: scale(1.08);
+}
+
+.header-custom-icon {
+    width: 19.2px;
+    height: 19.2px;
+    object-fit: contain;
+    display: block;
+}
+
+/* CART RED BADGE */
+.cart-icon-wrapper {
+    position: relative;
+}
+
+.cart-count-badge {
+    position: absolute;
+    top: -9px;
+    right: -11px;
+    width: 16px;
+    height: 16px;
+    background: #D72329;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+
+/* NAVIGATION */
+.menu-list__link {
+    font-size: 15px !important;
+    font-weight: 950 !important;
+    letter-spacing: 0.05em !important;
+    padding: 10px 24px;
+    color: #1F1F1F !important;
+    text-transform: uppercase;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 1200px) {
+
+    .header-pill-wrapper { 
+        padding: 0 30px; 
+    }
+
+    .header-logo img { 
+        max-height: 75px !important; 
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    #header-component { 
+        height: 80px; 
+        top: 15px; 
+    }
+
+    #header-component.scrolled {
+        top: 10px;
+    }
+
+    .header-logo img { 
+        max-height: 50px !important; 
+    }
+
+    .header-pill-wrapper { 
+        padding: 0 20px; 
+    }
+
+    .header-column.column-center { 
+        display: none; 
+    }
+
+    .header-pill-wrapper { 
+        grid-template-columns: 1fr 1fr; 
+    }
+
+    .header-custom-icon {
+        width: 19.2px;
+        height: 19.2px;
+    }
+
+    .cart-count-badge {
+        width: 18px;
+        height: 18px;
+        font-size: 9px;
+        top: -8px;
+        right: -10px;
+    }
+}
+
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const header = document.getElementById("header-component");
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 40) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
+
+    });
+
+});
+</script>

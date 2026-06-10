@@ -1,0 +1,313 @@
+{% comment %}
+  Trust Section
+{% endcomment %}
+
+{%- style -%}
+  .trust-section-{{ section.id }} {
+    background-color: #ffffff;
+    padding: 80px 0;
+    overflow: hidden;
+  }
+
+  .trust-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+  }
+
+  .trust-content {
+    flex: 1;
+    max-width: 500px;
+
+    /* ANIMATION */
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: all 1s ease;
+  }
+
+  .trust-image-wrap {
+    flex: 1.2;
+    position: relative;
+
+    /* ANIMATION */
+    opacity: 0;
+    transform: translateX(80px);
+    transition: all 1s ease;
+  }
+
+  .trust-section-{{ section.id }}.animate .trust-content,
+  .trust-section-{{ section.id }}.animate .trust-image-wrap {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .trust-title {
+    font-size: 64px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 24px 0;
+    letter-spacing: -0.01em;
+  }
+
+  .trust-title span {
+    color: #D72329;
+  }
+
+  .trust-description {
+    font-size: 24px;
+    line-height: 1.5;
+    color: #1E1E1E;
+    margin: 0 0 40px 0;
+    max-width: 440px;
+    opacity: 0.8;
+    font-family:'Degular Demo'!important;
+  }
+
+  .trust-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .trust-btn {
+    display: inline-block;
+    padding: 18px 36px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-family:'Degular Demo'!important;
+
+    /* BUTTON ANIMATION */
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .trust-section-{{ section.id }}.animate .trust-btn {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 0.8s ease,
+      transform 0.8s ease;
+  }
+
+  .trust-section-{{ section.id }}.animate .trust-btn:nth-child(1) {
+    transition-delay: 0.4s;
+  }
+
+  .trust-section-{{ section.id }}.animate .trust-btn:nth-child(2) {
+    transition-delay: 0.6s;
+  }
+
+  .trust-btn--primary {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #000;
+  }
+
+  .trust-btn--primary:hover {
+    background-color: #333;
+    border-color: #333;
+  }
+
+  .trust-btn--secondary {
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #000;
+    font-weight: 500;
+  }
+
+  .trust-btn--secondary:hover {
+    background-color: #f5f5f5;
+  }
+
+  .trust-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  @media (max-width: 1200px) {
+    .trust-container {
+      gap: 40px;
+      padding: 0 40px;
+    }
+
+    .trust-title {
+      font-size: 48px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .trust-section-{{ section.id }} {
+      padding: 80px 0;
+    }
+
+    .trust-container {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .trust-content {
+      max-width: 100%;
+      order: 1;
+    }
+
+    .trust-description {
+      margin-inline: auto;
+    }
+
+    .trust-actions {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .trust-image-wrap {
+      width: 100%;
+      order: 2;
+      margin-top: 40px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .trust-title {
+      font-size: 36px;
+    }
+
+    .trust-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+{%- endstyle -%}
+
+<section class="trust-section-{{ section.id }}">
+  <div class="trust-container">
+
+    <div class="trust-content">
+      <h2 class="trust-title">
+        {{ section.settings.heading | replace: 'trust you', '<span>trust you</span>' }}
+      </h2>
+
+      <p class="trust-description">
+        {{ section.settings.subtext }}
+      </p>
+
+      <div class="trust-actions">
+        <a href="{{ section.settings.btn1_link }}" class="trust-btn trust-btn--primary">
+          {{ section.settings.btn1_label }}
+        </a>
+
+        <a href="{{ section.settings.btn2_link }}" class="trust-btn trust-btn--secondary">
+          {{ section.settings.btn2_label }}
+        </a>
+      </div>
+    </div>
+
+    <div class="trust-image-wrap">
+      {% if section.settings.image != blank %}
+        <img
+          src="{{ section.settings.image | img_url: '1200x' }}"
+          alt="Pet products and happy pets"
+          loading="lazy"
+        >
+      {% else %}
+        <img
+          src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=1200&h=600"
+          alt="Pet products placeholder"
+        >
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const section = document.querySelector(".trust-section-{{ section.id }}");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            section.classList.add("animate");
+          }
+        });
+      },
+      {
+        threshold: 0.25,
+      }
+    );
+
+    observer.observe(section);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Trust Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "They trust you with everything."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Be a part of a space where pet parents come together to learn, share, and care better."
+    },
+    {
+      "type": "header",
+      "content": "Button 1"
+    },
+    {
+      "type": "text",
+      "id": "btn1_label",
+      "label": "Label",
+      "default": "EXPLORE PRODUCTS"
+    },
+    {
+      "type": "url",
+      "id": "btn1_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Button 2"
+    },
+    {
+      "type": "text",
+      "id": "btn2_label",
+      "label": "Label",
+      "default": "START WITH YOUR PET"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Main Collage Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Section"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,613 @@
+{%- style -%}
+.science-{{ section.id }} {
+  --accent: {{ section.settings.accent_color }};
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #ffffff 58%,
+    #ffffff 78%,
+    #FEEDDE 100%
+  );
+
+  padding: 60px 0 80px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* MAIN CONTAINER */
+.sc-container {
+  width: 100%;
+  max-width: 1420px!important;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: 470px 1fr;
+  gap: 34px;
+  align-items: start;
+
+  position: relative;
+}
+
+/* HUGE TITLE */
+.sc-heading-wrapper {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1260px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sc-heading {
+  position: relative;
+  margin: 0;
+
+  font-size: 180px !important;
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -3px;
+  word-spacing: 24px!important;
+  color: #000;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+
+  width: 100%;
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(60px);
+  transition:
+    transform 1s cubic-bezier(.22,.61,.36,1),
+    opacity 1s ease;
+
+  font-family:'Neusa Next Std'!important;
+}
+
+.sc-heading span {
+  color: var(--accent);
+}
+
+/* IMAGE SIDE */
+.sc-image-box {
+  position: relative;
+  width: 100%;
+  max-width: 470px;
+
+  margin-top: 55px;
+  margin-left: 150px;
+
+  z-index: 20;
+
+  opacity: 0;
+  transform: scale(0.88);
+  transition:
+    transform 1.2s cubic-bezier(.22,.61,.36,1),
+    opacity 1.2s ease;
+}
+
+/* DOG IMAGE */
+.sc-image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* LEFT GREY CURVE */
+.sc-left-curve {
+  position: absolute;
+  top: 420px;
+  left: -20px;
+  width: 170px;
+  z-index: 1;
+  pointer-events: none;
+
+  opacity: 0;
+  transform: translateX(-120px);
+  transition:
+    transform 1s cubic-bezier(.22,.61,.36,1),
+    opacity 1s ease;
+}
+
+.sc-left-curve img {
+  width: 100%;
+  display: block;
+}
+
+/* RIGHT GREEN CURVE */
+.sc-right-curve {
+  position: absolute;
+  right: -10px;
+  top: 120px;
+  width: 170px;
+  z-index: 1;
+  pointer-events: none;
+
+  opacity: 0;
+  transform: translateX(120px);
+  transition:
+    transform 1s cubic-bezier(.22,.61,.36,1),
+    opacity 1s ease;
+}
+
+.sc-right-curve img {
+  width: 100%;
+  display: block;
+}
+
+/* CONTENT SIDE */
+.sc-content {
+  margin-top: 190px!important;
+  max-width: 560px;
+  padding-left: 10px;
+  position: relative;
+  z-index: 5;
+  padding-top:40px;
+  margin-left: 120px;
+
+  opacity: 0;
+  transform: translateY(70px);
+  transition:
+    transform 1s cubic-bezier(.22,.61,.36,1),
+    opacity 1s ease;
+}
+
+/* TITLE */
+.sc-title {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: #1E1E1E;
+  margin: 0 0 26px;
+  max-width: 520px;
+  font-family:'Degular Demo'!important;
+  margin-top:50px;
+}
+
+/* DESCRIPTION */
+.sc-text {
+  font-size: 19px;
+  line-height: 1.75;
+  letter-spacing: -0.2px;
+  color: #3F3F3F;
+
+  max-width: 640px;
+  margin: 0 0 42px;
+
+  font-family:'Degular Demo'!important;
+}
+
+/* RED SEPARATOR */
+.sc-separator {
+  width: 100%;
+  max-width: 500px;
+  height: 1px;
+  background-color: var(--accent);
+  opacity: 0.35;
+  margin-bottom: 30px;
+}
+
+/* FEATURE GRID */
+.sc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 500px;
+}
+
+/* FEATURE ITEM */
+.sc-item {
+  width: 100%;
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    transform 0.8s cubic-bezier(.22,.61,.36,1),
+    opacity 0.8s ease;
+}
+
+/* ICON */
+.sc-item-icon {
+  width: 34px;
+  height: 28px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* FEATURE TITLE */
+.sc-item-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #000;
+  margin-bottom: 10px;
+  font-family:'Degular Demo'!important;
+}
+
+/* FEATURE DESCRIPTION */
+.sc-item-desc {
+  font-size: 17px;
+  line-height: 1;
+  letter-spacing: -0.2px;
+  color: #5A5A5A;
+
+  max-width: 181px;
+
+  font-family:'Degular Demo'!important;
+}
+
+/* UPDATED BUTTON */
+.sc-button {
+  min-width: 200px;
+  height: 66px;
+  border-radius: 999px;
+
+  background: #000;
+  color: #fff;
+
+  text-decoration: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+
+  font-family:'Degular Demo'!important;
+
+  margin-top: 28px;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.sc-button:hover {
+  transform: scale(1.04);
+  background: var(--accent);
+}
+
+/* ACTIVE STATES */
+.sc-inview .sc-left-curve,
+.sc-inview .sc-right-curve,
+.sc-inview .sc-heading,
+.sc-inview .sc-content,
+.sc-inview .sc-item {
+  opacity: 1;
+  transform: translate(0,0);
+}
+
+.sc-inview .sc-image-box {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* STAGGER */
+.sc-inview .sc-item:nth-child(1) {
+  transition-delay: .15s;
+}
+
+.sc-inview .sc-item:nth-child(2) {
+  transition-delay: .3s;
+}
+
+.sc-inview .sc-item:nth-child(3) {
+  transition-delay: .45s;
+}
+
+/* LARGE LAPTOP */
+@media screen and (max-width: 1600px) {
+
+  .sc-container {
+    max-width: 1120px;
+    gap: 30px;
+  }
+
+  .sc-heading {
+    font-size: 118px;
+  }
+}
+
+/* TABLET */
+@media screen and (max-width: 1200px) {
+
+  .science-{{ section.id }} {
+    padding: 70px 0;
+  }
+
+  .sc-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 0 30px;
+  }
+
+  .sc-heading-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .sc-heading {
+    font-size: 90px !important;
+  }
+
+  .sc-image-box {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .sc-content {
+    margin-top: 0 !important;
+    max-width: 100%;
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .sc-title,
+  .sc-text {
+    max-width: 100%;
+  }
+
+  .sc-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .sc-item-icon {
+    margin-inline: auto;
+  }
+
+  .sc-left-curve,
+  .sc-right-curve {
+    display: none;
+  }
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+
+  .science-{{ section.id }} {
+    padding: 50px 0 70px;
+  }
+
+  .sc-container {
+    padding: 0 20px;
+  }
+
+  .sc-heading {
+    font-size: 56px !important;
+    line-height: 0.9;
+    letter-spacing: -2px;
+  }
+
+  .sc-image-box {
+    max-width: 320px;
+  }
+
+  .sc-title {
+    font-size: 26px;
+  }
+
+  .sc-text {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .sc-grid {
+    gap: 24px;
+  }
+
+  .sc-item-title {
+    font-size: 16px;
+  }
+
+  .sc-item-desc {
+    font-size: 13px;
+  }
+
+  .sc-button {
+    min-width: 220px;
+    height: 58px;
+    font-size: 15px;
+    margin-top: 24px;
+  }
+}
+{%- endstyle -%}
+
+<div class="science-{{ section.id }}">
+
+{% if section.settings.left_curve != blank %}
+  <div class="sc-left-curve">
+    <img src="{{ section.settings.left_curve | image_url: width: 500 }}" alt="">
+  </div>
+{% endif %}
+
+{% if section.settings.right_curve != blank %}
+  <div class="sc-right-curve">
+    <img src="{{ section.settings.right_curve | image_url: width: 500 }}" alt="">
+  </div>
+{% endif %}
+
+  <div class="sc-container">
+
+    <div class="sc-heading-wrapper">
+      <h2 class="sc-heading">
+        The <span>Science</span>
+      </h2>
+    </div>
+
+    <div class="sc-image-box">
+
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1000 | image_tag }}
+      {% else %}
+        <img src="https://images.unsplash.com/photo-1541414779316-956a5084c0d4?auto=format&fit=crop&q=80&w=1000" alt="Space Dog">
+      {% endif %}
+
+    </div>
+
+    <div class="sc-content">
+
+      <h3 class="sc-title">{{ section.settings.title }}</h3>
+
+      <p class="sc-text">
+        The way we prepare our food is inspired by how astronaut meals<br>
+        are handled, preserving nutrients without damaging them.<br><br>
+
+        Because when it comes to your pet’s health, every detail matters.
+      </p>
+
+      <div class="sc-separator"></div>
+
+      <div class="sc-grid">
+
+        {% for block in section.blocks %}
+          <div class="sc-item" {{ block.shopify_attributes }}>
+
+            {% if block.settings.icon != blank %}
+              <img src="{{ block.settings.icon | image_url: width: 100 }}" class="sc-item-icon" loading="lazy">
+            {% else %}
+              <div class="sc-item-icon" style="background: #eee; border-radius: 4px;"></div>
+            {% endif %}
+
+            <div class="sc-item-title">
+              {{ block.settings.label }}
+            </div>
+
+            <div class="sc-item-desc">
+              {{ block.settings.text | newline_to_br }}
+            </div>
+
+          </div>
+        {% endfor %}
+
+      </div>
+
+      <a href="{{ section.settings.link }}" class="sc-button">
+        KNOW MORE
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const section = document.querySelector(".science-{{ section.id }}");
+
+  if (!section) return;
+
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+        section.classList.add("sc-inview");
+      }
+
+    });
+
+  }, {
+    threshold: 0.2
+  });
+
+  observer.observe(section);
+
+});
+</script>
+
+{% schema %}
+{
+  "name": "The Science Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#D12B2B"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Astronaut Dog Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Main Title",
+      "default": "Built with the same precision as space-grade nutrition"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "The way we prepare our food is inspired by how astronaut meals are handled, preserving nutrients without damaging them."
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_curve",
+      "label": "Left Curve"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_curve",
+      "label": "Right Curve"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Lab-tested"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Small Text",
+          "default": "Independent third-party verification on every batch."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Science Section"
+    }
+  ]
+}
+{% endschema %}
