@@ -199,7 +199,7 @@
         "image_max_width": 600,
         "media_top": "100",
         "media_bottom": "unset",
-        "media_left": "0",
+        "media_left": "-50",
         "media_right": "unset",
         "hearts_image": "shopify://shop_images/Group_59509.png",
         "hearts_width": 106,
