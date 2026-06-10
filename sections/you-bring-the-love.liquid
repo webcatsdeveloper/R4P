@@ -1,12 +1,14 @@
+{% comment %} Touch to sync {% endcomment %}
 {%- style -%}
   #section-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
-    padding: 80px 20px 100px 20px;
+    padding: 100px 20px 100px 20px;
     overflow: hidden;
     font-family: inherit;
     color: {{ section.settings.text_color }};
   }
 
+  /* Typography Colors */
   #section-{{ section.id }} .pcf-title, 
   #section-{{ section.id }} .pcf-intro-title {
     color: {{ section.settings.title_color }};
@@ -17,7 +19,23 @@
   
   <div class="pcf-intro-block pcf-animate fade-up">
     {% if section.settings.intro_heading != blank %}
-      <h2 class="pcf-intro-title">{{ section.settings.intro_heading | newline_to_br }}</h2>
+      <h2 class="pcf-intro-title">
+        {%- assign heading_html = section.settings.intro_heading | newline_to_br -%}
+        {%- if heading_html contains '<br />' -%}
+          {%- assign heading_lines = heading_html | split: '<br />' -%}
+        {%- elsif heading_html contains '<br>' -%}
+          {%- assign heading_lines = heading_html | split: '<br>' -%}
+        {%- else -%}
+          {%- assign heading_lines = heading_html | split: '
+' -%}
+        {%- endif -%}
+        {%- if heading_lines.size > 1 -%}
+          <span class="heading-line-1">{{ heading_lines[0] | strip_html | strip }}</span>
+          <span class="heading-line-2">{{ heading_lines[1] | strip_html | strip }}</span>
+        {%- else -%}
+          {{ section.settings.intro_heading | newline_to_br }}
+        {%- endif -%}
+      </h2>
     {% endif %}
     {% if section.settings.intro_subtext != blank %}
       <div class="pcf-intro-subtext">
@@ -33,7 +51,7 @@
     </div>
 
     <div class="pcf-diagram-col pcf-animate fade-in delay-2">
-      <div class="pcf-engine">
+      <div class="pcf-diagram-container">
         
         <div class="pcf-bowl-wrapper pcf-animate scale-in delay-3">
           {% if section.settings.center_image != blank %}
@@ -43,21 +61,21 @@
           {% endif %}
         </div>
 
-        <svg class="pcf-arc-svg" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 440 52 A 279 279 0 0 1 440 508" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+        <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 62.27 17.73 A 31.5 31.5 0 0 1 62.27 62.27" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
         </svg>
 
         {% for block in section.blocks %}
           {% case forloop.index %}
-            {% when 1 %} {% assign angle = '-48deg' %}
-            {% when 2 %} {% assign angle = '-16deg' %}
-            {% when 3 %} {% assign angle = '16deg' %}
-            {% when 4 %} {% assign angle = '48deg' %}
+            {% when 1 %} {% assign angle = '-45deg' %}
+            {% when 2 %} {% assign angle = '-15deg' %}
+            {% when 3 %} {% assign angle = '15deg' %}
+            {% when 4 %} {% assign angle = '45deg' %}
             {% else %} {% assign angle = '0deg' %}
           {% endcase %}
 
-          <div class="pcf-point" style="--angle: {{ angle }};" {{ block.shopify_attributes }}>
-            <div class="pcf-content pcf-animate fade-left" style="transition-delay: 0.{{ forloop.index | plus: 3 }}s;">
+          <div class="pcf-feature-point" style="--angle: {{ angle }};" {{ block.shopify_attributes }}>
+            <div class="pcf-feature-content pcf-animate fade-left" style="transition-delay: 0.{{ forloop.index | plus: 3 }}s;">
               
               <div class="pcf-icon-circle">
                 {% if block.settings.custom_icon != blank %}
@@ -76,7 +94,7 @@
                 {% endif %}
               </div>
 
-              <div class="pcf-text">
+              <div class="pcf-feature-text">
                 {{ block.settings.text | newline_to_br }}
               </div>
             </div>
@@ -93,15 +111,23 @@
   /* --- Intro Header --- */
   .pcf-intro-block {
     max-width: 800px;
-    margin: 0 auto 90px auto;
+    margin: 0 auto 3rem auto;
     text-align: center;
   }
   .pcf-intro-title {
-    font-size: clamp(32px, 4vw, 42px);
-    font-weight: 800;
+    font-size: clamp(32px, 3.5vw, 46px);
     line-height: 1.15;
-    margin: 0 0 25px 0;
-    letter-spacing: -0.01em;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pcf-intro-title .heading-line-1 {
+    font-weight: 500;
+  }
+  .pcf-intro-title .heading-line-2 {
+    font-weight: 800;
   }
   .pcf-intro-subtext {
     font-size: 15px;
@@ -111,110 +137,119 @@
     opacity: 0.85;
   }
   .pcf-intro-subtext p { margin: 0; }
-  .pcf-intro-subtext strong { font-weight: 800; color: #000; opacity: 1; }
+  .pcf-intro-subtext strong { font-weight: 700; color: #000; opacity: 1; }
 
   /* --- Main Grid Layout --- */
   .pcf-main-grid {
-    max-width: 1200px;
+    max-width: 1140px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(340px, 1fr) 600px;
+    grid-template-columns: 1fr;
     align-items: center;
-    gap: 20px;
+    gap: 3.5rem;
+  }
+
+  @media (min-width: 990px) {
+    .pcf-main-grid {
+      grid-template-columns: 4.5fr 7.5fr;
+      gap: 2rem;
+    }
   }
 
   /* --- Left Column --- */
   .pcf-left-col {
-    padding-left: 20px;
+    padding-left: 0;
     z-index: 5;
   }
   .pcf-title {
-    font-size: clamp(48px, 6vw, 72px);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    font-size: clamp(3rem, 6.5vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.04em;
     margin: 0;
   }
 
-  /* --- Right Circular Engine --- */
+  /* --- Right Circular Diagram --- */
   .pcf-diagram-col {
     width: 100%;
-    display: flex;
-    justify-content: flex-start;
   }
-  .pcf-engine {
+  .pcf-diagram-container {
     position: relative;
-    width: 560px;
-    height: 560px;
+    width: 100%;
+    aspect-ratio: 1.25 / 1; 
+    container-type: inline-size;
   }
 
-  /* Center Bowl */
+  /* Center Anchor (Shifted Left to 40% to leave room for text) */
   .pcf-bowl-wrapper {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 40%;
     transform: translate(-50%, -50%);
-    width: 360px;
-    height: 360px;
+    width: 42cqw; 
     z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: block;
     border-radius: 50%;
-    object-fit: cover;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.18));
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
   }
 
-  /* Precise SVG Arc */
+  /* SVG Concentric Arc */
   .pcf-arc-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
+    display: none;
+  }
+  @media (min-width: 990px) {
+    .pcf-arc-svg {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
   }
 
-  /* Mathematical Anchors for Icons */
-  .pcf-point {
+  /* Precise Trigonometric Positioning */
+  .pcf-feature-point {
     position: absolute;
     top: 50%;
-    left: 50%;
-    /* Translates outwards exactly 280px (the SVG radius) and un-rotates contents */
-    transform: rotate(var(--angle)) translateX(280px) rotate(calc(var(--angle) * -1));
+    left: 40%;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(31.5cqw) rotate(calc(var(--angle) * -1));
     z-index: 10;
   }
 
-  /* Wrapper aligns Icon perfectly ON the line, text to the right */
-  .pcf-content {
+  /* Wrapper to align Icon exactly on the arc line, text to the right */
+  .pcf-feature-content {
     position: absolute;
     top: 50%;
     left: 0;
-    /* -24px = half of icon width. Centers the icon squarely on the mathematical point */
-    transform: translate(-24px, -50%);
+    transform: translate(-26px, -50%);
     display: flex;
     align-items: center;
-    gap: 16px;
-    width: 340px;
+    gap: 15px;
+    width: max-content;
   }
 
   .pcf-icon-circle {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    z-index: 2;
   }
   .pcf-icon-circle svg {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
   .pcf-custom-img {
     width: 100%;
@@ -224,12 +259,11 @@
     border-radius: 50%;
   }
 
-  .pcf-text {
-    font-size: 14px;
-    line-height: 1.4;
-    font-weight: 400;
-    color: inherit;
-    max-width: 240px; /* Enforces exact line breaks from design */
+  .pcf-feature-text {
+    font-size: 15px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #2b2b2b;
   }
 
   /* --- Animations --- */
@@ -247,63 +281,68 @@
   .delay-2 { transition-delay: 0.2s; }
   .delay-3 { transition-delay: 0.3s; }
 
-  /* --- Mobile Optimization Fallback --- */
+  /* --- Mobile Optimization --- */
   @media screen and (max-width: 1024px) {
     #section-{{ section.id }} {
-      padding: 60px 20px;
+      padding: 60px 20px !important;
     }
     .pcf-intro-block {
-      margin-bottom: 50px;
+      margin-bottom: 3.5rem;
+    }
+    .pcf-intro-title {
+      font-size: 28px;
     }
     .pcf-main-grid {
       grid-template-columns: 1fr;
       text-align: center;
-      gap: 50px;
+      gap: 2.5rem;
     }
     .pcf-left-col {
       padding-left: 0;
+      text-align: left;
     }
     .pcf-title {
-      font-size: 48px;
+      font-size: 2.4rem;
+      text-align: left;
     }
     
-    /* Dismantle mathematical layout for clean mobile stacking */
-    .pcf-diagram-col {
-      justify-content: center;
-    }
-    .pcf-engine {
-      width: 100%;
-      height: auto;
+    .pcf-diagram-container {
+      aspect-ratio: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px;
+      gap: 2.5rem;
     }
     .pcf-bowl-wrapper {
       position: relative;
-      top: auto; left: auto; transform: none;
-      width: 100%; max-width: 320px; height: auto;
-      aspect-ratio: 1/1;
+      top: auto; left: auto; transform: none !important;
+      width: 100%; max-width: 280px !important;
+      margin: 0 auto;
     }
-    .scale-in.is-visible { transform: scale(1); }
-    
+    .scale-in.is-visible { transform: scale(1) !important; }
+
     .pcf-arc-svg { display: none; }
 
-    /* Reset feature points into standard list flow */
-    .pcf-point {
+    .pcf-feature-point {
       position: relative;
-      top: auto; left: auto; transform: none;
+      top: auto; left: auto; transform: none !important;
       width: 100%;
-      max-width: 380px;
+      max-width: 400px;
     }
-    .pcf-content {
+    .pcf-feature-content {
       position: relative;
-      top: auto; left: auto; transform: none;
-      width: 100%;
+      top: auto; left: auto; transform: none !important;
+      width: 100% !important;
       text-align: left;
+      gap: 1.2rem;
     }
-    .pcf-text {
-      max-width: 100%;
+    .pcf-icon-circle {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+    }
+    .pcf-feature-text {
+      font-size: 0.9rem;
     }
   }
 </style>
