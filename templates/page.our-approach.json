@@ -242,8 +242,9 @@
         "feature_8p8Uwc": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Layer_1_10.png",
-            "text": "<p>Feature description here</p>"
+            "icon_type": "drop",
+            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "text": "Feature description here"
           }
         }
       },
@@ -252,11 +253,13 @@
       ],
       "name": "Pet Science Info Circle",
       "settings": {
-        "background_color": "#ffcd6b",
-        "heading_top": "You bring the love.We bring the science.",
-        "subtext_top": "<p><a href=\"#\">A way of feeding that's built around what their bodies actually need, made practical for everyday life.</a></p><p><a href=\"#\">So what actually makes it different?</a></p>",
-        "heading_left": "Preservingwhatmatters.",
-        "bowl_image": "shopify://shop_images/4_1.png"
+        "bg_color": "#f8c86a",
+        "text_color": "#000000",
+        "arc_color": "#ffffff",
+        "intro_heading": "You bring the love.\nWe bring the science.",
+        "intro_subtext": "<p>A way of feeding that's built around what their bodies actually need, made practical for everyday life.<br/><strong>So what actually makes it different?</strong></p>",
+        "main_title": "Preserving\nwhat\nmatters.",
+        "center_image": "shopify://shop_images/4_1.png"
       }
     },
     "pet_benefits_slider_XeT6Pj": {
