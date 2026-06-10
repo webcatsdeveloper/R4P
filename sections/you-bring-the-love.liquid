@@ -97,7 +97,7 @@
   }
 
   .pet-science-container {
-    max-width: 1400px;
+    max-width: 1280px;
     margin: 0 auto;
     padding-left: {{ section.settings.padding_left }}px;
     padding-right: {{ section.settings.padding_right }}px;
@@ -320,6 +320,7 @@
 
     .animate-slide-in-left { transform: translateX(-45px); }
     .animate-scale-in { transform: scale(0.85); }
+    .pet-bowl-image-container.animate-scale-in { transform: translate(-50%, -50%) scale(0.85); }
 
     @media (min-width: 990px) {
       .pet-benefit-item.animate-fade-in-right {
@@ -335,6 +336,7 @@
     .is-visible.animate-fade-in-up { opacity: 1; transform: translateY(0); }
     .is-visible.animate-slide-in-left { opacity: 1; transform: translateX(0); }
     .is-visible.animate-scale-in { opacity: 1; transform: scale(1); }
+    .is-visible.pet-bowl-image-container.animate-scale-in { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     
     @media (min-width: 990px) {
       .pet-benefit-item.animate-fade-in-right.is-visible { 
