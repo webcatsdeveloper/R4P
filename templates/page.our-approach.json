@@ -137,7 +137,7 @@
         "sr_width": 80,
         "sr_top": "16",
         "sr_bottom": "unset",
-        "sr_left": "unset",
+        "sr_left": "20",
         "sr_right": "10",
         "burst_left": "shopify://shop_images/Isolation_Mode_5.png",
         "bl_width": 90,
