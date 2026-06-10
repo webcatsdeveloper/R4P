@@ -72,6 +72,7 @@
   .pet-hero__heading-sub-inner {
     display: inline-block;
     position: relative;
+    font-family: 'Degular Demo', sans-serif !important;
   }
 
   .pet-hero__heading-line3 {
@@ -358,7 +359,9 @@
             {{ section.settings.heading_line_4 }}
           {%- endif -%}
         </span>
-        <span class="pet-hero__heading-highlight">{{ section.settings.heading_highlight }}</span>
+        {%- if section.settings.heading_highlight != blank -%}
+          <span class="pet-hero__heading-highlight">{{ section.settings.heading_highlight }}</span>
+        {%- endif -%}
       </h2>
 
       <div class="pet-hero__graphics-wrapper">
