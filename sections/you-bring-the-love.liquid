@@ -1,8 +1,7 @@
-{% comment %} Touch to sync {% endcomment %}
 {%- style -%}
   #section-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
-    padding: 100px 20px 100px 20px;
+    padding: 70px 20px 80px 20px;
     overflow: hidden;
     font-family: inherit;
     color: {{ section.settings.text_color }};
@@ -62,15 +61,15 @@
         </div>
 
         <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 62.27 17.73 A 31.5 31.5 0 0 1 62.27 62.27" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
+          <path d="M 46.34 19.52 A 25 25 0 0 1 46.34 60.48" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.3" stroke-linecap="round"/>
         </svg>
 
         {% for block in section.blocks %}
           {% case forloop.index %}
-            {% when 1 %} {% assign angle = '-45deg' %}
-            {% when 2 %} {% assign angle = '-15deg' %}
-            {% when 3 %} {% assign angle = '15deg' %}
-            {% when 4 %} {% assign angle = '45deg' %}
+            {% when 1 %} {% assign angle = '-42deg' %}
+            {% when 2 %} {% assign angle = '-14deg' %}
+            {% when 3 %} {% assign angle = '14deg' %}
+            {% when 4 %} {% assign angle = '42deg' %}
             {% else %} {% assign angle = '0deg' %}
           {% endcase %}
 
@@ -83,13 +82,13 @@
                 {% else %}
                   {% case block.settings.icon_type %}
                     {% when 'drop' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M19.07 4.93l-2.83 2.83"></path></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M19.07 4.93l-2.83 2.83"></path></svg>
                     {% when 'shield' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                     {% when 'heat' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8c0-2-2-2-2-4"></path><path d="M12 8c0-2-2-2-2-4"></path><path d="M7 8c0-2-2-2-2-4"></path><path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path><path d="M12 22a7 7 0 0 0 7-7"></path></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8c0-2-2-2-2-4"></path><path d="M12 8c0-2-2-2-2-4"></path><path d="M7 8c0-2-2-2-2-4"></path><path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path><path d="M12 22a7 7 0 0 0 7-7"></path></svg>
                     {% when 'molecule' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><circle cx="12" cy="12" r="3"></circle><line x1="8.12" y1="8.12" x2="9.88" y2="9.88"></line><line x1="14.12" y1="9.88" x2="15.88" y2="8.12"></line><line x1="9.88" y1="14.12" x2="8.12" y2="15.88"></line><line x1="15.88" y1="14.12" x2="14.12" y2="15.88"></line></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><circle cx="12" cy="12" r="3"></circle><line x1="8.12" y1="8.12" x2="9.88" y2="9.88"></line><line x1="14.12" y1="9.88" x2="15.88" y2="8.12"></line><line x1="9.88" y1="14.12" x2="8.12" y2="15.88"></line><line x1="15.88" y1="14.12" x2="14.12" y2="15.88"></line></svg>
                   {% endcase %}
                 {% endif %}
               </div>
@@ -111,61 +110,58 @@
   /* --- Intro Header --- */
   .pcf-intro-block {
     max-width: 800px;
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 60px auto;
     text-align: center;
   }
   .pcf-intro-title {
-    font-size: clamp(32px, 3.5vw, 46px);
+    font-size: clamp(28px, 3vw, 36px);
     line-height: 1.15;
-    margin: 0 0 1rem 0;
-    letter-spacing: -0.02em;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.01em;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .pcf-intro-title .heading-line-1 {
-    font-weight: 500;
-  }
-  .pcf-intro-title .heading-line-2 {
-    font-weight: 800;
-  }
+  .pcf-intro-title .heading-line-1 { font-weight: 500; }
+  .pcf-intro-title .heading-line-2 { font-weight: 800; }
+  
   .pcf-intro-subtext {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.6;
     margin: 0;
     color: inherit;
-    opacity: 0.85;
+    opacity: 0.9;
   }
   .pcf-intro-subtext p { margin: 0; }
   .pcf-intro-subtext strong { font-weight: 700; color: #000; opacity: 1; }
 
   /* --- Main Grid Layout --- */
   .pcf-main-grid {
-    max-width: 1140px;
+    max-width: 1200px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
-    gap: 3.5rem;
+    gap: 40px;
   }
 
   @media (min-width: 990px) {
     .pcf-main-grid {
-      grid-template-columns: 4.5fr 7.5fr;
-      gap: 2rem;
+      grid-template-columns: 4fr 6fr; /* Precision ratio to match layout */
+      gap: 20px;
     }
   }
 
   /* --- Left Column --- */
   .pcf-left-col {
-    padding-left: 0;
+    padding-left: 20px;
     z-index: 5;
   }
   .pcf-title {
-    font-size: clamp(3rem, 6.5vw, 7.5rem);
-    font-weight: 900;
-    line-height: 0.88;
-    letter-spacing: -0.04em;
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
     margin: 0;
   }
 
@@ -180,13 +176,13 @@
     container-type: inline-size;
   }
 
-  /* Center Anchor (Shifted Left to 40% to leave room for text) */
+  /* Center Anchor */
   .pcf-bowl-wrapper {
     position: absolute;
     top: 50%;
-    left: 40%;
+    left: 32%; /* Positioned slightly left to accommodate wide text on right */
     transform: translate(-50%, -50%);
-    width: 42cqw; 
+    width: 36cqw; 
     z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
@@ -194,7 +190,7 @@
     height: auto;
     display: block;
     border-radius: 50%;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.18));
   }
 
   /* SVG Concentric Arc */
@@ -218,29 +214,32 @@
   .pcf-feature-point {
     position: absolute;
     top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(31.5cqw) rotate(calc(var(--angle) * -1));
+    left: 32%;
+    /* 25cqw aligns perfectly with SVG Radius of 25 */
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(25cqw) rotate(calc(var(--angle) * -1));
     z-index: 10;
   }
 
-  /* Wrapper to align Icon exactly on the arc line, text to the right */
+  /* Wrapper aligns Icon exactly ON the line, text to the right */
   .pcf-feature-content {
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translate(-26px, -50%);
+    /* -24px = exactly half of icon width (48px) to center perfectly on line */
+    transform: translate(-24px, -50%);
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 16px;
     width: max-content;
+    max-width: 280px; /* Restricts text wrap naturally */
   }
 
   .pcf-icon-circle {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,10 +259,10 @@
   }
 
   .pcf-feature-text {
-    font-size: 15px;
-    line-height: 1.35;
-    font-weight: 500;
-    color: #2b2b2b;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #333333;
   }
 
   /* --- Animations --- */
@@ -281,29 +280,25 @@
   .delay-2 { transition-delay: 0.2s; }
   .delay-3 { transition-delay: 0.3s; }
 
-  /* --- Mobile Optimization --- */
-  @media screen and (max-width: 1024px) {
+  /* --- Mobile Optimization Fallback --- */
+  @media screen and (max-width: 989px) {
     #section-{{ section.id }} {
-      padding: 60px 20px !important;
+      padding: 60px 20px;
     }
     .pcf-intro-block {
-      margin-bottom: 3.5rem;
-    }
-    .pcf-intro-title {
-      font-size: 28px;
+      margin-bottom: 50px;
     }
     .pcf-main-grid {
       grid-template-columns: 1fr;
       text-align: center;
-      gap: 2.5rem;
+      gap: 40px;
     }
     .pcf-left-col {
       padding-left: 0;
-      text-align: left;
+      text-align: center;
     }
     .pcf-title {
-      font-size: 2.4rem;
-      text-align: left;
+      text-align: center;
     }
     
     .pcf-diagram-container {
@@ -311,38 +306,29 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2.5rem;
+      gap: 30px;
     }
     .pcf-bowl-wrapper {
       position: relative;
       top: auto; left: auto; transform: none !important;
-      width: 100%; max-width: 280px !important;
+      width: 100%; max-width: 280px;
       margin: 0 auto;
     }
     .scale-in.is-visible { transform: scale(1) !important; }
-
-    .pcf-arc-svg { display: none; }
 
     .pcf-feature-point {
       position: relative;
       top: auto; left: auto; transform: none !important;
       width: 100%;
-      max-width: 400px;
+      max-width: 380px;
     }
     .pcf-feature-content {
       position: relative;
       top: auto; left: auto; transform: none !important;
-      width: 100% !important;
+      width: 100%;
+      max-width: 100%;
       text-align: left;
-      gap: 1.2rem;
-    }
-    .pcf-icon-circle {
-      width: 46px;
-      height: 46px;
-      min-width: 46px;
-    }
-    .pcf-feature-text {
-      font-size: 0.9rem;
+      gap: 15px;
     }
   }
 </style>
