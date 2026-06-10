@@ -203,7 +203,7 @@
         "media_right": "unset",
         "hearts_image": "shopify://shop_images/Group_59509.png",
         "hearts_width": 106,
-        "hearts_top": "-10",
+        "hearts_top": "20",
         "hearts_bottom": "unset",
         "hearts_left": "12",
         "hearts_right": "unset",
