@@ -51,7 +51,7 @@
 
   /* --- TYPOGRAPHY ENGINE & LAYOUT --- */
   .pet-hero__heading {
-    font-family: 'Degular Demo', sans-serif;
+    font-family: 'Degular Demo', sans-serif !important;
     font-weight: 600;
     font-size: {{ section.settings.heading_font_size }}px;
     line-height: {{ section.settings.heading_line_height }};
@@ -66,6 +66,7 @@
   .pet-hero__heading-line4 {
     display: block;
     position: relative;
+    font-family: 'Degular Demo', sans-serif !important;
   }
 
   .pet-hero__heading-sub-inner {
@@ -83,17 +84,17 @@
     margin-top: {{ section.settings.l3_margin_top }}px;
     margin-bottom: {{ section.settings.l3_margin_bottom }}px;
     {% if section.settings.l3_font_family == 'caveat' %}
-      font-family: 'Caveat', cursive;
+      font-family: 'Caveat', cursive !important;
     {% elsif section.settings.l3_font_family == 'georgia' %}
-      font-family: 'Georgia', serif;
+      font-family: 'Georgia', serif !important;
     {% else %}
-      font-family: 'Degular Demo', sans-serif;
+      font-family: 'Degular Demo', sans-serif !important;
     {% endif %}
   }
 
   .pet-hero__heading-highlight {
     display: block;
-    font-family: 'Caveat', cursive;
+    font-family: 'Caveat', cursive !important;
     font-size: {{ section.settings.highlight_font_size }}px;
     margin-top: 5px;
     color: {{ section.settings.accent_color_red }};
