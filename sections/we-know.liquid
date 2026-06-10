@@ -298,7 +298,7 @@
         <div class="pet-info__heading-wrapper pet-js-animate">
           <h2 class="pet-info__heading">
             {% if section.settings.heading_line_1 != blank %}<span>{{ section.settings.heading_line_1 }}</span>{% endif %}
-            {% if section.settings.heading_line_2 != blank %}<span>{{ section.settings.heading_line_2 }}</span>{% endif %}
+            {% comment %} {% if section.settings.heading_line_2 != blank %}<span>{{ section.settings.heading_line_2 }}</span>{% endif %} {% endcomment %}
             {% if section.settings.heading_line_3 != blank %}<span>{{ section.settings.heading_line_3 }}</span>{% endif %}
             {% if section.settings.heading_line_4 != blank %}<span class="pet-info__heading-line4">{{ section.settings.heading_line_4 }}</span>{% endif %}
           </h2>
