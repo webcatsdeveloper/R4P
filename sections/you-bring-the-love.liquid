@@ -6,14 +6,16 @@
 <div class="pet-science-section color-{{ section.settings.color_scheme }}" id="PetScience-{{ section.id }}">
   <div class="pet-science-container">
     
-    <div class="pet-science-header animate-fade-in-up">
-      {%- if section.settings.heading != blank -%}
-        <h2 class="pet-science-main-heading">{{ section.settings.heading | newline_to_br }}</h2>
-      {%- endif -%}
-      {%- if section.settings.subheading != blank -%}
-        <div class="pet-science-subheading">{{ section.settings.subheading | newline_to_br }}</div>
-      {%- endif -%}
-    </div>
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="pet-science-header animate-fade-in-up">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="pet-science-main-heading">{{ section.settings.heading | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <div class="pet-science-subheading">{{ section.settings.subheading | newline_to_br }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
 
     <div class="pet-science-content-grid">
       
@@ -39,11 +41,11 @@
                 <span>Bowl Image</span>
               </div>
             {%- endif -%}
-
-            <svg class="pet-science-arc-svg" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 10 10 A 185 185 0 0 1 10 390" stroke="{{ section.settings.arc_color }}" stroke-width="2.5"/>
-            </svg>
           </div>
+
+          <svg class="pet-science-arc-svg" viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 310 42 A 235 235 0 0 1 310 458" stroke="{{ section.settings.arc_color }}" stroke-width="2.5"/>
+          </svg>
 
           <div class="pet-science-benefits-list">
             {%- for block in section.blocks -%}
@@ -91,7 +93,7 @@
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     overflow: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Degular Demo', sans-serif !important;
   }
 
   .pet-science-container {
@@ -132,15 +134,16 @@
 
   @media (min-width: 990px) {
     .pet-science-content-grid {
-      grid-template-columns: 4.2fr 7.8fr;
+      grid-template-columns: 4.8fr 7.2fr;
       gap: 1rem;
     }
   }
 
   .pet-science-statement {
-    font-size: clamp(2.8rem, 5vw, 4.8rem);
-    font-weight: 800;
-    line-height: 1.05;
+    font-family: 'Degular Demo', sans-serif !important;
+    font-size: clamp(2.8rem, 5.2vw, 5.2rem);
+    font-weight: 900;
+    line-height: 0.98;
     color: var(--heading-color);
     margin: 0;
     letter-spacing: -0.03em;
@@ -149,40 +152,24 @@
   /* --- Interactive Wrap Area --- */
   .pet-science-interactive-wrapper {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
     width: 100%;
-  }
-
-  @media (min-width: 990px) {
-    .pet-science-interactive-wrapper {
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 0;
-      min-height: 520px;
-    }
+    max-width: 600px;
+    aspect-ratio: 600 / 500;
+    margin: 0 auto;
   }
 
   /* Bowl Containment & Sizing */
   .pet-bowl-image-container {
-    position: relative;
-    left:-100px;
-    z-index: 3;
-    width: 100%;
-    max-width: 600px !important;
+    position: absolute;
+    left: 33.3%;
+    top: 50%;
+    width: 58.3%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  @media (min-width: 990px) {
-    .pet-bowl-image-container {
-      max-width: 380px;
-      margin-left: 1.5rem;
-    }
-  }
   .pet-bowl-image-container:hover {
-    transform: scale(1.03) rotate(1deg);
+    transform: translate(-50%, -50%) scale(1.03) rotate(1deg);
   }
   .pet-bowl-img {
     width: 100%;
@@ -209,11 +196,10 @@
     .pet-science-arc-svg {
         display: block;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateY(-50%);
-        height: 130%;
-        width: auto;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         pointer-events: none;
         z-index: 1;
     }
@@ -230,24 +216,24 @@
 
   @media (min-width: 990px) {
     .pet-science-benefits-list {
-      position: relative;
-      height: 450px;
-      margin-left: -14.5rem; /* Tighter item clustering closer to bowl */
-      flex: 1;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
       gap: 0;
     }
 
     /* Absolute curved tracking offset paths */
     .pet-benefit-item {
       position: absolute !important;
-      left: 0;
-      width: 100%;
-      max-width: 440px;
+      pointer-events: auto;
     }
-    .pet-benefit-item-1 { top: 0%; left: -10px; }
-    .pet-benefit-item-2 { top: 26%; left: 42px; }
-    .pet-benefit-item-3 { top: 56%; left: 42px; }
-    .pet-benefit-item-4 { top: 82%; left: -10px; }
+    .pet-benefit-item-1 { left: 55.8%; top: 11.5%; }
+    .pet-benefit-item-2 { left: 70.6%; top: 35.5%; }
+    .pet-benefit-item-3 { left: 70.6%; top: 64.5%; }
+    .pet-benefit-item-4 { left: 55.8%; top: 88.5%; }
   }
 
   /* Benefit Items Layout styling */
@@ -258,8 +244,8 @@
     transition: transform 0.3s ease;
   }
   @media (min-width: 990px) {
-    .pet-benefit-item:hover {
-      transform: translateX(8px);
+    .pet-benefit-item {
+      transform: translate(-26px, -26px);
     }
   }
 
@@ -273,10 +259,11 @@
     width: 52px;
     height: 52px;
     min-width: 52px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     z-index: 2;
     transition: background-color 0.3s ease, transform 0.3s ease;
     padding: 0.7rem;
+    box-sizing: border-box;
   }
   .pet-benefit-item:hover .pet-benefit-icon-wrapper {
     background-color: var(--accent-color);
@@ -298,6 +285,7 @@
   .pet-benefit-text-wrapper {
     display: flex;
     flex-direction: column;
+    max-width: 220px;
   }
   .pet-benefit-title {
     font-size: 1.1rem;
@@ -307,10 +295,11 @@
     color: var(--heading-color);
   }
   .pet-benefit-desc {
-    font-size: 0.95rem;
-    line-height: 1.4;
+    font-size: 15px;
+    line-height: 1.35;
     margin: 0;
-    opacity: 0.8;
+    font-weight: 500;
+    color: #2b2b2b;
   }
 
   /* --- Smooth Scroll Animations --- */
@@ -329,17 +318,32 @@
     .animate-scale-in { transform: scale(0.85); }
 
     @media (min-width: 990px) {
-      .animate-fade-in-right {
-        transform: translateX(35px);
+      .pet-benefit-item.animate-fade-in-right {
+        opacity: 0;
+        transform: translate(15px, -26px);
+        transition: opacity 0.85s cubic-bezier(0.215, 0.61, 0.355, 1), 
+                    transform 0.85s cubic-bezier(0.215, 0.61, 0.355, 1);
         transition-delay: var(--animation-delay, 0s);
       }
     }
 
     /* Active visibility triggers */
     .is-visible.animate-fade-in-up { opacity: 1; transform: translateY(0); }
-    .is-visible.animate-slide-in-left { opacity: 1; transform: translateX(0); margin:-300px 0px 0px 100px; }
+    .is-visible.animate-slide-in-left { opacity: 1; transform: translateX(0); }
     .is-visible.animate-scale-in { opacity: 1; transform: scale(1); }
-    .is-visible.animate-fade-in-right { opacity: 1; transform: translateX(0); }
+    
+    @media (min-width: 990px) {
+      .pet-benefit-item.animate-fade-in-right.is-visible { 
+        opacity: 1; 
+        transform: translate(-26px, -26px); 
+      }
+      .pet-benefit-item.animate-fade-in-right.is-visible:hover {
+        transform: translate(-26px, -26px) translateX(8px);
+      }
+    }
+    @media (max-width: 989px) {
+      .is-visible.animate-fade-in-right { opacity: 1; transform: translateY(0); }
+    }
   }
 
   /* ==========================================================================
@@ -371,7 +375,7 @@
     .pet-science-statement {
       font-size: 2.4rem;
       text-align: left;
-      padding-left:20px;
+      padding-left: 0;
     }
 
     .pet-science-subheading { 
@@ -379,29 +383,46 @@
       line-height: 1.6; 
       font-weight: 400; 
       opacity: 0.85; 
-      padding:0 40px;
+      padding: 0 20px;
+    }
+
+    .pet-science-interactive-wrapper {
+      height: auto;
+      aspect-ratio: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
     }
 
     /* Reset desktop left overflow alignments seamlessly */
     .pet-bowl-image-container {
+      position: relative;
       left: 0 !important;
+      top: 0 !important;
+      width: 100%;
       max-width: 280px !important;
+      transform: none !important;
       margin: 0 auto;
     }
-
-    /* Prevent animation conflict issues crashing stack orders on small devices */
-    .is-visible.animate-slide-in-left {
-      margin: 0 !important;
+    
+    .pet-bowl-img {
+      position: static;
+      transform: none;
     }
 
     .pet-science-benefits-list {
       gap: 1.5rem;
       margin-left: 0 !important;
+      position: static;
+      height: auto;
     }
 
     .pet-benefit-item {
+      position: static !important;
+      transform: none !important;
       text-align: left;
-      align-items: flex-start;
+      align-items: center;
     }
 
     .pet-benefit-icon-wrapper {
