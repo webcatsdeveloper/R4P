@@ -374,16 +374,14 @@
       "name": "CTA Overlap Banner",
       "settings": {
         "bg_color": "#7d75b3",
-        "ribbon_image_desktop": "shopify://shop_images/Mask_group.png",
-        "ribbon_image_mobile": "shopify://shop_images/Mask_group_1_0fdd980f-7238-41d8-9c2a-0894317af896.png",
+        "person_image": "shopify://shop_images/ChatGPT_Image_May_20_2026_12_32_31_PM_1.png",
+        "curve_image": "shopify://shop_images/Mask_group.png",
         "heading": "So, ready to find what’s right for them?",
-        "btn1_text": "Start With Your Pet",
+        "subtext": "Be a part of a space where pet parents come together to learn, share, and care better.",
+        "btn1_label": "JOIN OUR COMMUNITY",
         "btn1_link": "",
-        "btn2_text": "Explore Products",
-        "btn2_link": "",
-        "model_image": "shopify://shop_images/ChatGPT_Image_May_20_2026_12_32_31_PM_1.png",
-        "padding_top": 60,
-        "padding_bottom": 60
+        "btn2_label": "LEARN MORE",
+        "btn2_link": ""
       }
     }
   },
