@@ -251,14 +251,16 @@
           "type": "feature",
           "settings": {
             "icon_type": "shield",
-            "text": "Helps retain\nessential amino\nacids and\nmicronutrients"
+            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "text": "Helps retain essential amino acids and micronutrients"
           }
         },
         "feature_3": {
           "type": "feature",
           "settings": {
             "icon_type": "heat",
-            "text": "Avoids nutrient\ndegradation\ncaused by high-\nheat processing"
+            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "text": "Avoids nutrient degradation caused by high-heat processing"
           }
         },
         "feature_4": {
