@@ -159,6 +159,9 @@
       "type": "we-know",
       "name": "Pet Info Section",
       "settings": {
+        "mobile_bg_image": "shopify://shop_images/Group_59504.png",
+        "mobile_bg_size": "cover",
+        "mobile_bg_position": "center",
         "bg_color": "#ffffff",
         "container_max_width": 1280,
         "container_padding_left": 100,
@@ -196,6 +199,7 @@
         "p2_color": "#555555",
         "p2_strong_color": "#111111",
         "main_image": "shopify://shop_images/3_1.png",
+        "mobile_main_image": "shopify://shop_images/3_1.png",
         "image_max_width": 600,
         "media_top": "100",
         "media_bottom": "unset",
