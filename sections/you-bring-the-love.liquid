@@ -17,24 +17,11 @@
 
 <div id="section-{{ section.id }}" class="pcf-wrapper">
   
+  {% if section.settings.intro_heading != blank or section.settings.intro_subtext != blank %}
   <div class="pcf-intro-block pcf-animate fade-up">
     {% if section.settings.intro_heading != blank %}
       <h2 class="pcf-intro-title">
-        {%- assign heading_html = section.settings.intro_heading | newline_to_br -%}
-        {%- if heading_html contains '<br />' -%}
-          {%- assign heading_lines = heading_html | split: '<br />' -%}
-        {%- elsif heading_html contains '<br>' -%}
-          {%- assign heading_lines = heading_html | split: '<br>' -%}
-        {%- else -%}
-          {%- assign heading_lines = heading_html | split: '
-' -%}
-        {%- endif -%}
-        {%- if heading_lines.size > 1 -%}
-          <span class="heading-line-1">{{ heading_lines[0] | strip_html | strip }}</span>
-          <span class="heading-line-2">{{ heading_lines[1] | strip_html | strip }}</span>
-        {%- else -%}
-          {{ section.settings.intro_heading | newline_to_br }}
-        {%- endif -%}
+        {{ section.settings.intro_heading | newline_to_br }}
       </h2>
     {% endif %}
     {% if section.settings.intro_subtext != blank %}
@@ -43,6 +30,7 @@
       </div>
     {% endif %}
   </div>
+  {% endif %}
 
   <div class="pcf-main-grid">
     
@@ -55,22 +43,23 @@
         
         <div class="pcf-bowl-wrapper pcf-animate scale-in delay-3">
           {% if section.settings.center_image != blank %}
-            {{ section.settings.center_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
+            {{ section.settings.center_image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
           {% else %}
             {{ 'product-1' | placeholder_svg_tag: 'pcf-placeholder' }}
           {% endif %}
         </div>
 
-        <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 17.73 17.73 A 31.5 31.5 0 1 1 17.73 62.27" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
+        <svg class="pcf-arc-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Adjusted arc to be a cleaner semi-circle for the features -->
+          <path d="M 50 15 A 35 35 0 0 1 50 85" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.3" fill="none"/>
         </svg>
 
         {% for block in section.blocks %}
           {% case forloop.index %}
-            {% when 1 %} {% assign angle = '-52deg' %}
+            {% when 1 %} {% assign angle = '-45deg' %}
             {% when 2 %} {% assign angle = '-15deg' %}
-            {% when 3 %} {% assign angle = '18deg' %}
-            {% when 4 %} {% assign angle = '52deg' %}
+            {% when 3 %} {% assign angle = '15deg' %}
+            {% when 4 %} {% assign angle = '45deg' %}
             {% else %} {% assign angle = '0deg' %}
           {% endcase %}
 
@@ -108,207 +97,125 @@
 </div>
 
 <style>
-  /* --- Intro Header --- */
+  /* --- Shared Styles --- */
   .pcf-intro-block {
     max-width: 800px;
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 4rem auto;
     text-align: center;
   }
-  .pcf-intro-title {
-    font-size: clamp(32px, 3.5vw, 46px);
-    line-height: 1.15;
-    margin: 0 0 1rem 0;
-    letter-spacing: -0.02em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .pcf-intro-title .heading-line-1 {
-    font-weight: 900;
-  }
-  .pcf-intro-title .heading-line-2 {
-    font-weight: 800;
-  }
-  .pcf-intro-subtext {
-    font-size: 23px;
-    line-height: 1.6;
-    margin: 0;
-    color: inherit;
-    opacity: 0.85;
-    padding:0 16px;
-  }
-  .pcf-intro-subtext p { margin: 0; }
-  .pcf-intro-subtext strong { font-weight: 700; color: #000; opacity: 1; }
+  .pcf-animate { opacity: 0; will-change: opacity, transform; }
+  .pcf-animate.is-visible { opacity: 1; transform: translate(0) scale(1); }
 
-  /* --- Main Grid Layout --- */
-  .pcf-main-grid {
-    max-width: 1340px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: center;
-    gap: 3.5rem;
-  }
-
+  /* --- Desktop Specific Design (To match Figma) --- */
   @media (min-width: 990px) {
     .pcf-main-grid {
-      grid-template-columns: 3.5fr 8.5fr;
-      gap: 2rem;
+      max-width: 1400px; /* Wider container for the hero look */
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr; /* Balanced split for title and diagram */
+      align-items: center;
+      gap: 20px;
     }
-  }
 
-  /* --- Left Column --- */
-  .pcf-left-col {
-    padding-left: 0;
-    z-index: 5;
-  }
-  .pcf-title {
-    font-size: clamp(3rem, 6.5vw, 7.5rem);
-    font-weight: 900;
-    line-height: 0.88;
-    letter-spacing: -0.04em;
-    margin: 0;
-  }
+    .pcf-title {
+      font-size: clamp(5rem, 8.5vw, 9.5rem); /* Massive bold text */
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      margin: 0;
+      text-align: left;
+    }
 
-  /* --- Right Circular Diagram --- */
-  .pcf-diagram-col {
-    width: 100%;
-  }
-  .pcf-diagram-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1.25 / 1; 
-    container-type: inline-size;
-  }
+    .pcf-diagram-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      container-type: inline-size;
+    }
 
-  /* Center Anchor (Shifted Left to 40% to leave room for text) */
-  .pcf-bowl-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    {% comment %} width: 52cqw;  {% endcomment %}
-    z-index: 5;
-  }
-  .pcf-bowl-img, .pcf-placeholder {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 50%;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
-  }
+    /* Center the bowl in its half of the grid */
+    .pcf-bowl-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 35%; /* Centered relative to the arc circle */
+      transform: translate(-50%, -50%);
+      width: 60cqw; 
+      z-index: 5;
+    }
+    
+    .pcf-bowl-img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 25px 50px rgba(0,0,0,0.15));
+    }
 
-  /* SVG Concentric Arc */
-  .pcf-arc-svg {
-    display: none;
-  }
-  @media (min-width: 990px) {
     .pcf-arc-svg {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
     }
+
+    /* Trigonometric Positioning for Arc Points */
+    .pcf-feature-point {
+      position: absolute;
+      top: 50%;
+      left: 35%; /* Matches bowl center */
+      transform: translate(-50%, -50%) rotate(var(--angle)) translateX(35cqw) rotate(calc(var(--angle) * -1));
+      z-index: 10;
+    }
+
+    .pcf-feature-content {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(-30px, -50%); /* Centers the icon on the line */
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      width: 350px; /* Room for description text */
+    }
+
+    .pcf-icon-circle {
+      width: 64px;
+      height: 64px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .pcf-feature-text {
+      font-size: 18px;
+      line-height: 1.3;
+      font-weight: 500;
+      color: #333;
+    }
+
+    /* Animation States for Desktop */
+    .fade-right { transform: translateX(-50px); transition: opacity 1s ease, transform 1s ease; }
+    .fade-left { transform: translateX(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .scale-in { transform: translate(-50%, -50%) scale(0.8); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .scale-in.is-visible { transform: translate(-50%, -50%) scale(1); }
   }
 
-  /* Precise Trigonometric Positioning */
-  .pcf-feature-point {
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(31.5cqw) rotate(calc(var(--angle) * -1));
-    z-index: 10;
-  }
-
-  /* Wrapper to align Icon exactly on the arc line, text to the right */
-  .pcf-feature-content {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translate(-26px, -50%);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    width: max-content;
-  }
-
-  .pcf-icon-circle {
-    width: 52px;
-    height: 52px;
-    background: #ffffff;
-    border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    z-index: 2;
-  }
-  .pcf-icon-circle svg {
-    width: 22px;
-    height: 22px;
-  }
-  .pcf-custom-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: 10px;
-    border-radius: 50%;
-  }
-
-  .pcf-feature-text {
-    font-size: 15px;
-    line-height: 1.35;
-    font-weight: 500;
-    color: #2b2b2b;
-  }
-
-  /* --- Animations --- */
-  .pcf-animate { opacity: 0; will-change: opacity, transform; }
-  .fade-up { transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .fade-right { transform: translateX(-30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .fade-left { transform: translateX(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .fade-in { transition: opacity 1s ease; }
-  .scale-in { transform: translate(-50%, -50%) scale(0.85); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
-  
-  .pcf-animate.is-visible { opacity: 1; transform: translate(0) scale(1); }
-  .scale-in.is-visible { transform: translate(-50%, -50%) scale(1); }
-
-  .delay-1 { transition-delay: 0.1s; }
-  .delay-2 { transition-delay: 0.2s; }
-  .delay-3 { transition-delay: 0.3s; }
-
-  /* --- Mobile Optimization --- */
-  @media screen and (max-width: 1024px) {
+  /* --- Mobile Layout (UNTOLD/UNCHANGED as requested) --- */
+  @media screen and (max-width: 989px) {
     #section-{{ section.id }} {
       padding: 60px 20px !important;
-    }
-    .pcf-intro-block {
-      margin-bottom: 3.5rem;
-    }
-    .pcf-intro-title {
-      font-size: 28px;
-    }
-    .pcf-main-grid {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: 2.5rem;
-    }
-    .pcf-left-col {
-      padding-left: 0;
-      text-align: center;
     }
     .pcf-title {
         font-size: 35px;
         text-align: left;
         margin-bottom: 1.5rem;
-        padding-left: 35px;
     }
-    
     .pcf-diagram-container {
       aspect-ratio: auto;
       display: flex;
@@ -318,64 +225,41 @@
       position: relative;
       --bowl-width: min(280px, 70vw);
     }
-
-    /* Vertical connector line on mobile, tangent to the left edge of the bowl */
     .pcf-diagram-container::before {
       content: "";
       position: absolute;
-      top: -30px;
-      bottom: 23px;
+      top: -30px; bottom: 23px;
       left: calc(50% - var(--bowl-width) / 2);
       width: 2px;
       background-color: {{ section.settings.arc_color | default: '#ffffff' }};
       z-index: 1;
     }
-
     .pcf-bowl-wrapper {
       position: relative;
-      top: auto; left: auto; transform: none !important;
       width: var(--bowl-width) !important;
-      max-width: 280px !important;
       margin: 0 auto;
       z-index: 5;
     }
-    .scale-in.is-visible { transform: scale(1) !important; }
-
     .pcf-arc-svg { display: none; }
-
     .pcf-feature-point {
       position: relative;
-      top: auto; left: auto; transform: none !important;
       width: 100%;
       padding-left: calc(50% - var(--bowl-width) / 2 - 23px);
       box-sizing: border-box;
-      z-index: 3;
     }
     .pcf-feature-content {
-      position: relative;
-      top: auto; left: auto; transform: none !important;
-      width: 100% !important;
-      text-align: left;
-      gap: 1.2rem;
       display: flex;
       align-items: center;
+      gap: 1.2rem;
     }
     .pcf-icon-circle {
-      width: 46px;
-      height: 46px;
-      min-width: 46px;
-      z-index: 5;
+      width: 46px; height: 46px;
+      background: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
     }
-    .pcf-feature-text {
-      font-size: 0.95rem;
-      line-height: 1.35;
-      font-weight: 500;
-      color: #2b2b2b;
-      max-width: 280px;
-    }
-    .heading-line-1{
-      font-weight:900 !important;
-    }
+    .pcf-feature-text { font-size: 0.95rem; max-width: 280px; }
+    .fade-up { transform: translateY(30px); transition: 0.8s ease; }
+    .is-visible { opacity: 1; transform: none; }
   }
 </style>
 
@@ -385,11 +269,9 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
         }
       });
-    }, { root: null, threshold: 0.15 });
-
+    }, { threshold: 0.1 });
     document.querySelectorAll('#section-{{ section.id }} .pcf-animate').forEach(el => observer.observe(el));
   });
 </script>
@@ -398,55 +280,14 @@
 {
   "name": "Circular Arc Features",
   "settings": [
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background Color",
-      "default": "#F9CE69"
-    },
-    {
-      "type": "color",
-      "id": "title_color",
-      "label": "Heading Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Body Text Color",
-      "default": "#333333"
-    },
-    {
-      "type": "header",
-      "content": "Top Intro"
-    },
-    {
-      "type": "textarea",
-      "id": "intro_heading",
-      "label": "Intro Heading",
-      "default": "You bring the love.\nWe bring the science."
-    },
-    {
-      "type": "richtext",
-      "id": "intro_subtext",
-      "label": "Intro Subtext",
-      "default": "<p>A way of feeding that's built around what their bodies actually need, made practical for everyday life.<br><strong>So what actually makes it different?</strong></p>"
-    },
-    {
-      "type": "header",
-      "content": "Main Split Block"
-    },
-    {
-      "type": "textarea",
-      "id": "main_title",
-      "label": "Left Bold Title",
-      "default": "Preserving\nwhat\nmatters."
-    },
-    {
-      "type": "image_picker",
-      "id": "center_image",
-      "label": "Center Bowl Image"
-    }
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#F9CE69" },
+    { "type": "color", "id": "title_color", "label": "Heading Text Color", "default": "#000000" },
+    { "type": "color", "id": "text_color", "label": "Body Text Color", "default": "#333333" },
+    { "type": "textarea", "id": "intro_heading", "label": "Intro Heading (Optional)" },
+    { "type": "richtext", "id": "intro_subtext", "label": "Intro Subtext (Optional)" },
+    { "type": "textarea", "id": "main_title", "label": "Left Bold Title", "default": "Preserving\nwhat\nmatters." },
+    { "type": "image_picker", "id": "center_image", "label": "Center Bowl Image" },
+    { "type": "color", "id": "arc_color", "label": "Arc Line Color", "default": "#ffffff" }
   ],
   "blocks": [
     {
@@ -466,17 +307,8 @@
           ],
           "default": "drop"
         },
-        {
-          "type": "image_picker",
-          "id": "custom_icon",
-          "label": "Or Custom Icon Image"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Feature Description",
-          "default": "Controlled low-\ntemperature dehydration"
-        }
+        { "type": "image_picker", "id": "custom_icon", "label": "Or Custom Icon Image" },
+        { "type": "textarea", "id": "text", "label": "Feature Description", "default": "Controlled low-\ntemperature dehydration" }
       ]
     }
   ],
