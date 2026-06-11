@@ -14,40 +14,34 @@
     background-color: {{ section.settings.bg_color }};
     border-radius: 40px;
     position: relative;
-    /* Extra top margin allows the overlapping image to break cleanly out of the box */
     margin-top: 60px; 
     display: flex;
     align-items: center;
     justify-content: space-between;
     min-height: 380px;
     padding: 40px 60px;
-    overflow: visible; /* Crucial to let the image hang out of the box */
+    overflow: visible; 
   }
 
- .cta-banner-ribbon{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  overflow:hidden;
-  border-radius:40px;
-}
+  .cta-banner-ribbon {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 40px;
+  }
 
-.cta-banner-ribbon img{
-  position:absolute;
+  .cta-banner-ribbon img {
+    position: absolute;
+    right: -40px;
+    top: 55px;
+    width: 950px;
+    max-width: none;
+    height: auto;
+    object-fit: contain;
+  }
 
-  /* Match Figma placement */
-  right:-40px;
-  top:55px;
-
-  width:950px;
-  max-width:none;
-  height:auto;
-
-  object-fit:contain;
-}
-
-  /* Left Side Text Content & Buttons */
   .cta-content-column {
     width: 50%;
     position: relative;
@@ -89,13 +83,12 @@
     transform: translateY(-2px);
   }
 
-  /* Right Side Overlapping Model Container */
   .cta-image-column {
     width: 55%;
     position: absolute;
     right: 0;
     bottom: 0;
-    height: calc(100% + 280px); /* Height spans higher than the box boundary */
+    height: calc(100% + 280px); 
     z-index: 2;
     display: flex;
     align-items: flex-end;
@@ -109,27 +102,32 @@
     object-position: bottom right;
   }
 
+  /* Visibility classes for Mobile/Desktop Image Separation */
+  .mobile-image-only { display: none !important; }
+  .desktop-image-only { display: block; }
+
   /* ==========================================================================
-     MOBILE RESPONSIVE HANDLING - TAILORED EXACTLY TO REFERENCE DESIGN MOCK
+     MOBILE RESPONSIVE HANDLING
      ========================================================================== */
   @media (max-width: 991px) {
     .cta-banner-section-{{ section.id }} {
-      padding: 20px 15px; /* Adds comfortable outer structural viewport spacing */
+      padding: 20px 15px; 
     }
 
     .cta-banner-wrapper {
       margin-top: 0;
       flex-direction: column;
-      padding: 50px 24px 0 24px;
+      padding: 50px 0 0 0; /* Removed side/bottom padding, shifted to content block */
       text-align: center;
       min-height: auto;
-      overflow: hidden; /* Clips the ribbon background perfectly to the card layout edge */
+      overflow: hidden; 
       border-radius: 36px;
     }
 
     .cta-content-column {
       width: 100%;
-      margin-bottom: 0px;
+      margin-bottom: 30px; /* Space between buttons and image */
+      padding: 0 24px; /* Inner spacing applied here instead of wrapper */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -143,13 +141,11 @@
       line-height: 1.2;
     }
 
-    /* Vertical full-width stacked layouts for modern app button styling */
     .cta-buttons-group {
       flex-direction: column;
       width: 100%;
       gap: 12px;
       max-width: 210px;
-      margin-bottom: 5px;
     }
 
     .cta-pill-button {
@@ -160,44 +156,38 @@
       text-align: center;
     }
 
-    /* Binds ribbon paths explicitly across full card display areas on screen */
-    .cta-banner-squiggles {
-      width: 100%;
-      height: 100%;
-      bottom: 0;
-      right: 0;
-      opacity: 0.85;
-      z-index: 1;
+    /* Fixed Ribbon Background for Mobile */
+    .cta-banner-ribbon img {
+      width: 150%;
+      top: 15%;
+      right: -25%;
+      object-fit: contain;
     }
 
-    .cta-banner-squiggles svg {
-      object-fit: cover;
-    }
-
-    /* Centers illustration content neatly inside baseline foundations */
+    /* Fixed Gap & Image Layout */
     .cta-image-column {
       position: relative;
-      width: calc(100% + 48px); /* Break out of the 24px left+right wrapper padding */
-      margin-left: -24px;
-      margin-right: -24px;
-
+      width: 100%;
+      height: auto; /* Natural height removes the gap */
       max-width: none;
-      height: 400px;
       right: auto;
       bottom: 0;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      display: block; /* Switch from flex to block */
+      line-height: 0; /* Removes phantom bottom margin */
       z-index: 2;
-      margin-top: 0;
     }
 
     .cta-image-column img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      height: auto; /* Image dictates container height perfectly */
+      object-fit: cover;
       object-position: bottom center;
+      display: block;
     }
+
+    /* Toggle visibility for separate images */
+    .mobile-image-only { display: block !important; }
+    .desktop-image-only { display: none !important; }
   }
 {%- endstyle -%}
 
@@ -205,14 +195,14 @@
   <div class="cta-banner-wrapper">
     
    {% if section.settings.ribbon_image != blank %}
-  <div class="cta-banner-ribbon">
-    <img
-      src="{{ section.settings.ribbon_image | image_url: width: 2000 }}"
-      alt="Ribbon"
-      loading="lazy"
-    >
-  </div>
-{% endif %}
+      <div class="cta-banner-ribbon">
+        <img
+          src="{{ section.settings.ribbon_image | image_url: width: 2000 }}"
+          alt="Ribbon"
+          loading="lazy"
+        >
+      </div>
+   {% endif %}
 
     <div class="cta-content-column">
       <h2 class="cta-banner-heading">{{ section.settings.heading }}</h2>
@@ -231,8 +221,11 @@
     </div>
 
     <div class="cta-image-column">
-      {% if section.settings.model_image != blank %}
-        <img src="{{ section.settings.model_image | image_url: width: 800 }}" alt="Get Started Banner Image" loading="lazy">
+      {% if section.settings.model_image_mobile != blank %}
+        <img src="{{ section.settings.model_image_mobile | image_url: width: 600 }}" class="mobile-image-only" alt="Mobile Banner Image" loading="lazy">
+        <img src="{{ section.settings.model_image | image_url: width: 800 }}" class="desktop-image-only" alt="Desktop Banner Image" loading="lazy">
+      {% elsif section.settings.model_image != blank %}
+        <img src="{{ section.settings.model_image | image_url: width: 800 }}" alt="Banner Image" loading="lazy">
       {% else %}
         {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {% endif %}
@@ -288,7 +281,12 @@
     {
       "type": "image_picker",
       "id": "model_image",
-      "label": "Overlapping Character Image (Transparent PNG highly recommended)"
+      "label": "Desktop Character Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "model_image_mobile",
+      "label": "Mobile Character Image (Optional)"
     },
     {
       "type": "range",
