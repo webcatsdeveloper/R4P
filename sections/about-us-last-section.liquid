@@ -58,7 +58,11 @@
           {{ section.settings.mobile_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.mobile_image.alt, class: 'purp-dog-img purp-mobile-img-only' }}
         {% endif %}
         {% if section.settings.main_image != blank %}
-          {{ section.settings.main_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.main_image.alt, class: 'purp-dog-img {% if section.settings.mobile_image != blank %}purp-desktop-img-only{% endif %}' }}
+          {%- assign img_class = 'purp-dog-img' -%}
+          {%- if section.settings.mobile_image != blank -%}
+            {%- assign img_class = 'purp-dog-img purp-desktop-img-only' -%}
+          {%- endif -%}
+          {{ section.settings.main_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.main_image.alt, class: img_class }}
         {% else %}
           {{ 'product-1' | placeholder_svg_tag: 'purp-placeholder' }}
         {% endif %}
