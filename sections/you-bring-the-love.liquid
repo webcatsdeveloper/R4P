@@ -152,8 +152,9 @@
 
   @media (min-width: 990px) {
     .pcf-main-grid {
-      grid-template-columns: 3.5fr 8.5fr;
+      grid-template-columns: 3.8fr 8.2fr;
       gap: 2rem;
+      align-items: flex-start; /* Correct alignment to top-match Figma */
     }
   }
 
@@ -161,14 +162,18 @@
   .pcf-left-col {
     padding-left: 0;
     z-index: 5;
-     margin-top: -40px!important;
+  }
+  @media (min-width: 990px) {
+    .pcf-left-col {
+      margin-top: 15px !important; /* Perfect visual vertical alignment with orbit top */
+    }
   }
   .pcf-title {
     font-size: clamp(3rem, 6.5vw, 7.5rem);
     font-weight: 900;
     line-height: 0.88;
     letter-spacing: -0.04em;
-    margin-top: -40px!important;
+    margin-top: 0 !important; /* Eliminates clipping negative margins */
   }
 
   /* --- Right Circular Diagram --- */
@@ -188,7 +193,7 @@
     top: 50%;
     left: 40%;
     transform: translate(-50%, -50%);
-    {% comment %} width: 52cqw;  {% endcomment %}
+    width: 53cqw; /* Rebuilt concentric sizing directly matching figma */
     z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
@@ -221,16 +226,18 @@
     position: absolute;
     top: 50%;
     left: 40%;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(31.5cqw) rotate(calc(var(--angle) * -1));
+    width: 0;  /* Size zero origin point to prevent shifting center of rotation */
+    height: 0;
+    transform: rotate(var(--angle)) translateX(31.5cqw) rotate(calc(var(--angle) * -1));
     z-index: 10;
   }
 
   /* Wrapper to align Icon exactly on the arc line, text to the right */
   .pcf-feature-content {
     position: absolute;
-    top: 50%;
     left: 0;
-    transform: translate(-26px, -50%);
+    top: 0;
+    transform: translate(-26px, -26px); /* Centers the 52px diameter circle perfectly on the orbit crosshair */
     display: flex;
     align-items: center;
     gap: 15px;
@@ -302,13 +309,14 @@
     .pcf-left-col {
       padding-left: 0;
       text-align: center;
+      margin-top: 0 !important;
     }
     .pcf-title {
         font-size: 35px;
         text-align: left;
         margin-bottom: 1.5rem;
         padding-left: 35px;
-         margin-top: -40px!important;
+        margin-top: 0 !important;
     }
     
     .pcf-diagram-container {
@@ -349,6 +357,7 @@
       position: relative;
       top: auto; left: auto; transform: none !important;
       width: 100%;
+      height: auto;
       padding-left: calc(50% - var(--bowl-width) / 2 - 23px);
       box-sizing: border-box;
       z-index: 3;
