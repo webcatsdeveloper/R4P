@@ -266,27 +266,6 @@
         "html_body_text": "<p>So we moved away from kibble, and began working with raw, locally available ingredients. What started as an attempt to do better turned into years of trial, learning, and experimentation. Over time, the process became more structured. Together, we began working with veterinarians and specialists in canine nutrition, grounding what we had learned in science.</p><p>Not to create something new, but to arrive at something that made sense.</p><p>After more than a decade of this work, Right4Paws came into being.</p><p>A way to make this approach more accessible, practical, and easier for everyday pet parents to trust and adopt.</p>"
       }
     },
-    "aboutus_purple_third_section_wpnQdC": {
-      "type": "aboutus-purple-third-section",
-      "name": "Asymmetric Story Block",
-      "settings": {
-        "color_bg": "#766fb4",
-        "color_heading": "#ffffff",
-        "heading_max_width": 480,
-        "title_font_size": 28,
-        "question_font_size": 36,
-        "heading_font_style": "normal",
-        "color_body": "#ffffff",
-        "body_max_width": 540,
-        "body_font_size": 15,
-        "body_font_style": "normal",
-        "text_title": "And we kept circling back to one simple question:",
-        "text_question": "If this doesn't work for us, why would it work for them?",
-        "image_1": "shopify://shop_images/ChatGPT_Image_May_20_2026_12_32_31_PM_1.png",
-        "image_2": "shopify://shop_images/3_1.png",
-        "html_body_text": "<p>So we moved away from kibble, and began working with raw, locally available ingredients. What started as an attempt to do better turned into years of trial, learning, and experimentation.</p><p>Over time, the process became more structured. Together, we began working with veterinarians and specialists in canine nutrition, grounding what we had learned in science.</p><p>Not to create something new, but to arrive at something that made sense.</p><p>After more than a decade of this work, Right4Paws came into being.</p><p>A way to make this approach more accessible, practical, and easier for everyday pet parents to trust and adopt.</p>"
-      }
-    },
     "about_us_last_section_rwPK9B": {
       "type": "about-us-last-section",
       "name": "Thinking Features Split",
@@ -311,7 +290,6 @@
     "aboutus_we_found_cQRw7M",
     "as_we_moved_jnyeWR",
     "aboutus_purple_third_section_dJwmez",
-    "aboutus_purple_third_section_wpnQdC",
     "about_us_last_section_rwPK9B"
   ]
 }
