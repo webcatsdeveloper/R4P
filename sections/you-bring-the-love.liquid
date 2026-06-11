@@ -61,10 +61,6 @@
           {% endif %}
         </div>
 
-        <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 59.39 18.97 A 31.25 31.25 0 0 1 59.39 81.03" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" stroke-linecap="round" fill="none"/>
-        </svg>
-
         {% for block in section.blocks %}
           {% case forloop.index %}
             {% when 1 %}
@@ -195,6 +191,25 @@
     width: 100%;
     aspect-ratio: 1.25 / 1; 
     container-type: inline-size;
+    overflow: hidden; /* Clips the left portion of the custom circle path cleanly */
+  }
+
+  /* FIXED: Replaced custom SVG paths with a perfect, smooth CSS pseudo-ring */
+  @media (min-width: 990px) {
+    .pcf-diagram-container::after {
+      content: "";
+      position: absolute;
+      box-sizing: border-box;
+      width: 62.1%; /* Matches the exact outer radius span of the icon layout points */
+      aspect-ratio: 1 / 1;
+      top: 50%;
+      left: 40%;
+      transform: translate(-50%, -50%);
+      border: 2px solid {{ section.settings.arc_color | default: '#ffffff' }};
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2; /* Sits perfectly behind inner icon symbols but cuts through the bubble layer */
+    }
   }
 
   /* Center Anchor (Shifted Left to 40% to leave room for text) */
@@ -203,7 +218,7 @@
     top: 50%;
     left: 40%;
     transform: translate(-50%, -50%);
-    z-index: 3; 
+    z-index: 1; 
   }
   .pcf-bowl-img, .pcf-placeholder {
     width: 100%;
@@ -211,23 +226,6 @@
     display: block;
     border-radius: 50%;
     filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
-  }
-
-  /* SVG Open Semi-Circle Arc */
-  .pcf-arc-svg {
-    display: none;
-  }
-  @media (min-width: 990px) {
-    .pcf-arc-svg {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 6 !important; 
-    }
   }
 
   .pcf-feature-point {
@@ -353,6 +351,7 @@
       gap: 1.5rem;
       position: relative;
       --bowl-width: min(280px, 70vw);
+      overflow: visible;
     }
 
     /* Vertical connector line on mobile */
@@ -364,7 +363,7 @@
       left: calc(50% - var(--bowl-width) / 2);
       width: 2px;
       background-color: {{ section.settings.arc_color | default: '#ffffff' }};
-      z-index: 6 !important;
+      z-index: 2;
     }
 
     .pcf-bowl-wrapper {
@@ -373,11 +372,9 @@
       width: var(--bowl-width) !important;
       max-width: 280px !important;
       margin: 0 auto;
-      z-index: 3;
+      z-index: 1;
     }
     .scale-in.is-visible { transform: scale(1) !important; }
-
-    .pcf-arc-svg { display: none; }
 
     .pcf-feature-point {
       position: relative;
