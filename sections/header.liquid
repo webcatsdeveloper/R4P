@@ -32,14 +32,10 @@
     <div class="header-column column-right">
       <div class="header-actions-group">
 
-        <!-- ACCOUNT ICON -->
-        <a href="/account" class="header-icon-action custom-icon-link">
-          <img 
-            src="https://cdn.shopify.com/s/files/1/0684/4959/9593/files/account.png?v=1778496051"
-            alt="Account"
-            class="header-custom-icon"
-          >
-        </a>
+        <!-- MOBILE MENU DRAWER -->
+        <div class="header-mobile-menu-wrapper">
+          {{ menu }}
+        </div>
 
         <!-- CART ICON -->
         <a href="/cart" class="header-icon-action custom-icon-link cart-icon-wrapper">
@@ -299,6 +295,117 @@
         font-size: 9px;
         top: -8px;
         right: -10px;
+    }
+}
+
+/* ======================================= */
+/* CUSTOM MOBILE HEADER DESIGN */
+/* ======================================= */
+
+.header-mobile-menu-wrapper {
+    display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    /* Layout */
+    .header-mobile-menu-wrapper {
+        display: block !important;
+    }
+    .header-mobile-menu-wrapper .header-menu {
+        display: none !important;
+    }
+    .header-mobile-menu-wrapper .header__drawer {
+        display: flex !important;
+        min-height: 0 !important;
+        height: auto !important;
+        align-items: center !important;
+    }
+
+    /* Red Circle Toggle Buttons on Mobile */
+    .header-actions-group {
+        gap: 12px !important;
+    }
+
+    /* 1. Hamburger Toggle Button */
+    .header-mobile-menu-wrapper .header__icon--menu {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background-color: #D92B2B !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        transition: transform 0.2s ease !important;
+        outline: none !important;
+        border: none !important;
+        list-style: none !important;
+    }
+    
+    .header-mobile-menu-wrapper .header__icon--menu::-webkit-details-marker {
+        display: none !important;
+    }
+    
+    .header-mobile-menu-wrapper .header__icon--menu::after {
+        display: none !important;
+    }
+
+    .header-mobile-menu-wrapper .header-drawer-icon {
+        width: 18px !important;
+        height: 18px !important;
+        margin: 0 !important;
+    }
+
+    .header-mobile-menu-wrapper details:not(.menu-open) .header-drawer-icon--close {
+        display: none !important;
+    }
+    .header-mobile-menu-wrapper details.menu-open .header-drawer-icon--open {
+        display: none !important;
+    }
+
+    .header-mobile-menu-wrapper .header-drawer-icon svg {
+        width: 18px !important;
+        height: 18px !important;
+        color: #ffffff !important;
+        stroke: #ffffff !important;
+        fill: none !important;
+        display: block !important;
+    }
+
+    /* 2. Cart Icon Button */
+    .cart-icon-wrapper {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background-color: #D92B2B !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        cursor: pointer !important;
+        position: relative !important;
+    }
+
+    .cart-icon-wrapper .header-custom-icon {
+        width: 18px !important;
+        height: 18px !important;
+        filter: brightness(0) invert(1) !important; /* Turns black PNG cart icon white */
+    }
+
+    /* 3. Cart Badge Yellow Dot */
+    .cart-icon-wrapper .cart-count-badge {
+        font-size: 0 !important; /* Hide number */
+        color: transparent !important;
+        width: 12px !important;
+        height: 12px !important;
+        background: #FFCD68 !important; /* Warm vibrant yellow matching site scheme */
+        border: 2px solid #D92B2B !important; /* Match red circle border */
+        border-radius: 50% !important;
+        top: -1px !important;
+        right: -1px !important;
+        box-shadow: none !important;
+        position: absolute !important;
+        display: block !important;
     }
 }
 

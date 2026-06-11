@@ -184,6 +184,19 @@
         fetchpriority="low"
       ></script>
     </header-menu>
+
+    <div
+      class="header__drawer"
+      ref="headerDrawerContainer"
+      data-hydration-key="header-drawer-mobile"
+    >
+      {% render 'header-drawer',
+        linklist: block_settings.menu,
+        data_header_drawer_type: 'mobile-drawer',
+        block: block,
+        section: section
+      %}
+    </div>
 {% endcase %}
 
 {% style %}
