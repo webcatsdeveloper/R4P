@@ -2,11 +2,10 @@
 {%- style -%}
   #section-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
-    padding: 6vw 0;
+    padding: 100px;
     overflow: hidden;
     font-family: inherit;
     color: {{ section.settings.text_color }};
-    position: relative;
   }
 
   /* Typography Colors */
@@ -27,7 +26,8 @@
         {%- elsif heading_html contains '<br>' -%}
           {%- assign heading_lines = heading_html | split: '<br>' -%}
         {%- else -%}
-          {%- assign heading_lines = heading_html | split: '\n' -%}
+          {%- assign heading_lines = heading_html | split: '
+' -%}
         {%- endif -%}
         {%- if heading_lines.size > 1 -%}
           <span class="heading-line-1">{{ heading_lines[0] | strip_html | strip }}</span>
@@ -44,71 +44,109 @@
     {% endif %}
   </div>
 
-  <div class="pcf-canvas-container">
+  <div class="pcf-main-grid">
     
     <div class="pcf-left-col pcf-animate fade-right delay-1">
       <h2 class="pcf-title">{{ section.settings.main_title | newline_to_br }}</h2>
     </div>
 
-    <div class="pcf-diagram-viewport pcf-animate fade-in delay-2">
-      <div class="pcf-orbit-system-wrapper">
+    <div class="pcf-diagram-col pcf-animate fade-in delay-2">
+      <div class="pcf-diagram-container">
         
         <div class="pcf-bowl-wrapper pcf-animate scale-in delay-3">
           {% if section.settings.center_image != blank %}
-            {{ section.settings.center_image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
+            {{ section.settings.center_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
           {% else %}
             {{ 'product-1' | placeholder_svg_tag: 'pcf-placeholder' }}
           {% endif %}
         </div>
 
-        <div class="pcf-orbit-arc"></div>
+        <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 48 12.29 A 32 32 0 0 1 48 67.71" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
+        </svg>
 
         {% for block in section.blocks %}
           {% case forloop.index %}
-            {% when 1 %}{% assign node_angle = '-48deg' %}
-            {% when 2 %}{% assign node_angle = '-16deg' %}
-            {% when 3 %}{% assign node_angle = '16deg' %}
-            {% when 4 %}{% assign node_angle = '48deg' %}
+            {% when 1 %} {% assign angle = '-52deg' %}
+            {% when 2 %} {% assign angle = '-15deg' %}
+            {% when 3 %} {% assign angle = '18deg' %}
+            {% when 4 %} {% assign angle = '52deg' %}
+            {% else %} {% assign angle = '0deg' %}
           {% endcase %}
-          
-          <div class="pcf-node node-{{ forloop.index }}" style="--node-angle: {{ node_angle }};" {{ block.shopify_attributes }}>
-            <div class="pcf-icon-circle">
-              {% if block.settings.custom_icon != blank %}
-                {{ block.settings.custom_icon | image_url: width: 100 | image_tag: class: 'pcf-custom-img' }}
-              {% else %}
-                {% case block.settings.icon_type %}
-                  {% when 'drop' %}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M19.07 4.93l-2.83 2.83"></path></svg>
-                  {% when 'shield' %}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                  {% when 'heat' %}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8c0-2-2-2-2-4"></path><path d="M12 8c0-2-2-2-2-4"></path><path d="M7 8c0-2-2-2-2-4"></path><path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path><path d="M12 22a7 7 0 0 0 7-7"></path></svg>
-                  {% when 'molecule' %}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><circle cx="12" cy="12" r="3"></circle><line x1="8.12" y1="8.12" x2="9.88" y2="9.88"></line><line x1="14.12" y1="9.88" x2="15.88" y2="8.12"></line><line x1="9.88" y1="14.12" x2="8.12" y2="15.88"></line><line x1="15.88" y1="14.12" x2="14.12" y2="15.88"></line></svg>
-                {% endcase %}
-              {% endif %}
-            </div>
 
-            <div class="pcf-feature-text">
-              {{ block.settings.text | newline_to_br }}
+          <div class="pcf-feature-point" style="--angle: {{ angle }};" {{ block.shopify_attributes }}>
+            <div class="pcf-feature-content pcf-animate fade-left" style="transition-delay: 0.{{ forloop.index | plus: 3 }}s;">
+              
+              <div class="pcf-icon-circle">
+                {% if block.settings.custom_icon != blank %}
+                  {{ block.settings.custom_icon | image_url: width: 80 | image_tag: class: 'pcf-custom-img' }}
+                {% else %}
+                  {%- assign current_icon_type = block.settings.icon_type -%}
+                  {%- if current_icon_type == 'drop' and forloop.index == 2 -%}
+                    {%- assign current_icon_type = 'shield' -%}
+                  {%- elsif current_icon_type == 'drop' and forloop.index == 3 -%}
+                    {%- assign current_icon_type = 'heat' -%}
+                  {%- elsif current_icon_type == 'drop' and forloop.index == 4 -%}
+                    {%- assign current_icon_type = 'molecule' -%}
+                  {%- endif -%}
+
+                  {% case current_icon_type %}
+                    {% when 'drop' %}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <circle cx="8" cy="8" r="1.5" fill="#222"></circle>
+                        <circle cx="16" cy="16" r="1.5" fill="#222"></circle>
+                      </svg>
+                    {% when 'shield' %}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      </svg>
+                    {% when 'heat' %}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 8a2 2 0 0 1 2-2 2 2 0 0 0 2-2 2 2 0 0 0-2-2M12 8a2 2 0 0 1 2-2 2 2 0 0 0 2-2 2 2 0 0 0-2-2M16 8a2 2 0 0 1 2-2 2 2 0 0 0 2-2 2 2 0 0 0-2-2" />
+                        <path d="M10 16a1.5 1.5 0 0 1-3 0c0-1.5 1.5-3 1.5-3s1.5 1.5 1.5 3z" />
+                        <path d="M17 16a1.5 1.5 0 0 1-3 0c0-1.5 1.5-3 1.5-3s1.5 1.5 1.5 3z" />
+                        <path d="M12 19a1 1 0 0 1-2 0c0-1 1-2 1-2s1 1 1 2z" />
+                      </svg>
+                    {% when 'molecule' %}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="18" r="2.5"></circle>
+                        <circle cx="6" cy="6" r="2.5"></circle>
+                        <circle cx="18" cy="6" r="2.5"></circle>
+                        <circle cx="6" cy="18" r="2.5"></circle>
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <line x1="8.12" y1="8.12" x2="9.88" y2="9.88"></line>
+                        <line x1="14.12" y1="9.88" x2="15.88" y2="8.12"></line>
+                        <line x1="9.88" y1="14.12" x2="8.12" y2="15.88"></line>
+                        <line x1="15.88" y1="14.12" x2="14.12" y2="15.88"></line>
+                      </svg>
+                  {% endcase %}
+                {% endif %}
+              </div>
+
+              <div class="pcf-feature-text">
+                {{ block.settings.text | newline_to_br }}
+              </div>
             </div>
           </div>
         {% endfor %}
 
       </div>
     </div>
+
   </div>
 </div>
 
 <style>
-  /* --- Intro Header Text Layout --- */
+  /* --- Intro Header --- */
   .pcf-intro-block {
     max-width: 1012px;
-    margin: 0 auto 4vw auto;
+    margin: 0 auto 3rem auto;
     text-align: center;
   }
   .pcf-intro-title {
-    font-size: clamp(28px, 2.5vw, 46px);
+    font-size: clamp(32px, 3.5vw, 46px);
     line-height: 1.15;
     margin: 0 0 1rem 0;
     letter-spacing: -0.02em;
@@ -116,143 +154,162 @@
     flex-direction: column;
     align-items: center;
   }
-  .pcf-intro-title .heading-line-1 { font-weight: 900; }
-  .pcf-intro-title .heading-line-2 { font-weight: 800; }
-  
+  .pcf-intro-title .heading-line-1 {
+    font-weight: 900;
+  }
+  .pcf-intro-title .heading-line-2 {
+    font-weight: 800;
+  }
   .pcf-intro-subtext {
-    font-size: clamp(16px, 1.2vw, 23px);
+    font-size: 23px;
     line-height: 1.6;
     margin: 0;
     color: inherit;
     opacity: 0.85;
-    padding: 0 16px;
+    padding:0 16px;
   }
-  .pcf-intro-subtext strong { font-weight: 700; color: #000; }
+  .pcf-intro-subtext p { margin: 0; }
+  .pcf-intro-subtext strong { font-weight: 700; color: #000; opacity: 1; }
 
-  /* --- Main Proportional Canvas Container Area --- */
-  .pcf-canvas-container {
-    position: relative;
-    width: 100%;
-    max-width: 1922px;
-    height: 48vw; 
+  /* --- Main Grid Layout --- */
+  .pcf-main-grid {
+    max-width: 1340px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 3.5rem;
   }
 
-  /* --- Left Heading Placement (Figma Exact Offset Values) --- */
+  @media (min-width: 990px) {
+    .pcf-main-grid {
+      grid-template-columns: 4.8fr 7.2fr;
+      gap: 0;
+    }
+  }
+
+  /* --- Left Column --- */
   .pcf-left-col {
-    position: absolute;
-    width: 28.7vw; 
-    left: 7.2vw;   
-    top: 6vw;
+    padding-left: 0;
     z-index: 5;
+    margin-top: 0 !important;
   }
   .pcf-title {
-    font-size: 6.24vw; 
-    font-weight: 700;
-    line-height: 0.84;
+    font-size: clamp(3rem, 6.5vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.88;
     letter-spacing: -0.04em;
-    margin: 0;
-    color: #000000;
+    margin-top: 0 !important;
   }
 
-  .pcf-diagram-viewport {
-    position: absolute;
+  /* --- Right Circular Diagram --- */
+  .pcf-diagram-col {
     width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+  }
+  .pcf-diagram-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.25 / 1; 
+    container-type: inline-size;
+    --center-x: 32%;
+    --center-y: 50%;
+    --bowl-size: 54cqw;
+    --arc-radius: 32cqw;
   }
 
-  /* --- The Central Anchor System Group (Keeps elements locked together) --- */
-  .pcf-orbit-system-wrapper {
-    position: absolute;
-    width: 38vw; 
-    height: 38vw;
-    left: 48vw; /* Centered position matching the Figma perspective */
-    top: 2vw;
-  }
-
-  /* --- Proportional Center Bowl Anchor --- */
+  /* Center Anchor */
   .pcf-bowl-wrapper {
     position: absolute;
-    width: 28vw;  
-    height: 28vw;
-    top: 50%;
-    left: 50%;
+    top: var(--center-y);
+    left: var(--center-x);
     transform: translate(-50%, -50%);
-    z-index: 3;
+    width: var(--bowl-size);
+    z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 50%;
-    filter: drop-shadow(0 1.5vw 3vw rgba(0,0,0,0.12));
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
   }
 
-  /* --- Concentric White Orbit Tracking Ring --- */
-  .pcf-orbit-arc {
-    position: absolute;
-    box-sizing: border-box;
-    width: 38vw; 
-    height: 38vw;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 0.22vw solid #FFFFFF; 
-    border-radius: 50%;
-    z-index: 1;
-    pointer-events: none;
+  /* SVG Concentric Arc */
+  .pcf-arc-svg {
+    display: none;
+  }
+  @media (min-width: 990px) {
+    .pcf-arc-svg {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
   }
 
-  /* --- Pinned Geometry Node Framework (Polar coordinates logic) --- */
-  .pcf-node {
+  /* Precise Trigonometric Positioning */
+  .pcf-feature-point {
+    position: absolute;
+    top: var(--center-y);
+    left: var(--center-x);
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--arc-radius)) rotate(calc(var(--angle) * -1));
+    z-index: 10;
+  }
+
+  /* Wrapper to align Icon exactly on the arc line, text to the right */
+  .pcf-feature-content {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 0;
+    transform: translate(-26px, -50%);
     display: flex;
     align-items: center;
-    gap: 1.25vw;
-    z-index: 10;
-    /* Pushes nodes out along the exact center path matching the white orbit line */
-    transform: translate(-50%, -50%) rotate(var(--node-angle)) translateX(19vw) rotate(calc(var(--node-angle) * -1));
+    gap: 15px;
+    width: max-content;
   }
-  
+
   .pcf-icon-circle {
-    width: 3.95vw; 
-    height: 3.95vw;
-    background: #FFFFFF;
+    width: 52px;
+    height: 52px;
+    background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0px 0.2vw 0.4vw rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    z-index: 2;
   }
   .pcf-icon-circle svg {
-    width: 1.8vw;
-    height: 1.8vw;
+    width: 22px;
+    height: 22px;
   }
-  .pcf-feature-text {
-    font-size: 1.24vw; 
-    line-height: 1.33;
-    font-weight: 400;
-    color: #1E1E1E;
-    white-space: nowrap;
+  .pcf-custom-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10px;
+    border-radius: 50%;
   }
 
-  /* --- Micro Adjustments to fine-tune individual line lengths --- */
-  .pcf-node.node-1 .pcf-feature-text { margin-left: -0.2vw; }
-  .pcf-node.node-2 .pcf-feature-text { margin-left: 0.1vw; }
-  .pcf-node.node-3 .pcf-feature-text { margin-left: 0.2vw; }
-  .pcf-node.node-4 .pcf-feature-text { margin-left: -0.1vw; }
+  .pcf-feature-text {
+    font-size: 15px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #1e1e1e;
+  }
 
   /* --- Animations --- */
   .pcf-animate { opacity: 0; will-change: opacity, transform; }
-  .fade-up { transform: translateY(2vw); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .fade-right { transform: translateX(-2vw); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-up { transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-right { transform: translateX(-30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-left { transform: translateX(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .fade-in { transition: opacity 1s ease; }
-  .scale-in { transform: translate(-50%, -50%) scale(0.9); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .scale-in { transform: translate(-50%, -50%) scale(0.85); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
   
   .pcf-animate.is-visible { opacity: 1; transform: translate(0) scale(1); }
   .scale-in.is-visible { transform: translate(-50%, -50%) scale(1); }
@@ -261,86 +318,100 @@
   .delay-2 { transition-delay: 0.2s; }
   .delay-3 { transition-delay: 0.3s; }
 
-  /* --- Mobile Breakdown Settings Overrides --- */
-  @media screen and (max-width: 1120px) {
+  /* --- Mobile Optimization --- */
+  @media screen and (max-width: 1024px) {
     #section-{{ section.id }} {
-      padding: 50px 20px !important;
+      padding: 60px 20px !important;
     }
-    .pcf-canvas-container {
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
+    .pcf-intro-block {
+      margin-bottom: 3.5rem;
+    }
+    .pcf-intro-title {
+      font-size: 28px;
+    }
+    .pcf-main-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 2.5rem;
     }
     .pcf-left-col {
-      position: relative;
-      width: 100%;
-      left: auto; top: auto;
-      text-align: left;
-      padding-left: 10px;
+      padding-left: 0;
+      text-align: center;
     }
     .pcf-title {
-      font-size: 48px;
-      line-height: 52px;
+        font-size: 35px;
+        text-align: left;
+        margin-bottom: 1.5rem;
+        padding-left: 35px;
+         margin-top: -40px!important;
     }
-    .pcf-diagram-viewport {
-      position: relative;
-      width: 100%;
-      height: auto;
-    }
-    .pcf-orbit-system-wrapper {
-      position: relative;
-      width: 100%;
-      height: auto;
-      left: auto; top: auto;
+    
+    .pcf-diagram-container {
+      aspect-ratio: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1.5rem;
+      position: relative;
+      --bowl-width: min(280px, 70vw);
     }
+
+    /* Vertical connector line on mobile, tangent to the left edge of the bowl */
+    .pcf-diagram-container::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      bottom: 23px;
+      left: calc(50% - var(--bowl-width) / 2);
+      width: 2px;
+      background-color: {{ section.settings.arc_color | default: '#ffffff' }};
+      z-index: 1;
+    }
+
     .pcf-bowl-wrapper {
       position: relative;
-      left: auto; top: auto;
-      transform: none !important;
-      width: min(260px, 75vw);
-      height: min(260px, 75vw);
+      top: auto; left: auto; transform: none !important;
+      width: var(--bowl-width) !important;
+      max-width: 280px !important;
       margin: 0 auto;
+      z-index: 5;
     }
-    .scale-in.is-visible { transform: none !important; }
+    .scale-in.is-visible { transform: scale(1) !important; }
 
-    .pcf-orbit-arc {
-      position: absolute;
-      width: 2px;
-      height: calc(100% - 200px);
-      left: calc(50% - min(260px, 75vw)/2);
-      top: 130px;
-      transform: none;
-      border: none;
-      border-left: 2px solid #FFFFFF;
-      border-radius: 0;
-    }
-    .pcf-node {
+    .pcf-arc-svg { display: none; }
+
+    .pcf-feature-point {
       position: relative;
-      left: auto !important; top: auto !important;
-      transform: none !important;
+      top: auto; left: auto; transform: none !important;
       width: 100%;
-      padding-left: calc(50% - min(260px, 75vw)/2 - 28px);
+      padding-left: calc(50% - var(--bowl-width) / 2 - 23px);
       box-sizing: border-box;
-      gap: 15px;
+      z-index: 3;
+    }
+    .pcf-feature-content {
+      position: relative;
+      top: auto; left: auto; transform: none !important;
+      width: 100% !important;
+      text-align: left;
+      gap: 1.2rem;
+      display: flex;
+      align-items: center;
     }
     .pcf-icon-circle {
-      width: 56px;
-      height: 56px;
-    }
-    .pcf-icon-circle svg {
-      width: 22px;
-      height: 22px;
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      z-index: 5;
     }
     .pcf-feature-text {
-      font-size: 15px;
-      line-height: 20px;
-      white-space: normal;
+      font-size: 0.95rem;
+      line-height: 1.35;
+      font-weight: 500;
+      color: #1e1e1e;
+      max-width: 280px;
+    }
+    .heading-line-1{
+      font-weight:900 !important;
     }
   }
 </style>
@@ -354,7 +425,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { root: null, threshold: 0.1 });
+    }, { root: null, threshold: 0.15 });
 
     document.querySelectorAll('#section-{{ section.id }} .pcf-animate').forEach(el => observer.observe(el));
   });
