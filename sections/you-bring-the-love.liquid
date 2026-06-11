@@ -2,7 +2,7 @@
 {%- style -%}
   #section-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
-    padding: 100px 100px 100px 100px;
+    padding: 120px 0;
     overflow: hidden;
     font-family: inherit;
     color: {{ section.settings.text_color }};
@@ -26,8 +26,7 @@
         {%- elsif heading_html contains '<br>' -%}
           {%- assign heading_lines = heading_html | split: '<br>' -%}
         {%- else -%}
-          {%- assign heading_lines = heading_html | split: '
-' -%}
+          {%- assign heading_lines = heading_html | split: '\n' -%}
         {%- endif -%}
         {%- if heading_lines.size > 1 -%}
           <span class="heading-line-1">{{ heading_lines[0] | strip_html | strip }}</span>
@@ -44,80 +43,56 @@
     {% endif %}
   </div>
 
-  <div class="pcf-main-grid">
+  <div class="pcf-canvas-container">
     
     <div class="pcf-left-col pcf-animate fade-right delay-1">
       <h2 class="pcf-title">{{ section.settings.main_title | newline_to_br }}</h2>
     </div>
 
-    <div class="pcf-diagram-col pcf-animate fade-in delay-2">
-      <div class="pcf-diagram-container">
-        
-        <div class="pcf-bowl-wrapper pcf-animate scale-in delay-3">
-          {% if section.settings.center_image != blank %}
-            {{ section.settings.center_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
-          {% else %}
-            {{ 'product-1' | placeholder_svg_tag: 'pcf-placeholder' }}
-          {% endif %}
-        </div>
+    <div class="pcf-diagram-viewport pcf-animate fade-in delay-2">
+      
+      <div class="pcf-bowl-wrapper pcf-animate scale-in delay-3">
+        {% if section.settings.center_image != blank %}
+          {{ section.settings.center_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'pcf-placeholder' }}
+        {% endif %}
+      </div>
 
-        <svg class="pcf-arc-svg" viewBox="0 0 368 735" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 733C201.86 733 365.5 569.36 365.5 367.5C365.5 165.64 201.86 2 0 2" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="4" stroke-linecap="round"/>
+      <div class="pcf-svg-arc-wrapper">
+        <svg viewBox="0 0 368 735" fill="none" xmlns="http://www.w3.org/2000/svg" class="pcf-native-svg">
+          <path d="M0 733C201.86 733 365.5 569.36 365.5 367.5C365.5 165.64 201.86 2 0 2" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="4"/>
         </svg>
+      </div>
 
-        {% for block in section.blocks %}
-          {% case forloop.index %}
-            {% when 1 %}
-              {% assign left_val = '59.39%' %}
-              {% assign top_val = '18.97%' %}
-            {% when 2 %}
-              {% assign left_val = '70.43%' %}
-              {% assign top_val = '39.81%' %}
-            {% when 3 %}
-              {% assign left_val = '69.96%' %}
-              {% assign top_val = '62.17%' %}
-            {% when 4 %}
-              {% assign left_val = '59.39%' %}
-              {% assign top_val = '81.03%' %}
-            | else %}
-              {% assign left_val = '71.5%' %}
-              {% assign top_val = '50%' %}
-          {% endcase %}
-
-          <div class="pcf-feature-point" style="left: {{ left_val }}; top: {{ top_val }};" {{ block.shopify_attributes }}>
-            <div class="pcf-feature-content-wrapper">
-              <div class="pcf-feature-content pcf-animate fade-left" style="transition-delay: 0.{{ forloop.index | plus: 3 }}s;">
-                
-                <div class="pcf-icon-circle">
-                  <div class="pcf-icon-inner-content">
-                    {% if block.settings.custom_icon != blank %}
-                      {{ block.settings.custom_icon | image_url: width: 80 | image_tag: class: 'pcf-custom-img' }}
-                    {% else %}
-                      {% case block.settings.icon_type %}
-                        {% when 'drop' %}
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M19.07 4.93l-2.83 2.83"></path></svg>
-                        {% when 'shield' %}
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        {% when 'heat' %}
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8c0-2-2-2-2-4"></path><path d="M12 8c0-2-2-2-2-4"></path><path d="M7 8c0-2-2-2-2-4"></path><path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path><path d="M12 22a7 7 0 0 0 7-7"></path></svg>
-                        {% when 'molecule' %}
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><circle cx="12" cy="12" r="3"></circle><line x1="8.12" y1="8.12" x2="9.88" y2="9.88"></line><line x1="14.12" y1="9.88" x2="15.88" y2="8.12"></line><line x1="9.88" y1="14.12" x2="8.12" y2="15.88"></line><line x1="15.88" y1="14.12" x2="14.12" y2="15.88"></line></svg>
-                      {% endcase %}
-                    {% endif %}
-                  </div>
-                </div>
-
-                <div class="pcf-feature-text">
-                  {{ block.settings.text | newline_to_br }}
-                </div>
-              </div>
+      {% for block in section.blocks %}
+        <div class="pcf-node node-{{ forloop.index }}" {{ block.shopify_attributes }}>
+          <div class="pcf-icon-circle">
+            <div class="pcf-icon-inner-content">
+              {% if block.settings.custom_icon != blank %}
+                {{ block.settings.custom_icon | image_url: width: 80 | image_tag: class: 'pcf-custom-img' }}
+              {% else %}
+                {% case block.settings.icon_type %}
+                  {% when 'drop' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M19.07 4.93l-2.83 2.83"></path></svg>
+                  {% when 'shield' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                  {% when 'heat' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8c0-2-2-2-2-4"></path><path d="M12 8c0-2-2-2-2-4"></path><path d="M7 8c0-2-2-2-2-4"></path><path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path><path d="M12 22a7 7 0 0 0 7-7"></path></svg>
+                  {% when 'molecule' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><circle cx="12" cy="12" r="3"></circle><line x1="8.12" y1="8.12" x2="9.88" y2="9.88"></line><line x1="14.12" y1="9.88" x2="15.88" y2="8.12"></line><line x1="9.88" y1="14.12" x2="8.12" y2="15.88"></line><line x1="15.88" y1="14.12" x2="14.12" y2="15.88"></line></svg>
+                {% endcase %}
+              {% endif %}
             </div>
           </div>
-        {% endfor %}
 
-      </div>
+          <div class="pcf-feature-text">
+            {{ block.settings.text | newline_to_br }}
+          </div>
+        </div>
+      {% endfor %}
+
     </div>
-
   </div>
 </div>
 
@@ -125,7 +100,7 @@
   /* --- Intro Header --- */
   .pcf-intro-block {
     max-width: 1012px;
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 4rem auto;
     text-align: center;
   }
   .pcf-intro-title {
@@ -137,12 +112,8 @@
     flex-direction: column;
     align-items: center;
   }
-  .pcf-intro-title .heading-line-1 {
-    font-weight: 900;
-  }
-  .pcf-intro-title .heading-line-2 {
-    font-weight: 800;
-  }
+  .pcf-intro-title .heading-line-1 { font-weight: 900; }
+  .pcf-intro-title .heading-line-2 { font-weight: 800; }
   .pcf-intro-subtext {
     font-size: 23px;
     line-height: 1.6;
@@ -151,279 +122,228 @@
     opacity: 0.85;
     padding: 0 16px;
   }
-  .pcf-intro-subtext p { margin: 0; }
-  .pcf-intro-subtext strong { font-weight: 700; color: #000; opacity: 1; }
+  .pcf-intro-subtext strong { font-weight: 700; color: #000; }
 
-  /* --- Main Grid Layout --- */
-  .pcf-main-grid {
-    max-width: 1340px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: start; 
-    gap: 3.5rem;
-  }
-
-  @media (min-width: 990px) {
-    .pcf-main-grid {
-      grid-template-columns: 3.5fr 8.5fr;
-      gap: 2rem;
-    }
-  }
-
-  /* --- Left Column --- */
-  .pcf-left-col {
-    padding-left: 0;
-    z-index: 5;
-    margin-top: 20px !important; 
-  }
-  .pcf-title {
-    font-size: clamp(3rem, 6.5vw, 7.5rem);
-    font-weight: 900;
-    line-height: 0.88;
-    letter-spacing: -0.04em;
-    margin: 0 !important; 
-  }
-
-  /* --- Right Circular Diagram --- */
-  .pcf-diagram-col {
-    width: 100%;
-    margin-top: 40px; 
-  }
-  .pcf-diagram-container {
+  /* --- Main Canvas Frame Setup --- */
+  .pcf-canvas-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 1.25 / 1; 
-    container-type: inline-size;
+    max-width: 1440px;
+    height: 740px;
+    margin: 0 auto;
   }
 
-  /* Center Anchor (Shifted Left to 40% to leave room for text) */
+  /* --- Left Heading Column --- */
+  .pcf-left-col {
+    position: absolute;
+    width: 550px;
+    left: 50px;
+    top: 20px;
+    z-index: 5;
+  }
+  .pcf-title {
+    font-size: 112px;
+    font-weight: 700;
+    line-height: 101px;
+    letter-spacing: -0.04em;
+    margin: 0;
+    color: #000000;
+  }
+
+  /* --- Right Layout Graphic Viewport Area --- */
+  .pcf-diagram-viewport {
+    position: absolute;
+    width: 890px;
+    height: 740px;
+    right: 0;
+    top: 0;
+  }
+
+  /* --- Pet Food Bowl Wrapper --- */
   .pcf-bowl-wrapper {
     position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    z-index: 3; 
+    width: 580px;
+    height: 580px;
+    left: 0;
+    top: 75px;
+    z-index: 2;
   }
   .pcf-bowl-img, .pcf-placeholder {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 50%;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12));
   }
 
-  /* SVG Open Semi-Circle Arc */
-  .pcf-arc-svg {
-    display: none;
-  }
-  @media (min-width: 990px) {
-    .pcf-arc-svg {
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 40%;
-        /* FIXED: Configured size constraints perfectly to scale your exact figma measurements */
-        width: 62.1%; 
-        height: 100%;
-        transform: translate(-30.5%, -50%);
-        pointer-events: none;
-        z-index: 6 !important; 
-    }
-  }
-
-  .pcf-feature-point {
+  /* --- FIXED: Integrated Your Figma SVG Half-Arc Element --- */
+  .pcf-svg-arc-wrapper {
     position: absolute;
-    z-index: 4; 
+    width: 368px;
+    height: 735px;
+    left: 468px; /* Perfectly aligns relative to your bowl radius */
+    top: -2px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .pcf-native-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
-  /* Alignment wrapper centering the 52px diameter icon bubble on the coordinates */
-  .pcf-feature-content-wrapper {
+  /* --- Base Interactive Node Framework --- */
+  .pcf-node {
     position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-26px, -50%);
-  }
-
-  /* Wrapper to align Icon exactly on the arc line, text to the right */
-  .pcf-feature-content {
     display: flex;
     align-items: center;
-    gap: 15px;
-    width: max-content;
+    gap: 20px;
+    z-index: 10;
   }
-
   .pcf-icon-circle {
-    width: 52px;
-    height: 52px;
-    background: #ffffff;
+    width: 76px;
+    height: 76px;
+    background: #FFFFFF;
     border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     position: relative;
-    z-index: 4;
   }
-  
   .pcf-icon-inner-content {
-    position: relative;
-    z-index: 8 !important; 
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
-  }
-  
-  .pcf-icon-circle svg {
-    width: 22px;
-    height: 22px;
     position: relative;
-    z-index: 9;
+    z-index: 5;
+  }
+  .pcf-icon-circle svg {
+    width: 32px;
+    height: 32px;
   }
   .pcf-custom-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 10px;
+    padding: 14px;
     border-radius: 50%;
-    position: relative;
-    z-index: 9;
+  }
+  .pcf-feature-text {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+    color: #1E1E1E;
+    white-space: nowrap;
   }
 
-  .pcf-feature-text {
-    font-size: 15px;
-    line-height: 1.35;
-    font-weight: 500;
-    color: #2b2b2b;
+  /* --- FIXED: Precision Node Positions Mapped to Your Custom Arc path --- */
+  
+  /* Node 1: Top Feature Point */
+  .pcf-node.node-1 {
+    left: 659px; /* 468px start + figma horizontal path delta */
+    top: -4px;
+  }
+  /* Node 2: Upper Middle Feature Point */
+  .pcf-node.node-2 {
+    left: 795.5px;
+    top: 165px;
+  }
+  /* Node 3: Lower Middle Feature Point */
+  .pcf-node.node-3 {
+    left: 807px;
+    top: 361px;
+  }
+  /* Node 4: Bottom Feature Point */
+  .pcf-node.node-4 {
+    left: 698px;
+    top: 551px;
   }
 
   /* --- Animations --- */
   .pcf-animate { opacity: 0; will-change: opacity, transform; }
   .fade-up { transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .fade-right { transform: translateX(-30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .fade-left { transform: translateX(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .fade-in { transition: opacity 1s ease; }
-  .scale-in { transform: translate(-50%, -50%) scale(0.85); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .scale-in { transform: scale(0.9); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
   
   .pcf-animate.is-visible { opacity: 1; transform: translate(0) scale(1); }
-  .scale-in.is-visible { transform: translate(-50%, -50%) scale(1); }
 
   .delay-1 { transition-delay: 0.1s; }
   .delay-2 { transition-delay: 0.2s; }
   .delay-3 { transition-delay: 0.3s; }
 
-  /* --- Mobile Optimization --- */
-  @media screen and (max-width: 1024px) {
+  /* --- Fully Responsive Mobile Overrides --- */
+  @media screen and (max-width: 1200px) {
     #section-{{ section.id }} {
       padding: 60px 20px !important;
     }
-    .pcf-intro-block {
-      margin-bottom: 3.5rem;
-    }
-    .pcf-intro-title {
-      font-size: 28px;
-    }
-    .pcf-main-grid {
-      grid-template-columns: 1fr;
-      text-align: center;
+    .pcf-canvas-container {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 2.5rem;
     }
     .pcf-left-col {
-      padding-left: 0;
-      text-align: center;
-      margin-top: 0px !important;
+      position: relative;
+      width: 100%;
+      left: auto; top: auto;
+      text-align: left;
     }
     .pcf-title {
-        font-size: 35px;
-        text-align: left;
-        margin-bottom: 1.5rem;
-        padding-left: 35px;
-        margin-top: 0px !important;
+      font-size: 54px;
+      line-height: 58px;
     }
-    
-    .pcf-diagram-col {
-      margin-top: 0px;
-    }
-    .pcf-diagram-container {
-      aspect-ratio: auto;
+    .pcf-diagram-viewport {
+      position: relative;
+      width: 100%;
+      height: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1.5rem;
-      position: relative;
-      --bowl-width: min(280px, 70vw);
     }
-
-    /* Vertical connector line on mobile */
-    .pcf-diagram-container::before {
-      content: "";
-      position: absolute;
-      top: -30px;
-      bottom: 23px;
-      left: calc(50% - var(--bowl-width) / 2);
-      width: 2px;
-      background-color: {{ section.settings.arc_color | default: '#ffffff' }};
-      z-index: 6 !important;
-    }
-
     .pcf-bowl-wrapper {
       position: relative;
-      top: auto; left: auto; transform: none !important;
-      width: var(--bowl-width) !important;
-      max-width: 280px !important;
+      left: auto; top: auto;
+      width: min(280px, 75vw);
+      height: min(280px, 75vw);
       margin: 0 auto;
-      z-index: 3;
     }
-    .scale-in.is-visible { transform: scale(1) !important; }
-
-    .pcf-arc-svg { display: none; }
-
-    .pcf-feature-point {
+    .pcf-svg-arc-wrapper {
+      position: absolute;
+      width: 2px;
+      height: calc(100% - 200px);
+      left: calc(50% - min(280px, 75vw)/2);
+      top: 140px;
+      border-left: 2px solid #FFFFFF;
+    }
+    .pcf-native-svg { display: none; }
+    
+    .pcf-node {
       position: relative;
-      top: auto !important;
-      left: auto !important;
-      transform: none !important;
+      left: auto !important; top: auto !important;
       width: 100%;
-      padding-left: calc(50% - var(--bowl-width) / 2 - 23px);
+      padding-left: calc(50% - min(280px, 75vw)/2 - 38px);
       box-sizing: border-box;
-      z-index: 4;
-    }
-
-    .pcf-feature-content-wrapper {
-      position: relative !important;
-      top: auto !important;
-      left: auto !important;
-      transform: none !important;
-      width: 100%;
-    }
-
-    .pcf-feature-content {
-      position: relative;
-      top: auto; left: auto; transform: none !important;
-      width: 100% !important;
-      text-align: left;
-      gap: 1.2rem;
-      display: flex;
-      align-items: center;
+      gap: 15px;
     }
     .pcf-icon-circle {
-      width: 46px;
-      height: 46px;
-      min-width: 46px;
-      z-index: 4;
+      width: 56px;
+      height: 56px;
+    }
+    .pcf-icon-circle svg {
+      width: 22px;
+      height: 22px;
     }
     .pcf-feature-text {
-      font-size: 0.95rem;
-      line-height: 1.35;
-      font-weight: 500;
-      color: #2b2b2b;
-      max-width: 280px;
-    }
-    .heading-line-1{
-      font-weight: 900 !important;
+      font-size: 16px;
+      line-height: 22px;
+      white-space: normal;
     }
   }
 </style>
@@ -437,7 +357,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { root: null, threshold: 0.15 });
+    }, { root: null, threshold: 0.1 });
 
     document.querySelectorAll('#section-{{ section.id }} .pcf-animate').forEach(el => observer.observe(el));
   });
