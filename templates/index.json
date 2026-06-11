@@ -16,7 +16,7 @@
           "type": "slide",
           "settings": {
             "bg_image": "shopify://shop_images/Homepage_1.png",
-            "bg_image_mobile": "shopify://shop_images/Homepage_1_7115de9a-bad0-41f8-82da-ae1b13a87f55.png",
+            "mobile_image": "shopify://shop_images/Homepage_1_7115de9a-bad0-41f8-82da-ae1b13a87f55.png",
             "hero_heading": "You love them like family.",
             "hero_description": "And that’s why every choice matters, especially what goes into their bowl.",
             "button_text": "WHAT’S IN A BOWL?",
