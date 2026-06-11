@@ -1,0 +1,397 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "pet_food_hero_ARqKUK": {
+      "type": "pet-food-hero",
+      "name": "Pet Food Hero",
+      "settings": {
+        "bg_gradient_top": "#e9e8f5",
+        "bg_gradient_mid": "#e9e8f5",
+        "bg_gradient_bottom": "#ffffff",
+        "padding_top": 180,
+        "padding_bottom": 60,
+        "heading_line_1": "What if doing",
+        "heading_line_4": "goes into their",
+        "heading_font_size": 80,
+        "heading_color": "#111111",
+        "heading_line_height": "0.9",
+        "heading_margin_bottom": 20,
+        "heading_line_3": "starts with what",
+        "l3_font_family": "georgia",
+        "l3_font_size": 70,
+        "l3_font_weight": "400",
+        "l3_font_style": "normal",
+        "l3_color": "#111111",
+        "l3_margin_top": 0,
+        "l3_margin_bottom": 0,
+        "heading_highlight": "",
+        "highlight_font_size": 140,
+        "accent_color_red": "#d92b2b",
+        "bowl_image": "shopify://shop_images/Group_59508.png",
+        "bowl_max_width": 600,
+        "bowl_margin_bottom": 20,
+        "bowl_top": "0",
+        "bowl_bottom": "unset",
+        "bowl_left": "unset",
+        "bowl_right": "unset",
+        "food_flake_image": "shopify://shop_images/2_3.png",
+        "flake_1_size": 80,
+        "flake_1_top": "-330",
+        "flake_1_bottom": "unset",
+        "flake_1_left": "32",
+        "flake_1_right": "unset",
+        "flake_1_rotation": 0,
+        "flake_2_size": 50,
+        "flake_2_top": "-170",
+        "flake_2_bottom": "unset",
+        "flake_2_left": "48",
+        "flake_2_right": "unset",
+        "flake_2_rotation": 60,
+        "flake_3_size": 80,
+        "flake_3_top": "-70",
+        "flake_3_bottom": "unset",
+        "flake_3_left": "48",
+        "flake_3_right": "unset",
+        "flake_3_rotation": -160,
+        "flake_4_size": 10,
+        "flake_4_top": "",
+        "flake_4_bottom": "unset",
+        "flake_4_left": "0",
+        "flake_4_right": "unset",
+        "flake_4_rotation": 15,
+        "wave_left": "shopify://shop_images/Vector_5_1.png",
+        "wl_width": 180,
+        "wl_top": "30",
+        "wl_bottom": "unset",
+        "wl_left": "0",
+        "wl_right": "unset",
+        "wave_right": "shopify://shop_images/Isolation_Mode_1_7bf42ff0-0e75-47b3-b425-823cd0fb1c0b.png",
+        "wr_width": 220,
+        "wr_top": "22",
+        "wr_bottom": "unset",
+        "wr_left": "unset",
+        "wr_right": "0",
+        "sparkle_left": "shopify://shop_images/Isolation_Mode_3.png",
+        "sl_width": 70,
+        "sl_top": "10",
+        "sl_bottom": "unset",
+        "sl_left": "25",
+        "sl_right": "unset",
+        "sparkle_right": "shopify://shop_images/Isolation_Mode_2.png",
+        "sr_width": 100,
+        "sr_top": "16",
+        "sr_bottom": "unset",
+        "sr_left": "20",
+        "sr_right": "0",
+        "burst_left": "shopify://shop_images/Isolation_Mode_5.png",
+        "bl_width": 90,
+        "bl_top": "unset",
+        "bl_bottom": "32",
+        "bl_left_range": -6,
+        "burst_right": "shopify://shop_images/Isolation_Mode_4.png",
+        "br_width": 100,
+        "br_top": "unset",
+        "br_bottom": "50",
+        "br_right_range": -6,
+        "description": "Energy, health, and even the years you get to spend together, all traces back to nutrition.",
+        "desc_color": "#555555",
+        "desc_font_size": 16,
+        "desc_max_width": 460
+      }
+    },
+    "we_know_Wh9cYW": {
+      "type": "we-know",
+      "name": "Pet Info Section",
+      "settings": {
+        "bg_color": "#ffffff",
+        "container_max_width": 1280,
+        "container_padding_left": 100,
+        "container_padding_right": 40,
+        "center_gap_width": 40,
+        "padding_top": 52,
+        "padding_bottom": 120,
+        "content_top": "0",
+        "content_bottom": "unset",
+        "content_left": "50",
+        "content_right": "unset",
+        "heading_line_1": "We know how much",
+        "heading_line_3": "you want to",
+        "heading_font_size": 80,
+        "heading_color": "#111111",
+        "heading_line_height": "0.9",
+        "heading_max_width": 480,
+        "heading_margin_bottom": 10,
+        "heading_line_4": "get it right.",
+        "line4_color": "#111111",
+        "line4_max_width": 480,
+        "line4_padding_top": 10,
+        "line4_padding_bottom": 10,
+        "line_5_text": "We do too.",
+        "line_5_font_size": 80,
+        "line5_color": "#d92b2b",
+        "line5_margin_bottom": 48,
+        "desc_max_width": 420,
+        "p1_content": "But when it comes to food, there's a lot to choose from, and not all of it is built the same way.",
+        "p1_font_size": 23,
+        "p1_color": "#555555",
+        "p1_margin_bottom": 24,
+        "p2_content": "<strong>They're not built like us.</strong> So their food shouldn't be either.",
+        "p2_font_size": 15,
+        "p2_color": "#555555",
+        "p2_strong_color": "#111111",
+        "main_image": "shopify://shop_images/Group_59512.png",
+        "image_max_width": 600,
+        "media_top": "100",
+        "media_bottom": "unset",
+        "media_left": "-50",
+        "media_right": "unset",
+        "hearts_width": 106,
+        "hearts_top": "5",
+        "hearts_bottom": "unset",
+        "hearts_left": "15",
+        "hearts_right": "unset",
+        "bheart_width": 106,
+        "bheart_top": "40",
+        "bheart_bottom": "unset",
+        "bheart_left": "unset",
+        "bheart_right": "10",
+        "curve_image": "shopify://shop_images/Vector_1_e7f6e6fc-6076-4993-b8ea-13a05fc93662.png",
+        "curve_image_mobile": "shopify://shop_images/Group_59504.png",
+        "mobile_text_alignment": "left",
+        "mobile_side_padding": 24,
+        "mobile_padding_top": 50,
+        "mobile_padding_bottom": 60,
+        "mobile_center_gap": 32,
+        "mobile_heading_font_size": 34,
+        "mobile_line5_font_size": 34,
+        "mobile_line5_margin_bottom": 24,
+        "mobile_desc_font_size": 16,
+        "mobile_p1_margin_bottom": 16,
+        "mobile_hearts_width": 46,
+        "mobile_hearts_top": "-10",
+        "mobile_hearts_bottom": "unset",
+        "mobile_hearts_left": "12",
+        "mobile_hearts_right": "unset",
+        "mobile_bheart_width": 70,
+        "mobile_bheart_top": "55",
+        "mobile_bheart_bottom": "unset",
+        "mobile_bheart_left": "unset",
+        "mobile_bheart_right": "-10"
+      }
+    },
+    "you_bring_the_love_7rpmFw": {
+      "type": "you-bring-the-love",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "drop",
+            "custom_icon": "",
+            "text": "Controlled low-\ntemperature dehydration"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "shield",
+            "custom_icon": "",
+            "text": "Helps retain essential amino \nacids and micronutrients"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "heat",
+            "custom_icon": "",
+            "text": "Avoids nutrient degradation \ncaused by high-heat processing"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon_type": "molecule",
+            "custom_icon": "",
+            "text": "Maintains structural\nintegrity of ingredients"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ],
+      "name": "Pet Science Info Circle",
+      "settings": {
+        "bg_color": "#ffcd68",
+        "title_color": "#000000",
+        "text_color": "#222222",
+        "intro_heading": "You bring the love.\nWe bring the science.",
+        "intro_subtext": "<p>A way of feeding that's built around what their bodies actually need, made practical for everyday life.<br/><strong>So what actually makes it different?</strong></p>",
+        "main_title": "Preserving what\nmatters.",
+        "center_image": "shopify://shop_images/4_1_fd0918c6-f2a2-40ca-8779-92c8c2dd4ed9.png"
+      }
+    },
+    "pet_benefits_slider_XeT6Pj": {
+      "type": "pet-benefits-slider",
+      "blocks": {
+        "badge_icon_jgQ7ta": {
+          "type": "badge_icon",
+          "settings": {
+            "icon_img": "shopify://shop_images/Layer_1_12.png",
+            "label": "Higher nutrient<br> retention"
+          }
+        },
+        "badge_icon_axahzB": {
+          "type": "badge_icon",
+          "settings": {
+            "icon_img": "shopify://shop_images/Layer_1_13.png",
+            "label": "Improved digestion and absorption"
+          }
+        },
+        "badge_icon_qayRnp": {
+          "type": "badge_icon",
+          "settings": {
+            "icon_img": "shopify://shop_images/Layer_1_15.png",
+            "label": "Consistent, balanced nutrition"
+          }
+        },
+        "badge_icon_Q6TRUQ": {
+          "type": "badge_icon",
+          "settings": {
+            "icon_img": "shopify://shop_images/Layer_1_14.png",
+            "label": "Reduced reliance on synthetic supplements"
+          }
+        },
+        "slide_card_rjwkPc": {
+          "type": "slide_card",
+          "settings": {
+            "card_title": "Shiny Coat & Healthy Skin",
+            "card_desc": "Visible improvements packed with natural omegas."
+          }
+        },
+        "slide_card_4bXAeR": {
+          "type": "slide_card",
+          "settings": {
+            "card_title": "Shiny Coat & Healthy Skin",
+            "card_desc": "Visible improvements packed with natural omegas."
+          }
+        },
+        "slide_card_k6R6zQ": {
+          "type": "slide_card",
+          "settings": {
+            "card_title": "Shiny Coat & Healthy Skin",
+            "card_desc": "Visible improvements packed with natural omegas."
+          }
+        },
+        "slide_card_BdzjXL": {
+          "type": "slide_card",
+          "settings": {
+            "card_title": "Shiny Coat & Healthy Skin",
+            "card_desc": "Visible improvements packed with natural omegas."
+          }
+        }
+      },
+      "block_order": [
+        "badge_icon_jgQ7ta",
+        "badge_icon_axahzB",
+        "badge_icon_qayRnp",
+        "badge_icon_Q6TRUQ",
+        "slide_card_rjwkPc",
+        "slide_card_4bXAeR",
+        "slide_card_k6R6zQ",
+        "slide_card_BdzjXL"
+      ],
+      "name": "Pet Benefits Slider",
+      "settings": {
+        "bg_color": "#ffffff",
+        "icon_bg_color": "#cf3c3c",
+        "wave_color": "#7d75b3",
+        "card_bg_color": "#e0e0e0",
+        "title": "What does this mean for your pet?",
+        "padding_top": 80,
+        "padding_bottom": 40
+      }
+    },
+    "end_banner_tKEwHr": {
+      "type": "end-banner",
+      "name": "CTA Overlap Banner",
+      "settings": {
+        "bg_color": "#7d75b3",
+        "ribbon_color": "#f4cb55",
+        "heading": "So, ready to find what’s right for them?",
+        "btn1_text": "Start With Your Pet",
+        "btn1_link": "",
+        "btn2_text": "Explore Products",
+        "btn2_link": "",
+        "model_image": "shopify://shop_images/Group_59513.png",
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "pet_food_hero_ARqKUK",
+    "we_know_Wh9cYW",
+    "you_bring_the_love_7rpmFw",
+    "pet_benefits_slider_XeT6Pj",
+    "end_banner_tKEwHr"
+  ]
+}

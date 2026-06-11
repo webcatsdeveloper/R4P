@@ -1,0 +1,326 @@
+{% comment %}
+  Pet Hero Banner Section - Independent Component
+  Features 9-position coordinate positioning, top/bottom padding movement,
+  and smooth page entry animations. References image_02a73f.png (desktop style)
+  and image_02a71d.png (mobile responsive layout style).
+{% endcomment %}
+
+{% style %}
+  /* --- Clean Page Load Entry Animations --- */
+  @keyframes petBannerFadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes petBannerFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* --- Global Wrapper Setup --- */
+  .pet-hero-banner-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background-color: transparent;
+  }
+
+  /* --- Desktop Banner Structural Canvas (image_02a73f.png) --- */
+  .pet-hero-desktop {
+    width: 100%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    animation: petBannerFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  
+  .pet-hero-desktop img.pet-bg-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* --- 9 Position Content Flexbox Matrix Engine --- */
+  .pet-hero-desktop-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    
+    /* Variable Injection Driven via Section Schema Controllers */
+    padding-top: {{ section.settings.desktop_padding_top }}px;
+    padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+    padding-left: {{ section.settings.desktop_padding_horizontal }}px;
+    padding-right: {{ section.settings.desktop_padding_horizontal }}px;
+    
+    {% case section.settings.desktop_text_position %}
+      {% when 'top-left' %}
+        align-items: flex-start; justify-content: flex-start; text-align: left;
+      {% when 'top-center' %}
+        align-items: flex-start; justify-content: center; text-align: center;
+      {% when 'top-right' %}
+        align-items: flex-start; justify-content: flex-end; text-align: right;
+      {% when 'middle-left' %}
+        align-items: center; justify-content: flex-start; text-align: left;
+      {% when 'middle-center' %}
+        align-items: center; justify-content: center; text-align: center;
+      {% when 'middle-right' %}
+        align-items: center; justify-content: flex-end; text-align: right;
+      {% when 'bottom-left' %}
+        align-items: flex-end; justify-content: flex-start; text-align: left;
+      {% when 'bottom-center' %}
+        align-items: flex-end; justify-content: center; text-align: center;
+      {% when 'bottom-right' %}
+        align-items: flex-end; justify-content: flex-end; text-align: right;
+    {% endcase %}
+  }
+
+  .pet-hero-desktop-text h1 {
+    font-size: {{ section.settings.desktop_font_size }}px;
+    font-weight: 800;
+    color: {{ section.settings.desktop_text_color }};
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    animation: petBannerFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.15s;
+  }
+
+  /* --- Mobile Banner Structural Canvas (image_02a71d.png) --- */
+  .pet-hero-mobile {
+    display: none;
+    background-color: #a4e4fc; /* Solid sky blue color theme context */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-top: {{ section.settings.mobile_padding_top }}px;
+    padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    padding-left: 20px;
+    padding-right: 20px;
+    animation: petBannerFadeIn 0.8s ease both;
+  }
+  
+  .pet-hero-mobile h1 {
+    font-size: {{ section.settings.mobile_font_size }}px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 auto 20px auto;
+    text-transform: capitalize;
+    letter-spacing: -0.5px;
+    max-width: 90%;
+    line-height: 1.2;
+    animation: petBannerFadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  
+  .pet-hero-mobile-img {
+    max-width: {{ section.settings.mobile_img_max_width }}px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    height: auto;
+    animation: petBannerFadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.1s;
+  }
+
+  /* =======================================================
+     RESPONSIVE BREAKPOINT FLOW (DESKTOP TO MOBILE TOGGLE)
+     ======================================================= */
+  @media (max-width: 768px) {
+    .pet-hero-desktop {
+      display: none !important;
+    }
+    .pet-hero-mobile {
+      display: block;
+    }
+  }
+{% endstyle %}
+
+<div class="pet-hero-banner-wrapper" id="PetHeroBanner-{{ section.id }}">
+  
+  <!-- Desktop Layer Engine (image_02a73f.png Alignment Layout Structure) -->
+  <div class="pet-hero-desktop">
+    {%- if section.settings.desktop_banner_image != blank -%}
+      <img src="{{ section.settings.desktop_banner_image | image_url: width: 2000 }}" class="pet-bg-img" alt="{{ section.settings.desktop_heading | escape }}" loading="eager">
+      {%- if section.settings.desktop_heading != blank -%}
+        <div class="pet-hero-desktop-overlay">
+          <div class="pet-hero-desktop-text">
+            <h1>{{ section.settings.desktop_heading }}</h1>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <!-- Functional CSS Placeholder if image asset isn't mounted yet -->
+      <div style="background: #a4e4fc; padding: 140px 20px; text-align: center;">
+        <h1 style="color:#fff; font-size: 56px; margin:0; font-weight:800;">{{ section.settings.desktop_heading | default: "All Products" }}</h1>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Mobile Layer Engine (image_02a71d.png Vertical Stack Layout Structure) -->
+  <div class="pet-hero-mobile">
+    <h1>{{ section.settings.mobile_heading | default: section.settings.desktop_heading }}</h1>
+    {%- if section.settings.mobile_hero_image != blank -%}
+      <img src="{{ section.settings.mobile_hero_image | image_url: width: 750 }}" class="pet-hero-mobile-img" alt="Mobile Hero Illustration" loading="eager">
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'pet-hero-mobile-img' }}
+    {%- endif -%}
+  </div>
+  
+</div>
+
+{% schema %}
+{
+  "name": "Pet Hero Banner Only",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Desktop Settings (image_02a73f.png)"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_banner_image",
+      "label": "Widescreen Background Asset"
+    },
+    {
+      "type": "text",
+      "id": "desktop_heading",
+      "label": "Heading Text String",
+      "default": "All Products"
+    },
+    {
+      "type": "color",
+      "id": "desktop_text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "desktop_font_size",
+      "min": 24,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Text Font Size Scala",
+      "default": 56
+    },
+    {
+      "type": "select",
+      "id": "desktop_text_position",
+      "label": "9-Position Placement Grid Matrix",
+      "default": "middle-left",
+      "options": [
+        { "value": "top-left", "label": "Top Left" },
+        { "value": "top-center", "label": "Top Center" },
+        { "value": "top-right", "label": "Top Right" },
+        { "value": "middle-left", "label": "Middle Left" },
+        { "value": "middle-center", "label": "Middle Center" },
+        { "value": "middle-right", "label": "Middle Right" },
+        { "value": "bottom-left", "label": "Bottom Left" },
+        { "value": "bottom-center", "label": "Bottom Center" },
+        { "value": "bottom-right", "label": "Bottom Right" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding Spacer Offset",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding Spacer Offset",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_horizontal",
+      "min": 20,
+      "max": 240,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal Margins Padding",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings (image_02a71d.png)"
+    },
+    {
+      "type": "text",
+      "id": "mobile_heading",
+      "label": "Mobile Heading Title Override",
+      "info": "Leave completely blank to sync directly with your default Desktop Heading text setting entry automatically."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_hero_image",
+      "label": "Mobile Center Illustration Asset"
+    },
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Heading Font Size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "mobile_img_max_width",
+      "min": 160,
+      "max": 450,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile Illustration Image Max Width",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Wrapper Top Padding Offset",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Wrapper Bottom Padding Offset",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pet Hero Banner Only"
+    }
+  ]
+}
+{% endschema %}

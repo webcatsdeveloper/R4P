@@ -1,0 +1,533 @@
+{% schema %}
+{
+  "name": "Custom Hero Slideshow",
+  "settings": [
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "hero_heading",
+          "label": "Heading",
+          "default": "You love them like family."
+        },
+        {
+          "type": "textarea",
+          "id": "hero_description",
+          "label": "Description",
+          "default": "And that’s why every choice matters, especially what goes into their bowl."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "WHAT’S IN A BOWL?"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Hero Slideshow",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<section class="right4paws-hero" id="Slideshow-{{ section.id }}" data-autoplay="{{ section.settings.autoplay_speed }}">
+
+  <div class="slideshow-inner">
+
+    {% for block in section.blocks %}
+    <div class="hero-slide {% if forloop.first %}is-active{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+
+      {% if block.settings.bg_image != blank %}
+      <img
+        class="hero-bg-image"
+        src="{{ block.settings.bg_image | image_url: width: 2500 }}"
+        alt="{{ block.settings.hero_heading | escape }}"
+        loading="lazy"
+      >
+      {% else %}
+      <div class="hero-bg-image placeholder-bg"></div>
+      {% endif %}
+
+      <div class="hero-overlay-content">
+
+        <div class="hero-container">
+
+          <div class="hero-content-wrap">
+
+            <div class="hero-text-content">
+
+              <h1>{{ block.settings.hero_heading | replace: 'them ', 'them <br>' }}</h1>
+
+              <div class="hero-description">
+                {{ block.settings.hero_description }}
+              </div>
+
+              {% if block.settings.button_text != blank %}
+              <a href="{{ block.settings.button_link }}" class="hero-btn">
+                {{ block.settings.button_text }}
+              </a>
+              {% endif %}
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- BOTTOM CURVE -->
+  <div class="hero-bottom-curve-wrap">
+    <svg viewBox="0 0 1920 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path 
+        d="M0 70 
+           C 280 180, 620 200, 960 140 
+           C 1320 75, 1640 40, 1920 110 
+           L1920 220 
+           L0 220 
+           Z" 
+        fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <!-- DOTS -->
+  <div class="slideshow-dots">
+    {% for block in section.blocks %}
+    <button
+      class="dot {% if forloop.first %}is-active{% endif %}"
+      data-index="{{ forloop.index0 }}"
+      aria-label="Go to slide {{ forloop.index }}">
+    </button>
+    {% endfor %}
+  </div>
+
+</section>
+
+<style>
+.right4paws-hero{
+    position:relative;
+    width:100%;
+    height:860px;
+    overflow:hidden;
+    background:#ffeddf;
+    font-family: 'Degular Demo', sans-serif !important;
+}
+
+.slideshow-inner{
+    position:relative;
+    width:100%;
+    height:742px;
+}
+
+/* SLIDES */
+.hero-slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .8s ease;
+    z-index:1;
+}
+
+.hero-slide.is-active{
+    opacity:1;
+    visibility:visible;
+    z-index:2;
+}
+
+/* OVERLAY */
+.hero-slide::after{
+    display:none;
+}
+
+.hero-overlay-content{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    display:flex;
+    justify-content:center;
+}
+
+/* CONTAINER */
+.hero-container{
+    width:100%;
+    max-width:1380px;
+    height:742px;
+    position:relative;
+    margin:31px auto 0;
+    padding-left:32px;
+    padding-right:32px;
+    box-sizing:border-box;
+    z-index:2;
+}
+
+/* =========================
+BG IMAGE LOAD EFFECT
+========================= */
+
+.hero-bg-image{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+
+    /* FIX */
+    object-fit:contain;
+    object-position:center top;
+    background:#ffeddf;
+
+    opacity:0;
+    transform:scale(1.08);
+}
+
+/* ACTIVE IMAGE */
+.hero-slide.is-active .hero-bg-image{
+    animation:bgFadeZoom 1.8s ease forwards;
+}
+
+@keyframes bgFadeZoom{
+
+    from{
+        opacity:0;
+        transform:scale(1.08);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* PLACEHOLDER */
+.placeholder-bg{
+    width:100%;
+    height:100%;
+    background:#ffeddf;
+}
+
+/* CONTENT */
+.hero-content-wrap{
+    position:absolute;
+    left:180px;
+    top:155px;
+    z-index:20;
+    width:620px;
+}
+
+.hero-content-wrap h1{
+    margin:0;
+    font-size:65px !important;
+    line-height:1;
+    font-weight:800;
+    letter-spacing:-4px;
+    color:#E41F26;
+    margin-bottom:34px;
+}
+
+/* =========================
+TEXT LOAD + SLIDE ANIMATION
+========================= */
+
+.hero-text-content h1,
+.hero-text-content .hero-description,
+.hero-text-content .hero-btn{
+    opacity:0;
+    transform:translateX(-90px);
+}
+
+/* ACTIVE ANIMATION */
+.hero-slide.is-active .hero-text-content h1{
+    animation:slideFadeLeft .9s ease forwards;
+}
+
+.hero-slide.is-active .hero-description{
+    animation:slideFadeLeft .9s ease forwards;
+    animation-delay:.15s;
+}
+
+.hero-slide.is-active .hero-btn{
+    animation:slideFadeLeft .9s ease forwards;
+    animation-delay:.3s;
+}
+
+/* KEYFRAMES */
+@keyframes slideFadeLeft{
+
+    from{
+        opacity:0;
+        transform:translateX(-90px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+.hero-description{
+    font-size:16px;
+    line-height:1;
+    color:#111111;
+    max-width:430px;
+    margin-bottom:42px;
+    margin-top:-20px;
+    font-family:'Degular Demo'!important;
+    font-weight:400;
+}
+
+.hero-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:178px;
+    height:50px;
+    padding:0 32px;
+    border-radius:999px;
+    background:#000;
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:600;
+    transition:all .3s ease;
+    font-family:'Degular Demo'!important;
+}
+
+.hero-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* CURVE */
+.hero-bottom-curve-wrap{
+    position:absolute;
+    bottom:-20px;
+    left:0;
+    width:100%;
+    z-index:15;
+    line-height:0;
+    pointer-events:none;
+}
+
+.hero-bottom-curve-wrap svg{
+    width:100%;
+    height:170px;
+    display:block;
+}
+
+/* DOTS */
+.slideshow-dots{
+    position:absolute;
+    bottom:135px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:20;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    border:none;
+    background:#d9d9d9;
+    padding:0;
+    cursor:pointer;
+    transition:all .3s ease;
+}
+
+.dot.is-active{
+    background:#E41F26;
+}
+
+/* LAPTOP */
+@media screen and (max-width:1600px){
+
+    .hero-content-wrap h1{
+        font-size:110px;
+        line-height:80px;
+    }
+}
+
+/* TABLET */
+@media screen and (max-width:1200px){
+
+    .right4paws-hero{
+        height:760px;
+    }
+
+    .hero-container{
+        height:650px;
+        margin-top:20px;
+        padding:0 40px;
+    }
+
+    .hero-content-wrap{
+        width:520px;
+        top:120px;
+        left:40px;
+    }
+
+    .hero-content-wrap h1{
+        font-size:64px;
+        line-height:1;
+    }
+
+    .hero-bottom-curve-wrap svg{
+        height:120px;
+    }
+
+    .slideshow-dots{
+        bottom:95px;
+    }
+}
+
+/* MOBILE */
+@media screen and (max-width:768px){
+
+    .right4paws-hero{
+        height:700px;
+    }
+
+    .hero-container{
+        height:100%;
+        margin-top:0;
+        padding:0 20px;
+    }
+
+    .hero-bg-image{
+        object-position:center;
+    }
+
+    .hero-content-wrap{
+        position:relative;
+        top:80px;
+        left:0;
+        width:100%;
+        text-align:center;
+    }
+
+    .hero-content-wrap h1{
+        font-size:52px;
+        line-height:0.95;
+        letter-spacing:-2px;
+    }
+
+    .hero-description{
+        font-size:17px;
+        max-width:100%;
+        margin:0 auto 30px;
+    }
+
+    .hero-btn{
+        height:52px;
+        font-size:13px;
+    }
+
+    .hero-bottom-curve-wrap svg{
+        height:90px;
+    }
+
+    .slideshow-dots{
+        bottom:70px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const slideshow = document.getElementById('Slideshow-{{ section.id }}');
+
+    if (!slideshow) return;
+
+    const slides = slideshow.querySelectorAll('.hero-slide');
+    const dots = slideshow.querySelectorAll('.dot');
+
+    const autoplaySpeed = parseInt(slideshow.dataset.autoplay) * 1000;
+
+    let currentSlide = 0;
+    let slideInterval;
+
+    function goToSlide(index){
+
+        if(!slides[currentSlide] || !dots[currentSlide]) return;
+
+        slides[currentSlide].classList.remove('is-active');
+        dots[currentSlide].classList.remove('is-active');
+
+        currentSlide = index;
+
+        slides[currentSlide].classList.add('is-active');
+        dots[currentSlide].classList.add('is-active');
+    }
+
+    function startAutoplay(){
+
+        if(slideInterval) clearInterval(slideInterval);
+
+        slideInterval = setInterval(() => {
+
+            let next = (currentSlide + 1) % slides.length;
+
+            goToSlide(next);
+
+        }, autoplaySpeed);
+    }
+
+    dots.forEach((dot,index) => {
+
+        dot.addEventListener('click', () => {
+
+            goToSlide(index);
+            startAutoplay();
+
+        });
+
+    });
+
+    startAutoplay();
+
+});
+</script>

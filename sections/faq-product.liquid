@@ -1,0 +1,311 @@
+{% comment %}
+  Custom FAQ Accordion Group Section
+  Recreates the precise color scheme, typography, and structure from image_f2c5e5.png
+{% endcomment %}
+
+<!-- Import geometric font for clean layout reproduction -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+{% style %}
+  .faq-section {
+    padding: 80px 4%;
+    background-color: #ffffff;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .faq-main-heading {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+  }
+
+  /* --- ACCORDION ITEM BASE CONTAINER --- */
+  .faq-item {
+    background-color: #cf2a2a; /* Exact vibrant red matching image_f2c5e5.png */
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  /* --- TRIGGER BUTTON HEADER LAYER --- */
+  .faq-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 24px 30px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+    color: #ffffff;
+  }
+
+  .faq-question-text {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+    padding-right: 20px;
+    letter-spacing: -0.1px;
+  }
+
+  .faq-icon-indicator {
+    width: 12px;
+    height: 12px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 3px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  /* --- DRAWER CONTENT BODY LAYER --- */
+  .faq-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    box-sizing: border-box;
+  }
+
+  .faq-body-content {
+    padding: 0 30px 30px 30px;
+    color: #fcebeb; /* Off-white for readability against red */
+    font-size: 13px;
+    line-height: 1.6;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .faq-body-content p {
+    margin: 0;
+  }
+
+  /* --- STATE STYLING ACTIVE VIA DETAILS/OPEN OR INPUT STATE --- */
+  .faq-item.is-active .faq-icon-indicator {
+    transform: rotate(180deg);
+  }
+
+  .faq-item.is-active .faq-panel {
+    max-height: 1000px; /* Large fallback safe ceiling value */
+  }
+
+  /* --- BOTTOM CALL TO ACTION BUTTON --- */
+  .faq-cta-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .faq-view-all-btn {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px 50px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .faq-view-all-btn:hover {
+    background-color: #222222;
+  }
+
+  /* Responsive Scaling Parameters */
+  @media (max-width: 767px) {
+    .faq-section {
+      padding: 50px 16px;
+    }
+    .faq-main-heading {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+    .faq-trigger {
+      padding: 20px 22px;
+    }
+    .faq-question-text {
+      font-size: 14px;
+    }
+    .faq-body-content {
+      padding: 0 22px 22px 22px;
+      font-size: 12px;
+    }
+  }
+{% endstyle %}
+
+<section class="faq-section" id="FaqSection-{{ section.id }}">
+  <h2 class="faq-main-heading">{{ section.settings.title | default: "Frequently Asked Questions" }}</h2>
+  
+  <div class="faq-container">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'faq_entry' -%}
+        <div class="faq-item {% if forloop.first and section.settings.open_first %}is-active{% endif %}" {{ block.shopify_attributes }}>
+          <button class="faq-trigger" type="button" onclick="toggleFaqItem(this)">
+            <span class="faq-question-text">{{ block.settings.question }}</span>
+            <svg class="faq-icon-indicator" viewBox="0 0 24 24">
+              <path d="M4 9l8 8 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="faq-panel">
+            <div class="faq-body-content">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.show_cta -%}
+    <div class="faq-cta-wrapper">
+      <a href="{{ section.settings.cta_link | default: '#' }}" class="faq-view-all-btn">
+        {{ section.settings.cta_text | default: "View All" }}
+      </a>
+    </div>
+  {%- endif -%}
+</section>
+
+<script>
+  function toggleFaqItem(button) {
+    const currentItem = button.parentElement;
+    const isActive = currentItem.classList.contains('is-active');
+    
+    // Optional: Close other active items if desired by uncommenting below lines
+    // document.querySelectorAll('.faq-item').forEach(item => {
+    //   item.classList.remove('is-active');
+    // });
+
+    if (!isActive) {
+      currentItem.classList.add('is-active');
+    } else {
+      currentItem.classList.remove('is-active');
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Custom FAQ Block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Heading Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open First Item By Default",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Bottom CTA Button Properties"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Display View All Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Label",
+      "default": "View All"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button Direct Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_entry",
+      "name": "FAQ Accordion Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Accordion Question Label",
+          "default": "What is species and biologically appropriate food"
+        },
+        {
+          "type": "html",
+          "id": "answer",
+          "label": "Accordion Rich Answer Content",
+          "default": "<p>It is an alternative approach to provide nutrition to your furry babies using whole foods.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom FAQ Block",
+      "blocks": [
+        {
+          "type": "faq_entry",
+          "settings": {
+            "question": "Why is Right4Paws pet food called the \"Next Gen Pet Food\"",
+            "answer": "<p>It is an alternative approach to provide nutrition to your furry babies using whole foods.</p><p>Right for Paws Pet food is the next generation of pet food as it is minimally processed using the sophisticated Multi Factor Controlled Dehydration (MFCD) Technique where the food is gently dehydrated while preserving the characteristics and nutrients of the ingredients. It combines benefits of natural food with the convenience (open & serve) offered by commercial dry-kibble pet food.</p><p>Right4Paws pet food is versatile whereby, it can be served dry or in re-hydrated form which is akin to fresh food.</p><p>Right4Paws pet food is vet formulated, complete & balanced and species & biologically appropriate food made using human grade ingredients. It does not use any synthetic preservative or supplements. It is the goodness of nature delivered in an easy to use package.</p>"
+          }
+        },
+        {
+          "type": "faq_entry",
+          "settings": {
+            "question": "What is species and biologically appropriate food",
+            "answer": "<p>Detailed response data layer content layout structure goes here placeholder.</p>"
+          }
+        },
+        {
+          "type": "faq_entry",
+          "settings": {
+            "question": "What is the Multi Factor Controlled Dehydration (MFCD) Technique used for dehydration of Right4Paws Pet Food",
+            "answer": "<p>Detailed response data layer content layout structure goes here placeholder.</p>"
+          }
+        },
+        {
+          "type": "faq_entry",
+          "settings": {
+            "question": "What are the different types of pet food",
+            "answer": "<p>Detailed response data layer content layout structure goes here placeholder.</p>"
+          }
+        },
+        {
+          "type": "faq_entry",
+          "settings": {
+            "question": "What is human grade Whole food",
+            "answer": "<p>Detailed response data layer content layout structure goes here placeholder.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

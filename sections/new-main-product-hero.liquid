@@ -1,0 +1,972 @@
+{% comment %}
+  Main Product Hero Section - Fullscreen View Optimization V6
+  Matches structural alignment requirements from image_ffe8e4.jpg, image_ffddff.png, and image_ff87e4.png
+{% endcomment %}
+
+{% style %}
+  /* --- Staggered Micro-Interactions & Transitions --- */
+  @keyframes dynamicBlockFadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes dynamicMainImageReveal {
+    0% {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* --- Fullscreen Master Architecture Layout --- */
+  .pet-prod-hero-section {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 180px 8% 80px 8%; /* Precise padding targeting balanced image layout footprints */
+    color: #111111;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .pet-prod-breadcrumbs {
+    font-size: 13px;
+    color: #777777;
+    margin-bottom: 30px;
+    animation: dynamicBlockFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .pet-prod-breadcrumbs a {
+    color: #777777;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .pet-prod-breadcrumbs a:hover {
+    color: #e52d27;
+  }
+
+  /* --- Two-Column Balanced Grid Frame --- */
+  .pet-prod-main-desktop-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* Symmetrical split balance matching layout */
+    gap: 60px; /* Separation spacing between graphic frame and meta elements */
+    align-items: start;
+  }
+
+  /* --- Left Media Frame Structural Setup --- */
+  .pet-prod-media-gallery-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pet-prod-main-display-frame {
+    background-color: #fbf1e7;
+    border-radius: 28px;
+    padding: 0px; /* Removed internal padding to let image hit edges if needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    aspect-ratio: 1.05 / 1;
+    overflow: hidden;
+    animation: dynamicMainImageReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Target 1: Modified image width rule to display at full absolute boundary size */
+  .pet-prod-main-display-frame img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* Ensures beautiful full coverage framing across layouts */
+    transition: opacity 0.25s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Slider Dots Layer */
+  .pet-prod-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    position: absolute;
+    bottom: 25px;
+    z-index: 3;
+  }
+  .pet-prod-carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #d1cbd4;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  .pet-prod-carousel-dot.active {
+    background-color: #e52d27;
+    transform: scale(1.1);
+  }
+
+  /* Thumbnails Row */
+  .pet-prod-dynamic-thumbnails-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+    animation: dynamicBlockFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.15s;
+  }
+
+  .pet-prod-thumbnail-node {
+    width: 76px;
+    height: 76px;
+    background-color: #fbf1e7;
+    border-radius: 12px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    transition: border-color 0.25s ease, transform 0.2s ease;
+  }
+  .pet-prod-thumbnail-node:hover {
+    transform: translateY(-2px);
+  }
+  .pet-prod-thumbnail-node.active {
+    border-color: #fcc9bd;
+  }
+  .pet-prod-thumbnail-node img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  /* --- Integrated Customer Review Slider Section (Cleaned Alignments) --- */
+  .pet-prod-review-slider-card {
+    background-color: #fbf1e7;
+    border-radius: 28px;
+    padding: 40px 40px 20px 40px;
+    position: relative;
+    overflow: hidden;
+    min-height: 290px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    animation: dynamicBlockFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.3s;
+  }
+
+  .pet-prod-review-track-wrapper {
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
+  }
+
+  /* Target 2: Setup slide layout structures to handle seamless transitions and smooth offsets */
+  .pet-prod-review-slide {
+    display: none;
+    grid-template-columns: 1fr 180px;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateX(15px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Target 2: Slide animation behavior properties triggered cleanly on active states */
+  .pet-prod-review-slide.is-active {
+    display: grid;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .pet-prod-review-text-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 20px;
+  }
+
+  .pet-prod-review-quote {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #222222;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.3px;
+  }
+
+  .pet-prod-review-author {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111111;
+    margin: 0;
+  }
+
+  .pet-prod-review-graphic-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    align-self: end;
+  }
+
+  .pet-prod-review-graphic-container img,
+  .pet-prod-review-graphic-container svg {
+    max-height: 240px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin-bottom: -20px; /* Merges evenly with border radius mask limits */
+  }
+
+  .pet-prod-review-pagination-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    z-index: 5;
+  }
+
+  .pet-prod-review-pagination-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #d1cbd4;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .pet-prod-review-pagination-dot.is-active {
+    background-color: #e52d27;
+  }
+
+  /* --- Right Columns Structural Typography Setup --- */
+  .pet-prod-meta-buy-column {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+  }
+
+  .stagger-node {
+    opacity: 0;
+    animation: dynamicBlockFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .sn-1 { animation-delay: 0.05s; }
+  .sn-2 { animation-delay: 0.1s; }
+  .sn-3 { animation-delay: 0.15s; }
+  .sn-4 { animation-delay: 0.2s; }
+  .sn-5 { animation-delay: 0.25s; }
+
+  .pet-prod-main-title {
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0 0 10px 0;
+    color: #111111;
+    letter-spacing: -0.5px;
+  }
+
+  .pet-prod-rating-row-layout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .pet-prod-rating-stars-element {
+    color: #e52d27;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .pet-prod-rating-numerical-count {
+    font-size: 12px;
+    color: #666666;
+  }
+
+  .pet-prod-short-summary-text {
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.6;
+    margin: 0 0 30px 0;
+    max-width: 540px;
+  }
+
+  /* --- Fixed Inline Alignment Row: Price & Weight Side-By-Side (image_ffe8e4.jpg) --- */
+  .pet-prod-price-and-weight-flex-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 40px 0;
+  }
+  
+  .pet-prod-price-inner-stack {
+    display: flex;
+    flex-direction: column;
+  }
+  .pet-prod-price-primary-line {
+    font-size: 32px;
+    font-weight: 800;
+    color: #000000;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+  .pet-prod-price-tax-disclaimer-line {
+    font-size: 11px;
+    color: #777777;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  .pet-prod-variant-pill-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: -12px;
+  }
+  .pet-prod-variant-pill-label {
+    font-size: 12px;
+    color: #777777;
+    font-weight: 400;
+  }
+  .pet-prod-variant-pill-selection {
+    border: 1px solid #e52d27;
+    background-color: transparent;
+    color: #111111;
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* --- Core Operation Form Area (Compact Width Enforcements) --- */
+  .pet-prod-action-form-matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 380px;
+    margin-bottom: 25px;
+  }
+
+  .pet-prod-qty-and-subscribe-row-flex {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 12px;
+  }
+
+  .pet-prod-qty-selector-engine {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #a3a3a3;
+    border-radius: 6px;
+    padding: 0 10px;
+    height: 46px;
+    background-color: #ffffff;
+  }
+  .pet-prod-qty-adjustment-trigger {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #666666;
+    cursor: pointer;
+    width: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+  .pet-prod-qty-value-input-node {
+    width: 30px;
+    text-align: center;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111111;
+    background: transparent;
+  }
+  .pet-prod-qty-value-input-node:focus {
+    outline: none;
+  }
+
+  .pet-functional-btn {
+    width: 100%;
+    height: 46px;
+    border-radius: 23px;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
+  .pet-functional-btn:active {
+    transform: scale(0.99);
+  }
+
+  .pet-btn-black-subscribe {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+  }
+  .pet-btn-black-subscribe:hover {
+    background-color: #1c1c1c;
+  }
+
+  .pet-btn-outline-cart {
+    background-color: #ffffff;
+    color: #e52d27;
+    border: 1px solid #e52d27;
+  }
+  .pet-btn-outline-cart:hover {
+    background-color: #fff4f3;
+  }
+
+  .pet-btn-solid-buy {
+    background-color: #e52d27;
+    color: #ffffff;
+    border: none;
+  }
+  .pet-btn-solid-buy:hover {
+    background-color: #cd241f;
+  }
+
+  /* --- Secondary Details Area Footer Rows --- */
+  .pet-prod-footer-meta-block {
+    max-width: 380px;
+  }
+
+  .pet-prod-promo-coupon-container {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #555555;
+    margin-bottom: 25px;
+  }
+  .pet-prod-promo-coupon-container a {
+    color: #e52d27;
+    text-decoration: underline;
+    font-weight: 600;
+    margin-left: 4px;
+  }
+
+  .pet-prod-pdf-guide-row {
+    font-size: 13px;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 35px;
+    border-top: 1px dashed #e2decb;
+    padding-top: 20px;
+  }
+  .pet-prod-pdf-guide-row a {
+    color: #e52d27;
+    text-decoration: underline;
+    margin-left: 4px;
+  }
+
+  /* --- Dropdown Accordions Block (Updated from image_ff87e4.png) --- */
+  .pet-prod-accordions-container-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .pet-accordion-element-node {
+    background-color: #fbf1e7;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .pet-accordion-element-trigger-bar {
+    width: 100%;
+    padding: 16px 24px;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  .pet-accordion-element-trigger-bar span {
+    font-size: 14px;
+    font-weight: 0;
+    color: #222222;
+  }
+  .pet-accordion-element-chevron-icon {
+    font-size: 11px;
+    color: #333333;
+    transition: transform 0.3s ease;
+  }
+  .pet-accordion-element-node.is-open .pet-accordion-element-chevron-icon {
+    transform: rotate(180deg);
+  }
+  .pet-accordion-element-panel-slider {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pet-accordion-element-panel-inner-content {
+    padding: 4px 24px 24px 24px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #444444;
+  }
+  .pet-accordion-element-panel-inner-content ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .pet-accordion-element-panel-inner-content li {
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 991px) {
+    .pet-prod-hero-section { padding: 20px 20px 40px 20px; }
+    .pet-prod-main-desktop-grid { grid-template-columns: 1fr; gap: 40px; }
+    .pet-prod-price-and-weight-flex-row { gap: 20px; justify-content: space-between; }
+    .pet-prod-action-form-matrix, .pet-prod-footer-meta-block { max-width: 100%; }
+    .pet-prod-variant-pill-wrapper { margin-top: 0; }
+    .pet-prod-review-slide { grid-template-columns: 1fr; gap: 15px; }
+    .pet-prod-review-graphic-container { justify-content: center; }
+    .pet-prod-review-graphic-container img,
+    .pet-prod-review-graphic-container svg { margin-bottom: 0; max-height: 200px; }
+  }
+{% endstyle %}
+
+<section class="pet-prod-hero-section" id="PetProductHeroSection-{{ section.id }}">
+  <!-- Breadcrumb Path Tracking Segment -->
+  <div class="pet-prod-breadcrumbs">
+    <a href="/collections/all">All Product</a> &gt; <span>{{ product.title | default: "Taster Pack - Adult (All Breeds)" }}</span>
+  </div>
+
+  <div class="pet-prod-main-desktop-grid">
+    
+    <!-- LEFT COLUMN - CONTAINER GRAPHIC AREA & REVIEW SLIDER -->
+    <div class="pet-prod-media-gallery-container">
+      <div class="pet-prod-main-display-frame">
+        {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+        {%- if featured_media != blank -%}
+          <img id="PetHeroPrimaryImageDisplay" src="{{ featured_media | image_url: width: 800 }}" data-media-id="{{ featured_media.id }}" alt="{{ product.title | escape }}">
+        {%- else -%}
+          <img id="PetHeroPrimaryImageDisplay" src="https://cdn.shopify.com/s/files/1/0000/0000/files/placeholder_taster_pack.png?v=1" alt="Template Display Frame Asset">
+        {%- endif -%}
+        
+        <!-- Interactive Pagination Dots Array Line -->
+        <div class="pet-prod-carousel-dots" id="PetImageCarouselDotsContainer">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+              <span class="pet-prod-carousel-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" onclick="jumpToPetImageIndex({{ forloop.index0 }})"></span>
+            {%- endfor -%}
+          {%- else -%}
+            <span class="pet-prod-carousel-dot active"></span>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Thumbnails Loop Array Layout Field Link Elements -->
+      <div class="pet-prod-dynamic-thumbnails-strip" id="PetProductThumbnailsStrip">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media -%}
+            <div class="pet-prod-thumbnail-node{% if forloop.first %} active{% endif %}" 
+                 data-index="{{ forloop.index0 }}" 
+                 data-src="{{ media | image_url: width: 800 }}"
+                 onclick="syncActivePetThumbnail(this)">
+              <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | escape | default: 'Thumbnail Asset Content' }}">
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      <!-- PRODUCT REVIEW SLIDER CONTAINER -->
+      <div class="pet-prod-review-slider-card">
+        <div class="pet-prod-review-track-wrapper">
+          
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              <div class="pet-prod-review-slide{% if forloop.first %} is-active{% endif %}" data-review-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+                <div class="pet-prod-review-text-content">
+                  <p class="pet-prod-review-quote">"{{ block.settings.quote_text }}"</p>
+                  <h4 class="pet-prod-review-author">- {{ block.settings.author_name }}</h4>
+                </div>
+                <div class="pet-prod-review-graphic-container">
+                  {%- if block.settings.customer_image != blank -%}
+                    <img src="{{ block.settings.customer_image | image_url: width: 400 }}" alt="{{ block.settings.author_name | escape }} Background Illustration">
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <!-- Fallback Mock Blocks when no blocks exist inside customize screen -->
+            <div class="pet-prod-review-slide is-active" data-review-index="0">
+              <div class="pet-prod-review-text-content">
+                <p class="pet-prod-review-quote">"We noticed a visible difference in my puppy's digestion and energy within weeks. Feeding finally started feeling simple."</p>
+                <h4 class="pet-prod-review-author">- Ranjani Divakar</h4>
+              </div>
+              <div class="pet-prod-review-graphic-container">
+                <img src="https://cdn.shopify.com/s/files/1/0817/3990/7350/files/review_person.png?v=1710000001" alt="Ranjani Divakar Profile Context">
+              </div>
+            </div>
+          {%- endif -%}
+
+        </div>
+
+        <!-- Dynamic Review Slide Bullet Navigation Dots -->
+        <div class="pet-prod-review-pagination-dots">
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              <span class="pet-prod-review-pagination-dot{% if forloop.first %} is-active{% endif %}" data-target-review="{{ forloop.index0 }}" onclick="switchReviewSlide({{ forloop.index0 }})"></span>
+            {%- endfor -%}
+          {%- else -%}
+            <span class="pet-prod-review-pagination-dot is-active" data-target-review="0" onclick="switchReviewSlide(0)"></span>
+          {%- endif -%}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN - DYNAMIC SELECTION PURCHASING COMPLIANCE SYSTEM -->
+    <div class="pet-prod-meta-buy-column">
+      
+      <div class="stagger-node sn-1">
+        <h1 class="pet-prod-main-title">{{ product.title | default: "Taster Pack - Adult (All Breeds)" }}</h1>
+      </div>
+
+      <div class="stagger-node sn-2">
+        <div class="pet-prod-rating-row-layout">
+          <div class="pet-prod-rating-stars-element">★★★★☆</div>
+          <span class="pet-prod-rating-numerical-count">4 reviews</span>
+        </div>
+      </div>
+
+      <div class="stagger-node sn-3">
+        <p class="pet-prod-short-summary-text">
+          {{ product.description | strip_html | truncatewords: 35 | default: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" }}
+        </p>
+      </div>
+
+      <!-- Fixed Pricing & Weight Structural Element Row Blocks (image_ffe8e4.jpg) -->
+      <div class="stagger-node sn-4">
+        <div class="pet-prod-price-and-weight-flex-row">
+          <div class="pet-prod-price-inner-stack">
+            <span class="pet-prod-price-primary-line" id="PetProductPriceDisplayContainer">{{ product.selected_or_first_available_variant.price | money | default: "₹149.00" }}</span>
+            <span class="pet-prod-price-tax-disclaimer-line">MRP (Incl. of all taxes)</span>
+          </div>
+
+          <div class="pet-prod-variant-pill-wrapper">
+            <span class="pet-prod-variant-pill-label">Weight:</span>
+            <span class="pet-prod-variant-pill-selection">
+              {{ product.selected_or_first_available_variant.options[0] | default: "100g" }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stagger-node sn-5">
+        <form action="/cart/add" method="post" enctype="multipart/form-data" id="PetProductCoreFormElement">
+          <input type="hidden" name="id" id="PetVariantHiddenIdField" value="{{ product.selected_or_first_available_variant.id }}">
+          
+          <div class="pet-prod-action-form-matrix">
+            <div class="pet-prod-qty-and-subscribe-row-flex">
+              <div class="pet-prod-qty-selector-engine">
+                <div class="pet-prod-qty-adjustment-trigger" onclick="executeLocalQuantityOffset(-1)">-</div>
+                <input class="pet-prod-qty-value-input-node" type="number" name="quantity" id="PetHeroFormQuantityInput" value="1" min="1">
+                <div class="pet-prod-qty-adjustment-trigger" onclick="executeLocalQuantityOffset(1)">+</div>
+              </div>
+
+              <button type="button" class="pet-functional-btn pet-btn-black-subscribe" onclick="triggerSubscribeAction({% if customer %}true{% else %}false{% endif %})">Subscribe</button>
+            </div>
+
+            <button type="button" class="pet-functional-btn pet-btn-outline-cart" onclick="triggerAddToCartAjaxAction(this)">Add To Cart</button>
+            <button type="button" class="pet-functional-btn pet-btn-solid-buy" onclick="triggerDirectInstantCheckoutAction()">Buy It Now</button>
+          </div>
+        </form>
+
+        <div class="pet-prod-footer-meta-block">
+          <div class="pet-prod-promo-coupon-container">
+            Get ₹100 off on your first purchase (on order ₹2000 and above) | Use Code: FIRST100 
+            <a href="#apply" onclick="return false;">Apply Now</a>
+          </div>
+          
+          <div class="pet-prod-pdf-guide-row">
+            Still in doubt Download our Feeding guide 
+            {%- if section.settings.uploaded_feeding_guide_pdf != blank -%}
+              <a href="{{ section.settings.uploaded_feeding_guide_pdf }}" target="_blank">Download PDF ↗</a>
+            {%- else -%}
+              <a href="#fallback" onclick="alert('Assign documentation links inside the Shopify customization panel options block.'); return false;">Download PDF ↗</a>
+            {%- endif -%}
+          </div>
+
+          <!-- Dynamic Dropdowns Native Selection Framework Panels (image_ff87e4.png) -->
+          <div class="pet-prod-accordions-container-stack">
+            <div class="pet-accordion-element-node">
+              <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                <span>Description</span>
+                <span class="pet-accordion-element-chevron-icon">▼</span>
+              </button>
+              <div class="pet-accordion-element-panel-slider">
+                <div class="pet-accordion-element-panel-inner-content">
+                  {%- if product.description != blank -%}
+                    {{ product.description }}
+                  {%- else -%}
+                    <ul>
+                      <li>Optimal Zinc, Omega 3 & Omega 6 for higher immunity and cardio health</li>
+                      <li>85.7% high quality fresh animal source ingredients with 14.3% vegetables, fruits, herbs, botanicals & probiotics</li>
+                      <li>Meets FEDIAF guidelines</li>
+                      <li>Low risk of obesity</li>
+                      <li>Higher absorption & reduced stools</li>
+                      <li>Higher nutrition density, need to feed 25-35% lesser than dry kibble</li>
+                    </ul>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+
+            <div class="pet-accordion-element-node">
+              <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                <span>Ingredients</span>
+                <span class="pet-accordion-element-chevron-icon">▼</span>
+              </button>
+              <div class="pet-accordion-element-panel-slider">
+                <div class="pet-accordion-element-panel-inner-content">
+                  {{ product.metafields.custom.ingredients | default: "Freshly caught deboned Salmon, Whole Mackerel, Sardines, Eggs, Organs and Bone vectors." }}
+                </div>
+              </div>
+            </div>
+
+            <div class="pet-accordion-element-node">
+              <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                <span>Detailed nutrition Analysis</span>
+                <span class="pet-accordion-element-chevron-icon">▼</span>
+              </button>
+              <div class="pet-accordion-element-panel-slider">
+                <div class="pet-accordion-element-panel-inner-content">
+                  {{ product.metafields.custom.detailed_nutrition_analysis | default: "Crude Protein 38%, Fat content 18%, Crude Ash 8%, Crude Fibre 5%." }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Transition Metafield Node Block Addition -->
+            <div class="pet-accordion-element-node">
+              <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                <span>Transition</span>
+                <span class="pet-accordion-element-chevron-icon">▼</span>
+              </button>
+              <div class="pet-accordion-element-panel-slider">
+                <div class="pet-accordion-element-panel-inner-content">
+                  {{ product.metafields.custom.transition | default: "Transition slowly over 7 days. Start with 25% new food mixed into 75% old food, scaling up progressively every two days." }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Declaration Metafield Node Block Addition -->
+            <div class="pet-accordion-element-node">
+              <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                <span>Declaration</span>
+                <span class="pet-accordion-element-chevron-icon">▼</span>
+              </button>
+              <div class="pet-accordion-element-panel-slider">
+                <div class="pet-accordion-element-panel-inner-content">
+                  {{ product.metafields.custom.declaration | default: "100% human-grade materials. No added artificial colorings, synthetic binding arrays, or processed chemical flavor enhancements." }}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  let currentPetImageIndex = 0;
+
+  function syncActivePetThumbnail(element) {
+    if (!element) return;
+    const targetUrl = element.getAttribute('data-src');
+    const index = parseInt(element.getAttribute('data-index')) || 0;
+    currentPetImageIndex = index;
+
+    const nodes = document.querySelectorAll('.pet-prod-thumbnail-node');
+    nodes.forEach(n => n.classList.remove('active'));
+    element.classList.add('active');
+
+    const displayImg = document.getElementById('PetHeroPrimaryImageDisplay');
+    if (displayImg && targetUrl) {
+      displayImg.style.opacity = '0.4';
+      setTimeout(() => {
+        displayImg.src = targetUrl;
+        displayImg.style.opacity = '1';
+      }, 120);
+    }
+
+    const dots = document.querySelectorAll('.pet-prod-carousel-dot');
+    dots.forEach((dot, dIdx) => {
+      if (dIdx === index) dot.classList.add('active');
+      else dot.classList.remove('active');
+    });
+  }
+
+  function jumpToPetImageIndex(index) {
+    const matchingThumb = document.querySelector(`.pet-prod-thumbnail-node[data-index="${index}"]`);
+    if (matchingThumb) syncActivePetThumbnail(matchingThumb);
+  }
+
+  /* --- Review Slider Functionality Core --- */
+  function switchReviewSlide(targetIndex) {
+    const slides = document.querySelectorAll('.pet-prod-review-slide');
+    const dots = document.querySelectorAll('.pet-prod-review-pagination-dot');
+    
+    slides.forEach((slide) => {
+      slide.classList.remove('is-active');
+      if (parseInt(slide.getAttribute('data-review-index')) === targetIndex) {
+        // Delayed layout call forces transition slide rendering mechanisms to activate
+        setTimeout(() => {
+          slide.classList.add('is-active');
+        }, 50);
+      }
+    });
+
+    dots.forEach((dot) => {
+      dot.classList.remove('is-active');
+      if (parseInt(dot.getAttribute('data-target-review')) === targetIndex) {
+        dot.classList.add('is-active');
+      }
+    });
+  }
+
+  function executeLocalQuantityOffset(amount) {
+    const inputNode = document.getElementById('PetHeroFormQuantityInput');
+    if (!inputNode) return;
+    let computedVal = parseInt(inputNode.value) || 1;
+    computedVal += amount;
+    if (computedVal < 1) computedVal = 1;
+    inputNode.value = computedVal;
+  }
+
+  function triggerAddToCartAjaxAction(buttonElement) {
+    const originalText = buttonElement.innerText;
+    buttonElement.innerText = "ADDING TO CART...";
+    
+    const variantId = document.getElementById('PetVariantHiddenIdField').value;
+    const qty = document.getElementById('PetHeroFormQuantityInput').value;
+
+    let formData = { 'items': [{ 'id': parseInt(variantId), 'quantity': parseInt(qty) }] };
+
+    fetch(window.Shopify.routes.root + 'cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      buttonElement.innerText = "ADDED TO CART!";
+      document.dispatchEvent(new CustomEvent('cart:updated', { bubbles: true, detail: data }));
+      setTimeout(() => { buttonElement.innerText = originalText; }, 1800);
+    })
+    .catch((error) => {
+      console.error('Ajax operational asset error:', error);
+      buttonElement.innerText = originalText;
+    });
+  }
+
+  function triggerDirectInstantCheckoutAction() {
+    const cartForm = document.getElementById('PetProductCoreFormElement');
+    if (cartForm) {
+      const inputCheckout = document.createElement('input');
+      inputCheckout.type = 'hidden';
+      inputCheckout.name = 'return_to';
+      inputCheckout.value = '/checkout';
+      cartForm.appendChild(inputCheckout);
+      cartForm.submit();
+    }
+  }
+
+  function triggerSubscribeAction(isCustomerLoggedIn) {
+    if (!isCustomerLoggedIn) {
+      window.location.href = "/account/login?return_to=" + encodeURIComponent(window.location.pathname);
+    } else {
+      alert("Redirecting to your automated recurrent subscription account configurations dashboard line panel.");
+    }
+  }
+
+  function executeAccordionToggleTrigger(buttonNode) {
+    const containerNode = buttonNode.closest('.pet-accordion-element-node');
+    const displayPanel = containerNode.querySelector('.pet-accordion-element-panel-slider');
+    const chevronIcon = buttonNode.querySelector('.pet-accordion-element-chevron-icon');
+
+    if (containerNode.classList.contains('is-open')) {
+      displayPanel.style.maxHeight = '0px';
+      containerNode.classList.remove('is-open');
+      chevronIcon.innerText = '▼';
+    } else {
+      displayPanel.style.maxHeight = displayPanel.scrollHeight + "px";
+      containerNode.classList.add('is-open');
+      chevronIcon.innerText = '▲';
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Main Product Hero V6",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Document Configuration Rules"
+    },
+    {
+      "type": "url",
+      "id": "uploaded_feeding_guide_pdf",
+      "label": "Select Feeding Guide PDF Link Asset Target Path"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_slide",
+      "name": "Review Slide Item",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote_text",
+          "label": "Customer Review Quote",
+          "default": "We noticed a visible difference in my puppy's digestion and energy within weeks."
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Customer Name",
+          "default": "Ranjani Divakar"
+        },
+        {
+          "type": "image_picker",
+          "id": "customer_image",
+          "label": "Customer Right Graphic Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Product Hero Custom Layout V6",
+      "blocks": [
+        { "type": "review_slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

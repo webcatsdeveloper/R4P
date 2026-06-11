@@ -1,0 +1,533 @@
+{% comment %} Touch to sync wide arc 2 {% endcomment %}
+{%- style -%}
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: 100px 100px 100px 100px;
+    overflow: hidden;
+    font-family: inherit;
+    color: {{ section.settings.text_color }};
+  }
+
+  /* Typography Colors */
+  #section-{{ section.id }} .pcf-title, 
+  #section-{{ section.id }} .pcf-intro-title {
+    color: {{ section.settings.title_color }};
+  }
+{%- endstyle -%}
+
+<div id="section-{{ section.id }}" class="pcf-wrapper">
+  
+  <div class="pcf-intro-block pcf-animate fade-up">
+    {% if section.settings.intro_heading != blank %}
+      <h2 class="pcf-intro-title">
+        {%- assign heading_html = section.settings.intro_heading | newline_to_br -%}
+        {%- if heading_html contains '<br />' -%}
+          {%- assign heading_lines = heading_html | split: '<br />' -%}
+        {%- elsif heading_html contains '<br>' -%}
+          {%- assign heading_lines = heading_html | split: '<br>' -%}
+        {%- else -%}
+          {%- assign heading_lines = heading_html | split: '
+' -%}
+        {%- endif -%}
+        {%- if heading_lines.size > 1 -%}
+          <span class="heading-line-1">{{ heading_lines[0] | strip_html | strip }}</span>
+          <span class="heading-line-2">{{ heading_lines[1] | strip_html | strip }}</span>
+        {%- else -%}
+          {{ section.settings.intro_heading | newline_to_br }}
+        {%- endif -%}
+      </h2>
+    {% endif %}
+    {% if section.settings.intro_subtext != blank %}
+      <div class="pcf-intro-subtext">
+        {{ section.settings.intro_subtext }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="pcf-main-grid">
+    
+    <div class="pcf-left-col pcf-animate fade-right delay-1">
+      <h2 class="pcf-title">{{ section.settings.main_title | newline_to_br }}</h2>
+    </div>
+
+    <div class="pcf-diagram-col pcf-animate fade-in delay-2">
+      <div class="pcf-diagram-container">
+        
+        <div class="pcf-bowl-wrapper pcf-animate scale-in delay-3">
+          {% if section.settings.center_image != blank %}
+            {{ section.settings.center_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'pcf-placeholder' }}
+          {% endif %}
+        </div>
+
+        <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 40 8.5 A 31.5 31.5 0 0 1 40 71.5" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
+        </svg>
+
+        {% for block in section.blocks %}
+          {% case forloop.index %}
+            {% when 1 %}
+              {% assign left_val = '59.39%' %}
+              {% assign top_val = '18.97%' %}
+            {% when 2 %}
+              {% assign left_val = '70.43%' %}
+              {% assign top_val = '39.81%' %}
+            {% when 3 %}
+              {% assign left_val = '69.96%' %}
+              {% assign top_val = '62.17%' %}
+            {% when 4 %}
+              {% assign left_val = '59.39%' %}
+              {% assign top_val = '81.03%' %}
+            {% else %}
+              {% assign left_val = '71.5%' %}
+              {% assign top_val = '50%' %}
+          {% endcase %}
+
+          <div class="pcf-feature-point" style="left: {{ left_val }}; top: {{ top_val }};" {{ block.shopify_attributes }}>
+            <div class="pcf-feature-content-wrapper">
+              <div class="pcf-feature-content pcf-animate fade-left" style="transition-delay: 0.{{ forloop.index | plus: 3 }}s;">
+                
+                <div class="pcf-icon-circle">
+                  {% if block.settings.custom_icon != blank %}
+                    {{ block.settings.custom_icon | image_url: width: 80 | image_tag: class: 'pcf-custom-img' }}
+                  {% else %}
+                    {% case block.settings.icon_type %}
+                      {% when 'drop' %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M19.07 4.93l-2.83 2.83"></path></svg>
+                      {% when 'shield' %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                      {% when 'heat' %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8c0-2-2-2-2-4"></path><path d="M12 8c0-2-2-2-2-4"></path><path d="M7 8c0-2-2-2-2-4"></path><path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path><path d="M12 22a7 7 0 0 0 7-7"></path></svg>
+                      {% when 'molecule' %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><circle cx="12" cy="12" r="3"></circle><line x1="8.12" y1="8.12" x2="9.88" y2="9.88"></line><line x1="14.12" y1="9.88" x2="15.88" y2="8.12"></line><line x1="9.88" y1="14.12" x2="8.12" y2="15.88"></line><line x1="15.88" y1="14.12" x2="14.12" y2="15.88"></line></svg>
+                    {% endcase %}
+                  {% endif %}
+                </div>
+
+                <div class="pcf-feature-text">
+                  {{ block.settings.text | newline_to_br }}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* --- Intro Header --- */
+  .pcf-intro-block {
+    max-width: 1012px;
+    margin: 0 auto 3rem auto;
+    text-align: center;
+  }
+  .pcf-intro-title {
+    font-size: clamp(32px, 3.5vw, 46px);
+    line-height: 1.15;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pcf-intro-title .heading-line-1 {
+    font-weight: 900;
+  }
+  .pcf-intro-title .heading-line-2 {
+    font-weight: 800;
+  }
+  .pcf-intro-subtext {
+    font-size: 23px;
+    line-height: 1.6;
+    margin: 0;
+    color: inherit;
+    opacity: 0.85;
+    padding:0 16px;
+  }
+  .pcf-intro-subtext p { margin: 0; }
+  .pcf-intro-subtext strong { font-weight: 700; color: #000; opacity: 1; }
+
+  /* --- Main Grid Layout --- */
+  .pcf-main-grid {
+    max-width: 1340px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start; /* FIXED: Changed from center to push title toward the top */
+    gap: 3.5rem;
+  }
+
+  @media (min-width: 990px) {
+    .pcf-main-grid {
+      grid-template-columns: 3.5fr 8.5fr;
+      gap: 2rem;
+    }
+  }
+
+  /* --- Left Column --- */
+  .pcf-left-col {
+    padding-left: 0;
+    z-index: 5;
+    margin-top: 20px !important; /* FIXED: Removed the aggressive negative top margin to allow natural top tracking */
+  }
+  .pcf-title {
+    font-size: clamp(3rem, 6.5vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    margin: 0 !important; /* FIXED: Reset constraints cleanly */
+  }
+
+  /* --- Right Circular Diagram --- */
+  .pcf-diagram-col {
+    width: 100%;
+    margin-top: 40px; /* FIXED: Gently pushes right diagram column downwards below the title flow line */
+  }
+  .pcf-diagram-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.25 / 1; 
+    container-type: inline-size;
+  }
+
+  /* Center Anchor (Shifted Left to 37.5% to align with the SVG circle shadow & aspect-ratio) */
+  .pcf-bowl-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 37.5%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    width: 64%;
+  }
+  .pcf-bowl-img, .pcf-placeholder {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 50%;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+  }
+
+  /* SVG Concentric Arc */
+  .pcf-arc-svg {
+    display: none;
+  }
+  @media (min-width: 990px) {
+    .pcf-arc-svg {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+  }
+
+  /* Precise Trigonometric Positioning matching concentric SVG geometry */
+  .pcf-feature-point {
+    position: absolute;
+    z-index: 10;
+  }
+
+  /* Alignment wrapper centering the 52px diameter icon bubble on the coordinates */
+  .pcf-feature-content-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-26px, -50%);
+  }
+
+  /* Wrapper to align Icon exactly on the arc line, text to the right */
+  .pcf-feature-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: max-content;
+  }
+
+  .pcf-icon-circle {
+    width: 52px;
+    height: 52px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+  .pcf-icon-circle svg {
+    width: 28px;
+    height: 28px;
+  }
+  .pcf-custom-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 8px;
+    border-radius: 50%;
+  }
+
+  .pcf-feature-text {
+    font-size: 15px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #2b2b2b;
+  }
+
+  /* --- Animations --- */
+  .pcf-animate { opacity: 0; will-change: opacity, transform; }
+  .fade-up { transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-right { transform: translateX(-30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-left { transform: translateX(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-in { transition: opacity 1s ease; }
+  .scale-in { transform: translate(-50%, -50%) scale(0.85); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  
+  .pcf-animate.is-visible { opacity: 1; transform: translate(0) scale(1); }
+  .scale-in.is-visible { transform: translate(-50%, -50%) scale(1); }
+
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+
+  /* --- Mobile Optimization --- */
+  @media screen and (max-width: 1024px) {
+    #section-{{ section.id }} {
+      padding: 60px 20px !important;
+    }
+    .pcf-intro-block {
+      margin-bottom: 3.5rem;
+    }
+    .pcf-intro-title {
+      font-size: 28px;
+    }
+    .pcf-main-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 2.5rem;
+    }
+    .pcf-left-col {
+      padding-left: 0;
+      text-align: center;
+      margin-top: 0px !important;
+    }
+    .pcf-title {
+        font-size: 35px;
+        text-align: left;
+        margin-bottom: 1.5rem;
+        padding-left: 35px;
+        margin-top: 0px !important;
+    }
+    
+    .pcf-diagram-col {
+      margin-top: 0px;
+    }
+    .pcf-diagram-container {
+      aspect-ratio: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+      --bowl-width: min(280px, 70vw);
+    }
+
+    /* Vertical connector line on mobile, tangent to the left edge of the bowl */
+    .pcf-diagram-container::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      bottom: 23px;
+      left: calc(50% - var(--bowl-width) / 2);
+      width: 2px;
+      background-color: {{ section.settings.arc_color | default: '#ffffff' }};
+      z-index: 1;
+    }
+
+    .pcf-bowl-wrapper {
+      position: relative;
+      top: auto; left: auto; transform: none !important;
+      width: var(--bowl-width) !important;
+      max-width: 280px !important;
+      margin: 0 auto;
+      z-index: 5;
+    }
+    .scale-in.is-visible { transform: scale(1) !important; }
+
+    .pcf-arc-svg { display: none; }
+
+    .pcf-feature-point {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+      width: 100%;
+      padding-left: calc(50% - var(--bowl-width) / 2 - 23px);
+      box-sizing: border-box;
+      z-index: 3;
+    }
+
+    .pcf-feature-content-wrapper {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+      width: 100%;
+    }
+
+    .pcf-feature-content {
+      position: relative;
+      top: auto; left: auto; transform: none !important;
+      width: 100% !important;
+      text-align: left;
+      gap: 1.2rem;
+      display: flex;
+      align-items: center;
+    }
+    .pcf-icon-circle {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      z-index: 5;
+    }
+    .pcf-icon-circle svg {
+      width: 24px;
+      height: 24px;
+    }
+    .pcf-custom-img {
+      padding: 6px;
+    }
+    .pcf-feature-text {
+      font-size: 0.95rem;
+      line-height: 1.35;
+      font-weight: 500;
+      color: #2b2b2b;
+      max-width: 280px;
+    }
+    .heading-line-1{
+      font-weight:900 !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { root: null, threshold: 0.15 });
+
+    document.querySelectorAll('#section-{{ section.id }} .pcf-animate').forEach(el => observer.observe(el));
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Circular Arc Features",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F9CE69"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Heading Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Top Intro"
+    },
+    {
+      "type": "textarea",
+      "id": "intro_heading",
+      "label": "Intro Heading",
+      "default": "You bring the love.\nWe bring the science."
+    },
+    {
+      "type": "richtext",
+      "id": "intro_subtext",
+      "label": "Intro Subtext",
+      "default": "<p>A way of feeding that's built around what their bodies actually need, made practical for everyday life.<br><strong>So what actually makes it different?</strong></p>"
+    },
+    {
+      "type": "header",
+      "content": "Main Split Block"
+    },
+    {
+      "type": "textarea",
+      "id": "main_title",
+      "label": "Left Bold Title",
+      "default": "Preserving\nwhat\nmatters."
+    },
+    {
+      "type": "image_picker",
+      "id": "center_image",
+      "label": "Center Bowl Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Point",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Built-in Icon",
+          "options": [
+            { "value": "drop", "label": "Drop/Dehydration" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heat", "label": "Heat/Vapor" },
+            { "value": "molecule", "label": "Molecule" }
+          ],
+          "default": "drop"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Or Custom Icon Image"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Feature Description",
+          "default": "Controlled low-\ntemperature dehydration"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Circular Arc Features",
+      "blocks": [
+        { "type": "feature", "settings": { "icon_type": "drop", "text": "Controlled low-\ntemperature dehydration" } },
+        { "type": "feature", "settings": { "icon_type": "shield", "text": "Helps retain essential amino\nacids and micronutrients" } },
+        { "type": "feature", "settings": { "icon_type": "heat", "text": "Avoids nutrient degradation\ncaused by high-heat processing" } },
+        { "type": "feature", "settings": { "icon_type": "molecule", "text": "Maintains structural\nintegrity of ingredients" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,550 @@
+{% comment %}
+  Pet Selector Section
+  Scroll Animation Version
+{% endcomment %}
+
+<style>
+
+.pet-selector-section {
+    width: 100%;
+    background: #ffffffff;
+    position: relative;
+    overflow: hidden;
+    padding: 88px 0 20px;
+    color: #1E1E1E;
+}
+
+/* CONTAINER */
+.pet-selector-container {
+    width: 100%;
+    max-width: 1079px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 5;
+}
+
+/* HEADING */
+.pet-selector-heading {
+    margin: 0;
+    text-align: center;
+    font-size: 62px !important;
+    line-height: 1.05;
+    font-weight: 600 !important;
+    color: #000;
+    letter-spacing: -2px;
+}
+
+.pet-selector-heading span {
+    color: #E41F26;
+}
+
+/* SUBHEADING */
+.pet-selector-subheading {
+    margin: 18px auto 70px;
+    text-align: center;
+    max-width: 760px;
+    font-size: 24px !important;
+    line-height: 1.5 !important;
+    font-weight: 400 !important;
+    color: #111111;
+    font-family: 'Degular Demo' !important;
+}
+
+/* CURVES */
+.pet-curve {
+    position: absolute;
+    top: 52%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.pet-curve-left {
+    left: 0px;
+    width: 180px;
+}
+
+.pet-curve-right {
+    right: 0px;
+    width: 180px;
+}
+
+.pet-curve img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* GRID */
+.pet-grid-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: nowrap;
+}
+
+/* CARD */
+.pet-nav-card {
+    width: 100%;
+    max-width: 360px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .3s ease;
+}
+
+.pet-nav-card:hover {
+    transform: translateY(-6px);
+}
+
+/* IMAGE HOLDER */
+.pet-image-hold {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+/* PET IMAGE */
+.pet-img-display {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+/* STARS */
+.pet-star {
+    position: absolute;
+    z-index: 4;
+    color: #F2BE4D;
+}
+
+.pet-star--1 {
+    top: 14%;
+    left: 47%;
+    width: 24px;
+    height: 24px;
+}
+
+.pet-star--2 {
+    top: 11%;
+    left: 57%;
+    width: 16px;
+    height: 16px;
+}
+
+.pet-nav-card--cats .pet-star {
+    color: #8ED8F8;
+}
+
+.pet-nav-card--cats .pet-star--1 {
+    left: 16%;
+    top: 13%;
+}
+
+.pet-nav-card--cats .pet-star--2 {
+    left: 14%;
+    top: 10%;
+}
+
+/* TEXT AREA */
+.pet-text-area {
+    position: absolute;
+    top: 65%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+}
+
+/* DOG POSITION */
+.pet-nav-card--dogs .pet-text-area {
+    right: 17%;
+    top: 60%;
+}
+
+/* CAT POSITION */
+.pet-nav-card--cats .pet-text-area {
+    left: 17%;
+    top: 60%;
+}
+
+/* TITLE */
+.pet-nav-title {
+    margin: 0 0 8px;
+    font-size: 28px !important;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #000;
+    text-transform: uppercase;
+}
+
+/* ICON */
+.pet-nav-icon {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease;
+}
+
+.pet-nav-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 3px;
+}
+
+.pet-nav-card:hover .pet-nav-icon {
+    background: #000;
+    color: #fff;
+}
+
+/* =========================
+   SCROLL ANIMATION
+========================= */
+
+.pet-selector-heading,
+.pet-selector-subheading,
+.pet-nav-card,
+.pet-curve-left,
+.pet-curve-right {
+    opacity: 0;
+    transition: all 1s ease;
+    will-change: transform, opacity;
+}
+
+/* HEADING */
+.pet-selector-heading {
+    transform: translateY(60px);
+}
+
+/* SUBHEADING */
+.pet-selector-subheading {
+    transform: translateY(60px);
+    transition-delay: 0.15s;
+}
+
+/* LEFT CURVE */
+.pet-curve-left {
+    transform: translate(-120px, -50%);
+    transition-delay: 0.2s;
+}
+
+/* RIGHT CURVE */
+.pet-curve-right {
+    transform: translate(120px, -50%);
+    transition-delay: 0.2s;
+}
+
+/* CARDS */
+.pet-nav-card {
+    transform: translateY(70px);
+}
+
+.pet-nav-card:nth-child(1) {
+    transition-delay: 0.3s;
+}
+
+.pet-nav-card:nth-child(2) {
+    transition-delay: 0.5s;
+}
+
+/* ACTIVE STATE */
+.pet-selector-section.in-view .pet-selector-heading,
+.pet-selector-section.in-view .pet-selector-subheading,
+.pet-selector-section.in-view .pet-nav-card,
+.pet-selector-section.in-view .pet-curve-left,
+.pet-selector-section.in-view .pet-curve-right {
+    opacity: 1;
+}
+
+/* FINAL POSITIONS */
+.pet-selector-section.in-view .pet-selector-heading,
+.pet-selector-section.in-view .pet-selector-subheading,
+.pet-selector-section.in-view .pet-nav-card {
+    transform: translateY(0);
+}
+
+.pet-selector-section.in-view .pet-curve-left {
+    transform: translate(0, -50%);
+}
+
+.pet-selector-section.in-view .pet-curve-right {
+    transform: translate(0, -50%);
+}
+
+/* TABLET */
+@media screen and (max-width: 1200px) {
+
+    .pet-selector-container {
+        padding: 0 30px;
+    }
+
+    .pet-selector-heading {
+        font-size: 54px !important;
+    }
+
+    .pet-grid-layout {
+        gap: 30px;
+    }
+
+    .pet-nav-title {
+        font-size: 34px;
+    }
+
+    .pet-curve-left {
+        left: -120px;
+    }
+
+    .pet-curve-right {
+        right: -120px;
+    }
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+
+    .pet-selector-section {
+        padding: 70px 20px 90px;
+    }
+
+    .pet-selector-heading {
+        font-size: 40px !important;
+        line-height: 1.15;
+    }
+
+    .pet-selector-subheading {
+        font-size: 15px !important;
+        margin-bottom: 50px;
+    }
+
+    .pet-grid-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .pet-nav-card {
+        max-width: 420px;
+    }
+
+    .pet-nav-title {
+        font-size: 28px;
+    }
+
+    .pet-nav-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .pet-curve {
+        display: none;
+    }
+}
+
+</style>
+
+<div class="pet-selector-section">
+
+  {% if section.settings.left_curve != blank %}
+    <div class="pet-curve pet-curve-left">
+      <img src="{{ section.settings.left_curve | img_url: '600x' }}" alt="Decorative curve" loading="lazy">
+    </div>
+  {% endif %}
+  
+  {% if section.settings.right_curve != blank %}
+    <div class="pet-curve pet-curve-right">
+      <img src="{{ section.settings.right_curve | img_url: '600x' }}" alt="Decorative curve" loading="lazy">
+    </div>
+  {% endif %}
+
+  <div class="pet-selector-container">
+
+    <h2 class="pet-selector-heading">
+      {{ section.settings.heading | replace: "what's right", "<span>what's right</span>" }}
+    </h2>
+
+    <p class="pet-selector-subheading">
+      {{ section.settings.subheading }}
+    </p>
+
+    <div class="pet-grid-layout">
+
+      {% for block in section.blocks %}
+        {% if block.type == 'pet_card' %}
+
+          {% assign pet_handle = block.settings.title | handle %}
+
+          <a href="{{ block.settings.link }}" class="pet-nav-card pet-nav-card--{{ pet_handle }}" {{ block.shopify_attributes }}>
+
+            <div class="pet-image-hold">
+
+              {% if block.settings.star_icon != blank %}
+
+                <img
+                  src="{{ block.settings.star_icon | image_url }}"
+                  alt=""
+                  class="pet-star pet-star--1"
+                  loading="lazy"
+                >
+
+                <img
+                  src="{{ block.settings.star_icon | image_url }}"
+                  alt=""
+                  class="pet-star pet-star--2"
+                  loading="lazy"
+                >
+
+              {% endif %}
+
+              {% if block.settings.image != blank %}
+
+                <img
+                  src="{{ block.settings.image | img_url: '736x736' }}"
+                  alt="{{ block.settings.title }}"
+                  class="pet-img-display"
+                  loading="lazy"
+                >
+
+              {% else %}
+
+                {{ 'image' | placeholder_svg_tag: 'pet-img-display placeholder-svg' }}
+
+              {% endif %}
+              
+              <div class="pet-text-area">
+
+                <h3 class="pet-nav-title">
+                  {{ block.settings.title }}
+                </h3>
+
+                <div class="pet-nav-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+
+              </div>
+
+            </div>
+
+          </a>
+
+        {% endif %}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const section = document.querySelector(".pet-selector-section");
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    section.classList.add("in-view");
+                }
+            });
+        },
+        {
+            threshold: 0.2
+        }
+    );
+
+    observer.observe(section);
+
+});
+</script>
+
+{% schema %}
+{
+  "name": "Pet Selector Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Let's find what's right for your little one",
+      "info": "Highlight 'what's right' automatically in red."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Tell us a bit about them and we'll guide you to the right nutrition plan!"
+    },
+    {
+      "type": "header",
+      "content": "Decorative Curves"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_curve",
+      "label": "Left Curve Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_curve",
+      "label": "Right Curve Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pet_card",
+      "name": "Pet Card",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Pet Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "star_icon",
+          "label": "Star Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Pet Title",
+          "default": "DOGS"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Pet Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pet Selector Section",
+      "blocks": [
+        {
+          "type": "pet_card",
+          "settings": {
+            "title": "DOGS"
+          }
+        },
+        {
+          "type": "pet_card",
+          "settings": {
+            "title": "CATS"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,376 @@
+{% comment %}
+  Brand Footer Section - Exact Reference Recreation
+  - BG Color: #D72329 (Brand Red)
+  - Top Border Radius: 100px
+  - Content: Logo, Description, Two Nav Columns, Social Icons
+  - Bottom: Copyright on white background
+{% endcomment %}
+
+{%- style -%}
+  .brand-footer-{{ section.id }} {
+    padding-top: 0px !important;
+    background-color: #ffffff;
+    font-family: "Degular Demo", -apple-system, BlinkMacSystemFont, sans-serif;
+    z-index:1;
+  }
+
+  .footer-red-box {
+    background-color: #D72329;
+    border-radius: 50px 50px 0 0;
+    padding: 90px 60px 80px;
+    color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .footer-container {
+    max-width: 1360px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Ensures all columns align horizontally along the top baseline */
+    gap: 50px;
+  }
+
+  /* Left Side: Logo & Info */
+  .footer-info {
+    flex: 0 1 460px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-logo {
+    display: block;
+    max-width: 250px;
+    height: auto;
+  }
+
+  .footer-logo svg, .footer-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .footer-description {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    font-family: 'Degular Demo', sans-serif !important;
+  }
+
+  /* Right Side: Links & Socials */
+  .footer-links-wrap {
+    display: flex;
+    gap: 90px;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    transition: opacity 0.25s ease;
+    white-space: nowrap;
+    font-family: 'Degular Demo', sans-serif !important;
+  }
+
+  .footer-link:hover {
+    opacity: 0.75;
+  }
+
+  /* Social Icons */
+  .footer-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 140px;
+  }
+
+  .social-title {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 12px;
+  }
+
+  .social-icon-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid #ffffff;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .social-icon-circle:hover {
+    background-color: #ffffff;
+    color: #D72329;
+  }
+
+  .social-icon-circle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Copyright Area */
+  .footer-copyright {
+    background-color: #ffffff;
+    padding: 24px 20px;
+    text-align: center;
+    color: #000000;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  /* Responsive Design Overrides */
+  @media (max-width: 1150px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 50px;
+    }
+    .footer-info {
+      flex: none;
+      max-width: 100%;
+      width: 100%;
+    }
+    .footer-links-wrap {
+      width: 100%;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-red-box {
+      border-radius: 60px 60px 0 0;
+      padding: 60px 30px;
+    }
+    .footer-links-wrap {
+      flex-direction: column;
+      gap: 35px;
+    }
+    .footer-description {
+      font-size: 18px;
+    }
+    .footer-link {
+      font-size: 19px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-red-box {
+      padding: 50px 20px;
+      border-radius: 40px 40px 0 0;
+    }
+    .footer-logo {
+      max-width: 190px;
+    }
+  }
+{%- endstyle -%}
+
+<footer class="brand-footer-{{ section.id }}">
+  <div class="footer-red-box">
+    <div class="footer-container">
+      
+      <!-- Info Column -->
+      <div class="footer-info">
+        <a href="/" class="footer-logo">
+           {% if section.settings.logo != blank %}
+             <img src="{{ section.settings.logo | img_url: '500x' }}" alt="{{ shop.name }}">
+           {% else %}
+             <!-- Placeholder Logo Text Style -->
+             <div style="font-size: 40px; font-weight: 900; line-height: 0.9; color: #ffffff;">
+               {{ section.settings.logo_text | default: 'RIGHT<br>4PAWS' }}<br>
+               <span style="font-size: 18px; font-weight: 400; font-family: cursive; color: #ffffff;">{{ section.settings.logo_subtext | default: 'Raw Made Right' }}</span>
+             </div>
+           {% endif %}
+        </a>
+        <p class="footer-description">
+          {{ section.settings.description }}
+        </p>
+      </div>
+
+      <!-- Links & Socials -->
+      <div class="footer-links-wrap">
+        <!-- Navigation Column 1 -->
+        <div class="footer-col">
+          {% for link in section.settings.menu_1.links %}
+            <a href="{{ link.url }}" class="footer-link">{{ link.label | default: link.title }}</a>
+          {% endfor %}
+          {% if section.settings.menu_1 == blank %}
+            <a href="#" class="footer-link">Store Locator</a>
+            <a href="#" class="footer-link">Careers</a>
+            <a href="#" class="footer-link">About Us</a>
+            <a href="#" class="footer-link">Contact Us</a>
+            <a href="#" class="footer-link">Products</a>
+            <a href="#" class="footer-link">Loyalty Program</a>
+            <a href="#" class="footer-link">FAQs</a>
+          {% endif %}
+        </div>
+
+        <!-- Navigation Column 2 -->
+        <div class="footer-col">
+          {% for link in section.settings.menu_2.links %}
+             <a href="{{ link.url }}" class="footer-link">{{ link.label | default: link.title }}</a>
+          {% endfor %}
+          {% if section.settings.menu_2 == blank %}
+            <a href="#" class="footer-link">Terms of Service</a>
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Return & Refund Policy</a>
+            <a href="#" class="footer-link">Shipping Policy</a>
+            <a href="#" class="footer-link">Declarations</a>
+          {% endif %}
+        </div>
+
+        <!-- Social Media Column -->
+        <div class="footer-socials">
+          <h4 class="social-title">{{ section.settings.social_title }}</h4>
+          <div class="social-icons">
+            {% if section.settings.facebook_url != blank %}
+              <a href="{{ section.settings.facebook_url }}" class="social-icon-circle" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+            {% endif %}
+            {% if section.settings.instagram_url != blank %}
+              <a href="{{ section.settings.instagram_url }}" class="social-icon-circle" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+            {% endif %}
+            {% if section.settings.youtube_url != blank %}
+              <a href="{{ section.settings.youtube_url }}" class="social-icon-circle" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+              </a>
+            {% endif %}
+            
+            {% if section.settings.facebook_url == blank and section.settings.instagram_url == blank and section.settings.youtube_url == blank %}
+              <a href="#" class="social-icon-circle" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+              <a href="#" class="social-icon-circle" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="#" class="social-icon-circle" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer-copyright">
+    {% if section.settings.copyright_text != blank %}
+      {{ section.settings.copyright_text }}
+    {% else %}
+      Copyright &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All Rights Reserved.
+    {% endif %}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Brand Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (White version)"
+    },
+    {
+      "type": "textarea",
+      "id": "logo_text",
+      "label": "Logo Text (Fallback)",
+      "default": "RIGHT<br>4PAWS",
+      "info": "Used if no image logo is selected"
+    },
+    {
+      "type": "text",
+      "id": "logo_subtext",
+      "label": "Logo Subtext (Fallback)",
+      "default": "Raw Made Right"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "A pet care company pioneering a holistic approach to well-being through natural products and services enhancing internal and external health as defined by science and delivered through nature's goodness."
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1",
+      "label": "Left Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Right Menu"
+    },
+    {
+      "type": "header",
+      "content": "Social Media"
+    },
+    {
+      "type": "text",
+      "id": "social_title",
+      "label": "Social Title",
+      "default": "Follow Us On"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "header",
+      "content": "Copyright"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "info": "Leave blank for default dynamic format"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Footer"
+    }
+  ]
+}
+{% endschema %}

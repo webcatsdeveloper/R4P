@@ -1,0 +1,392 @@
+{%- style -%}
+  #section-{{ section.id }} {
+    background-color: {{ section.settings.color_bg }};
+  }
+
+  /* Heading Box Custom Settings */
+  #section-{{ section.id }} .purp-staggered-heading-box {
+    max-width: {{ section.settings.heading_max_width }}px;
+    color: {{ section.settings.color_heading }};
+  }
+  #section-{{ section.id }} .purp-staggered-title {
+    font-size: {{ section.settings.title_font_size }}px;
+    font-style: {{ section.settings.heading_font_style }};
+  }
+  #section-{{ section.id }} .purp-staggered-question {
+    font-size: {{ section.settings.question_font_size }}px;
+    font-style: {{ section.settings.heading_font_style }};
+  }
+
+  /* Body Content Custom Settings */
+  #section-{{ section.id }} .purp-staggered-body-box {
+    max-width: {{ section.settings.body_max_width }}px;
+    color: {{ section.settings.color_body }};
+  }
+  #section-{{ section.id }} .purp-staggered-body-box p {
+    font-size: {{ section.settings.body_font_size }}px;
+    font-style: {{ section.settings.body_font_style }};
+  }
+{%- endstyle -%}
+
+<div id="section-{{ section.id }}" class="purp-staggered-section">
+  <div class="purp-staggered-container">
+    
+    <div class="purp-staggered-row purp-row-top">
+      <div class="purp-staggered-col purp-col-text purp-animate-fade-in stagger-1">
+        <div class="purp-staggered-heading-box">
+          {%- if section.settings.text_title != blank -%}
+            <span class="purp-staggered-title">{{ section.settings.text_title }}</span>
+          {%- endif -%}
+          {%- if section.settings.text_question != blank -%}
+            <h2 class="purp-staggered-question">{{ section.settings.text_question }}</h2>
+          {%- endif -%}
+        </div>
+      </div>
+      
+      <div class="purp-staggered-col purp-col-card purp-animate-fade-in stagger-2">
+        <div class="purp-story-card purp-card-top-right">
+          <div class="purp-story-card-inner">
+            {%- if section.settings.image_1 != blank -%}
+              {{ section.settings.image_1 | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.image_1.alt, class: 'purp-story-img' }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'purp-story-placeholder' }}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="purp-staggered-row purp-row-bottom">
+      <div class="purp-staggered-col purp-col-card purp-animate-fade-in stagger-3">
+        <div class="purp-story-card purp-card-bottom-left">
+          <div class="purp-story-card-inner">
+            {%- if section.settings.image_2 != blank -%}
+              {{ section.settings.image_2 | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.image_2.alt, class: 'purp-story-img' }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'purp-story-placeholder' }}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <div class="purp-staggered-col purp-col-text purp-animate-fade-in stagger-4">
+        <div class="purp-staggered-body-box">
+          {{ section.settings.html_body_text }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* --- Structural Layout Base --- */
+  .purp-staggered-section {
+    padding: 120px 0;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .purp-staggered-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 150px 0 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .purp-staggered-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .purp-staggered-col {
+    width: 48%;
+    position: relative;
+  }
+
+  /* --- Text Boxes Elements Styling --- */
+  .purp-staggered-heading-box {
+    width: 100%;
+  }
+
+  .purp-staggered-title {
+    display: block;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    opacity: 0.9;
+  }
+
+  .purp-staggered-question {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .purp-staggered-body-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+  }
+
+  .purp-staggered-body-box p {
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.95;
+    font-weight:100;
+  }
+
+  /* --- Premium Photo Cards Transformations --- */
+  .purp-story-card {
+    background-color: #e5e5e5;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    border-radius: 4px;
+    width: 80%;
+    max-width: 440px;
+    aspect-ratio: 1.22 / 1; /* Matches the rectangular format of mockup */
+    position: relative;
+    transition: transform 0.4s ease;
+  }
+
+  .purp-story-card-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+
+  .purp-story-card img,
+  .purp-story-placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Exact Asymmetric Rotations and Layout Placements from Mockup */
+  .purp-card-top-right {
+    transform: rotate(-4deg);
+    margin-left: 40px;
+    margin-top: -20px;
+  }
+
+  .purp-card-bottom-left {
+    transform: rotate(5deg);
+    margin-right: auto;
+    margin-top: 20px;
+  }
+
+  /* --- High Performance Scroll Animations CSS --- */
+  .purp-animate-fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+    will-change: opacity, transform;
+  }
+
+  .purp-animate-fade-in.is-triggered {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.3s; }
+  .stagger-3 { transition-delay: 0.1s; }
+  .stagger-4 { transition-delay: 0.3s; }
+
+  /* --- Responsive Breakpoints (Mobile Optimization) --- */
+  @media screen and (max-width: 989px) {
+    .purp-staggered-section {
+      padding: 70px 0;
+    }
+    .purp-staggered-container {
+      gap: 50px;
+      padding: 0 24px;
+    }
+    .purp-staggered-row {
+      flex-direction: column !important;
+      gap: 35px;
+    }
+    .purp-staggered-col {
+      width: 100%;
+    }
+    .purp-story-card {
+      max-width: 100%;
+      aspect-ratio: 1.3 / 1;
+      margin: 0 auto !important;
+    }
+    /* Moderate mobile rotation for neat screens reading flow */
+    .purp-card-top-right { transform: rotate(-2deg); }
+    .purp-card-bottom-left { transform: rotate(2deg); }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const purpStaggeredObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-triggered');
+          purpStaggeredObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('#section-{{ section.id }} .purp-animate-fade-in').forEach(el => {
+      purpStaggeredObserver.observe(el);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Asymmetric Story Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Canvas Color Background"
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background Color",
+      "default": "#7B6FBE"
+    },
+    {
+      "type": "header",
+      "content": "Heading Controls"
+    },
+    {
+      "type": "color",
+      "id": "color_heading",
+      "label": "Heading Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "min": 300,
+      "max": 700,
+      "step": 20,
+      "unit": "px",
+      "label": "Heading Box Max Width",
+      "default": 480
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 18,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Top Title Font Size",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "question_font_size",
+      "min": 24,
+      "max": 54,
+      "step": 1,
+      "unit": "px",
+      "label": "Bold Question Font Size",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "heading_font_style",
+      "label": "Heading Font Style",
+      "options": [
+        { "value": "normal", "label": "Normal Style" },
+        { "value": "italic", "label": "Italic Style" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "Body Paragraph Controls"
+    },
+    {
+      "type": "color",
+      "id": "color_body",
+      "label": "Body Paragraphs Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "body_max_width",
+      "min": 400,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "label": "Body Box Max Width",
+      "default": 540
+    },
+    {
+      "type": "range",
+      "id": "body_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Body Font Size",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "body_font_style",
+      "label": "Body Font Style",
+      "options": [
+        { "value": "normal", "label": "Normal Style" },
+        { "value": "italic", "label": "Italic Style" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "Section Content Assets"
+    },
+    {
+      "type": "text",
+      "id": "text_title",
+      "label": "Top Title Text",
+      "default": "And we kept circling back to one simple question:"
+    },
+    {
+      "type": "text",
+      "id": "text_question",
+      "label": "Bold Question Line",
+      "default": "If this doesn't work for us, why would it work for them?"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Top Right Card Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Bottom Left Card Image"
+    },
+    {
+      "type": "richtext",
+      "id": "html_body_text",
+      "label": "Right Column Paragraphs Block",
+      "default": "<p>So we moved away from kibble, and began working with raw, locally available ingredients. What started as an attempt to do better turned into years of trial, learning, and experimentation. Over time, the process became more structured. Together, we began working with veterinarians and specialists in canine nutrition, grounding what we had learned in science.</p><p>Not to create something new, but to arrive at something that made sense.</p><p>After more than a decade of this work, Right4Paws came into being.</p><p>A way to make this approach more accessible, practical, and easier for everyday pet parents to trust and adopt.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Asymmetric Story Block"
+    }
+  ]
+}
+{% endschema %}
