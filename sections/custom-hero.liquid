@@ -98,6 +98,15 @@
                 {{ block.settings.hero_description }}
               </div>
 
+              {% if block.settings.bg_image != blank %}
+              <img
+                class="hero-mobile-image"
+                src="{{ block.settings.bg_image | image_url: width: 800 }}"
+                alt="{{ block.settings.hero_heading | escape }}"
+                loading="lazy"
+              >
+              {% endif %}
+
               {% if block.settings.button_text != blank %}
               <a href="{{ block.settings.button_link }}" class="hero-btn">
                 {{ block.settings.button_text }}
@@ -145,6 +154,9 @@
 </section>
 
 <style>
+.hero-mobile-image {
+  display: none;
+}
 .right4paws-hero{
     position:relative;
     width:100%;
@@ -427,50 +439,153 @@ TEXT LOAD + SLIDE ANIMATION
 @media screen and (max-width:768px){
 
     .right4paws-hero{
-        height:700px;
+        height: auto !important;
+        background: #fff5eb !important;
+        padding-bottom: 40px;
     }
 
-    .hero-container{
-        height:100%;
-        margin-top:0;
-        padding:0 20px;
+    .slideshow-inner{
+        height: auto !important;
+    }
+
+    .hero-slide{
+        position: absolute;
+        width: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.8s ease;
+    }
+
+    .hero-slide.is-active{
+        position: relative;
+        opacity: 1;
+        visibility: visible;
     }
 
     .hero-bg-image{
-        object-position:center;
+        display: none !important;
+    }
+
+    .hero-overlay-content{
+        position: relative;
+        inset: auto;
+        display: block;
+        width: 100%;
+    }
+
+    .hero-container{
+        height: auto !important;
+        margin: 0 auto !important;
+        padding: 40px 24px 0 24px !important;
     }
 
     .hero-content-wrap{
-        position:relative;
-        top:80px;
-        left:0;
-        width:100%;
-        text-align:center;
+        position: relative;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        text-align: center;
     }
 
-    .hero-content-wrap h1{
-        font-size:52px;
-        line-height:0.95;
-        letter-spacing:-2px;
+    .hero-text-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-text-content h1{
+        font-size: 46px !important;
+        line-height: 1.05 !important;
+        letter-spacing: -1.5px !important;
+        color: #E41F26 !important;
+        margin-bottom: 20px !important;
+        text-align: center;
     }
 
     .hero-description{
-        font-size:17px;
-        max-width:100%;
-        margin:0 auto 30px;
+        font-size: 16px !important;
+        line-height: 1.35 !important;
+        color: #222222 !important;
+        max-width: 320px !important;
+        margin: 0 auto 24px !important;
+        text-align: center;
+    }
+
+    .hero-mobile-image {
+        display: block !important;
+        width: 100% !important;
+        max-width: 360px !important;
+        height: auto !important;
+        margin: 0 auto 24px !important;
+        object-fit: contain;
     }
 
     .hero-btn{
-        height:52px;
-        font-size:13px;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 100% !important;
+        max-width: 280px !important;
+        height: 54px !important;
+        border-radius: 999px !important;
+        background: #000000 !important;
+        color: #ffffff !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0 auto !important;
     }
 
-    .hero-bottom-curve-wrap svg{
-        height:90px;
+    .hero-bottom-curve-wrap{
+        display: none !important;
     }
 
     .slideshow-dots{
-        bottom:70px;
+        position: relative !important;
+        bottom: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin-top: 30px !important;
+    }
+
+    /* Animation resets for mobile stack flow */
+    .hero-text-content h1,
+    .hero-text-content .hero-description,
+    .hero-mobile-image,
+    .hero-text-content .hero-btn {
+        opacity: 0;
+        transform: translateY(20px) !important;
+    }
+
+    @keyframes slideFadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .hero-slide.is-active .hero-text-content h1 {
+        animation: slideFadeUp 0.8s ease forwards !important;
+    }
+
+    .hero-slide.is-active .hero-description {
+        animation: slideFadeUp 0.8s ease forwards !important;
+        animation-delay: 0.15s !important;
+    }
+
+    .hero-slide.is-active .hero-mobile-image {
+        animation: slideFadeUp 0.8s ease forwards !important;
+        animation-delay: 0.3s !important;
+    }
+
+    .hero-slide.is-active .hero-btn {
+        animation: slideFadeUp 0.8s ease forwards !important;
+        animation-delay: 0.45s !important;
     }
 }
 </style>
