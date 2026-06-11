@@ -1,6 +1,6 @@
 /*
  * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated. - touch wide 2
+ * IMPORTANT: The contents of this file are auto-generated.
  *
  * This file may be updated by the Shopify admin theme editor
  * or related systems. Please exercise caution as any changes
@@ -243,7 +243,6 @@
           "type": "feature",
           "settings": {
             "icon_type": "drop",
-            "custom_icon": "",
             "text": "Controlled low-temperature\ndehydration"
           }
         },
@@ -251,7 +250,6 @@
           "type": "feature",
           "settings": {
             "icon_type": "shield",
-            "custom_icon": "",
             "text": "Helps retain\nessential amino\nacids and\nmicronutrients"
           }
         },
@@ -259,7 +257,6 @@
           "type": "feature",
           "settings": {
             "icon_type": "heat",
-            "custom_icon": "",
             "text": "Avoids nutrient\ndegradation\ncaused by high-\nheat processing"
           }
         },
@@ -267,7 +264,6 @@
           "type": "feature",
           "settings": {
             "icon_type": "molecule",
-            "custom_icon": "",
             "text": "Maintains structural integrity\nof ingredients"
           }
         }
@@ -285,7 +281,7 @@
         "text_color": "#222222",
         "intro_heading": "You bring the love.\nWe bring the science.",
         "intro_subtext": "<p>A way of feeding that's built around what their bodies actually need, made practical for everyday life.<br/><strong>So what actually makes it different?</strong></p>",
-        "main_title": "Preserving\nwhat\nmatters.",
+        "main_title": "Preserving what\nmatters.",
         "center_image": "shopify://shop_images/4_1.png"
       }
     },
