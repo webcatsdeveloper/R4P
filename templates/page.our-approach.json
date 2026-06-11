@@ -1,6 +1,6 @@
 /*
  * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
+ * IMPORTANT: The contents of this file are auto-generated. - touch wide 2
  *
  * This file may be updated by the Shopify admin theme editor
  * or related systems. Please exercise caution as any changes
@@ -243,7 +243,7 @@
           "type": "feature",
           "settings": {
             "icon_type": "drop",
-            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "custom_icon": "",
             "text": "Controlled low-temperature\ndehydration"
           }
         },
@@ -251,7 +251,7 @@
           "type": "feature",
           "settings": {
             "icon_type": "shield",
-            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "custom_icon": "",
             "text": "Helps retain\nessential amino\nacids and\nmicronutrients"
           }
         },
@@ -259,7 +259,7 @@
           "type": "feature",
           "settings": {
             "icon_type": "heat",
-            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "custom_icon": "",
             "text": "Avoids nutrient\ndegradation\ncaused by high-\nheat processing"
           }
         },
@@ -267,7 +267,7 @@
           "type": "feature",
           "settings": {
             "icon_type": "molecule",
-            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "custom_icon": "",
             "text": "Maintains structural integrity\nof ingredients"
           }
         }

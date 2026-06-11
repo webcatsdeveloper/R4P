@@ -1,4 +1,4 @@
-{% comment %} Touch to sync {% endcomment %}
+{% comment %} Touch to sync wide arc 2 {% endcomment %}
 {%- style -%}
   #section-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
@@ -62,15 +62,15 @@
         </div>
 
         <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 62.27 17.73 A 31.5 31.5 0 0 1 62.27 62.27" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
+          <path d="M 17.73 17.73 A 31.5 31.5 0 1 1 17.73 62.27" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
         </svg>
 
         {% for block in section.blocks %}
           {% case forloop.index %}
-            {% when 1 %} {% assign angle = '-45deg' %}
+            {% when 1 %} {% assign angle = '-52deg' %}
             {% when 2 %} {% assign angle = '-15deg' %}
-            {% when 3 %} {% assign angle = '15deg' %}
-            {% when 4 %} {% assign angle = '45deg' %}
+            {% when 3 %} {% assign angle = '18deg' %}
+            {% when 4 %} {% assign angle = '52deg' %}
             {% else %} {% assign angle = '0deg' %}
           {% endcase %}
 
@@ -186,7 +186,7 @@
     top: 50%;
     left: 40%;
     transform: translate(-50%, -50%);
-    width: 42cqw; 
+    width: 52cqw; 
     z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
