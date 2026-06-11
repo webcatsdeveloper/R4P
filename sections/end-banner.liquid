@@ -1,6 +1,6 @@
 {% comment %}
   Community Banner Section - Image Right, Text & Two Buttons Left
-  Ribbon positioned on right side without gap
+  Ribbon positioned on right side with FULL HEIGHT - no gaps
 {% endcomment %}
 
 {%- style -%}
@@ -26,10 +26,10 @@
     align-items: center;
     justify-content: flex-start;
     padding-left: 90px;
-    overflow: visible;
+    overflow: hidden;
   }
 
-  /* Decorative Curve / Ribbon - Positioned on RIGHT side without gap */
+  /* Decorative Curve / Ribbon - FULL HEIGHT, no gaps */
   .community-curvy-line {
     position: absolute;
     top: 0;
@@ -54,9 +54,10 @@
   .community-curvy-line svg {
     height: 100%;
     width: auto;
+    min-width: 200px;
     max-width: none;
-    object-fit: contain;
-    object-position: bottom right;
+    object-fit: cover;
+    object-position: right center;
     display: block;
   }
 
@@ -64,9 +65,10 @@
   .community-person-wrap {
     position: absolute;
     bottom: 0;
-    right: 80px;
-    width: 550px;
-    height: 520px;
+    right: 60px;
+    width: 500px;
+    height: 100%;
+    max-height: 472px;
     z-index: 10;
 
     opacity: 0;
@@ -199,12 +201,16 @@
   /* Tablet Styles */
   @media (max-width: 1280px) {
     .community-person-wrap {
-      width: 450px;
+      width: 420px;
       right: 40px;
     }
     
     .community-heading {
       font-size: 48px;
+    }
+    
+    .community-box {
+      padding-left: 60px;
     }
   }
 
@@ -232,13 +238,14 @@
       transform: translateX(-50%);
       bottom: auto;
       top: -100px;
+      max-height: none;
     }
 
     .community-banner-{{ section.id }}.animate .community-person-wrap {
       transform: translateX(-50%);
     }
 
-    /* Ribbon covers full width on mobile */
+    /* Ribbon covers full width & height on mobile */
     .community-curvy-line {
       right: 0;
       left: 0;
@@ -320,7 +327,7 @@
 
     <div class="community-box">
 
-      <!-- Curve / Ribbon - Right side without gap -->
+      <!-- Curve / Ribbon - FULL HEIGHT, no gaps -->
       <div class="community-curvy-line">
         {% if section.settings.curve_image != blank %}
           <img
@@ -329,14 +336,13 @@
             loading="lazy"
           >
         {% else %}
-          <svg width="auto" height="100%" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="auto" height="100%" viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
             <path
-              d="M350 500 C300 350 380 250 350 180 C320 110 250 80 200 50 C150 20 100 10 50 0"
+              d="M250 0 C300 100 200 200 250 300 C300 400 200 450 250 500"
               stroke="#FECC66"
-              stroke-width="12"
-              stroke-linecap="round"
+              stroke-width="80"
+              stroke-linecap="butt"
               fill="none"
-              opacity="0.6"
             />
           </svg>
         {% endif %}
@@ -426,13 +432,13 @@ document.addEventListener("DOMContentLoaded", function () {
       "type": "image_picker",
       "id": "curve_image",
       "label": "Background Ribbon Image",
-      "info": "Place on right side without gap - transparent PNG recommended"
+      "info": "Will stretch to FULL HEIGHT of purple background - no gaps at top or bottom"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "So, ready to find what’s right for them?"
+      "default": "So, ready to find what's right for them?"
     },
     {
       "type": "textarea",
