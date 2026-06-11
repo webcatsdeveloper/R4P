@@ -125,6 +125,11 @@
       min-height: auto;
       overflow: hidden; /* Clips the ribbon background perfectly to the card layout edge */
       border-radius: 36px;
+      /* --- UPDATED MOBILE WIDTHS TO MATCH MOCKUP --- */
+      width: 100%;
+      max-width: 350px; /* Constrains the purple banner card size on mobile screens */
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .cta-content-column {
@@ -174,12 +179,12 @@
       object-fit: cover;
     }
 
-    /* Centers illustration content neatly inside baseline foundations */
+    /* --- UPDATED TO ENSURE IMAGE FITS THE WIDTH PROPERLY --- */
     .cta-image-column {
       position: relative;
       width: 100%;
-      max-width: 320px;
-      height: 270px;
+      max-width: 100%; /* Allows image space to scale fully within the now constrained card */
+      height: auto;    /* Uses auto height alongside width properties to stay proportional */
       right: auto;
       bottom: 0;
       display: flex;
@@ -191,7 +196,8 @@
 
     .cta-image-column img {
       width: 100%;
-      height: 100%;
+      height: auto;    /* Keeps image from distorting or extending past bounds */
+      display: block;
       object-fit: contain;
       object-position: bottom center;
     }
