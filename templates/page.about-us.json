@@ -168,7 +168,9 @@
       "type": "aboutus-we-found",
       "name": "Pet Feature Section",
       "settings": {
+        "use_gradient": true,
         "bg_color": "#e8f5f8",
+        "bg_gradient": "linear-gradient(135deg, #E8F5F8 0%, #ffffff 60%, #ffffff 100%)",
         "heading_text_left": "We found ourselves doing",
         "heading_text_accent": "different things for different dogs.",
         "heading_accent_color": "#e63946",
