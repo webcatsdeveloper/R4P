@@ -190,12 +190,26 @@
     {% if section.settings.bheart_right != "unset" and section.settings.bheart_right != "" %}right: {{ section.settings.bheart_right }}%;{% else %}right: auto;{% endif %}
   }
 
+  /* Background Curve - separate desktop and mobile */
   .pet-info__bg-curve {
     z-index: 1;
     width: 100%;
     bottom: 0;
     left: 0;
     right: 0;
+    line-height: 0;
+  }
+  .pet-info__bg-curve img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  /* Desktop curve visible, mobile hidden */
+  .pet-info__bg-curve--desktop {
+    display: block;
+  }
+  .pet-info__bg-curve--mobile {
+    display: none;
   }
 
   /* --- PREMIUM SCROLL ANIMATION SUITE ENGINE --- */
@@ -310,6 +324,14 @@
       padding-left: 0px; 
       padding-right: 0px; 
     }
+
+    /* Switch curve images for mobile */
+    .pet-info__bg-curve--desktop {
+      display: none;
+    }
+    .pet-info__bg-curve--mobile {
+      display: block;
+    }
   }
 </style>
 
@@ -381,9 +403,25 @@
     </div>
   </div>
 
+  {% comment %} 
+    BACKGROUND CURVE - Desktop and Mobile separate
+    Desktop version visible on desktop, hidden on mobile
+    Mobile version hidden on desktop, visible on mobile
+  {% endcomment %}
   {% if section.settings.curve_image != blank %}
-    <div class="pet-info__decor pet-info__bg-curve">
+    <div class="pet-info__decor pet-info__bg-curve pet-info__bg-curve--desktop">
       <img src="{{ section.settings.curve_image | image_url: width: 2800 }}" alt="" loading="lazy">
+    </div>
+  {% endif %}
+  
+  {% if section.settings.curve_image_mobile != blank %}
+    <div class="pet-info__decor pet-info__bg-curve pet-info__bg-curve--mobile">
+      <img src="{{ section.settings.curve_image_mobile | image_url: width: 1200 }}" alt="" loading="lazy">
+    </div>
+  {% elsif section.settings.curve_image != blank %}
+    {# Fallback to desktop curve if mobile not set #}
+    <div class="pet-info__decor pet-info__bg-curve pet-info__bg-curve--mobile">
+      <img src="{{ section.settings.curve_image | image_url: width: 1200 }}" alt="" loading="lazy">
     </div>
   {% endif %}
 </div>
@@ -866,7 +904,13 @@
     {
       "type": "image_picker",
       "id": "curve_image",
-      "label": "Bottom Yellow Asymmetric Curve Asset"
+      "label": "Desktop Background Curve Asset"
+    },
+    {
+      "type": "image_picker",
+      "id": "curve_image_mobile",
+      "label": "Mobile Background Curve Asset",
+      "info": "Leave empty to use desktop curve on mobile"
     },
     {
       "type": "header",
