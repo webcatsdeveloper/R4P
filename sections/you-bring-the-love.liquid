@@ -1,4 +1,4 @@
-{% comment %} Touch to sync wide arc 2 {% endcomment %}
+{% comment %} Touch to sync wide arc 3 {% endcomment %}
 {%- style -%}
   #section-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
@@ -61,8 +61,9 @@
           {% endif %}
         </div>
 
-        <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 17.73 17.73 A 31.5 31.5 0 1 1 17.73 62.27" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
+        <!-- Arc SVG: RIGHT-side arc from top to bottom, matching icon orbit exactly -->
+        <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M 59.39 15.18 A 31.5 31.5 0 0 1 59.39 64.82" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.5" fill="none"/>
         </svg>
 
         {% for block in section.blocks %}
@@ -83,13 +84,34 @@
                 {% else %}
                   {% case block.settings.icon_type %}
                     {% when 'drop' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M19.07 4.93l-2.83 2.83"></path></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        <line x1="12" y1="12" x2="12" y2="16"/>
+                        <circle cx="12" cy="17.5" r="0.5" fill="#222"/>
+                      </svg>
                     {% when 'shield' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      </svg>
                     {% when 'heat' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8c0-2-2-2-2-4"></path><path d="M12 8c0-2-2-2-2-4"></path><path d="M7 8c0-2-2-2-2-4"></path><path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path><path d="M12 22a7 7 0 0 0 7-7"></path></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 3c0 2 2 2 2 4s-2 2-2 4 2 2 2 4"/>
+                        <path d="M12 3c0 2 2 2 2 4s-2 2-2 4 2 2 2 4"/>
+                        <path d="M16 3c0 2 2 2 2 4s-2 2-2 4 2 2 2 4"/>
+                        <line x1="6" y1="19" x2="18" y2="19"/>
+                      </svg>
                     {% when 'molecule' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><circle cx="12" cy="12" r="3"></circle><line x1="8.12" y1="8.12" x2="9.88" y2="9.88"></line><line x1="14.12" y1="9.88" x2="15.88" y2="8.12"></line><line x1="9.88" y1="14.12" x2="8.12" y2="15.88"></line><line x1="15.88" y1="14.12" x2="14.12" y2="15.88"></line></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="18" r="3"/>
+                        <circle cx="6" cy="6" r="3"/>
+                        <circle cx="18" cy="6" r="3"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="12" cy="12" r="3"/>
+                        <line x1="8.12" y1="8.12" x2="9.88" y2="9.88"/>
+                        <line x1="14.12" y1="9.88" x2="15.88" y2="8.12"/>
+                        <line x1="9.88" y1="14.12" x2="8.12" y2="15.88"/>
+                        <line x1="15.88" y1="14.12" x2="14.12" y2="15.88"/>
+                      </svg>
                   {% endcase %}
                 {% endif %}
               </div>
@@ -135,7 +157,7 @@
     margin: 0;
     color: inherit;
     opacity: 0.85;
-    padding:0 16px;
+    padding: 0 16px;
   }
   .pcf-intro-subtext p { margin: 0; }
   .pcf-intro-subtext strong { font-weight: 700; color: #000; opacity: 1; }
@@ -161,14 +183,13 @@
   .pcf-left-col {
     padding-left: 0;
     z-index: 5;
-     margin-top: -40px!important;
   }
   .pcf-title {
     font-size: clamp(3rem, 6.5vw, 7.5rem);
     font-weight: 900;
     line-height: 0.88;
     letter-spacing: -0.04em;
-    margin-top: -40px!important;
+    margin: 0;
   }
 
   /* --- Right Circular Diagram --- */
@@ -178,17 +199,17 @@
   .pcf-diagram-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 1.25 / 1; 
+    aspect-ratio: 1.25 / 1;
     container-type: inline-size;
   }
 
-  /* Center Anchor (Shifted Left to 40% to leave room for text) */
+  /* Bowl: centered at 40% left, 50% top */
   .pcf-bowl-wrapper {
     position: absolute;
     top: 50%;
     left: 40%;
     transform: translate(-50%, -50%);
-    {% comment %} width: 52cqw;  {% endcomment %}
+    width: 52cqw;
     z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
@@ -199,24 +220,24 @@
     filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
   }
 
-  /* SVG Concentric Arc */
+  /* SVG Arc — RIGHT side only, matching icon orbit */
   .pcf-arc-svg {
     display: none;
   }
   @media (min-width: 990px) {
     .pcf-arc-svg {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
     }
   }
 
-  /* Precise Trigonometric Positioning */
+  /* Icon orbit: same center and radius as SVG arc */
   .pcf-feature-point {
     position: absolute;
     top: 50%;
@@ -225,7 +246,7 @@
     z-index: 10;
   }
 
-  /* Wrapper to align Icon exactly on the arc line, text to the right */
+  /* Icon + text row, icon centered on arc line, text to the right */
   .pcf-feature-content {
     position: absolute;
     top: 50%;
@@ -242,7 +263,7 @@
     height: 52px;
     background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.10);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -304,11 +325,10 @@
       text-align: center;
     }
     .pcf-title {
-        font-size: 35px;
-        text-align: left;
-        margin-bottom: 1.5rem;
-        padding-left: 35px;
-         margin-top: -40px!important;
+      font-size: 35px;
+      text-align: left;
+      margin-bottom: 1.5rem;
+      padding-left: 35px;
     }
     
     .pcf-diagram-container {
@@ -321,7 +341,6 @@
       --bowl-width: min(280px, 70vw);
     }
 
-    /* Vertical connector line on mobile, tangent to the left edge of the bowl */
     .pcf-diagram-container::before {
       content: "";
       position: absolute;
@@ -375,8 +394,8 @@
       color: #2b2b2b;
       max-width: 280px;
     }
-    .heading-line-1{
-      font-weight:900 !important;
+    .heading-line-1 {
+      font-weight: 900 !important;
     }
   }
 </style>
@@ -417,6 +436,12 @@
       "id": "text_color",
       "label": "Body Text Color",
       "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "arc_color",
+      "label": "Arc Line Color",
+      "default": "#ffffff"
     },
     {
       "type": "header",
