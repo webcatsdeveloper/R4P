@@ -212,17 +212,38 @@
       flex-direction: column !important;
       gap: 35px;
     }
+    .purp-staggered-row.purp-row-bottom {
+      flex-direction: column-reverse !important;
+    }
     .purp-staggered-col {
       width: 100%;
     }
     .purp-story-card {
-      max-width: 100%;
-      aspect-ratio: 1.3 / 1;
-      margin: 0 auto !important;
+      width: 80%;
+      max-width: 440px;
+      aspect-ratio: 1.22 / 1;
     }
-    /* Moderate mobile rotation for neat screens reading flow */
-    .purp-card-top-right { transform: rotate(-2deg); }
-    .purp-card-bottom-left { transform: rotate(2deg); }
+    .purp-card-top-right {
+      transform: rotate(-4deg);
+      margin-left: auto !important;
+      margin-right: 40px !important;
+      margin-top: 0 !important;
+    }
+    .purp-card-bottom-left {
+      transform: rotate(5deg);
+      margin-right: auto !important;
+      margin-left: 30px !important;
+      margin-top: 0 !important;
+    }
+    #section-{{ section.id }} .purp-staggered-title {
+      font-size: calc({{ section.settings.title_font_size }}px * 0.8) !important;
+    }
+    #section-{{ section.id }} .purp-staggered-question {
+      font-size: calc({{ section.settings.question_font_size }}px * 0.85) !important;
+    }
+    #section-{{ section.id }} .purp-staggered-body-box p {
+      font-size: calc({{ section.settings.body_font_size }}px * 0.95) !important;
+    }
   }
 </style>
 
@@ -380,7 +401,7 @@
       "type": "richtext",
       "id": "html_body_text",
       "label": "Right Column Paragraphs Block",
-      "default": "<p>So we moved away from kibble, and began working with raw, locally available ingredients. What started as an attempt to do better turned into years of trial, learning, and experimentation. Over time, the process became more structured. Together, we began working with veterinarians and specialists in canine nutrition, grounding what we had learned in science.</p><p>Not to create something new, but to arrive at something that made sense.</p><p>After more than a decade of this work, Right4Paws came into being.</p><p>A way to make this approach more accessible, practical, and easier for everyday pet parents to trust and adopt.</p>"
+      "default": "<p>So we moved away from kibble, and began working with raw, locally available ingredients. What started as an attempt to do better turned into years of trial, learning, and experimentation.</p><p>Over time, the process became more structured. Together, we began working with veterinarians and specialists in canine nutrition, grounding what we had learned in science.</p><p>Not to create something new, but to arrive at something that made sense.</p><p>After more than a decade of this work, Right4Paws came into being.</p><p>A way to make this approach more accessible, practical, and easier for everyday pet parents to trust and adopt.</p>"
     }
   ],
   "presets": [
