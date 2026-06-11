@@ -381,7 +381,7 @@
         "btn2_text": "Explore Products",
         "btn2_link": "",
         "model_image": "shopify://shop_images/Group_59513.png",
-        "padding_top": 60,
+        "padding_top": 20,
         "padding_bottom": 60
       }
     }
