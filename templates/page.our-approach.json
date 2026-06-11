@@ -218,22 +218,22 @@
         "mobile_side_padding": 24,
         "mobile_padding_top": 50,
         "mobile_padding_bottom": 60,
-        "mobile_center_gap": 32,
+        "mobile_center_gap": 60,
         "mobile_heading_font_size": 34,
         "mobile_line5_font_size": 34,
         "mobile_line5_margin_bottom": 24,
         "mobile_desc_font_size": 16,
         "mobile_p1_margin_bottom": 16,
-        "mobile_hearts_width": 46,
+        "mobile_hearts_width": 50,
         "mobile_hearts_top": "-10",
         "mobile_hearts_bottom": "unset",
-        "mobile_hearts_left": "12",
+        "mobile_hearts_left": "30",
         "mobile_hearts_right": "unset",
-        "mobile_bheart_width": 70,
-        "mobile_bheart_top": "55",
+        "mobile_bheart_width": 76,
+        "mobile_bheart_top": "60",
         "mobile_bheart_bottom": "unset",
         "mobile_bheart_left": "unset",
-        "mobile_bheart_right": "-10"
+        "mobile_bheart_right": "10"
       }
     },
     "you_bring_the_love_7rpmFw": {

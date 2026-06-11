@@ -76,6 +76,24 @@
     color: {{ section.settings.line4_color }} !important;
   }
 
+  /* Show desktop heading, hide mobile heading by default */
+  .pet-info__heading--desktop {
+    display: block;
+  }
+  .pet-info__heading--mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 991px) {
+    /* Hide desktop heading, show mobile heading on mobile */
+    .pet-info__heading--desktop {
+      display: none !important;
+    }
+    .pet-info__heading--mobile {
+      display: block !important;
+    }
+  }
+
   /* Fixed Red Text Settings Override Framework Matrix */
   .pet-info__content .pet-info__line5 {
     font-family: 'Degular Demo', sans-serif !important;
@@ -296,10 +314,26 @@
     <div class="pet-info__grid">
       <div class="pet-info__content">
         <div class="pet-info__heading-wrapper pet-js-animate">
-          <h2 class="pet-info__heading">
+          {%- assign line1_clean = section.settings.heading_line_1 | replace: '<br>', ' ' | replace: '<br />', ' ' | replace: '  ', ' ' | strip -%}
+          {%- assign line1_words = line1_clean | split: ' ' -%}
+          {%- if line1_words.size >= 4 and line1_words[0] == "We" and line1_words[1] == "know" -%}
+            {%- assign mobile_line_1 = line1_words[0] | append: ' ' | append: line1_words[1] | append: ' ' | append: line1_words[2] -%}
+            {%- assign mobile_line_2 = line1_words[3] | append: ' ' | append: section.settings.heading_line_3 -%}
+          {%- else -%}
+            {%- assign mobile_line_1 = section.settings.heading_line_1 | replace: '<br>', '' | replace: '<br />', '' -%}
+            {%- assign mobile_line_2 = section.settings.heading_line_3 -%}
+          {%- endif -%}
+
+          <!-- Desktop Heading -->
+          <h2 class="pet-info__heading pet-info__heading--desktop">
             {% if section.settings.heading_line_1 != blank %}<span>{{ section.settings.heading_line_1 }}</span>{% endif %}
-            {% comment %} {% if section.settings.heading_line_2 != blank %}<span>{{ section.settings.heading_line_2 }}</span>{% endif %} {% endcomment %}
             {% if section.settings.heading_line_3 != blank %}<span>{{ section.settings.heading_line_3 }}</span>{% endif %}
+            {% if section.settings.heading_line_4 != blank %}<span class="pet-info__heading-line4">{{ section.settings.heading_line_4 }}</span>{% endif %}
+          </h2>
+          <!-- Mobile Heading -->
+          <h2 class="pet-info__heading pet-info__heading--mobile">
+            {% if mobile_line_1 != blank %}<span>{{ mobile_line_1 }}</span>{% endif %}
+            {% if mobile_line_2 != blank %}<span>{{ mobile_line_2 }}</span>{% endif %}
             {% if section.settings.heading_line_4 != blank %}<span class="pet-info__heading-line4">{{ section.settings.heading_line_4 }}</span>{% endif %}
           </h2>
         </div>
