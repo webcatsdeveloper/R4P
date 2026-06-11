@@ -5,7 +5,7 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     width: 100%;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
   }
 
   .cta-banner-wrapper {
@@ -15,7 +15,7 @@
     border-radius: 40px;
     position: relative;
     /* Extra top margin allows the overlapping image to break cleanly out of the box */
-    margin-top: 60px; 
+    margin-top: 260px; 
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -114,8 +114,7 @@
      ========================================================================== */
   @media (max-width: 991px) {
     .cta-banner-section-{{ section.id }} {
-      /* --- UPDATED: Reduced padding to remove large outer gaps --- */
-      padding: 20px 10px; 
+      padding: 20px 15px; /* Adds comfortable outer structural viewport spacing */
     }
 
     .cta-banner-wrapper {
@@ -126,11 +125,6 @@
       min-height: auto;
       overflow: hidden; /* Clips the ribbon background perfectly to the card layout edge */
       border-radius: 36px;
-      /* --- UPDATED: Maximized card space to fit Figma dimensions closely --- */
-      width: 100%;
-      max-width: 357px; 
-      margin-left: auto;
-      margin-right: auto;
     }
 
     .cta-content-column {
@@ -153,9 +147,9 @@
     .cta-buttons-group {
       flex-direction: column;
       width: 100%;
-      gap: 14px;
-      max-width: 290px;
-      margin-bottom: 35px;
+      gap: 12px;
+      max-width: 210px;
+      margin-bottom: 5px;
     }
 
     .cta-pill-button {
@@ -180,26 +174,28 @@
       object-fit: cover;
     }
 
+    /* Centers illustration content neatly inside baseline foundations */
     .cta-image-column {
       position: relative;
-      width: 100%;
-      max-width: 100%; 
-      height: auto;    
+      width: calc(100% + 48px); /* Break out of the 24px left+right wrapper padding */
+      margin-left: -24px;
+      margin-right: -24px;
+      max-width: none;
+      height: 400px;
       right: auto;
       bottom: 0;
       display: flex;
       justify-content: center;
-      align-items: flex-end;
+      align-items: flex-start;
       z-index: 2;
-      margin-top: auto;
+      margin-top: 0;
     }
 
     .cta-image-column img {
       width: 100%;
-      height: auto;    
-      display: block;
+      height: 100%;
       object-fit: contain;
-      object-position: bottom center;
+      object-position: top center;
     }
   }
 {%- endstyle -%}
@@ -235,7 +231,7 @@
 
     <div class="cta-image-column">
       {% if section.settings.model_image != blank %}
-        <img src="{{ section.settings.model_image | img_url: '800x800' }}" alt="Get Started Banner Image" loading="lazy">
+        <img src="{{ section.settings.model_image | image_url: width: 800 }}" alt="Get Started Banner Image" loading="lazy">
       {% else %}
         {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {% endif %}
