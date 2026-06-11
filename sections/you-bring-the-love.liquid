@@ -61,9 +61,15 @@
           {% endif %}
         </div>
 
-        <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 17.73 17.73 A 31.5 31.5 0 1 1 17.73 62.27" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
-        </svg>
+       <svg class="pcf-arc-svg" viewBox="0 0 100 100" fill="none">
+  <path
+    d="M50 10 A40 40 0 0 1 50 90"
+    stroke="{{ section.settings.arc_color | default: '#ffffff' }}"
+    stroke-width="0.5"
+    fill="none"
+    stroke-linecap="round"
+  />
+</svg>
 
         {% for block in section.blocks %}
           {% case forloop.index %}
