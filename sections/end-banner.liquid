@@ -1,410 +1,323 @@
-{% comment %}
-  Community Banner Section - Image Right, Text & Two Buttons Left
-{% endcomment %}
-
 {%- style -%}
-  .community-banner-{{ section.id }} {
-    padding: 100px 0 60px 0;
-    overflow: visible;
-    font-family: "Degular Demo", -apple-system, BlinkMacSystemFont, sans-serif;
+  .cta-banner-section-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 130px {{ section.settings.padding_bottom }}px 130px;
+    background-color: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
-  .community-container {
-    max-width: 1380px;
-    margin: 0 auto;
-    padding: 0 40px;
+  .cta-banner-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    background-color: {{ section.settings.bg_color }};
+    border-radius: 40px;
     position: relative;
-  }
-
-  .community-box {
-    background-color: #7670B3;
-    border-radius: 60px;
-    height: 472px;
-    position: relative;
+    /* Extra top margin allows the overlapping image to break cleanly out of the box */
+    margin-top: 80px; 
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    padding-left: 90px;
-    overflow: hidden;
+    justify-content: space-between;
+    min-height: 380px;
+    padding: 40px 60px;
+    overflow: visible; /* Crucial to let the image hang out of the box */
   }
 
-  /* Decorative Curve */
-  .community-curvy-line {
-    position: absolute;
-    top: 0;
-    right: 0 !important;
-    width: 100% !important;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-
-    opacity: 0;
-    transform: scale(1.1);
-    transition:
-      opacity 1.2s ease,
-      transform 1.2s ease;
-  }
-
-  .community-curvy-line img {
-    width: 60%;
-    height: 100%;
-    object-position: right;
-  }
-
-  /* Person Image - Now on RIGHT side */
-  .community-person-wrap {
+  /* Desktop ribbon background image */
+  .cta-banner-ribbon-desktop {
     position: absolute;
     bottom: 0;
-    right: 150px;
-    width: 630px;
-    height: 786px;
-    z-index: 10;
-
-    opacity: 0;
-    transform: translateX(120px);
-    transition:
-      opacity 1s ease,
-      transform 1s ease;
-  }
-
-  .community-person-img {
-    width: 80%;
+    right: 0;
+    width: 100%;
     height: 100%;
-    object-fit: contain;
-    display: block;
-    object-position: bottom;
+    z-index: 1;
+    pointer-events: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
   }
 
-  /* Content - Now on LEFT side */
-  .community-content {
+  /* Mobile ribbon background image - hidden by default */
+  .cta-banner-ribbon-mobile {
+    display: none;
+  }
+
+  /* Left Side Text Content & Buttons */
+  .cta-content-column {
+    width: 50%;
     position: relative;
-    z-index: 20;
-    max-width: 592px;
-    text-align: left;
-
-    opacity: 0;
-    transform: translateX(-120px);
-    transition:
-      opacity 1s ease,
-      transform 1s ease;
+    z-index: 3;
   }
 
-  .community-heading {
-    font-size: 64px;
-    line-height: 59px;
+  .cta-banner-heading {
+    color: #ffffff;
+    font-size: 3rem;
     font-weight: 700;
-    color: #fff;
-    margin: 0 0 24px 0;
-    letter-spacing: 0;
-    font-family:'Degular Demo'!important;
+    line-height: 1.15;
+    margin: 0 0 35px 0;
+    letter-spacing: -0.02em;
+    max-width: 500px;
   }
 
-  .community-heading span {
-    color: #FECC66;
-    display: block;
-    font-family:'Degular Demo'!important;
-  }
-
-  .community-subtext {
-    font-size: 23px;
-    line-height: 1.4;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 30px 0 45px 0;
-    max-width: 440px;
-    font-weight: 400;
-    font-family:'Degular Demo'!important;
-  }
-
-  /* Button Group - Two Buttons */
-  .community-buttons-group {
+  .cta-buttons-group {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     flex-wrap: wrap;
   }
 
-  .community-btn {
-    display: inline-block;
-    background-color: #000;
-    color: #fff;
-    padding: 20px 48px;
+  .cta-pill-button {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 14px 28px;
     border-radius: 50px;
-    font-size: 18px;
-    font-weight: 600;
-    text-transform: uppercase;
     text-decoration: none;
-    transition:
-      transform 0.3s ease,
-      background-color 0.3s ease;
-    font-family:'Degular Demo'!important;
-  }
-
-  .community-btn:hover {
-    transform: scale(1.04);
-  }
-
-  .community-btn-outline {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease, background-color 0.2s ease;
     display: inline-block;
-    background-color: transparent;
-    color: #fff;
-    padding: 20px 48px;
-    border-radius: 50px;
-    font-size: 18px;
-    font-weight: 600;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 2px solid #fff;
-    transition:
-      transform 0.3s ease,
-      background-color 0.3s ease,
-      color 0.3s ease;
-    font-family:'Degular Demo'!important;
   }
 
-  .community-btn-outline:hover {
-    transform: scale(1.04);
-    background-color: rgba(255, 255, 255, 0.1);
+  .cta-pill-button:hover {
+    background-color: #1a1a1a;
+    transform: translateY(-2px);
   }
 
-  /* ACTIVE ANIMATION */
-  .community-banner-{{ section.id }}.animate .community-curvy-line {
-    opacity: 1;
-    transform: scale(1);
-    transition-delay: 0.1s;
+  /* Right Side Overlapping Model Container */
+  .cta-image-column {
+    width: 50%;
+    position: absolute;
+    right: 40px;
+    bottom: 0;
+    height: calc(100% + 80px); /* Height spans higher than the box boundary */
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
   }
 
-  .community-banner-{{ section.id }}.animate .community-person-wrap {
-    opacity: 1;
-    transform: translateX(0);
-    transition-delay: 0.2s;
+  .cta-image-column img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: bottom right;
   }
 
-  .community-banner-{{ section.id }}.animate .community-content {
-    opacity: 1;
-    transform: translateX(0);
-    transition-delay: 0.4s;
-  }
-
-  @media (max-width: 1440px) {
-    .community-box {
-      padding-left: 60px;
+  /* ==========================================================================
+     MOBILE RESPONSIVE HANDLING - TAILORED EXACTLY TO REFERENCE DESIGN MOCK
+     ========================================================================== */
+  @media (max-width: 991px) {
+    .cta-banner-section-{{ section.id }} {
+      padding: 20px 15px; /* Adds comfortable outer structural viewport spacing */
     }
 
-    .community-person-wrap {
-      width: 500px;
-      right: 40px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    .community-banner-{{ section.id }} {
-      padding: 180px 0 60px;
-    }
-
-    .community-box {
-      height: auto;
+    .cta-banner-wrapper {
+      margin-top: 0;
       flex-direction: column;
-      padding: 300px 40px 60px;
+      padding: 50px 24px 0 24px;
       text-align: center;
-      justify-content: center;
-      padding-left: 40px;
+      min-height: auto;
+      overflow: hidden; /* Clips the ribbon background perfectly to the card layout edge */
+      border-radius: 36px;
     }
 
-    .community-person-wrap {
-      width: 400px;
-      height: auto;
-      left: 50%;
-      right: auto;
-      transform: translateX(-50%);
-      bottom: auto;
-      top: -150px;
-    }
-
-    .community-banner-{{ section.id }}.animate .community-person-wrap {
-      transform: translateX(-50%);
-    }
-
-    .community-content {
-      text-align: center;
-      max-width: 100%;
-    }
-
-    .community-heading {
-      font-size: 42px;
-      line-height: 1.1;
-    }
-
-    .community-subtext {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .community-buttons-group {
-      justify-content: center;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .community-person-wrap {
+    .cta-content-column {
       width: 100%;
-      top: -120px;
+      margin-bottom: 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 3;
     }
 
-    .community-heading {
-      font-size: 32px;
+    .cta-banner-heading {
+      font-size: 2.1rem;
+      max-width: 100%;
+      margin: 0 auto 30px auto;
+      line-height: 1.2;
     }
 
-    .community-btn,
-    .community-btn-outline {
-      padding: 14px 28px;
-      font-size: 14px;
+    /* Vertical full-width stacked layouts for modern app button styling */
+    .cta-buttons-group {
+      flex-direction: column;
+      width: 100%;
+      gap: 14px;
+      max-width: 290px;
+      margin-bottom: 35px;
+    }
+
+    .cta-pill-button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 16px 20px;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    /* Hide desktop ribbon, show mobile ribbon */
+    .cta-banner-ribbon-desktop {
+      display: none;
+    }
+
+    .cta-banner-ribbon-mobile {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: bottom center;
+    }
+
+    /* Centers illustration content neatly inside baseline foundations */
+    .cta-image-column {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      height: 270px;
+      right: auto;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      z-index: 2;
+      margin-top: auto;
+    }
+
+    .cta-image-column img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: bottom center;
     }
   }
 {%- endstyle -%}
 
-<section class="community-banner-{{ section.id }}">
-  <div class="community-container">
+<div class="cta-banner-section-{{ section.id }}">
+  <div class="cta-banner-wrapper">
+    
+    <!-- Desktop Ribbon Background Image -->
+    {% if section.settings.ribbon_image_desktop != blank %}
+      <div class="cta-banner-ribbon-desktop" style="background-image: url('{{ section.settings.ribbon_image_desktop | img_url: 'master' }}');"></div>
+    {% endif %}
 
-    <div class="community-person-wrap">
-      {% if section.settings.person_image != blank %}
-        <img
-          class="community-person-img"
-          src="{{ section.settings.person_image | img_url: '1000x' }}"
-          alt="Pet Parent"
-        >
+    <!-- Mobile Ribbon Background Image -->
+    {% if section.settings.ribbon_image_mobile != blank %}
+      <div class="cta-banner-ribbon-mobile" style="background-image: url('{{ section.settings.ribbon_image_mobile | img_url: 'master' }}');"></div>
+    {% endif %}
+
+    <div class="cta-content-column">
+      <h2 class="cta-banner-heading">{{ section.settings.heading }}</h2>
+      <div class="cta-buttons-group">
+        {% if section.settings.btn1_text != blank %}
+          <a href="{{ section.settings.btn1_link }}" class="cta-pill-button">
+            {{ section.settings.btn1_text }}
+          </a>
+        {% endif %}
+        {% if section.settings.btn2_text != blank %}
+          <a href="{{ section.settings.btn2_link }}" class="cta-pill-button">
+            {{ section.settings.btn2_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="cta-image-column">
+      {% if section.settings.model_image != blank %}
+        <img src="{{ section.settings.model_image | img_url: '800x800' }}" alt="Get Started Banner Image" loading="lazy">
       {% else %}
-        <img
-          class="community-person-img"
-          src="https://ais-dev-us76jjassfjamgylbqzewq-898880156449.asia-southeast1.run.app/person-placeholder.png"
-          alt="Pet Parent"
-        >
+        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {% endif %}
     </div>
 
-    <div class="community-box">
-
-      <!-- Curve -->
-      <div class="community-curvy-line">
-        {% if section.settings.curve_image != blank %}
-          <img
-            src="{{ section.settings.curve_image | img_url: 'master' }}"
-            alt="Background Curve"
-          >
-        {% else %}
-          <svg width="100%" height="100%" viewBox="0 0 1000 500" preserveAspectRatio="none">
-            <path
-              d="M-100 400 Q 100 50, 400 350 T 900 100"
-              stroke="#F8B426"
-              stroke-width="12"
-              fill="none"
-              opacity="0.4"
-            />
-          </svg>
-        {% endif %}
-      </div>
-
-      <!-- Content - Left Side -->
-      <div class="community-content">
-        <h2 class="community-heading">
-          {{ section.settings.heading | replace: 'do things right.', '<span>do things right.</span>' }}
-        </h2>
-
-        <p class="community-subtext">
-          {{ section.settings.subtext }}
-        </p>
-
-        <div class="community-buttons-group">
-          {% if section.settings.btn1_label != blank %}
-            <a href="{{ section.settings.btn1_link }}" class="community-btn">
-              {{ section.settings.btn1_label }}
-            </a>
-          {% endif %}
-          {% if section.settings.btn2_label != blank %}
-            <a href="{{ section.settings.btn2_link }}" class="community-btn-outline">
-              {{ section.settings.btn2_label }}
-            </a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
   </div>
-</section>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const section = document.querySelector(".community-banner-{{ section.id }}");
-
-  if (!section) return;
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          section.classList.add("animate");
-        }
-      });
-    },
-    {
-      threshold: 0.25,
-    }
-  );
-
-  observer.observe(section);
-});
-</script>
+</div>
 
 {% schema %}
 {
-  "name": "Community Banner",
+  "name": "CTA Overlap Banner",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "person_image",
-      "label": "Person + Pet Image"
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Card Color",
+      "default": "#7d75b3"
     },
     {
       "type": "image_picker",
-      "id": "curve_image",
-      "label": "Background Curve Image"
+      "id": "ribbon_image_desktop",
+      "label": "Ribbon Background Image (Desktop)",
+      "info": "Recommended size: 600x380px, transparent PNG with decorative elements"
+    },
+    {
+      "type": "image_picker",
+      "id": "ribbon_image_mobile",
+      "label": "Ribbon Background Image (Mobile)",
+      "info": "Optimized version for smaller screens, transparent PNG recommended"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
-      "default": "For pet parents who want to do things right."
-    },
-    {
-      "type": "textarea",
-      "id": "subtext",
-      "label": "Subtext",
-      "default": "Be a part of a space where pet parents come together to learn, share, and care better."
+      "label": "Banner Headline Text",
+      "default": "So, ready to find what's right for them?"
     },
     {
       "type": "text",
-      "id": "btn1_label",
-      "label": "Button 1 Label",
-      "default": "JOIN OUR COMMUNITY"
+      "id": "btn1_text",
+      "label": "Button 1 Text Label",
+      "default": "Start With Your Pet"
     },
     {
       "type": "url",
       "id": "btn1_link",
-      "label": "Button 1 Link"
+      "label": "Button 1 Web Link"
     },
     {
       "type": "text",
-      "id": "btn2_label",
-      "label": "Button 2 Label",
-      "default": "LEARN MORE"
+      "id": "btn2_text",
+      "label": "Button 2 Text Label",
+      "default": "Explore Products"
     },
     {
       "type": "url",
       "id": "btn2_link",
-      "label": "Button 2 Link"
+      "label": "Button 2 Web Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "model_image",
+      "label": "Overlapping Character Image (Transparent PNG highly recommended)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 140,
+      "step": 5,
+      "unit": "px",
+      "label": "Outer Layout Top Margin Spacer",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 140,
+      "step": 5,
+      "unit": "px",
+      "label": "Outer Layout Bottom Margin Spacer",
+      "default": 60
     }
   ],
   "presets": [
     {
-      "name": "Community Banner",
-      "category": "Banner"
+      "name": "CTA Overlap Banner"
     }
   ]
 }
