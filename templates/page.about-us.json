@@ -80,7 +80,7 @@
         "mobile_heading_font_size": 36,
         "top_row_text_offset": 40,
         "row1_heading_l1": "<b>Let's go back </b><b style=\"color:#D92B2B;\">in</b>",
-        "row1_heading_l2_accent": "<b>time, </b><b style=\"color:#000;\">shall we?<b></b></b>",
+        "row1_heading_l2_accent": "<b>time, </b><b style=\"color:#000;\">shall we<b>?</b></b>",
         "row1_heading_l2_end": "",
         "row1_heading_l3": "",
         "heading_font_size": 64,
