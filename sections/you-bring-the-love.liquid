@@ -299,11 +299,12 @@
     }
     .pcf-left-col {
       padding-left: 0;
-      text-align: left;
+      text-align: center;
     }
     .pcf-title {
-      font-size: 2.4rem;
-      text-align: left;
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
     }
     
     .pcf-diagram-container {
@@ -312,12 +313,29 @@
       flex-direction: column;
       align-items: center;
       gap: 2.5rem;
+      position: relative;
+      --bowl-width: min(280px, 70vw);
     }
+
+    /* Vertical connector line on mobile, tangent to the left edge of the bowl */
+    .pcf-diagram-container::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      bottom: 23px;
+      left: calc(50% - var(--bowl-width) / 2);
+      width: 2px;
+      background-color: {{ section.settings.arc_color | default: '#ffffff' }};
+      z-index: 1;
+    }
+
     .pcf-bowl-wrapper {
       position: relative;
       top: auto; left: auto; transform: none !important;
-      width: 100%; max-width: 280px !important;
+      width: var(--bowl-width) !important;
+      max-width: 280px !important;
       margin: 0 auto;
+      z-index: 5;
     }
     .scale-in.is-visible { transform: scale(1) !important; }
 
@@ -327,7 +345,9 @@
       position: relative;
       top: auto; left: auto; transform: none !important;
       width: 100%;
-      max-width: 400px;
+      padding-left: calc(50% - var(--bowl-width) / 2 - 23px);
+      box-sizing: border-box;
+      z-index: 3;
     }
     .pcf-feature-content {
       position: relative;
@@ -335,14 +355,21 @@
       width: 100% !important;
       text-align: left;
       gap: 1.2rem;
+      display: flex;
+      align-items: center;
     }
     .pcf-icon-circle {
       width: 46px;
       height: 46px;
       min-width: 46px;
+      z-index: 5;
     }
     .pcf-feature-text {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      line-height: 1.35;
+      font-weight: 500;
+      color: #2b2b2b;
+      max-width: 280px;
     }
   }
 </style>
