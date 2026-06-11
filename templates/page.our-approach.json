@@ -374,14 +374,13 @@
       "name": "CTA Overlap Banner",
       "settings": {
         "bg_color": "#7d75b3",
-        "ribbon_image_desktop": "shopify://shop_images/Mask_group.png",
         "ribbon_image_mobile": "shopify://shop_images/Mask_group_1_0fdd980f-7238-41d8-9c2a-0894317af896.png",
         "heading": "So, ready to find what’s right for them?",
         "btn1_text": "Start With Your Pet",
         "btn1_link": "",
         "btn2_text": "Explore Products",
         "btn2_link": "",
-        "model_image": "shopify://shop_images/ChatGPT_Image_May_20_2026_12_32_31_PM_1.png",
+        "model_image": "shopify://shop_images/Group_59513.png",
         "padding_top": 20,
         "padding_bottom": 50
       }
