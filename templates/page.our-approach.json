@@ -244,7 +244,7 @@
           "settings": {
             "icon_type": "drop",
             "custom_icon": "shopify://shop_images/Layer_1_10.png",
-            "text": "Controlled low-temperature dehydration"
+            "text": "Controlled low-temperature \ndehydration"
           }
         },
         "feature_2": {
@@ -252,7 +252,7 @@
           "settings": {
             "icon_type": "shield",
             "custom_icon": "shopify://shop_images/Layer_1_10.png",
-            "text": "Helps retain essential amino acids and micronutrients"
+            "text": "Helps retain essential amino \nacids and micronutrients"
           }
         },
         "feature_3": {
@@ -260,7 +260,7 @@
           "settings": {
             "icon_type": "heat",
             "custom_icon": "shopify://shop_images/Layer_1_10.png",
-            "text": "Avoids nutrient degradation caused by high-heat processing"
+            "text": "Avoids nutrient degradation \ncaused by high-heat processing"
           }
         },
         "feature_4": {
@@ -268,7 +268,7 @@
           "settings": {
             "icon_type": "molecule",
             "custom_icon": "shopify://shop_images/Layer_1_10.png",
-            "text": "Maintains structural integrity of ingredients"
+            "text": "Maintains structural integrity \nof ingredients"
           }
         }
       },
