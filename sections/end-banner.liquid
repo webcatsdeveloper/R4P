@@ -24,16 +24,28 @@
     overflow: visible; /* Crucial to let the image hang out of the box */
   }
 
-  /* Abstract Yellow Squiggle Vector Graphic */
-  .cta-banner-squiggles {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 60%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-  }
+ .cta-banner-ribbon{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  overflow:hidden;
+  border-radius:40px;
+}
+
+.cta-banner-ribbon img{
+  position:absolute;
+
+  /* Match Figma placement */
+  right:-40px;
+  top:55px;
+
+  width:950px;
+  max-width:none;
+  height:auto;
+
+  object-fit:contain;
+}
 
   /* Left Side Text Content & Buttons */
   .cta-content-column {
