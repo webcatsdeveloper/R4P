@@ -74,7 +74,7 @@
         "row_gap": 80,
         "text_col_width": 50,
         "media_box_max_width": 520,
-        "mobile_padding_top": 40,
+        "mobile_padding_top": 140,
         "mobile_padding_bottom": 40,
         "mobile_row_gap": 60,
         "mobile_heading_font_size": 36,
