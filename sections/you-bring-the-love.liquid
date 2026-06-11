@@ -149,14 +149,13 @@
 
   @media (min-width: 990px) {
     .pcf-main-grid {
-      grid-template-columns: 4.5fr 7.5fr;
-      gap: 0px;
+      grid-template-columns: 500px 1fr; /* Set fixed column limit for left text */
+      gap: 40px;
     }
   }
 
   /* --- Left Column --- */
   .pcf-left-col {
-    padding-left: 20px;
     z-index: 5;
   }
   .pcf-title {
@@ -171,22 +170,24 @@
   /* --- Right Circular Diagram --- */
   .pcf-diagram-col {
     width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Keeps layout tight to the left column */
   }
+  
   .pcf-diagram-container {
     position: relative;
-    width: 100%;
-    aspect-ratio: 1.1 / 1; 
-    container-type: inline-size;
+    width: 870px; /* Exact width from figma layer specifications */
+    height: 740px; /* Gives headroom for top/bottom text peaks */
+    flex-shrink: 0;
   }
 
-  /* Center Bowl Wrapper Placement matching Figma geometry */
+  /* Fixed Bowl Sizing matching Figma scale */
   .pcf-bowl-wrapper {
     position: absolute;
     top: 50%;
-    left: 25%;
+    left: 240px; /* Locked center point offset */
     transform: translate(-50%, -50%);
-    width: 58cqw;  
-    max-width: 520px;
+    width: 530px;  
     z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
@@ -194,7 +195,6 @@
     height: auto;
     display: block;
     border-radius: 50%;
-    filter: drop-shadow(0px 10px 30px rgba(0,0,0,0.12));
   }
 
   /* SVG Concentric Arc */
@@ -206,21 +206,22 @@
         display: block;
         position: absolute;
         top: 50%;
-        left: 25%;
-        width: 82cqw;
-        height: 82cqw;
+        left: 240px;
+        width: 731px; /* Locked to ellipse height boundary from Figma */
+        height: 731px;
         transform: translate(-50%, -50%);
         pointer-events: none;
         z-index: 1;
     }
   }
 
-  /* Precise Trigonometric Positioning on Arc Line */
+  /* Precise Trigonometric Positioning using static pixel radii */
   .pcf-feature-point {
     position: absolute;
     top: 50%;
-    left: 25%;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(41cqw) rotate(calc(var(--angle) * -1));
+    left: 240px;
+    /* 365.5px represents the exact mathematical radius of Ellipse 26 in Figma */
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(365.5px) rotate(calc(var(--angle) * -1));
     z-index: 10;
   }
 
@@ -228,7 +229,7 @@
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translate(-38px, -50%);
+    transform: translate(-38px, -50%); /* Centers the 76px circles precisely over the arc path line */
     display: flex;
     align-items: center;
     gap: 24px;
@@ -264,7 +265,7 @@
     line-height: 32px;
     font-weight: 400;
     color: #1E1E1E;
-    max-width: 310px;
+    max-width: 328px; /* Restricts wrapping to match Figma widths */
     text-align: left;
   }
 
@@ -312,6 +313,8 @@
     
     .pcf-diagram-container {
       aspect-ratio: auto;
+      width: 100%;
+      height: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
