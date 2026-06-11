@@ -243,6 +243,7 @@
           "type": "feature",
           "settings": {
             "icon_type": "drop",
+            "custom_icon": "shopify://shop_images/Layer_1_10.png",
             "text": "Controlled low-temperature dehydration"
           }
         },
