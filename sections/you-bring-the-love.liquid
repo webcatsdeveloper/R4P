@@ -44,66 +44,68 @@
     {% endif %}
   </div>
 
-  <div class="pcf-main-grid">
-    
-    <div class="pcf-left-col pcf-animate fade-right delay-1">
-      <h2 class="pcf-title">{{ section.settings.main_title | newline_to_br }}</h2>
-    </div>
+  <div class="pcf-main-grid-outer">
+    <div class="pcf-main-grid">
+      
+      <div class="pcf-left-col pcf-animate fade-right delay-1">
+        <h2 class="pcf-title">{{ section.settings.main_title | newline_to_br }}</h2>
+      </div>
 
-    <div class="pcf-diagram-col pcf-animate fade-in delay-2">
-      <div class="pcf-diagram-container">
-        
-        <div class="pcf-bowl-wrapper pcf-animate scale-in delay-3">
-          {% if section.settings.center_image != blank %}
-            {{ section.settings.center_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
-          {% else %}
-            {{ 'product-1' | placeholder_svg_tag: 'pcf-placeholder' }}
-          {% endif %}
-        </div>
+      <div class="pcf-diagram-col pcf-animate fade-in delay-2">
+        <div class="pcf-diagram-container">
+          
+          <div class="pcf-bowl-wrapper pcf-animate scale-in delay-3">
+            {% if section.settings.center_image != blank %}
+              {{ section.settings.center_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'pcf-placeholder' }}
+            {% endif %}
+          </div>
 
-        <svg class="pcf-arc-svg" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 400 35 A 365.5 365.5 0 0 1 400 765" stroke="#FFFFFF" stroke-width="4" fill="none"/>
-        </svg>
+          <svg class="pcf-arc-svg" viewBox="0 0 731 731" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 365.5 4 A 361.5 361.5 0 0 1 365.5 727" stroke="#FFFFFF" stroke-width="4" fill="none"/>
+          </svg>
 
-        {% for block in section.blocks %}
-          {% case forloop.index %}
-            {% when 1 %} {% assign angle = '-48deg' %}
-            {% when 2 %} {% assign angle = '-16deg' %}
-            {% when 3 %} {% assign angle = '16deg' %}
-            {% when 4 %} {% assign angle = '48deg' %}
-            {% else %} {% assign angle = '0deg' %}
-          {% endcase %}
+          {% for block in section.blocks %}
+            {% case forloop.index %}
+              {% when 1 %} {% assign angle = '-48deg' %}
+              {% when 2 %} {% assign angle = '-16deg' %}
+              {% when 3 %} {% assign angle = '16deg' %}
+              {% when 4 %} {% assign angle = '48deg' %}
+              {% else %} {% assign angle = '0deg' %}
+            {% endcase %}
 
-          <div class="pcf-feature-point" style="--angle: {{ angle }};" {{ block.shopify_attributes }}>
-            <div class="pcf-feature-content pcf-animate fade-left" style="transition-delay: 0.{{ forloop.index | plus: 3 }}s;">
-              
-              <div class="pcf-icon-circle">
-                {% if block.settings.custom_icon != blank %}
-                  {{ block.settings.custom_icon | image_url: width: 80 | image_tag: class: 'pcf-custom-img' }}
-                {% else %}
-                  {% case block.settings.icon_type %}
-                    {% when 'drop' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M19.07 4.93l-2.83 2.83"></path></svg>
-                    {% when 'shield' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    {% when 'heat' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8c0-2-2-2-2-4"></path><path d="M12 8c0-2-2-2-2-4"></path><path d="M7 8c0-2-2-2-2-4"></path><path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path><path d="M12 22a7 7 0 0 0 7-7"></path></svg>
-                    {% when 'molecule' %}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><circle cx="12" cy="12" r="3"></circle><line x1="8.12" y1="8.12" x2="9.88" y2="9.88"></line><line x1="14.12" y1="9.88" x2="15.88" y2="8.12"></line><line x1="9.88" y1="14.12" x2="8.12" y2="15.88"></line><line x1="15.88" y1="14.12" x2="14.12" y2="15.88"></line></svg>
-                  {% endcase %}
-                {% endif %}
-              </div>
+            <div class="pcf-feature-point" style="--angle: {{ angle }};" {{ block.shopify_attributes }}>
+              <div class="pcf-feature-content pcf-animate fade-left" style="transition-delay: 0.{{ forloop.index | plus: 3 }}s;">
+                
+                <div class="pcf-icon-circle">
+                  {% if block.settings.custom_icon != blank %}
+                    {{ block.settings.custom_icon | image_url: width: 80 | image_tag: class: 'pcf-custom-img' }}
+                  {% else %}
+                    {% case block.settings.icon_type %}
+                      {% when 'drop' %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M19.07 4.93l-2.83 2.83"></path></svg>
+                      {% when 'shield' %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                      {% when 'heat' %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8c0-2-2-2-2-4"></path><path d="M12 8c0-2-2-2-2-4"></path><path d="M7 8c0-2-2-2-2-4"></path><path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path><path d="M12 22a7 7 0 0 0 7-7"></path></svg>
+                      {% when 'molecule' %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><circle cx="12" cy="12" r="3"></circle><line x1="8.12" y1="8.12" x2="9.88" y2="9.88"></line><line x1="14.12" y1="9.88" x2="15.88" y2="8.12"></line><line x1="9.88" y1="14.12" x2="8.12" y2="15.88"></line><line x1="15.88" y1="14.12" x2="14.12" y2="15.88"></line></svg>
+                    {% endcase %}
+                  {% endif %}
+                </div>
 
-              <div class="pcf-feature-text">
-                {{ block.settings.text | newline_to_br }}
+                <div class="pcf-feature-text">
+                  {{ block.settings.text | newline_to_br }}
+                </div>
               </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
 
+        </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
 
@@ -136,27 +138,37 @@
   .pcf-intro-subtext p { margin: 0; }
   .pcf-intro-subtext strong { font-weight: 700; color: #000; display: block; margin-top: 8px; }
 
-  /* --- Main Grid Layout --- */
+  /* --- Main Layout Grid Isolation Containers --- */
+  .pcf-main-grid-outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
   .pcf-main-grid {
-    max-width: 1440px;
+    width: 100%;
+    max-width: 1530px; /* Locked precisely to your 1529.5px layout grid asset */
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
     gap: 4rem;
     padding: 0 40px;
+    box-sizing: border-box;
   }
 
   @media (min-width: 990px) {
     .pcf-main-grid {
-      grid-template-columns: 500px 1fr; /* Set fixed column limit for left text */
-      gap: 40px;
+      grid-template-columns: 552px 869px; /* Absolute fixed columns from your figma blue print dimensions */
+      gap: 0px;
+      justify-content: center;
     }
   }
 
   /* --- Left Column --- */
   .pcf-left-col {
     z-index: 5;
+    box-sizing: border-box;
   }
   .pcf-title {
     font-size: 120px;
@@ -170,29 +182,31 @@
   /* --- Right Circular Diagram --- */
   .pcf-diagram-col {
     width: 100%;
-    display: flex;
-    justify-content: flex-start; /* Keeps layout tight to the left column */
+    box-sizing: border-box;
   }
   
   .pcf-diagram-container {
     position: relative;
-    width: 870px; /* Exact width from figma layer specifications */
-    height: 740px; /* Gives headroom for top/bottom text peaks */
-    flex-shrink: 0;
+    width: 100%;
+    max-width: 869px; 
+    height: 769px; /* Bound absolute coordinate height window */
+    margin: 0 auto;
   }
 
-  /* Fixed Bowl Sizing matching Figma scale */
+  /* Fixed Absolute Bowl Dimension Sizing */
   .pcf-bowl-wrapper {
     position: absolute;
     top: 50%;
-    left: 240px; /* Locked center point offset */
+    left: 215px; /* Aligns center anchor precisely matching layout lines */
     transform: translate(-50%, -50%);
     width: 530px;  
+    height: 530px;
     z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
     display: block;
     border-radius: 50%;
   }
@@ -206,8 +220,8 @@
         display: block;
         position: absolute;
         top: 50%;
-        left: 240px;
-        width: 731px; /* Locked to ellipse height boundary from Figma */
+        left: 215px;
+        width: 731px; /* Locked down completely to the Figma ellipse layer size */
         height: 731px;
         transform: translate(-50%, -50%);
         pointer-events: none;
@@ -215,12 +229,12 @@
     }
   }
 
-  /* Precise Trigonometric Positioning using static pixel radii */
+  /* Fixed mathematical absolute radius translations */
   .pcf-feature-point {
     position: absolute;
     top: 50%;
-    left: 240px;
-    /* 365.5px represents the exact mathematical radius of Ellipse 26 in Figma */
+    left: 215px;
+    /* 365.5px translates coordinates to exact path boundary of Ellipse 26 */
     transform: translate(-50%, -50%) rotate(var(--angle)) translateX(365.5px) rotate(calc(var(--angle) * -1));
     z-index: 10;
   }
@@ -229,7 +243,7 @@
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translate(-38px, -50%); /* Centers the 76px circles precisely over the arc path line */
+    transform: translate(-38px, -50%); /* Centers the circles cleanly directly across path line splits */
     display: flex;
     align-items: center;
     gap: 24px;
@@ -265,7 +279,7 @@
     line-height: 32px;
     font-weight: 400;
     color: #1E1E1E;
-    max-width: 328px; /* Restricts wrapping to match Figma widths */
+    max-width: 328px; /* Strict content width from figma layer definitions */
     text-align: left;
   }
 
@@ -338,6 +352,7 @@
       position: relative;
       top: auto; left: auto; transform: none !important;
       width: var(--bowl-width) !important;
+      height: var(--bowl-width) !important;
       margin: 0 auto;
       z-index: 5;
     }
