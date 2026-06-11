@@ -2,7 +2,7 @@
 {%- style -%}
   #section-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
-    padding: 100px 0;
+    padding: 6vw 0;
     overflow: hidden;
     font-family: inherit;
     color: {{ section.settings.text_color }};
@@ -95,11 +95,11 @@
   /* --- Intro Header --- */
   .pcf-intro-block {
     max-width: 1012px;
-    margin: 0 auto 5rem auto;
+    margin: 0 auto 4vw auto;
     text-align: center;
   }
   .pcf-intro-title {
-    font-size: clamp(32px, 3.5vw, 46px);
+    font-size: clamp(28px, 2.5vw, 46px);
     line-height: 1.15;
     margin: 0 0 1rem 0;
     letter-spacing: -0.02em;
@@ -111,7 +111,7 @@
   .pcf-intro-title .heading-line-2 { font-weight: 800; }
   
   .pcf-intro-subtext {
-    font-size: 23px;
+    font-size: clamp(16px, 1.2vw, 23px);
     line-height: 1.6;
     margin: 0;
     color: inherit;
@@ -120,27 +120,27 @@
   }
   .pcf-intro-subtext strong { font-weight: 700; color: #000; }
 
-  /* --- Desktop Proportional Layout Mirroring Figma Workspace --- */
+  /* --- Dynamic Canvas System Proportional to Viewport Width --- */
   .pcf-canvas-container {
     position: relative;
     width: 100%;
-    max-width: 1440px;
-    height: 750px;
+    max-width: 1922px;
+    height: 48vw; /* Proportional scale height */
     margin: 0 auto;
   }
 
-  /* --- Title Styling Matched exactly with Figma Values --- */
+  /* --- Left Main Heading (Scaled dynamically to prevent zoom feel) --- */
   .pcf-left-col {
     position: absolute;
-    width: 552px;
-    left: 40px;
-    top: 40px;
+    width: 28.7vw; /* 552px / 1922px */
+    left: 7.2vw;   /* Aligned accurately with canvas bounds */
+    top: 3vw;
     z-index: 5;
   }
   .pcf-title {
-    font-size: 120px;
+    font-size: 6.24vw; /* 120px / 1922px */
     font-weight: 700;
-    line-height: 101px;
+    line-height: 0.84;
     letter-spacing: -0.04em;
     margin: 0;
     color: #000000;
@@ -154,13 +154,13 @@
     left: 0;
   }
 
-  /* --- Central Bowl Setup --- */
+  /* --- Proportional Central Bowl --- */
   .pcf-bowl-wrapper {
     position: absolute;
-    width: 540px;
-    height: 540px;
-    left: 440px;
-    top: 60px;
+    width: 23.5vw;  /* Scaled naturally down from 540px */
+    height: 23.5vw;
+    left: 28.5vw;
+    top: 4vw;
     z-index: 2;
   }
   .pcf-bowl-img, .pcf-placeholder {
@@ -168,84 +168,84 @@
     height: auto;
     display: block;
     border-radius: 50%;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12));
+    filter: drop-shadow(0 1.5vw 3vw rgba(0,0,0,0.1));
   }
 
-  /* --- Orbit Arc Line (Figma Ellipse 26) --- */
+  /* --- Perfectly Scaled Proportional Orbit Arc Line --- */
   .pcf-orbit-arc {
     position: absolute;
     box-sizing: border-box;
-    width: 365.5px;
-    height: 731px;
-    left: 710px;
-    top: -35px;
-    border: 4px solid #FFFFFF;
-    border-radius: 0 365.5px 365.5px 0 / 0 365.5px 365.5px 0;
+    width: 19.01vw; /* 365.5px / 1922px */
+    height: 38.03vw; /* 731px / 1922px */
+    left: 40.8vw;
+    top: -1vw;
+    border: 0.22vw solid #FFFFFF; /* Proportional border thickness */
+    border-radius: 0 19.01vw 19.01vw 0 / 0 19.01vw 19.01vw 0;
     border-left: none;
     z-index: 1;
     pointer-events: none;
   }
 
-  /* --- Global Node Base --- */
+  /* --- Global Scaled Node Base --- */
   .pcf-node {
     position: absolute;
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 1.25vw;
     z-index: 10;
   }
   .pcf-icon-circle {
-    width: 76px;
-    height: 76px;
+    width: 3.95vw; /* 76px / 1922px */
+    height: 3.95vw;
     background: #FFFFFF;
     border-radius: 50%;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0.2vw 0.4vw rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
   .pcf-icon-circle svg {
-    width: 32px;
-    height: 32px;
+    width: 1.8vw;
+    height: 1.8vw;
   }
   .pcf-feature-text {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 1.24vw; /* 24px / 1922px */
+    line-height: 1.33;
     font-weight: 400;
     color: #1E1E1E;
     white-space: nowrap;
   }
 
-  /* --- Precise Node Positional Calculation From Figma Vectors --- */
+  /* --- Scaled Positional Nodes relative to 1922px Canvas --- */
   
   /* Node 1: Top Point */
   .pcf-node.node-1 {
-    left: 862px;
-    top: 5px;
+    left: 50.5vw;
+    top: 1.1vw;
   }
   /* Node 2: Top-Middle Point */
   .pcf-node.node-2 {
-    left: 1010px;
-    top: 174px;
+    left: 57vw;
+    top: 10vw;
   }
   /* Node 3: Bottom-Middle Point */
   .pcf-node.node-3 {
-    left: 1022px;
-    top: 370px;
+    left: 57.7vw;
+    top: 20.2vw;
   }
   /* Node 4: Bottom Point */
   .pcf-node.node-4 {
-    left: 913px;
-    top: 560px;
+    left: 52.2vw;
+    top: 30.2vw;
   }
 
   /* --- Animations --- */
   .pcf-animate { opacity: 0; will-change: opacity, transform; }
-  .fade-up { transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .fade-right { transform: translateX(-30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-up { transform: translateY(2vw); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-right { transform: translateX(-2vw); transition: opacity 0.8s ease, transform 0.8s ease; }
   .fade-in { transition: opacity 1s ease; }
-  .scale-in { transform: scale(0.85); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .scale-in { transform: scale(0.9); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
   
   .pcf-animate.is-visible { opacity: 1; transform: translate(0) scale(1); }
 
@@ -253,28 +253,28 @@
   .delay-2 { transition-delay: 0.2s; }
   .delay-3 { transition-delay: 0.3s; }
 
-  /* --- Fully Responsive Mobile Overrides --- */
+  /* --- Mobile Layout Clean Overrides --- */
   @media screen and (max-width: 1120px) {
     #section-{{ section.id }} {
-      padding: 60px 20px !important;
+      padding: 50px 20px !important;
     }
     .pcf-canvas-container {
       height: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2.5rem;
+      gap: 2rem;
     }
     .pcf-left-col {
       position: relative;
       width: 100%;
       left: auto; top: auto;
       text-align: left;
-      padding-left: 15px;
+      padding-left: 10px;
     }
     .pcf-title {
-      font-size: 54px;
-      line-height: 58px;
+      font-size: 48px;
+      line-height: 52px;
     }
     .pcf-diagram-viewport {
       position: relative;
@@ -287,16 +287,16 @@
     .pcf-bowl-wrapper {
       position: relative;
       left: auto; top: auto;
-      width: min(280px, 75vw);
-      height: min(280px, 75vw);
+      width: min(260px, 75vw);
+      height: min(260px, 75vw);
       margin: 0 auto;
     }
     .pcf-orbit-arc {
       position: absolute;
       width: 2px;
-      height: calc(100% - 240px);
-      left: calc(50% - min(280px, 75vw)/2);
-      top: 140px;
+      height: calc(100% - 200px);
+      left: calc(50% - min(260px, 75vw)/2);
+      top: 130px;
       border: none;
       border-left: 2px solid #FFFFFF;
       border-radius: 0;
@@ -305,7 +305,7 @@
       position: relative;
       left: auto !important; top: auto !important;
       width: 100%;
-      padding-left: calc(50% - min(280px, 75vw)/2 - 38px);
+      padding-left: calc(50% - min(260px, 75vw)/2 - 28px);
       box-sizing: border-box;
       gap: 15px;
     }
@@ -318,8 +318,8 @@
       height: 22px;
     }
     .pcf-feature-text {
-      font-size: 16px;
-      line-height: 22px;
+      font-size: 15px;
+      line-height: 20px;
       white-space: normal;
     }
   }
@@ -334,7 +334,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { root: null, threshold: 0.15 });
+    }, { root: null, threshold: 0.1 });
 
     document.querySelectorAll('#section-{{ section.id }} .pcf-animate').forEach(el => observer.observe(el));
   });
