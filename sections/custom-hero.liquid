@@ -25,6 +25,11 @@
           "label": "Background Image"
         },
         {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image"
+        },
+        {
           "type": "text",
           "id": "hero_heading",
           "label": "Heading",
@@ -98,7 +103,14 @@
                 {{ block.settings.hero_description }}
               </div>
 
-              {% if block.settings.bg_image != blank %}
+              {% if block.settings.mobile_image != blank %}
+              <img
+                class="hero-mobile-image"
+                src="{{ block.settings.mobile_image | image_url: width: 800 }}"
+                alt="{{ block.settings.hero_heading | escape }}"
+                loading="lazy"
+              >
+              {% elsif block.settings.bg_image != blank %}
               <img
                 class="hero-mobile-image"
                 src="{{ block.settings.bg_image | image_url: width: 800 }}"
@@ -476,7 +488,7 @@ TEXT LOAD + SLIDE ANIMATION
     .hero-container{
         height: auto !important;
         margin: 0 auto !important;
-        padding: 40px 24px 0 24px !important;
+        padding: 130px 24px 0 24px !important;
     }
 
     .hero-content-wrap{
