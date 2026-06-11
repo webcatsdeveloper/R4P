@@ -74,17 +74,20 @@
         {% for block in section.blocks %}
           {% case forloop.index %}
             {% when 1 %}
-              {% assign left_val = '59.39%' %}
-              {% assign top_val = '18.97%' %}
-            {% when 2 %}
-              {% assign left_val = '70.43%' %}
-              {% assign top_val = '39.81%' %}
-            {% when 3 %}
-              {% assign left_val = '69.96%' %}
-              {% assign top_val = '62.17%' %}
-            {% when 4 %}
-              {% assign left_val = '59.39%' %}
-              {% assign top_val = '81.03%' %}
+  {% assign left_val = '67%' %}
+  {% assign top_val = '20%' %}
+
+{% when 2 %}
+  {% assign left_val = '76%' %}
+  {% assign top_val = '42%' %}
+
+{% when 3 %}
+  {% assign left_val = '76%' %}
+  {% assign top_val = '64%' %}
+
+{% when 4 %}
+  {% assign left_val = '67%' %}
+  {% assign top_val = '86%' %}
             {% else %}
               {% assign left_val = '71.5%' %}
               {% assign top_val = '50%' %}
