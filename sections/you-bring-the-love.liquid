@@ -2,7 +2,7 @@
 {%- style -%}
   #section-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
-    padding: 120px 0 140px 0;
+    padding: 100px 100px 100px 100px;
     overflow: hidden;
     font-family: inherit;
     color: {{ section.settings.text_color }};
@@ -67,10 +67,10 @@
 
         {% for block in section.blocks %}
           {% case forloop.index %}
-            {% when 1 %} {% assign angle = '-48deg' %}
-            {% when 2 %} {% assign angle = '-16deg' %}
-            {% when 3 %} {% assign angle = '16deg' %}
-            {% when 4 %} {% assign angle = '48deg' %}
+            {% when 1 %} {% assign angle = '-52deg' %}
+            {% when 2 %} {% assign angle = '-15deg' %}
+            {% when 3 %} {% assign angle = '18deg' %}
+            {% when 4 %} {% assign angle = '52deg' %}
             {% else %} {% assign angle = '0deg' %}
           {% endcase %}
 
@@ -110,54 +110,50 @@
 <style>
   /* --- Intro Header --- */
   .pcf-intro-block {
-    max-width: 1086px;
-    margin: 0 auto 4.5rem auto;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
     text-align: center;
   }
   .pcf-intro-title {
-    font-size: 62px;
-    line-height: 67px;
-    font-weight: 700;
-    margin: 0 0 20px 0;
-    letter-spacing: -0.01em;
+    font-size: clamp(32px, 3.5vw, 46px);
+    line-height: 1.15;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   .pcf-intro-title .heading-line-1 {
-    font-weight: 700;
+    font-weight: 900;
   }
   .pcf-intro-title .heading-line-2 {
-    font-weight: 700;
+    font-weight: 800;
   }
   .pcf-intro-subtext {
-    max-width: 1012px;
-    margin: 0 auto;
-    font-size: 24px;
-    line-height: 32px;
-    font-weight: 400;
-    color: #1E1E1E;
-    padding: 0 16px;
+    font-size: 23px;
+    line-height: 1.6;
+    margin: 0;
+    color: inherit;
+    opacity: 0.85;
+    padding:0 16px;
   }
   .pcf-intro-subtext p { margin: 0; }
   .pcf-intro-subtext strong { font-weight: 700; color: #000; opacity: 1; }
 
   /* --- Main Grid Layout --- */
   .pcf-main-grid {
-    max-width: 1440px;
+    max-width: 1340px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
     gap: 3.5rem;
-    padding: 0 60px; /* Provides consistent spacing from screen edges */
-    box-sizing: border-box;
   }
 
   @media (min-width: 990px) {
     .pcf-main-grid {
-      grid-template-columns: 5fr 7fr; /* Adjusted column proportions to bring components closer */
-      gap: 0;
+      grid-template-columns: 3.5fr 8.5fr;
+      gap: 2rem;
     }
   }
 
@@ -167,11 +163,11 @@
     z-index: 5;
   }
   .pcf-title {
-    font-size: 120px;
-    font-weight: 700;
-    line-height: 101px;
-    letter-spacing: -0.03em;
-    margin: 0;
+    font-size: clamp(3rem, 6.5vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    margin-top: -40px!important;
   }
 
   /* --- Right Circular Diagram --- */
@@ -181,18 +177,17 @@
   .pcf-diagram-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 1.15 / 1; 
+    aspect-ratio: 1.25 / 1; 
     container-type: inline-size;
   }
 
-  /* Center Anchor (Adjusted left spacing to mimic Figma diagram layout) */
+  /* Center Anchor (Shifted Left to 40% to leave room for text) */
   .pcf-bowl-wrapper {
     position: absolute;
     top: 50%;
-    left: 28%;
+    left: 40%;
     transform: translate(-50%, -50%);
-    width: 53cqw;  
-    max-width: 530px;
+    {% comment %} width: 52cqw;  {% endcomment %}
     z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
@@ -200,6 +195,7 @@
     height: auto;
     display: block;
     border-radius: 50%;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
   }
 
   /* SVG Concentric Arc */
@@ -210,11 +206,10 @@
     .pcf-arc-svg {
         display: block;
         position: absolute;
-        top: 50%;
-        left: 28%;
-        width: 73cqw;
-        height: 73cqw;
-        transform: translate(-50%, -50%);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         pointer-events: none;
         z-index: 1;
     }
@@ -224,8 +219,8 @@
   .pcf-feature-point {
     position: absolute;
     top: 50%;
-    left: 28%;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(36.5cqw) rotate(calc(var(--angle) * -1));
+    left: 40%;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(31.5cqw) rotate(calc(var(--angle) * -1));
     z-index: 10;
   }
 
@@ -234,19 +229,19 @@
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translate(-38px, -50%);
+    transform: translate(-26px, -50%);
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 15px;
     width: max-content;
   }
 
   .pcf-icon-circle {
-    width: 76px;
-    height: 76px;
+    width: 52px;
+    height: 52px;
     background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -254,24 +249,22 @@
     z-index: 2;
   }
   .pcf-icon-circle svg {
-    width: 36px;
-    height: 36px;
+    width: 22px;
+    height: 22px;
   }
   .pcf-custom-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 16px;
+    padding: 10px;
     border-radius: 50%;
   }
 
   .pcf-feature-text {
-    font-size: 24px;
-    line-height: 32px;
-    font-weight: 400;
-    color: #1E1E1E;
-    max-width: 328px;
-    text-align: left;
+    font-size: 15px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #2b2b2b;
   }
 
   /* --- Animations --- */
@@ -295,7 +288,7 @@
       padding: 60px 20px !important;
     }
     .pcf-intro-block {
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
     }
     .pcf-intro-title {
       font-size: 28px;
@@ -304,17 +297,16 @@
       grid-template-columns: 1fr;
       text-align: center;
       gap: 2.5rem;
-      padding: 0;
     }
     .pcf-left-col {
       padding-left: 0;
       text-align: center;
     }
     .pcf-title {
-        font-size: 48px;
-        line-height: 44px;
-        text-align: center;
-        margin-bottom: 0;
+        font-size: 35px;
+        text-align: left;
+        margin-bottom: 1.5rem;
+        padding-left: 35px;
     }
     
     .pcf-diagram-container {
@@ -375,14 +367,14 @@
       z-index: 5;
     }
     .pcf-feature-text {
-      font-size: 16px;
-      line-height: 22px;
+      font-size: 0.95rem;
+      line-height: 1.35;
       font-weight: 500;
-      color: #1E1E1E;
+      color: #2b2b2b;
       max-width: 280px;
     }
     .heading-line-1{
-      font-weight:700 !important;
+      font-weight:900 !important;
     }
   }
 </style>
