@@ -423,55 +423,108 @@ TEXT LOAD + SLIDE ANIMATION
     }
 }
 
-/* MOBILE */
+/* =========================
+   NEW MOBILE DESIGN 
+========================= */
 @media screen and (max-width:768px){
 
-    .right4paws-hero{
-        height:700px;
+    .right4paws-hero {
+        height: 750px;
     }
 
-    .hero-container{
-        height:100%;
-        margin-top:0;
-        padding:0 20px;
+    .slideshow-inner {
+        height: 100%;
     }
 
-    .hero-bg-image{
-        object-position:center;
+    .hero-container {
+        height: 100%;
+        margin-top: 0;
+        padding: 0 15px;
     }
 
-    .hero-content-wrap{
-        position:relative;
-        top:80px;
-        left:0;
-        width:100%;
-        text-align:center;
+    /* Reposition image to the bottom so it sits under the text */
+    .hero-bg-image {
+        object-position: center bottom;
+        height: 60%;
+        top: auto;
+        bottom: 80px; /* Aligns the paw above the dots */
     }
 
-    .hero-content-wrap h1{
-        font-size:52px;
-        line-height:0.95;
-        letter-spacing:-2px;
+    /* Full-height flex wrapper for text and button */
+    .hero-content-wrap {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 50px);
+        text-align: center;
+        padding: 0;
     }
 
-    .hero-description{
-        font-size:17px;
-        max-width:100%;
-        margin:0 auto 30px;
+    .hero-text-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
     }
 
-    .hero-btn{
-        height:52px;
-        font-size:13px;
+    .hero-content-wrap h1 {
+        font-size: 54px !important;
+        line-height: 1.05;
+        letter-spacing: -2px;
+        margin-bottom: 24px;
     }
 
-    .hero-bottom-curve-wrap svg{
-        height:90px;
+    .hero-description {
+        font-size: 16px;
+        line-height: 1.4;
+        max-width: 320px;
+        margin: 0 auto;
     }
 
-    .slideshow-dots{
-        bottom:70px;
+    /* Pushes button to the bottom overlapping the image */
+    .hero-btn {
+        margin-top: auto;
+        margin-bottom: 75px; 
+        height: 56px;
+        font-size: 14px;
+        width: 100%;
+        max-width: 300px;
+        z-index: 10;
     }
+
+    /* Hide the bottom white curve as seen in mobile design */
+    .hero-bottom-curve-wrap {
+        display: none; 
+    }
+
+    /* Move dots to the very bottom */
+    .slideshow-dots {
+        bottom: 30px;
+    }
+
+    /* Reset base animation state for mobile to avoid horizontal scrolling issues */
+    .hero-text-content h1,
+    .hero-text-content .hero-description,
+    .hero-text-content .hero-btn {
+        transform: translateY(20px);
+    }
+
+    /* Override with a cleaner vertical fade up for mobile */
+    @keyframes slideFadeUpMobile {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-slide.is-active .hero-text-content h1,
+    .hero-slide.is-active .hero-description,
+    .hero-slide.is-active .hero-btn {
+        animation: slideFadeUpMobile 0.8s ease forwards;
+    }
+
+    .hero-slide.is-active .hero-description { animation-delay: 0.15s; }
+    .hero-slide.is-active .hero-btn { animation-delay: 0.3s; }
 }
 </style>
 
