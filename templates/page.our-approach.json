@@ -295,24 +295,28 @@
         "badge_icon_jgQ7ta": {
           "type": "badge_icon",
           "settings": {
+            "icon_img": "shopify://shop_images/Layer_1_12.png",
             "label": "Higher nutrient<br> retention"
           }
         },
         "badge_icon_axahzB": {
           "type": "badge_icon",
           "settings": {
+            "icon_img": "shopify://shop_images/Layer_1_13.png",
             "label": "Improved digestion and absorption"
           }
         },
         "badge_icon_qayRnp": {
           "type": "badge_icon",
           "settings": {
+            "icon_img": "shopify://shop_images/Layer_1_15.png",
             "label": "Consistent, balanced nutrition"
           }
         },
         "badge_icon_Q6TRUQ": {
           "type": "badge_icon",
           "settings": {
+            "icon_img": "shopify://shop_images/Layer_1_14.png",
             "label": "Reduced reliance on synthetic supplements"
           }
         },
