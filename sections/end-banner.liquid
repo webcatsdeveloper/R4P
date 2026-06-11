@@ -114,7 +114,8 @@
      ========================================================================== */
   @media (max-width: 991px) {
     .cta-banner-section-{{ section.id }} {
-      padding: 20px 15px; /* Adds comfortable outer structural viewport spacing */
+      /* --- UPDATED: Reduced padding to remove large outer gaps --- */
+      padding: 20px 10px; 
     }
 
     .cta-banner-wrapper {
@@ -125,9 +126,9 @@
       min-height: auto;
       overflow: hidden; /* Clips the ribbon background perfectly to the card layout edge */
       border-radius: 36px;
-      /* --- UPDATED MOBILE WIDTHS TO MATCH MOCKUP --- */
+      /* --- UPDATED: Maximized card space to fit Figma dimensions closely --- */
       width: 100%;
-      max-width: 350px; /* Constrains the purple banner card size on mobile screens */
+      max-width: 357px; 
       margin-left: auto;
       margin-right: auto;
     }
@@ -179,12 +180,11 @@
       object-fit: cover;
     }
 
-    /* --- UPDATED TO ENSURE IMAGE FITS THE WIDTH PROPERLY --- */
     .cta-image-column {
       position: relative;
       width: 100%;
-      max-width: 100%; /* Allows image space to scale fully within the now constrained card */
-      height: auto;    /* Uses auto height alongside width properties to stay proportional */
+      max-width: 100%; 
+      height: auto;    
       right: auto;
       bottom: 0;
       display: flex;
@@ -196,7 +196,7 @@
 
     .cta-image-column img {
       width: 100%;
-      height: auto;    /* Keeps image from distorting or extending past bounds */
+      height: auto;    
       display: block;
       object-fit: contain;
       object-position: bottom center;
