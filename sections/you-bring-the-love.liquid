@@ -61,8 +61,8 @@
           {% endif %}
         </div>
 
-        <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="z-index: 6 !important;">
-          <path d="M 17.73 17.73 A 31.5 31.5 0 1 1 17.73 62.27" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
+        <svg class="pcf-arc-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 40 18.97 A 31.5 31.5 0 0 1 70.43 39.81 A 31.5 31.5 0 0 1 69.96 62.17 A 31.5 31.5 0 0 1 40 81.03" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.5" stroke-linecap="round" fill="none"/>
         </svg>
 
         {% for block in section.blocks %}
@@ -79,7 +79,7 @@
             {% when 4 %}
               {% assign left_val = '59.39%' %}
               {% assign top_val = '81.03%' %}
-            {% else %}
+            | else %}
               {% assign left_val = '71.5%' %}
               {% assign top_val = '50%' %}
           {% endcase %}
@@ -149,7 +149,7 @@
     margin: 0;
     color: inherit;
     opacity: 0.85;
-    padding:0 16px;
+    padding: 0 16px;
   }
   .pcf-intro-subtext p { margin: 0; }
   .pcf-intro-subtext strong { font-weight: 700; color: #000; opacity: 1; }
@@ -203,7 +203,7 @@
     top: 50%;
     left: 40%;
     transform: translate(-50%, -50%);
-    z-index: 3; /* Placed beneath arc track and node icons */
+    z-index: 3; 
   }
   .pcf-bowl-img, .pcf-placeholder {
     width: 100%;
@@ -213,7 +213,7 @@
     filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
   }
 
-  /* SVG Concentric Arc Line */
+  /* SVG Open Semi-Circle Arc */
   .pcf-arc-svg {
     display: none;
   }
@@ -226,13 +226,13 @@
         width: 100%;
         height: 100%;
         pointer-events: none;
-        z-index: 6 !important; /* Forces the white track line to overlay right down the center of the bubble */
+        z-index: 6 !important; /* Retained stacking context to cleanly bisect node items */
     }
   }
 
   .pcf-feature-point {
     position: absolute;
-    z-index: 4; /* Container sits below line, but inner contents elevate graphics */
+    z-index: 4; 
   }
 
   /* Alignment wrapper centering the 52px diameter icon bubble on the coordinates */
@@ -265,7 +265,6 @@
     z-index: 4;
   }
   
-  /* FIXED: Houses the vector artwork safely above the overlaying white line intersection layer */
   .pcf-icon-inner-content {
     position: relative;
     z-index: 8 !important; 
@@ -356,7 +355,7 @@
       --bowl-width: min(280px, 70vw);
     }
 
-    /* Vertical connector line on mobile, tangent to the left edge of the bowl */
+    /* Vertical connector line on mobile */
     .pcf-diagram-container::before {
       content: "";
       position: absolute;
@@ -422,7 +421,7 @@
       max-width: 280px;
     }
     .heading-line-1{
-      font-weight:900 !important;
+      font-weight: 900 !important;
     }
   }
 </style>
