@@ -216,7 +216,7 @@
         "mobile_text_alignment": "left",
         "mobile_side_padding": 24,
         "mobile_padding_top": 10,
-        "mobile_padding_bottom": 60,
+        "mobile_padding_bottom": 10,
         "mobile_center_gap": 32,
         "mobile_heading_font_size": 44,
         "mobile_line5_font_size": 44,
