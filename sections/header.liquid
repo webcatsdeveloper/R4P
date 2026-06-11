@@ -407,6 +407,84 @@
         position: absolute !important;
         display: block !important;
     }
+
+    /* ======================================= */
+    /* MOBILE MENU DRAWER OVERRIDES */
+    /* ======================================= */
+
+    /* 1. Website Font Family on Menu Links */
+    .menu-drawer__menu-item {
+        font-family: 'Degular Demo', sans-serif !important;
+        font-size: 24px !important;
+        font-weight: 900 !important;
+        letter-spacing: -0.02em !important;
+        text-transform: uppercase !important;
+        color: #1F1F1F !important;
+        padding-left: 10px !important;
+    }
+
+    /* 2. Positioning the X Close Button to the Top Right */
+    .menu-drawer__close-button {
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        left: auto !important;
+        width: 44px !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        z-index: 99 !important;
+    }
+
+    .header-mobile-menu-wrapper .menu-drawer__close-button svg,
+    .header-mobile-menu-wrapper .menu-drawer__close-button .header-drawer-icon svg {
+        width: 24px !important;
+        height: 24px !important;
+        stroke: #1F1F1F !important;
+        color: #1F1F1F !important;
+    }
+
+    /* Ensure navigation starts below the X button */
+    .menu-drawer__navigation {
+        padding-top: 70px !important;
+    }
+
+    /* 3. Smooth Open/Close Slide Animation & Backdrop Blur */
+    .menu-drawer {
+        --drawer-animation-speed: 0.45s !important;
+        transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important, 
+                    visibility 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important, 
+                    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .menu-drawer__backdrop {
+        --drawer-animation-speed: 0.45s !important;
+        backdrop-filter: blur(5px) brightness(0.75) !important;
+        -webkit-backdrop-filter: blur(5px) brightness(0.75) !important;
+        transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    /* Staggered Item Slide-up Entrance Animation */
+    .menu-drawer-container.menu-open .menu-drawer__animated-element {
+        animation: menu-drawer-nav-open-custom 0.5s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+        animation-delay: calc(0.18s + (var(--menu-drawer-animation-index) - 1) * 0.06s) !important;
+    }
+
+    @keyframes menu-drawer-nav-open-custom {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 }
 
 </style>

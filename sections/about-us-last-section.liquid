@@ -22,8 +22,20 @@
 
     <div class="purp-col-left purp-scroll-animate stagger-1">
       <h2 class="purp-main-title">
-        <span class="purp-heading-black">{{ section.settings.title_top }}</span><br>
-        <span class="purp-heading-red">{{ section.settings.title_bottom }}</span>
+        <span class="purp-heading-black">
+          {%- if section.settings.title_top == 'Today, the thinking' -%}
+            Today, the<br class="purp-mobile-br"> thinking
+          {%- else -%}
+            {{ section.settings.title_top }}
+          {%- endif -%}
+        </span><br class="purp-desktop-br">
+        <span class="purp-heading-red">
+          {%- if section.settings.title_bottom == 'remains the same.' -%}
+            remains<br class="purp-mobile-br"> the same.
+          {%- else -%}
+            {{ section.settings.title_bottom }}
+          {%- endif -%}
+        </span>
       </h2>
       
       <div class="purp-sparkle-wrapper">
@@ -40,10 +52,17 @@
         <path d="M60 40 L55 5" />
         <path d="M90 50 L105 25" />
       </svg>
-      
+
       <div class="purp-image-wrap">
+        {% if section.settings.mobile_image != blank %}
+          {{ section.settings.mobile_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.mobile_image.alt, class: 'purp-dog-img purp-mobile-img-only' }}
+        {% endif %}
         {% if section.settings.main_image != blank %}
-          {{ section.settings.main_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.main_image.alt, class: 'purp-dog-img' }}
+          {%- assign img_class = 'purp-dog-img' -%}
+          {%- if section.settings.mobile_image != blank -%}
+            {%- assign img_class = 'purp-dog-img purp-desktop-img-only' -%}
+          {%- endif -%}
+          {{ section.settings.main_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.main_image.alt, class: img_class }}
         {% else %}
           {{ 'product-1' | placeholder_svg_tag: 'purp-placeholder' }}
         {% endif %}
@@ -85,8 +104,6 @@
     </div>
 
   </div>
-  
-  {% comment %} <div class="purp-bottom-banner" style="background-color: {{ section.settings.color_heading_2 }};"></div> {% endcomment %}
 </div>
 
 <style>
@@ -209,16 +226,6 @@
     max-width: 280px;
   }
 
-  /* --- Bottom Red Banner --- */
-  .purp-bottom-banner {
-    width: 100%;
-    height: 60px;
-    border-radius: 30px 30px 0 0;
-    margin-top: -20px; /* Pulls it up slightly behind the dog image */
-    position: relative;
-    z-index: 1;
-  }
-
   /* --- Staggered Scroll Animations --- */
   .purp-scroll-animate {
     opacity: 0;
@@ -236,43 +243,140 @@
   .stagger-2 { transition-delay: 0.25s; }
   .stagger-3 { transition-delay: 0.4s; }
 
+  /* --- Hide mobile-only elements on desktop --- */
+  .purp-mobile-img-only,
+  .purp-mobile-br {
+    display: none;
+  }
+
   /* --- Mobile Optimization Breakpoints --- */
   @media screen and (max-width: 989px) {
-    .purp-container {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: 60px;
-      padding: 0 24px;
-    }
-    
-    .purp-col-left {
-      padding-bottom: 0;
+    .purp-thinking-section {
+      padding: 60px 0 0 0 !important;
     }
 
-    .purp-sparkle-wrapper {
-      right: 10%;
-      bottom: -40px;
-      width: 60px;
+    .purp-container {
+      grid-template-columns: 1fr !important;
+      text-align: center;
+      gap: 40px !important;
+      padding: 0 24px !important;
+    }
+    
+    /* Order of stacking */
+    .purp-col-left {
+      order: 1 !important;
+      padding-bottom: 0 !important;
+      text-align: left !important;
+      width: 100% !important;
     }
 
     .purp-col-right {
-      padding-left: 0;
-      align-items: center;
+      order: 2 !important;
+      padding: 13px !important;
+      align-items: center !important;
+      width: 100% !important;
     }
 
+    .purp-col-center {
+      order: 3 !important;
+      position: relative !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      width: 100% !important;
+      max-width: 300px !important;
+      margin: 0 auto !important;
+      padding-top: 0 !important;
+    }
+
+    /* Sparkle wrapper on title is hidden */
+    .purp-sparkle-wrapper {
+      display: none !important;
+    }
+
+    /* Main Title Mobile styling */
+    .purp-main-title {
+      font-size: 38px !important;
+      line-height: 1.15 !important;
+      font-weight: 900 !important;
+      letter-spacing: -0.02em !important;
+      text-align: left !important;
+      margin: 0 !important;
+    }
+
+    .purp-desktop-br {
+      display: none !important;
+    }
+
+    .purp-mobile-br {
+      display: block !important;
+    }
+
+    /* Features List layout with dividers */
     .purp-features-list {
-      align-items: center;
-      gap: 30px;
+      width: 100% !important;
+      align-items: center !important;
+      gap: 0 !important;
+      margin: 0 !important;
     }
 
-    /* On mobile, we hide the arrows because they break a stacked layout flow */
+    .purp-feature-item {
+      width: 100% !important;
+      padding: 20px 0 !important;
+      border-bottom: 2px solid #000 !important;
+      text-align: center !important;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      margin: 0 !important;
+      position: relative !important;
+    }
+
+    .purp-feature-item:last-child {
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+    }
+
+    .purp-feature-text {
+      font-size: 22px !important;
+      font-weight: 700 !important;
+      color: #1F1F1F !important;
+    }
+
+    /* Hide default hand-drawn arrows in list items */
     .purp-drawn-arrow {
-      display: none;
+      display: none !important;
     }
 
+    /* Hide the right column extra paragraph */
     .purp-right-paragraph {
-      text-align: center;
-      max-width: 100%;
+      display: none !important;
+    }
+
+    /* Hide the sunburst SVG on mobile */
+    .purp-sunburst {
+      display: none !important;
+    }
+
+    .purp-image-wrap {
+      width: 100% !important;
+      z-index: 10 !important;
+      margin: 0 !important;
+    }
+
+    .purp-dog-img {
+      width: 100% !important;
+      height: auto !important;
+      display: block !important;
+    }
+
+    /* Mobile/Desktop image toggling */
+    .purp-desktop-img-only {
+      display: none !important;
+    }
+
+    .purp-mobile-img-only {
+      display: block !important;
     }
   }
 </style>
@@ -346,6 +450,11 @@
       "type": "image_picker",
       "id": "main_image",
       "label": "Center Main Image (Transparent PNG recommended)"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Main Image (Will use desktop image if blank)"
     },
     {
       "type": "header",
