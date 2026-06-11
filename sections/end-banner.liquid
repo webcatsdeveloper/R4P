@@ -24,15 +24,23 @@
     overflow: visible; /* Crucial to let the image hang out of the box */
   }
 
-  /* Abstract Yellow Squiggle Vector Graphic */
-  .cta-banner-squiggles {
+  /* Desktop ribbon background image */
+  .cta-banner-ribbon-desktop {
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 60%;
+    width: 100%;
     height: 100%;
     z-index: 1;
     pointer-events: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+
+  /* Mobile ribbon background image - hidden by default */
+  .cta-banner-ribbon-mobile {
+    display: none;
   }
 
   /* Left Side Text Content & Buttons */
@@ -148,18 +156,23 @@
       text-align: center;
     }
 
-    /* Binds ribbon paths explicitly across full card display areas on screen */
-    .cta-banner-squiggles {
-      width: 100%;
-      height: 100%;
-      bottom: 0;
-      right: 0;
-      opacity: 0.85;
-      z-index: 1;
+    /* Hide desktop ribbon, show mobile ribbon */
+    .cta-banner-ribbon-desktop {
+      display: none;
     }
 
-    .cta-banner-squiggles svg {
-      object-fit: cover;
+    .cta-banner-ribbon-mobile {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: bottom center;
     }
 
     /* Centers illustration content neatly inside baseline foundations */
@@ -189,15 +202,15 @@
 <div class="cta-banner-section-{{ section.id }}">
   <div class="cta-banner-wrapper">
     
-    <div class="cta-banner-squiggles">
-      <svg width="100%" height="100%" viewBox="0 0 600 380" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5,378 C60,250 40,160 80,180 C130,210 120,380 200,380 C310,380 340,120 400,130 C450,140 430,300 480,240 C520,180 500,10 600,160" 
-              stroke="{{ section.settings.ribbon_color }}" 
-              stroke-width="8" 
-              stroke-linecap="round" 
-              fill="none"/>
-      </svg>
-    </div>
+    <!-- Desktop Ribbon Background Image -->
+    {% if section.settings.ribbon_image_desktop != blank %}
+      <div class="cta-banner-ribbon-desktop" style="background-image: url('{{ section.settings.ribbon_image_desktop | img_url: 'master' }}');"></div>
+    {% endif %}
+
+    <!-- Mobile Ribbon Background Image -->
+    {% if section.settings.ribbon_image_mobile != blank %}
+      <div class="cta-banner-ribbon-mobile" style="background-image: url('{{ section.settings.ribbon_image_mobile | img_url: 'master' }}');"></div>
+    {% endif %}
 
     <div class="cta-content-column">
       <h2 class="cta-banner-heading">{{ section.settings.heading }}</h2>
@@ -237,16 +250,22 @@
       "default": "#7d75b3"
     },
     {
-      "type": "color",
-      "id": "ribbon_color",
-      "label": "Ribbon Vector Line Color",
-      "default": "#f4cb55"
+      "type": "image_picker",
+      "id": "ribbon_image_desktop",
+      "label": "Ribbon Background Image (Desktop)",
+      "info": "Recommended size: 600x380px, transparent PNG with decorative elements"
+    },
+    {
+      "type": "image_picker",
+      "id": "ribbon_image_mobile",
+      "label": "Ribbon Background Image (Mobile)",
+      "info": "Optimized version for smaller screens, transparent PNG recommended"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Banner Headline Text",
-      "default": "So, ready to find what’s right for them?"
+      "default": "So, ready to find what's right for them?"
     },
     {
       "type": "text",
