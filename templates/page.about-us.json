@@ -181,23 +181,6 @@
         "wave_vertical_offset": -10
       }
     },
-    "aboutus_we_found_Y8nwpD": {
-      "type": "aboutus-we-found",
-      "name": "Pet Feature Section",
-      "settings": {
-        "use_gradient": true,
-        "bg_color": "#e8f5f8",
-        "bg_gradient": "linear-gradient(180deg, #E8F5F8 0%, #ffffff 60%, #ffffff 100%)",
-        "heading_text_left": "We found ourselves doing",
-        "heading_text_accent": "different things for different dogs.",
-        "heading_accent_color": "#e63946",
-        "composite_pet_image": "shopify://shop_images/Group_59510.png",
-        "pet_image_width": 600,
-        "accent_top_left": "shopify://shop_images/Vector_8_1.png",
-        "wave_bottom_graphic": "shopify://shop_images/Vector_2_1.png",
-        "wave_vertical_offset": -10
-      }
-    },
     "as_we_moved_jnyeWR": {
       "type": "as-we-moved",
       "blocks": {
@@ -305,7 +288,6 @@
     "main",
     "about_hero_dynamic_TdxwdM",
     "aboutus_we_found_cQRw7M",
-    "aboutus_we_found_Y8nwpD",
     "as_we_moved_jnyeWR",
     "aboutus_purple_third_section_dJwmez",
     "about_us_last_section_rwPK9B"
