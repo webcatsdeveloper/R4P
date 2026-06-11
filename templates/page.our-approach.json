@@ -267,7 +267,8 @@
           "type": "feature",
           "settings": {
             "icon_type": "molecule",
-            "text": "Maintains structural integrity\nof ingredients"
+            "custom_icon": "shopify://shop_images/Layer_1_10.png",
+            "text": "Maintains structural integrity of ingredients"
           }
         }
       },
