@@ -67,10 +67,10 @@
 
         {% for block in section.blocks %}
           {% case forloop.index %}
-            {% when 1 %} {% assign angle = '-52deg' %}
+            {% when 1 %} {% assign angle = '-45deg' %}
             {% when 2 %} {% assign angle = '-15deg' %}
-            {% when 3 %} {% assign angle = '18deg' %}
-            {% when 4 %} {% assign angle = '52deg' %}
+            {% when 3 %} {% assign angle = '15deg' %}
+            {% when 4 %} {% assign angle = '45deg' %}
             {% else %} {% assign angle = '0deg' %}
           {% endcase %}
 
