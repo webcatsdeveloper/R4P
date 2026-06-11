@@ -216,7 +216,7 @@
         "curve_image": "shopify://shop_images/Vector_1_e7f6e6fc-6076-4993-b8ea-13a05fc93662.png",
         "mobile_text_alignment": "left",
         "mobile_side_padding": 24,
-        "mobile_padding_top": 30,
+        "mobile_padding_top": 50,
         "mobile_padding_bottom": 60,
         "mobile_center_gap": 32,
         "mobile_heading_font_size": 34,
