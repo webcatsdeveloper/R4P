@@ -172,7 +172,7 @@
         "content_right": "unset",
         "heading_line_1": "We know how much",
         "heading_line_3": "you want to",
-        "heading_font_size": 80,
+        "heading_font_size": 90,
         "heading_color": "#111111",
         "heading_line_height": "0.9",
         "heading_max_width": 480,
@@ -242,7 +242,6 @@
           "type": "feature",
           "settings": {
             "icon_type": "drop",
-            "custom_icon": "",
             "text": "Controlled low-\ntemperature dehydration"
           }
         },
@@ -250,7 +249,6 @@
           "type": "feature",
           "settings": {
             "icon_type": "shield",
-            "custom_icon": "",
             "text": "Helps retain essential amino \nacids and micronutrients"
           }
         },
@@ -258,7 +256,6 @@
           "type": "feature",
           "settings": {
             "icon_type": "heat",
-            "custom_icon": "",
             "text": "Avoids nutrient degradation \ncaused by high-heat processing"
           }
         },
@@ -266,7 +263,6 @@
           "type": "feature",
           "settings": {
             "icon_type": "molecule",
-            "custom_icon": "",
             "text": "Maintains structural\nintegrity of ingredients"
           }
         }
