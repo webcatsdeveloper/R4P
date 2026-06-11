@@ -1,4 +1,4 @@
-{% comment %} Touch to sync wide arc 2 - Desktop Optimized with Center Image & Proper Arc {% endcomment %}
+{% comment %} Touch to sync wide arc 2 {% endcomment %}
 {%- style -%}
   #section-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
@@ -53,42 +53,29 @@
     <div class="pcf-diagram-col pcf-animate fade-in delay-2">
       <div class="pcf-diagram-container">
         
-        <!-- Center Image - Perfectly Centered -->
         <div class="pcf-bowl-wrapper pcf-animate scale-in delay-3">
           {% if section.settings.center_image != blank %}
-            {{ section.settings.center_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
+            {{ section.settings.center_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
           {% else %}
             {{ 'product-1' | placeholder_svg_tag: 'pcf-placeholder' }}
           {% endif %}
         </div>
 
-        <!-- Circular Arc SVG - Centered around the image -->
-        <svg class="pcf-arc-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="72" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.6" fill="none" stroke-dasharray="340 20"/>
-          <circle cx="100" cy="100" r="72" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.3" fill="none" opacity="0.5"/>
+        <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 17.73 17.73 A 31.5 31.5 0 1 1 17.73 62.27" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
         </svg>
 
         {% for block in section.blocks %}
           {% case forloop.index %}
-            {% when 1 %} 
-              {% assign angle = -125 %}
-              {% assign text_side = 'right' %}
-            {% when 2 %} 
-              {% assign angle = -55 %}
-              {% assign text_side = 'right' %}
-            {% when 3 %} 
-              {% assign angle = 55 %}
-              {% assign text_side = 'left' %}
-            {% when 4 %} 
-              {% assign angle = 125 %}
-              {% assign text_side = 'left' %}
-            {% else %} 
-              {% assign angle = 0 %}
-              {% assign text_side = 'right' %}
+            {% when 1 %} {% assign angle = '-52deg' %}
+            {% when 2 %} {% assign angle = '-15deg' %}
+            {% when 3 %} {% assign angle = '18deg' %}
+            {% when 4 %} {% assign angle = '52deg' %}
+            {% else %} {% assign angle = '0deg' %}
           {% endcase %}
 
-          <div class="pcf-feature-point" style="--angle: {{ angle }}deg; --text-side: {{ text_side }};" {{ block.shopify_attributes }}>
-            <div class="pcf-feature-content pcf-feature-content--{{ text_side }} pcf-animate fade-left" style="transition-delay: 0.{{ forloop.index | plus: 3 }}s;">
+          <div class="pcf-feature-point" style="--angle: {{ angle }};" {{ block.shopify_attributes }}>
+            <div class="pcf-feature-content pcf-animate fade-left" style="transition-delay: 0.{{ forloop.index | plus: 3 }}s;">
               
               <div class="pcf-icon-circle">
                 {% if block.settings.custom_icon != blank %}
@@ -153,9 +140,9 @@
   .pcf-intro-subtext p { margin: 0; }
   .pcf-intro-subtext strong { font-weight: 700; color: #000; opacity: 1; }
 
-  /* --- Main Grid Layout - Desktop: Left Text + Right Diagram with Center Image --- */
+  /* --- Main Grid Layout --- */
   .pcf-main-grid {
-    max-width: 1280px;
+    max-width: 1140px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
@@ -165,16 +152,15 @@
 
   @media (min-width: 990px) {
     .pcf-main-grid {
-      grid-template-columns: 4fr 8fr;
+      grid-template-columns: 4.5fr 7.5fr;
       gap: 2rem;
     }
   }
 
-  /* --- Left Column - Left Aligned Text --- */
+  /* --- Left Column --- */
   .pcf-left-col {
     padding-left: 0;
     z-index: 5;
-    text-align: left;
   }
   .pcf-title {
     font-size: clamp(3rem, 6.5vw, 7.5rem);
@@ -184,29 +170,24 @@
     margin: 0;
   }
 
-  /* --- Right Circular Diagram with Center Image --- */
+  /* --- Right Circular Diagram --- */
   .pcf-diagram-col {
     width: 100%;
   }
   .pcf-diagram-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 1 / 1; 
+    aspect-ratio: 1.25 / 1; 
     container-type: inline-size;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
-  /* Center Image - Perfectly Centered in the container */
+  /* Center Anchor (Shifted Left to 40% to leave room for text) */
   .pcf-bowl-wrapper {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 40%;
     transform: translate(-50%, -50%);
-    width: 42cqw; 
-    max-width: 360px;
-    min-width: 200px;
+    {% comment %} width: 52cqw;  {% endcomment %}
     z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
@@ -217,7 +198,7 @@
     filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
   }
 
-  /* SVG Arc - Centered around the image */
+  /* SVG Concentric Arc */
   .pcf-arc-svg {
     display: none;
   }
@@ -225,56 +206,42 @@
     .pcf-arc-svg {
         display: block;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 82cqw;
-        height: 82cqw;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         pointer-events: none;
         z-index: 1;
     }
   }
 
-  /* Feature Points positioned in a circle around the center image */
+  /* Precise Trigonometric Positioning */
   .pcf-feature-point {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(41cqw) rotate(calc(var(--angle) * -1));
+    left: 40%;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(31.5cqw) rotate(calc(var(--angle) * -1));
     z-index: 10;
-    transform-origin: center center;
   }
 
-  /* Content container for icon + text */
+  /* Wrapper to align Icon exactly on the arc line, text to the right */
   .pcf-feature-content {
     position: absolute;
     top: 50%;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: max-content;
-  }
-  
-  /* Text on the right side of icon (for top and right features) */
-  .pcf-feature-content--right {
     left: 0;
     transform: translate(-26px, -50%);
-    flex-direction: row;
-  }
-  
-  /* Text on the left side of icon (for bottom and left features) */
-  .pcf-feature-content--left {
-    right: 0;
-    transform: translate(26px, -50%);
-    flex-direction: row-reverse;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: max-content;
   }
 
   .pcf-icon-circle {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -294,21 +261,10 @@
   }
 
   .pcf-feature-text {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.35;
     font-weight: 500;
     color: #2b2b2b;
-    max-width: 200px;
-    min-width: 160px;
-  }
-  
-  /* Text alignment based on side */
-  .pcf-feature-content--right .pcf-feature-text {
-    text-align: left;
-  }
-  
-  .pcf-feature-content--left .pcf-feature-text {
-    text-align: right;
   }
 
   /* --- Animations --- */
@@ -326,7 +282,7 @@
   .delay-2 { transition-delay: 0.2s; }
   .delay-3 { transition-delay: 0.3s; }
 
-  /* --- Mobile Optimization (unchanged - exactly as original) --- */
+  /* --- Mobile Optimization --- */
   @media screen and (max-width: 1024px) {
     #section-{{ section.id }} {
       padding: 60px 20px !important;
@@ -397,12 +353,12 @@
     }
     .pcf-feature-content {
       position: relative;
-      top: auto; left: auto; right: auto; transform: none !important;
+      top: auto; left: auto; transform: none !important;
       width: 100% !important;
       text-align: left;
       gap: 1.2rem;
       display: flex;
-      flex-direction: row !important;
+      align-items: center;
     }
     .pcf-icon-circle {
       width: 46px;
@@ -416,8 +372,6 @@
       font-weight: 500;
       color: #2b2b2b;
       max-width: 280px;
-      white-space: normal;
-      text-align: left !important;
     }
     .heading-line-1{
       font-weight:900 !important;
@@ -461,12 +415,6 @@
       "id": "text_color",
       "label": "Body Text Color",
       "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "arc_color",
-      "label": "Arc Line Color",
-      "default": "#ffffff"
     },
     {
       "type": "header",
