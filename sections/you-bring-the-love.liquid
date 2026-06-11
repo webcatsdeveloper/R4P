@@ -54,7 +54,7 @@
       
       <div class="pcf-bowl-wrapper pcf-animate scale-in delay-3">
         {% if section.settings.center_image != blank %}
-          {{ section.settings.center_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
+          {{ section.settings.center_image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: 'Main bowl image', class: 'pcf-bowl-img' }}
         {% else %}
           {{ 'product-1' | placeholder_svg_tag: 'pcf-placeholder' }}
         {% endif %}
@@ -66,7 +66,7 @@
         <div class="pcf-node node-{{ forloop.index }}" {{ block.shopify_attributes }}>
           <div class="pcf-icon-circle">
             {% if block.settings.custom_icon != blank %}
-              {{ block.settings.custom_icon | image_url: width: 80 | image_tag: class: 'pcf-custom-img' }}
+              {{ block.settings.custom_icon | image_url: width: 100 | image_tag: class: 'pcf-custom-img' }}
             {% else %}
               {% case block.settings.icon_type %}
                 {% when 'drop' %}
@@ -120,20 +120,20 @@
   }
   .pcf-intro-subtext strong { font-weight: 700; color: #000; }
 
-  /* --- Dynamic Canvas System Proportional to Viewport Width --- */
+  /* --- Dynamic Scaling Proportional Canvas Layout System --- */
   .pcf-canvas-container {
     position: relative;
     width: 100%;
     max-width: 1922px;
-    height: 48vw; /* Proportional scale height */
+    height: 48vw; 
     margin: 0 auto;
   }
 
-  /* --- Left Main Heading (Scaled dynamically to prevent zoom feel) --- */
+  /* --- Left Heading Placement --- */
   .pcf-left-col {
     position: absolute;
     width: 28.7vw; /* 552px / 1922px */
-    left: 7.2vw;   /* Aligned accurately with canvas bounds */
+    left: 7.2vw;   
     top: 3vw;
     z-index: 5;
   }
@@ -154,12 +154,12 @@
     left: 0;
   }
 
-  /* --- Proportional Central Bowl --- */
+  /* --- Repositioned Larger Bowl Image --- */
   .pcf-bowl-wrapper {
     position: absolute;
-    width: 23.5vw;  /* Scaled naturally down from 540px */
-    height: 23.5vw;
-    left: 28.5vw;
+    width: 28vw;  
+    height: 28vw;
+    left: 38vw;   /* Moved further right to match Figma perspective perfectly */
     top: 4vw;
     z-index: 2;
   }
@@ -171,22 +171,22 @@
     filter: drop-shadow(0 1.5vw 3vw rgba(0,0,0,0.1));
   }
 
-  /* --- Perfectly Scaled Proportional Orbit Arc Line --- */
+  /* --- Synchronized Orbit Arc Alignment Track --- */
   .pcf-orbit-arc {
     position: absolute;
     box-sizing: border-box;
     width: 19.01vw; /* 365.5px / 1922px */
     height: 38.03vw; /* 731px / 1922px */
-    left: 40.8vw;
+    left: 50.78vw;  /* Calibrated directly against node centers */
     top: -1vw;
-    border: 0.22vw solid #FFFFFF; /* Proportional border thickness */
+    border: 0.22vw solid #FFFFFF; 
     border-radius: 0 19.01vw 19.01vw 0 / 0 19.01vw 19.01vw 0;
     border-left: none;
     z-index: 1;
     pointer-events: none;
   }
 
-  /* --- Global Scaled Node Base --- */
+  /* --- Node System Styles --- */
   .pcf-node {
     position: absolute;
     display: flex;
@@ -217,30 +217,30 @@
     white-space: nowrap;
   }
 
-  /* --- Scaled Positional Nodes relative to 1922px Canvas --- */
+  /* --- Accurate Point Placement mapped to Figma Blueprint Variables --- */
   
-  /* Node 1: Top Point */
+  /* Node 1: Top Feature Point */
   .pcf-node.node-1 {
     left: 50.5vw;
     top: 1.1vw;
   }
-  /* Node 2: Top-Middle Point */
+  /* Node 2: Top-Middle Feature Point */
   .pcf-node.node-2 {
     left: 57vw;
     top: 10vw;
   }
-  /* Node 3: Bottom-Middle Point */
+  /* Node 3: Bottom-Middle Feature Point */
   .pcf-node.node-3 {
     left: 57.7vw;
     top: 20.2vw;
   }
-  /* Node 4: Bottom Point */
+  /* Node 4: Bottom Feature Point */
   .pcf-node.node-4 {
     left: 52.2vw;
     top: 30.2vw;
   }
 
-  /* --- Animations --- */
+  /* --- Visual Entrance Animations --- */
   .pcf-animate { opacity: 0; will-change: opacity, transform; }
   .fade-up { transform: translateY(2vw); transition: opacity 0.8s ease, transform 0.8s ease; }
   .fade-right { transform: translateX(-2vw); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -253,7 +253,7 @@
   .delay-2 { transition-delay: 0.2s; }
   .delay-3 { transition-delay: 0.3s; }
 
-  /* --- Mobile Layout Clean Overrides --- */
+  /* --- Clean Breakpoint Transformation Rules for Mobile Screens --- */
   @media screen and (max-width: 1120px) {
     #section-{{ section.id }} {
       padding: 50px 20px !important;
