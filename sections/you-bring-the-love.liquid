@@ -64,8 +64,7 @@
         <svg class="pcf-arc-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M 17.73 17.73 A 31.5 31.5 0 1 1 17.73 62.27" stroke="{{ section.settings.arc_color | default: '#ffffff' }}" stroke-width="0.4" fill="none"/>
         </svg>
-
-        {% for block in section.blocks %}
+{% for block in section.blocks %}
           {% case forloop.index %}
             {% when 1 %} {% assign angle = '-45deg' %}
             {% when 2 %} {% assign angle = '-15deg' %}
@@ -74,7 +73,7 @@
             {% else %} {% assign angle = '0deg' %}
           {% endcase %}
 
-          <div class="pcf-feature-point" style="--angle: {{ angle }};" {{ block.shopify_attributes }}>
+          <div class="pcf-feature-point" style="--angle: {{ angle }} !important;" {{ block.shopify_attributes }}>
             <div class="pcf-feature-content pcf-animate fade-left" style="transition-delay: 0.{{ forloop.index | plus: 3 }}s;">
               
               <div class="pcf-icon-circle">
