@@ -158,7 +158,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
-    align-items: center;
+    align-items: start; /* FIXED: Changed from center to push title toward the top */
     gap: 3.5rem;
   }
 
@@ -173,19 +173,20 @@
   .pcf-left-col {
     padding-left: 0;
     z-index: 5;
-     margin-top: -40px!important;
+    margin-top: 20px !important; /* FIXED: Removed the aggressive negative top margin to allow natural top tracking */
   }
   .pcf-title {
     font-size: clamp(3rem, 6.5vw, 7.5rem);
     font-weight: 900;
     line-height: 0.88;
     letter-spacing: -0.04em;
-    margin-top: -40px!important;
+    margin: 0 !important; /* FIXED: Reset constraints cleanly */
   }
 
   /* --- Right Circular Diagram --- */
   .pcf-diagram-col {
     width: 100%;
+    margin-top: 40px; /* FIXED: Gently pushes right diagram column downwards below the title flow line */
   }
   .pcf-diagram-container {
     position: relative;
@@ -200,7 +201,6 @@
     top: 50%;
     left: 40%;
     transform: translate(-50%, -50%);
-    {% comment %} width: 52cqw;  {% endcomment %}
     z-index: 5;
   }
   .pcf-bowl-img, .pcf-placeholder {
@@ -315,15 +315,19 @@
     .pcf-left-col {
       padding-left: 0;
       text-align: center;
+      margin-top: 0px !important;
     }
     .pcf-title {
         font-size: 35px;
         text-align: left;
         margin-bottom: 1.5rem;
         padding-left: 35px;
-         margin-top: -40px!important;
+        margin-top: 0px !important;
     }
     
+    .pcf-diagram-col {
+      margin-top: 0px;
+    }
     .pcf-diagram-container {
       aspect-ratio: auto;
       display: flex;
