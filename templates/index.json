@@ -164,6 +164,42 @@
         "view_all_link": ""
       }
     },
+    "product_grid_section_X6fbh8": {
+      "type": "product-grid-section",
+      "blocks": {
+        "category_tab_mQNrYL": {
+          "type": "category_tab",
+          "settings": {
+            "title": "All",
+            "collection": "frontpage"
+          }
+        },
+        "category_tab_Kypfmd": {
+          "type": "category_tab",
+          "settings": {
+            "title": "For Dogs",
+            "collection": "frontpage"
+          }
+        },
+        "category_tab_KfJtNT": {
+          "type": "category_tab",
+          "settings": {
+            "title": "For Cats",
+            "collection": "frontpage"
+          }
+        }
+      },
+      "block_order": [
+        "category_tab_mQNrYL",
+        "category_tab_Kypfmd",
+        "category_tab_KfJtNT"
+      ],
+      "name": "Product Grid Selection",
+      "settings": {
+        "heading": "Who are we shopping for today?",
+        "view_all_link": ""
+      }
+    },
     "instagram_reels_section_wPLexg": {
       "type": "instagram-reels-section",
       "blocks": {
@@ -537,6 +573,7 @@
     "pet_brand_MLPYAG",
     "the_science_jhjWpE",
     "product_grid_section_wXrYt3",
+    "product_grid_section_X6fbh8",
     "instagram_reels_section_wPLexg",
     "blog_post_grid_HzRG4x",
     "instagram_campaign_section_UxpLiM",
