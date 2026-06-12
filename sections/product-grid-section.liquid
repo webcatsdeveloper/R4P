@@ -31,6 +31,14 @@
   color: #EE3E34;
 }
 
+.ps-heading-desktop {
+  display: block;
+}
+
+.ps-heading-mobile {
+  display: none;
+}
+
 /* =========================
    TABS
 ========================= */
@@ -355,6 +363,14 @@
     margin-bottom: 52px;
   }
 
+  .ps-heading-desktop {
+    display: none !important;
+  }
+
+  .ps-heading-mobile {
+    display: block !important;
+  }
+
   .ps-tabs {
     margin-bottom: 46px;
     border-bottom: none !important;
@@ -464,8 +480,15 @@
 <section class="product-selection-{{ section.id }}" id="ShoppingGrid">
   <div class="ps-container">
 
-    <h2 class="ps-heading">
+    <h2 class="ps-heading ps-heading-desktop">
       {{ section.settings.heading | replace: "shopping", "<span>shopping</span>" }}
+    </h2>
+    <h2 class="ps-heading ps-heading-mobile">
+      {%- if section.settings.heading_mobile != blank -%}
+        {{ section.settings.heading_mobile | replace: "shopping", "<span>shopping</span>" }}
+      {%- else -%}
+        {{ section.settings.heading | replace: "shopping", "<span>shopping</span>" }}
+      {%- endif -%}
     </h2>
 
     <div class="ps-tabs">
@@ -623,7 +646,13 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       "type": "text",
       "id": "heading",
-      "label": "Section Heading",
+      "label": "Desktop Heading",
+      "default": "Who are we shopping for today?"
+    },
+    {
+      "type": "text",
+      "id": "heading_mobile",
+      "label": "Mobile Heading",
       "default": "Who are we shopping for today?"
     },
     {
