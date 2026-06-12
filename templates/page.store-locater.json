@@ -59,17 +59,12 @@
     "1781264408ddd0144b": {
       "type": "_blocks",
       "blocks": {
-        "s_store_locator_storeify_dealer_form_emGU83": {
-          "type": "shopify://apps/s-store-locator/blocks/storeify-dealer-form/e7003487-cc51-4321-9488-2c47c07a5b17",
-          "settings": {}
-        },
         "s_store_locator_storeify_storelocator_eprwhi": {
           "type": "shopify://apps/s-store-locator/blocks/storeify-storelocator/e7003487-cc51-4321-9488-2c47c07a5b17",
           "settings": {}
         }
       },
       "block_order": [
-        "s_store_locator_storeify_dealer_form_emGU83",
         "s_store_locator_storeify_storelocator_eprwhi"
       ],
       "settings": {
