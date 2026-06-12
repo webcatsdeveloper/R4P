@@ -45,6 +45,10 @@
   border-bottom: 3px solid #EBC8BE;
 }
 
+.ps-tab-icon-wrap {
+  display: none;
+}
+
 .ps-tab-btn {
   width: 33.333%;
   height: 58px;
@@ -344,13 +348,69 @@
 
   .ps-tabs {
     margin-bottom: 46px;
+    border-bottom: none !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    align-items: flex-start !important;
   }
 
   .ps-tab-btn {
-    height: 52px;
-    font-size: 15px;
-    line-height: 15px;
-    padding-bottom: 12px;
+    width: auto !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-bottom: none !important;
+    color: #555555 !important;
+  }
+
+  .ps-tab-btn.active {
+    color: #EE3E34 !important;
+  }
+
+  .ps-tab-btn::after {
+    display: none !important;
+  }
+
+  .ps-tab-icon-wrap {
+    display: flex !important;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background: #EADCD6;
+    transition: all 0.25s ease;
+    overflow: hidden;
+  }
+
+  .ps-tab-btn.active .ps-tab-icon-wrap {
+    background: #EE3E34;
+  }
+
+  .ps-tab-icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ps-tab-icon-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.1;
+  }
+
+  .ps-tab-text {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
   }
 
   .ps-grid-container.active {
@@ -405,7 +465,19 @@
           class="ps-tab-btn {% if forloop.first %}active{% endif %}"
           data-tab="tab-{{ block.id }}"
         >
-          {{ block.settings.title }}
+          <div class="ps-tab-icon-wrap">
+            {% if block.settings.tab_icon != blank %}
+              <img
+                src="{{ block.settings.tab_icon | image_url: width: 160 }}"
+                alt="{{ block.settings.title | escape }}"
+                loading="lazy"
+                class="ps-tab-icon-img"
+              >
+            {% else %}
+              <div class="ps-tab-icon-placeholder"></div>
+            {% endif %}
+          </div>
+          <span class="ps-tab-text">{{ block.settings.title }}</span>
         </button>
       {% endfor %}
     </div>
@@ -561,6 +633,11 @@ document.addEventListener('DOMContentLoaded', function () {
           "id": "title",
           "label": "Tab Label",
           "default": "For Dogs"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_icon",
+          "label": "Tab Icon"
         },
         {
           "type": "collection",
