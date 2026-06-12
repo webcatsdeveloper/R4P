@@ -24,7 +24,7 @@
   letter-spacing: -0.03em;
   color: #000;
   margin: 0 0 72px;
-  font-family: 'Degular Demo', sans-serif !important;
+  font-family: 'Neusa Next Std' !important;
 }
 
 .ps-heading span {
@@ -72,6 +72,14 @@
   transition: color 0.25s ease;
 
   text-align: center;
+}
+
+.ps-tab-icon {
+  display: none;
+}
+
+.ps-tab-mobile-text {
+  display: none;
 }
 
 .ps-tab-btn.active {
@@ -298,31 +306,7 @@
   background: #EE3E34;
 }
 
-/* =========================
-   SCROLL ANIMATION
-========================= */
 
-.ps-heading,
-.ps-tabs,
-.ps-card,
-.ps-view-all {
-  opacity: 0;
-  transform: translateY(60px);
-
-  transition:
-    opacity 0.9s ease,
-    transform 0.9s ease;
-
-  will-change: transform, opacity;
-}
-
-.product-selection-{{ section.id }}.ps-show .ps-heading,
-.product-selection-{{ section.id }}.ps-show .ps-tabs,
-.product-selection-{{ section.id }}.ps-show .ps-card,
-.product-selection-{{ section.id }}.ps-show .ps-view-all {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* =========================
    MOBILE
@@ -339,18 +323,71 @@
   }
 
   .ps-heading {
-    margin-bottom: 52px;
+    font-size: 40px !important;
+    line-height: 47px !important;
+    max-width: 335px;
+    margin-inline: auto;
+    margin-bottom: 24px;
   }
 
   .ps-tabs {
     margin-bottom: 46px;
+    border-bottom: none;
+    justify-content: center;
+    gap: 16px;
+    align-items: flex-start;
   }
 
   .ps-tab-btn {
-    height: 52px;
-    font-size: 15px;
-    line-height: 15px;
-    padding-bottom: 12px;
+    height: auto;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    flex: 1;
+    max-width: 75px;
+  }
+
+  .ps-tab-btn::after {
+    display: none;
+  }
+
+  .ps-tab-desktop-text {
+    display: none;
+  }
+
+  .ps-tab-icon {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    transition: transform 0.2s ease;
+  }
+
+  .ps-tab-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ps-tab-icon-placeholder {
+    background-color: #eee;
+    border-radius: 50%;
+  }
+
+  .ps-tab-btn.active .ps-tab-icon {
+    transform: scale(1.1);
+  }
+
+  .ps-tab-mobile-text {
+    display: block;
+    font-family: 'Degular Demo' !important;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #1E1E1E;
   }
 
   .ps-grid-container.active {
@@ -396,7 +433,7 @@
   <div class="ps-container">
 
     <h2 class="ps-heading">
-      {{ section.settings.heading | replace: "shopping", "<span>shopping</span>" }}
+      {{ section.settings.heading | replace: 'shopping', '<br><span>shopping</span>' | replace: 'for today?', 'for<br>today?' }}
     </h2>
 
     <div class="ps-tabs">
@@ -405,7 +442,15 @@
           class="ps-tab-btn {% if forloop.first %}active{% endif %}"
           data-tab="tab-{{ block.id }}"
         >
-          {{ block.settings.title }}
+          <span class="ps-tab-desktop-text">{{ block.settings.title }}</span>
+          
+          <div class="ps-tab-icon {% if block.settings.icon == blank %}ps-tab-icon-placeholder{% endif %}">
+            {% if block.settings.icon != blank %}
+              <img src="{{ block.settings.icon | image_url: width: 100 }}" alt="{{ block.settings.title }}">
+            {% endif %}
+          </div>
+          
+          <span class="ps-tab-mobile-text">{{ block.settings.title_mobile | default: block.settings.title }}</span>
         </button>
       {% endfor %}
     </div>
@@ -514,23 +559,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   });
 
-  const section = document.querySelector('.product-selection-{{ section.id }}');
 
-  const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-      if (entry.isIntersecting) {
-        section.classList.add('ps-show');
-      }
-
-    });
-
-  }, {
-    threshold: 0.2
-  });
-
-  observer.observe(section);
 
 });
 </script>
@@ -561,6 +590,16 @@ document.addEventListener('DOMContentLoaded', function () {
           "id": "title",
           "label": "Tab Label",
           "default": "For Dogs"
+        },
+        {
+          "type": "text",
+          "id": "title_mobile",
+          "label": "Tab Label (Mobile)"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Tab Icon (Mobile)"
         },
         {
           "type": "collection",
