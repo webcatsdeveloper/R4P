@@ -207,6 +207,10 @@
   transform: translateY(24px);
 }
 
+.mobile-only-icon {
+  display: none !important;
+}
+
 .blog-card.show .blog-icon-circle {
   opacity: 1;
   transform: translateY(0);
@@ -312,25 +316,36 @@
     gap: 22px;
   }
 
+  .blog-top-row {
+    margin-bottom: 22px !important;
+  }
+
+  .blog-card.feature,
+  .blog-card.secondary,
+  .blog-middle-row .blog-card {
+    height: 230px !important;
+  }
+
+  .blog-card {
+    border: 2px solid #ffffff !important;
+  }
+
   .blog-card-content {
     padding: 24px;
   }
 
-  .blog-card.feature .blog-card-title {
-    font-size: 24px;
-    max-width: 100%;
-  }
-
-  .blog-top-row .blog-card.secondary .blog-card-title,
-  .blog-middle-row .blog-card-title {
-    font-size: 22px;
-    max-width: 100%;
+  .blog-card-title {
+    font-size: 22px !important;
+    line-height: 1.2 !important;
+    max-width: calc(100% - 60px) !important;
   }
 
   .blog-read-more {
-    min-width: 130px;
-    height: 48px;
-    font-size: 12px;
+    display: none !important;
+  }
+
+  .mobile-only-icon {
+    display: flex !important;
   }
 }
 {%- endstyle -%}
@@ -374,6 +389,15 @@
               <a href="{{ article.url | default: '#' }}" class="blog-read-more">
                 READ MORE
               </a>
+
+              <div class="blog-icon-circle mobile-only-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.4"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </div>
 
             {% else %}
 
