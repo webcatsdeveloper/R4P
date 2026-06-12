@@ -155,7 +155,7 @@
       "name": "Product Grid Selection",
       "settings": {
         "heading": "Who are we shopping for today?",
-        "heading_mobile": "Who are we shopping for today?",
+        "heading_mobile": "Who are we <br>shopping for <br>today?",
         "view_all_link": ""
       }
     },
