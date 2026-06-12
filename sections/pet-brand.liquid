@@ -146,6 +146,10 @@
   z-index: 4;
 }
 
+.pet-image-mobile {
+  display: none !important;
+}
+
 /* HEART */
 .pet-heart-doodle {
   position: absolute;
@@ -371,7 +375,7 @@
     flex-direction: column-reverse !important;
     text-align: left !important;
     padding: 0 0 60px !important;
-    gap: 20px !important;
+    gap: 12px !important;
     width: 100% !important;
     max-width: 100% !important;
   }
@@ -442,10 +446,12 @@
   }
 
   .pet-hero-image-side {
-    width: 116% !important;
-    max-width: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
-    margin-left: -8% !important;
+    margin: 0 auto !important;
+    margin-top: -30px !important;
+    margin-bottom: -35px !important;
     padding: 0 !important;
     display: flex !important;
     justify-content: center !important;
@@ -465,6 +471,18 @@
     object-fit: contain !important;
   }
 
+  {% if section.settings.mobile_image != blank %}
+    .pet-image-desktop {
+      display: none !important;
+    }
+    .pet-image-mobile {
+      display: block !important;
+      width: 100% !important;
+      height: auto !important;
+      object-fit: contain !important;
+    }
+  {% endif %}
+
   .pet-heart-doodle {
     display: none !important;
   }
@@ -475,28 +493,7 @@
   }
 
   .pet-hero-wave-asset {
-    opacity: 1 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    left: 0 !important;
-    transform: none !important;
-    top: 0 !important;
-    bottom: 0 !important;
-    height: 100% !important;
-    display: block !important;
-    z-index: 1 !important;
-  }
-
-  .pet-hero-animate .pet-hero-wave-asset {
-    animation: none !important;
-    transform: none !important;
-  }
-
-  .pet-hero-wave-asset img {
-    width: 100% !important;
-    height: 100% !important;
-    display: block !important;
-    object-fit: fill !important;
+    display: none !important;
   }
 }
 
@@ -551,11 +548,19 @@
       {% if section.settings.image != blank %}
         <img
           src="{{ section.settings.image | img_url: '1800x' }}"
-          class="pet-main-image"
+          class="pet-main-image pet-image-desktop"
           alt="{{ section.settings.heading }}"
           loading="eager">
       {% else %}
         {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+
+      {% if section.settings.mobile_image != blank %}
+        <img
+          src="{{ section.settings.mobile_image | img_url: '1000x' }}"
+          class="pet-main-image pet-image-mobile"
+          alt="{{ section.settings.heading }}"
+          loading="eager">
       {% endif %}
 
     </div>
@@ -645,6 +650,11 @@ document.addEventListener("DOMContentLoaded", function () {
       "type": "image_picker",
       "id": "image",
       "label": "Main Image (Pets + Product)"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image (Optional)"
     },
     {
       "type": "image_picker",
