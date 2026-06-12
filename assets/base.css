@@ -77,6 +77,14 @@ select {
   color: currentcolor;
 }
 
+/* Locatar css Start*/
+
+#shopify-block-Ad2RKZ3VlMytMQjdmc__s_store_locator_storeify_storelocator_eprwhi{
+  width:100% !important;
+}
+
+/* Locatar css End*/
+
 .collection-card,
 .featured-blog-posts-card {
   width: 100%;
