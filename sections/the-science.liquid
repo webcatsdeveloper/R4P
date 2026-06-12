@@ -1,4 +1,11 @@
 {%- style -%}
+.desktop-only {
+  display: inline !important;
+}
+.mobile-only {
+  display: none !important;
+}
+
 .science-{{ section.id }} {
   --accent: {{ section.settings.accent_color }};
   width: 100%;
@@ -101,6 +108,7 @@
   height: auto;
   display: block;
   object-fit: contain;
+  margin-top: -55px;
 }
 
 /* LEFT GREY CURVE */
@@ -384,50 +392,120 @@
 /* MOBILE */
 @media screen and (max-width: 768px) {
 
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: inline-block !important;
+  }
+
   .science-{{ section.id }} {
-    padding: 50px 0 70px;
+    padding: 50px 0 70px !important;
   }
 
   .sc-container {
-    padding: 0 20px;
+    padding: 0 24px !important;
+    gap: 32px !important;
+  }
+
+  .sc-heading-wrapper {
+    margin-bottom: 0 !important;
   }
 
   .sc-heading {
-    font-size: 56px !important;
-    line-height: 0.9;
-    letter-spacing: -2px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0px !important;
+    font-size: 72px !important;
+    line-height: 0.85 !important;
+    letter-spacing: -2.5px !important;
   }
 
   .sc-image-box {
-    max-width: 320px;
+    max-width: 340px !important;
+    margin: -30px auto 0 !important;
+    z-index: 10 !important;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+
+  .sc-left-curve {
+    display: block !important;
+    top: 210px !important;
+    left: -20px !important;
+    width: 90px !important;
+    z-index: 1 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .sc-right-curve {
+    display: block !important;
+    top: 0px !important;
+    right: -20px !important;
+    width: 90px !important;
+    z-index: 1 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .sc-content {
+    opacity: 1 !important;
+    transform: none !important;
+    margin-top: 16px !important;
+    padding-top: 0 !important;
   }
 
   .sc-title {
-    font-size: 26px;
+    font-size: 24px !important;
+    line-height: 1.2 !important;
+    margin-top: 0 !important;
+    margin-bottom: 16px !important;
   }
 
   .sc-text {
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 14px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 32px !important;
+  }
+
+  .sc-separator {
+    margin-inline: auto !important;
+    margin-bottom: 32px !important;
   }
 
   .sc-grid {
-    gap: 24px;
+    gap: 32px !important;
+  }
+
+  .sc-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .sc-item-icon {
+    margin-bottom: 12px !important;
   }
 
   .sc-item-title {
-    font-size: 16px;
+    font-size: 18px !important;
+    margin-bottom: 8px !important;
   }
 
   .sc-item-desc {
-    font-size: 13px;
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    max-width: 175px !important;
+    margin-inline: auto !important;
   }
 
   .sc-button {
-    min-width: 220px;
-    height: 58px;
-    font-size: 15px;
-    margin-top: 24px;
+    min-width: 220px !important;
+    height: 58px !important;
+    font-size: 15px !important;
+    margin-top: 36px !important;
   }
 }
 {%- endstyle -%}
@@ -469,10 +547,20 @@
       <h3 class="sc-title">{{ section.settings.title }}</h3>
 
       <p class="sc-text">
-        The way we prepare our food is inspired by how astronaut meals<br>
-        are handled, preserving nutrients without damaging them.<br><br>
+        <span class="desktop-only">
+          The way we prepare our food is inspired by how astronaut meals<br>
+          are handled, preserving nutrients without damaging them.<br><br>
 
-        Because when it comes to your pet’s health, every detail matters.
+          Because when it comes to your pet’s health, every detail matters.
+        </span>
+        <span class="mobile-only">
+          The way we prepare our food is inspired by how<br>
+          astronaut meals are handled, preserving<br>
+          nutrients without damaging them.<br><br>
+
+          Because when it comes to your pet’s health,<br>
+          every detail matters.
+        </span>
       </p>
 
       <div class="sc-separator"></div>
