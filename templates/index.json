@@ -156,21 +156,13 @@
             "tab_icon": "shopify://shop_images/Layer_1_3_d4972e1c-5604-45b9-b89b-b9d9e85b06ef.png",
             "collection": "cats-copy"
           }
-        },
-        "category_tab_xrdJHz": {
-          "type": "category_tab",
-          "settings": {
-            "title": "For Cats",
-            "collection": "frontpage"
-          }
         }
       },
       "block_order": [
         "category_tab_4r9PNP",
         "category_tab_DQDMbq",
         "category_tab_Xy86jK",
-        "category_tab_qbgTJH",
-        "category_tab_xrdJHz"
+        "category_tab_qbgTJH"
       ],
       "name": "Product Grid Selection",
       "settings": {
