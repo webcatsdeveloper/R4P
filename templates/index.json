@@ -181,6 +181,14 @@
             "collection": "dogs"
           }
         },
+        "category_tab_Mkm3iH": {
+          "type": "category_tab",
+          "settings": {
+            "title": "Cats",
+            "tab_icon": "shopify://shop_images/Layer_1_2_3a21fd40-6acd-4f16-85fe-a78dc845f3c9.png",
+            "collection": "cats"
+          }
+        },
         "category_tab_KfJtNT": {
           "type": "category_tab",
           "settings": {
@@ -192,6 +200,7 @@
       "block_order": [
         "category_tab_mQNrYL",
         "category_tab_Kypfmd",
+        "category_tab_Mkm3iH",
         "category_tab_KfJtNT"
       ],
       "name": "Product Grid Selection",
