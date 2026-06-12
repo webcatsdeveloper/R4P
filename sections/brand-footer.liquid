@@ -207,7 +207,7 @@
     }
 
     .brand-footer-mobile .footer-description {
-      font-size: 15px !important;
+      font-size: 16px !important;
       line-height: 1.45 !important;
       max-width: 320px !important;
       margin: 0 !important;
@@ -229,7 +229,7 @@
       flex-direction: column !important;
       align-items: flex-start !important;
       text-align: left !important;
-      gap: 14px !important;
+      gap: 20px !important;
     }
 
     .brand-footer-mobile .footer-link-mobile {
@@ -252,14 +252,14 @@
       max-width: 330px !important;
       margin: 40px auto 0 !important;
       line-height: 1.8 !important;
-      font-size: 13px !important;
+      font-size: 14px !important;
       text-align: center !important;
       width: 100% !important;
     }
 
     .brand-footer-mobile .footer-policy-link-mobile {
       display: inline !important;
-      font-size: 13px !important;
+      font-size: 14px !important;
       color: #ffffff !important;
       text-decoration: none !important;
       font-family: 'Degular Demo', sans-serif !important;
@@ -271,8 +271,8 @@
 
     .brand-footer-mobile .policy-dot-mobile {
       display: inline !important;
-      font-size: 13px !important;
-      margin: 0 6px !important;
+      font-size: 14px !important;
+      margin: 0 8px !important;
       color: #ffffff !important;
       opacity: 0.8 !important;
       font-family: 'Degular Demo', sans-serif !important;
@@ -290,7 +290,7 @@
     }
 
     .brand-footer-mobile .social-title-mobile {
-      font-size: 16px !important;
+      font-size: 22px !important;
       font-weight: 500 !important;
       color: #ffffff !important;
       font-family: 'Degular Demo', sans-serif !important;
@@ -306,32 +306,23 @@
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      width: 36px !important;
-      height: 36px !important;
-      background-color: #ffffff !important;
+      width: 38px !important;
+      height: 38px !important;
+      background-color: transparent !important;
       border-radius: 50% !important;
-      color: #D72329 !important;
-      border: none !important;
-      transition: opacity 0.25s ease !important;
+      color: #ffffff !important;
+      border: 1.5px solid #ffffff !important;
+      transition: background-color 0.25s ease, color 0.25s ease !important;
     }
 
     .brand-footer-mobile .social-icon-circle-mobile:hover {
-      opacity: 0.85 !important;
+      background-color: #ffffff !important;
+      color: #D72329 !important;
     }
 
     .brand-footer-mobile .social-icon-circle-mobile svg {
       width: 18px !important;
       height: 18px !important;
-    }
-
-    /* Fill the Facebook icon on mobile */
-    .brand-footer-mobile .social-icon-circle-mobile[aria-label="Facebook"] svg {
-      fill: currentColor !important;
-    }
-
-    /* Fill the YouTube play triangle on mobile */
-    .brand-footer-mobile .social-icon-circle-mobile[aria-label="YouTube"] svg polygon {
-      fill: currentColor !important;
     }
 
     /* Copyright centered bar */
@@ -340,8 +331,8 @@
       color: #000000 !important;
       padding: 24px 20px !important;
       text-align: center !important;
-      font-size: 15px !important;
-      font-weight: 500 !important;
+      font-size: 16px !important;
+      font-weight: 400 !important;
       font-family: 'Degular Demo', sans-serif !important;
     }
   }
@@ -544,7 +535,7 @@
           <div class="social-icons-mobile">
             {% if section.settings.facebook_url != blank %}
               <a href="{{ section.settings.facebook_url }}" class="social-icon-circle-mobile" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V1.5c-.27-.04-1.2-.15-2.28-.15-2.28 0-3.72 1.38-3.72 3.9v2.75H9v4h2.5v9h2.5v-9z"/></svg>
               </a>
             {% endif %}
             {% if section.settings.instagram_url != blank %}
@@ -554,19 +545,19 @@
             {% endif %}
             {% if section.settings.youtube_url != blank %}
               <a href="{{ section.settings.youtube_url }}" class="social-icon-circle-mobile" aria-label="YouTube">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               </a>
             {% endif %}
             
             {% if section.settings.facebook_url == blank and section.settings.instagram_url == blank and section.settings.youtube_url == blank %}
               <a href="#" class="social-icon-circle-mobile" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V1.5c-.27-.04-1.2-.15-2.28-.15-2.28 0-3.72 1.38-3.72 3.9v2.75H9v4h2.5v9h2.5v-9z"/></svg>
               </a>
               <a href="#" class="social-icon-circle-mobile" aria-label="Instagram">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               </a>
               <a href="#" class="social-icon-circle-mobile" aria-label="YouTube">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               </a>
             {% endif %}
           </div>
