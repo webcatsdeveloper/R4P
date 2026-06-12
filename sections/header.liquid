@@ -266,6 +266,17 @@
 
     #header-component.scrolled {
         top: 10px;
+        overflow: visible !important;
+    }
+
+    /* Fix mobile header drawer clipping when scrolled due to backdrop-filter stacking bug */
+    #header-component.scrolled:has(.menu-open),
+    #header-component.scrolled:has(details[open]),
+    html[scroll-lock] #header-component.scrolled {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: #ffffff !important;
+        overflow: visible !important;
     }
 
     .header-logo img { 
