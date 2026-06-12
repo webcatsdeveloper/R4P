@@ -158,6 +158,7 @@
         "category_tab_Xy86jK",
         "category_tab_xrdJHz"
       ],
+      "disabled": true,
       "name": "Product Grid Selection",
       "settings": {
         "heading": "Who are we shopping for today?",
@@ -171,6 +172,7 @@
           "type": "category_tab",
           "settings": {
             "title": "All",
+            "title_mobile": "",
             "collection": "frontpage"
           }
         },
@@ -178,6 +180,7 @@
           "type": "category_tab",
           "settings": {
             "title": "For Dogs",
+            "title_mobile": "",
             "collection": "frontpage"
           }
         },
@@ -185,6 +188,7 @@
           "type": "category_tab",
           "settings": {
             "title": "For Cats",
+            "title_mobile": "",
             "collection": "frontpage"
           }
         }
