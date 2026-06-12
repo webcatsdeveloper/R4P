@@ -164,133 +164,427 @@
     }
   }
 
+  /* Desktop / Mobile wrappers */
+  .brand-footer-desktop {
+    display: block;
+  }
+  .brand-footer-mobile {
+    display: none;
+  }
+
   @media (max-width: 768px) {
-    .footer-red-box {
+    .brand-footer-desktop {
+      display: none !important;
+    }
+    .brand-footer-mobile {
+      display: block !important;
+    }
+
+    /* Red Box & general containers on mobile */
+    .brand-footer-mobile .footer-red-box {
       border-radius: 60px 60px 0 0;
-      padding: 60px 30px;
+      padding: 60px 24px 50px !important;
     }
-    .footer-links-wrap {
-      flex-direction: column;
-      gap: 35px;
+    
+    .brand-footer-mobile .footer-container {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+      gap: 36px !important;
+      width: 100% !important;
     }
-    .footer-description {
-      font-size: 18px;
+
+    .brand-footer-mobile .footer-info {
+      align-items: flex-start !important;
+      text-align: left !important;
+      gap: 24px !important;
+      width: 100% !important;
     }
-    .footer-link {
-      font-size: 19px;
+
+    .brand-footer-mobile .footer-logo {
+      max-width: 200px !important;
+      margin: 0 !important;
+    }
+
+    .brand-footer-mobile .footer-description {
+      font-size: 15px !important;
+      line-height: 1.45 !important;
+      max-width: 320px !important;
+      margin: 0 !important;
+      text-align: left !important;
+    }
+
+    /* Mobile Links Row */
+    .brand-footer-mobile .footer-links-wrap-mobile {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: flex-start !important;
+      gap: 80px !important;
+      width: 100% !important;
+      margin-top: 10px !important;
+    }
+
+    .brand-footer-mobile .footer-col-mobile {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+      gap: 14px !important;
+    }
+
+    .brand-footer-mobile .footer-link-mobile {
+      color: #ffffff !important;
+      text-decoration: none !important;
+      font-size: 18px !important;
+      line-height: 1.3 !important;
+      font-weight: 500 !important;
+      font-family: 'Degular Demo', sans-serif !important;
+      white-space: nowrap;
+    }
+
+    .brand-footer-mobile .footer-link-mobile:hover {
+      opacity: 0.75;
+    }
+
+    /* Policies centered row */
+    .brand-footer-mobile .footer-policies-mobile {
+      display: block !important;
+      max-width: 330px !important;
+      margin: 40px auto 0 !important;
+      line-height: 1.8 !important;
+      font-size: 13px !important;
+      text-align: center !important;
+      width: 100% !important;
+    }
+
+    .brand-footer-mobile .footer-policy-link-mobile {
+      display: inline !important;
+      font-size: 13px !important;
+      color: #ffffff !important;
+      text-decoration: none !important;
+      font-family: 'Degular Demo', sans-serif !important;
+    }
+
+    .brand-footer-mobile .footer-policy-link-mobile:hover {
+      opacity: 0.7;
+    }
+
+    .brand-footer-mobile .policy-dot-mobile {
+      display: inline !important;
+      font-size: 13px !important;
+      margin: 0 6px !important;
+      color: #ffffff !important;
+      opacity: 0.8 !important;
+      font-family: 'Degular Demo', sans-serif !important;
+    }
+
+    /* Social media centered inline row */
+    .brand-footer-mobile .footer-socials-mobile {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 16px !important;
+      margin: 30px auto 0 !important;
+      width: 100% !important;
+    }
+
+    .brand-footer-mobile .social-title-mobile {
+      font-size: 16px !important;
+      font-weight: 500 !important;
+      color: #ffffff !important;
+      font-family: 'Degular Demo', sans-serif !important;
+      margin: 0 !important;
+    }
+
+    .brand-footer-mobile .social-icons-mobile {
+      display: flex !important;
+      gap: 12px !important;
+    }
+
+    .brand-footer-mobile .social-icon-circle-mobile {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 36px !important;
+      height: 36px !important;
+      background-color: #ffffff !important;
+      border-radius: 50% !important;
+      color: #D72329 !important;
+      border: none !important;
+      transition: opacity 0.25s ease !important;
+    }
+
+    .brand-footer-mobile .social-icon-circle-mobile:hover {
+      opacity: 0.85 !important;
+    }
+
+    .brand-footer-mobile .social-icon-circle-mobile svg {
+      width: 18px !important;
+      height: 18px !important;
+    }
+
+    /* Fill the Facebook icon on mobile */
+    .brand-footer-mobile .social-icon-circle-mobile[aria-label="Facebook"] svg {
+      fill: currentColor !important;
+    }
+
+    /* Fill the YouTube play triangle on mobile */
+    .brand-footer-mobile .social-icon-circle-mobile[aria-label="YouTube"] svg polygon {
+      fill: currentColor !important;
+    }
+
+    /* Copyright centered bar */
+    .brand-footer-mobile .footer-copyright-mobile {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      padding: 24px 20px !important;
+      text-align: center !important;
+      font-size: 15px !important;
+      font-weight: 500 !important;
+      font-family: 'Degular Demo', sans-serif !important;
     }
   }
 
   @media (max-width: 480px) {
-    .footer-red-box {
-      padding: 50px 20px;
-      border-radius: 40px 40px 0 0;
+    .brand-footer-mobile .footer-red-box {
+      padding: 50px 20px 40px !important;
+      border-radius: 40px 40px 0 0 !important;
     }
-    .footer-logo {
-      max-width: 190px;
+    .brand-footer-mobile .footer-logo {
+      max-width: 190px !important;
+    }
+    .brand-footer-mobile .footer-links-wrap-mobile {
+      gap: 60px !important;
     }
   }
 {%- endstyle -%}
 
 <footer class="brand-footer-{{ section.id }}">
-  <div class="footer-red-box">
-    <div class="footer-container">
-      
-      <!-- Info Column -->
-      <div class="footer-info">
-        <a href="/" class="footer-logo">
-           {% if section.settings.logo != blank %}
-             <img src="{{ section.settings.logo | img_url: '500x' }}" alt="{{ shop.name }}">
-           {% else %}
-             <!-- Placeholder Logo Text Style -->
-             <div style="font-size: 40px; font-weight: 900; line-height: 0.9; color: #ffffff;">
-               {{ section.settings.logo_text | default: 'RIGHT<br>4PAWS' }}<br>
-               <span style="font-size: 18px; font-weight: 400; font-family: cursive; color: #ffffff;">{{ section.settings.logo_subtext | default: 'Raw Made Right' }}</span>
-             </div>
-           {% endif %}
-        </a>
-        <p class="footer-description">
-          {{ section.settings.description }}
-        </p>
-      </div>
 
-      <!-- Links & Socials -->
-      <div class="footer-links-wrap">
-        <!-- Navigation Column 1 -->
-        <div class="footer-col">
-          {% for link in section.settings.menu_1.links %}
-            <a href="{{ link.url }}" class="footer-link">{{ link.label | default: link.title }}</a>
-          {% endfor %}
-          {% if section.settings.menu_1 == blank %}
-            <a href="#" class="footer-link">Store Locator</a>
-            <a href="#" class="footer-link">Careers</a>
-            <a href="#" class="footer-link">About Us</a>
-            <a href="#" class="footer-link">Contact Us</a>
-            <a href="#" class="footer-link">Products</a>
-            <a href="#" class="footer-link">Loyalty Program</a>
-            <a href="#" class="footer-link">FAQs</a>
-          {% endif %}
+  <!-- DESKTOP VERSION (Untouched Layout) -->
+  <div class="brand-footer-desktop">
+    <div class="footer-red-box">
+      <div class="footer-container">
+        
+        <!-- Info Column -->
+        <div class="footer-info">
+          <a href="/" class="footer-logo">
+             {% if section.settings.logo != blank %}
+               <img src="{{ section.settings.logo | img_url: '500x' }}" alt="{{ shop.name }}">
+             {% else %}
+               <!-- Placeholder Logo Text Style -->
+               <div style="font-size: 40px; font-weight: 900; line-height: 0.9; color: #ffffff;">
+                 {{ section.settings.logo_text | default: 'RIGHT<br>4PAWS' }}<br>
+                 <span style="font-size: 18px; font-weight: 400; font-family: cursive; color: #ffffff;">{{ section.settings.logo_subtext | default: 'Raw Made Right' }}</span>
+               </div>
+             {% endif %}
+          </a>
+          <p class="footer-description">
+            {{ section.settings.description }}
+          </p>
         </div>
 
-        <!-- Navigation Column 2 -->
-        <div class="footer-col">
+        <!-- Links & Socials -->
+        <div class="footer-links-wrap">
+          <!-- Navigation Column 1 -->
+          <div class="footer-col">
+            {% for link in section.settings.menu_1.links %}
+              <a href="{{ link.url }}" class="footer-link">{{ link.label | default: link.title }}</a>
+            {% endfor %}
+            {% if section.settings.menu_1 == blank %}
+              <a href="#" class="footer-link">Store Locator</a>
+              <a href="#" class="footer-link">Careers</a>
+              <a href="#" class="footer-link">About Us</a>
+              <a href="#" class="footer-link">Contact Us</a>
+              <a href="#" class="footer-link">Products</a>
+              <a href="#" class="footer-link">Loyalty Program</a>
+              <a href="#" class="footer-link">FAQs</a>
+            {% endif %}
+          </div>
+
+          <!-- Navigation Column 2 -->
+          <div class="footer-col">
+            {% for link in section.settings.menu_2.links %}
+               <a href="{{ link.url }}" class="footer-link">{{ link.label | default: link.title }}</a>
+            {% endfor %}
+            {% if section.settings.menu_2 == blank %}
+              <a href="#" class="footer-link">Terms of Service</a>
+              <a href="#" class="footer-link">Privacy Policy</a>
+              <a href="#" class="footer-link">Return & Refund Policy</a>
+              <a href="#" class="footer-link">Shipping Policy</a>
+              <a href="#" class="footer-link">Declarations</a>
+            {% endif %}
+          </div>
+
+          <!-- Social Media Column -->
+          <div class="footer-socials">
+            <h4 class="social-title">{{ section.settings.social_title }}</h4>
+            <div class="social-icons">
+              {% if section.settings.facebook_url != blank %}
+                <a href="{{ section.settings.facebook_url }}" class="social-icon-circle" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+              {% endif %}
+              {% if section.settings.instagram_url != blank %}
+                <a href="{{ section.settings.instagram_url }}" class="social-icon-circle" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+              {% endif %}
+              {% if section.settings.youtube_url != blank %}
+                <a href="{{ section.settings.youtube_url }}" class="social-icon-circle" aria-label="YouTube">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                </a>
+              {% endif %}
+              
+              {% if section.settings.facebook_url == blank and section.settings.instagram_url == blank and section.settings.youtube_url == blank %}
+                <a href="#" class="social-icon-circle" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="#" class="social-icon-circle" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="#" class="social-icon-circle" aria-label="YouTube">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      {% if section.settings.copyright_text != blank %}
+        {{ section.settings.copyright_text }}
+      {% else %}
+        Copyright &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All Rights Reserved.
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- MOBILE VERSION (Figma Recreation Layout) -->
+  <div class="brand-footer-mobile">
+    <div class="footer-red-box">
+      <div class="footer-container">
+        
+        <!-- Info Column -->
+        <div class="footer-info">
+          <a href="/" class="footer-logo">
+             {% if section.settings.logo != blank %}
+               <img src="{{ section.settings.logo | img_url: '500x' }}" alt="{{ shop.name }}">
+             {% else %}
+               <!-- Placeholder Logo Text Style -->
+               <div style="font-size: 40px; font-weight: 900; line-height: 0.9; color: #ffffff;">
+                 {{ section.settings.logo_text | default: 'RIGHT<br>4PAWS' }}<br>
+                 <span style="font-size: 18px; font-weight: 400; font-family: cursive; color: #ffffff;">{{ section.settings.logo_subtext | default: 'Raw Made Right' }}</span>
+               </div>
+             {% endif %}
+          </a>
+          <p class="footer-description">
+            {{ section.settings.description }}
+          </p>
+        </div>
+
+        <!-- Links wrapper split into two columns side-by-side -->
+        <div class="footer-links-wrap-mobile">
+          <!-- Col 1: Store Locator, Careers, About Us, Contact Us -->
+          <div class="footer-col-mobile">
+            {% for link in section.settings.menu_1.links %}
+              {% if forloop.index <= 4 %}
+                <a href="{{ link.url }}" class="footer-link-mobile">{{ link.label | default: link.title }}</a>
+              {% endif %}
+            {% endfor %}
+            {% if section.settings.menu_1 == blank %}
+              <a href="#" class="footer-link-mobile">Store Locator</a>
+              <a href="#" class="footer-link-mobile">Careers</a>
+              <a href="#" class="footer-link-mobile">About Us</a>
+              <a href="#" class="footer-link-mobile">Contact Us</a>
+            {% endif %}
+          </div>
+
+          <!-- Col 2: Products, Loyalty Program, FAQs -->
+          <div class="footer-col-mobile">
+            {% for link in section.settings.menu_1.links %}
+              {% if forloop.index > 4 %}
+                <a href="{{ link.url }}" class="footer-link-mobile">{{ link.label | default: link.title }}</a>
+              {% endif %}
+            {% endfor %}
+            {% if section.settings.menu_1 == blank %}
+              <a href="#" class="footer-link-mobile">Products</a>
+              <a href="#" class="footer-link-mobile">Loyalty Program</a>
+              <a href="#" class="footer-link-mobile">FAQs</a>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Center Bottom: Policies -->
+        <div class="footer-policies-mobile">
           {% for link in section.settings.menu_2.links %}
-             <a href="{{ link.url }}" class="footer-link">{{ link.label | default: link.title }}</a>
+            <a href="{{ link.url }}" class="footer-policy-link-mobile">{{ link.label | default: link.title }}</a>
+            {% unless forloop.last %}<span class="policy-dot-mobile">.</span>{% endunless %}
           {% endfor %}
           {% if section.settings.menu_2 == blank %}
-            <a href="#" class="footer-link">Terms of Service</a>
-            <a href="#" class="footer-link">Privacy Policy</a>
-            <a href="#" class="footer-link">Return & Refund Policy</a>
-            <a href="#" class="footer-link">Shipping Policy</a>
-            <a href="#" class="footer-link">Declarations</a>
+            <a href="#" class="footer-policy-link-mobile">Terms of Service</a>
+            <span class="policy-dot-mobile">.</span>
+            <a href="#" class="footer-policy-link-mobile">Privacy Policy</a>
+            <span class="policy-dot-mobile">.</span>
+            <a href="#" class="footer-policy-link-mobile">Return & Refund Policy</a>
+            <span class="policy-dot-mobile">.</span>
+            <a href="#" class="footer-policy-link-mobile">Shipping Policy</a>
+            <span class="policy-dot-mobile">.</span>
+            <a href="#" class="footer-policy-link-mobile">Declarations</a>
           {% endif %}
         </div>
 
-        <!-- Social Media Column -->
-        <div class="footer-socials">
-          <h4 class="social-title">{{ section.settings.social_title }}</h4>
-          <div class="social-icons">
+        <!-- Center Bottom: Socials inline with 'Follow Us On' -->
+        <div class="footer-socials-mobile">
+          <span class="social-title-mobile">{{ section.settings.social_title }}</span>
+          <div class="social-icons-mobile">
             {% if section.settings.facebook_url != blank %}
-              <a href="{{ section.settings.facebook_url }}" class="social-icon-circle" aria-label="Facebook">
+              <a href="{{ section.settings.facebook_url }}" class="social-icon-circle-mobile" aria-label="Facebook">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
               </a>
             {% endif %}
             {% if section.settings.instagram_url != blank %}
-              <a href="{{ section.settings.instagram_url }}" class="social-icon-circle" aria-label="Instagram">
+              <a href="{{ section.settings.instagram_url }}" class="social-icon-circle-mobile" aria-label="Instagram">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               </a>
             {% endif %}
             {% if section.settings.youtube_url != blank %}
-              <a href="{{ section.settings.youtube_url }}" class="social-icon-circle" aria-label="YouTube">
+              <a href="{{ section.settings.youtube_url }}" class="social-icon-circle-mobile" aria-label="YouTube">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
               </a>
             {% endif %}
             
             {% if section.settings.facebook_url == blank and section.settings.instagram_url == blank and section.settings.youtube_url == blank %}
-              <a href="#" class="social-icon-circle" aria-label="Facebook">
+              <a href="#" class="social-icon-circle-mobile" aria-label="Facebook">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
               </a>
-              <a href="#" class="social-icon-circle" aria-label="Instagram">
+              <a href="#" class="social-icon-circle-mobile" aria-label="Instagram">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               </a>
-              <a href="#" class="social-icon-circle" aria-label="YouTube">
+              <a href="#" class="social-icon-circle-mobile" aria-label="YouTube">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
               </a>
             {% endif %}
           </div>
         </div>
-      </div>
 
+      </div>
+    </div>
+
+    <!-- Mobile Copyright on white background -->
+    <div class="footer-copyright-mobile">
+      {% if section.settings.copyright_text != blank %}
+        {{ section.settings.copyright_text }}
+      {% else %}
+        Copyright at {{ 'now' | date: '%Y' }} Right4Paws
+      {% endif %}
     </div>
   </div>
 
-  <div class="footer-copyright">
-    {% if section.settings.copyright_text != blank %}
-      {{ section.settings.copyright_text }}
-    {% else %}
-      Copyright &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All Rights Reserved.
-    {% endif %}
-  </div>
 </footer>
 
 {% schema %}
