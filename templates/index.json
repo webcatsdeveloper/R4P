@@ -129,44 +129,33 @@
           "type": "category_tab",
           "settings": {
             "title": "All",
-            "tab_icon": "shopify://shop_images/Layer_1_1_c4a80cf5-5c56-4121-bfc9-2064ad230098.png",
-            "collection": "cats-copy-1"
-          }
-        },
-        "category_tab_DQDMbq": {
-          "type": "category_tab",
-          "settings": {
-            "title": "Dogs",
-            "tab_icon": "shopify://shop_images/Layer_1_f05a10c9-1f6f-41de-9a51-b8a82a69a595.png",
-            "collection": "dogs"
+            "collection": "frontpage"
           }
         },
         "category_tab_Xy86jK": {
           "type": "category_tab",
           "settings": {
-            "title": "Cats",
-            "tab_icon": "shopify://shop_images/Layer_1_2_3a21fd40-6acd-4f16-85fe-a78dc845f3c9.png",
-            "collection": "cats"
+            "title": "For Dogs",
+            "collection": "frontpage"
           }
         },
-        "category_tab_qbgTJH": {
+        "category_tab_xrdJHz": {
           "type": "category_tab",
           "settings": {
-            "title": "Wellness",
-            "tab_icon": "shopify://shop_images/Layer_1_3_d4972e1c-5604-45b9-b89b-b9d9e85b06ef.png",
-            "collection": "cats-copy"
+            "title": "For Cats",
+            "collection": "frontpage"
           }
         }
       },
       "block_order": [
         "category_tab_4r9PNP",
-        "category_tab_DQDMbq",
         "category_tab_Xy86jK",
-        "category_tab_qbgTJH"
+        "category_tab_xrdJHz"
       ],
       "name": "Product Grid Selection",
       "settings": {
         "heading": "Who are we shopping for today?",
+        "heading_mobile": "Who are we shopping for today?",
         "view_all_link": ""
       }
     },
