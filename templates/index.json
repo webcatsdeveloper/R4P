@@ -131,8 +131,6 @@
           "type": "category_tab",
           "settings": {
             "title": "All",
-            "title_mobile": "",
-            "icon": "shopify://shop_images/Layer_1_1_c4a80cf5-5c56-4121-bfc9-2064ad230098.png",
             "collection": "frontpage"
           }
         },
@@ -140,7 +138,6 @@
           "type": "category_tab",
           "settings": {
             "title": "For Dogs",
-            "title_mobile": "",
             "collection": "frontpage"
           }
         },
@@ -148,7 +145,6 @@
           "type": "category_tab",
           "settings": {
             "title": "For Cats",
-            "title_mobile": "",
             "collection": "frontpage"
           }
         }
@@ -162,6 +158,7 @@
       "name": "Product Grid Selection",
       "settings": {
         "heading": "Who are we shopping for today?",
+        "heading_mobile": "Who are we shopping for today?",
         "view_all_link": ""
       }
     },
@@ -172,8 +169,6 @@
           "type": "category_tab",
           "settings": {
             "title": "All",
-            "title_mobile": "All",
-            "icon": "shopify://shop_images/Layer_1_1_c4a80cf5-5c56-4121-bfc9-2064ad230098.png",
             "collection": "cats-copy-1"
           }
         },
@@ -181,7 +176,6 @@
           "type": "category_tab",
           "settings": {
             "title": "For Dogs",
-            "title_mobile": "",
             "collection": "frontpage"
           }
         },
@@ -189,7 +183,6 @@
           "type": "category_tab",
           "settings": {
             "title": "For Cats",
-            "title_mobile": "",
             "collection": "frontpage"
           }
         }
@@ -202,6 +195,7 @@
       "name": "Product Grid Selection",
       "settings": {
         "heading": "Who are we shopping for today?",
+        "heading_mobile": "Who are we<br> shopping for <br>today?",
         "view_all_link": ""
       }
     },
