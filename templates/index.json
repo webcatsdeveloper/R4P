@@ -131,6 +131,8 @@
           "type": "category_tab",
           "settings": {
             "title": "All",
+            "title_mobile": "",
+            "icon": "shopify://shop_images/Layer_1_1_c4a80cf5-5c56-4121-bfc9-2064ad230098.png",
             "collection": "frontpage"
           }
         },
@@ -138,6 +140,7 @@
           "type": "category_tab",
           "settings": {
             "title": "For Dogs",
+            "title_mobile": "",
             "collection": "frontpage"
           }
         },
@@ -145,6 +148,7 @@
           "type": "category_tab",
           "settings": {
             "title": "For Cats",
+            "title_mobile": "",
             "collection": "frontpage"
           }
         }
