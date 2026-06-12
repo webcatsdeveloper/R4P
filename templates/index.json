@@ -169,6 +169,7 @@
           "type": "category_tab",
           "settings": {
             "title": "All",
+            "tab_icon": "shopify://shop_images/Layer_1_1_c4a80cf5-5c56-4121-bfc9-2064ad230098.png",
             "collection": "cats-copy-1"
           }
         },
