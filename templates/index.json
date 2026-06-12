@@ -133,6 +133,14 @@
             "collection": "cats-copy-1"
           }
         },
+        "category_tab_DQDMbq": {
+          "type": "category_tab",
+          "settings": {
+            "title": "Dogs",
+            "tab_icon": "shopify://shop_images/Layer_1_f05a10c9-1f6f-41de-9a51-b8a82a69a595.png",
+            "collection": "dogs"
+          }
+        },
         "category_tab_Xy86jK": {
           "type": "category_tab",
           "settings": {
@@ -150,6 +158,7 @@
       },
       "block_order": [
         "category_tab_4r9PNP",
+        "category_tab_DQDMbq",
         "category_tab_Xy86jK",
         "category_tab_xrdJHz"
       ],
