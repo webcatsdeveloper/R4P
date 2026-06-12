@@ -192,8 +192,9 @@
         "category_tab_KfJtNT": {
           "type": "category_tab",
           "settings": {
-            "title": "For Cats",
-            "collection": "frontpage"
+            "title": "Wellness",
+            "tab_icon": "shopify://shop_images/Layer_1_3_d4972e1c-5604-45b9-b89b-b9d9e85b06ef.png",
+            "collection": "cats-copy"
           }
         }
       },
