@@ -144,8 +144,17 @@
         "category_tab_Xy86jK": {
           "type": "category_tab",
           "settings": {
-            "title": "For Dogs",
-            "collection": "frontpage"
+            "title": "Cats",
+            "tab_icon": "shopify://shop_images/Layer_1_2_3a21fd40-6acd-4f16-85fe-a78dc845f3c9.png",
+            "collection": "cats"
+          }
+        },
+        "category_tab_qbgTJH": {
+          "type": "category_tab",
+          "settings": {
+            "title": "Wellness",
+            "tab_icon": "shopify://shop_images/Layer_1_3_d4972e1c-5604-45b9-b89b-b9d9e85b06ef.png",
+            "collection": "cats-copy"
           }
         },
         "category_tab_xrdJHz": {
@@ -160,6 +169,7 @@
         "category_tab_4r9PNP",
         "category_tab_DQDMbq",
         "category_tab_Xy86jK",
+        "category_tab_qbgTJH",
         "category_tab_xrdJHz"
       ],
       "name": "Product Grid Selection",
