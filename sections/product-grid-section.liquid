@@ -40,41 +40,60 @@
   max-width: 1280px;
   margin: 0 auto 72px;
   display: flex;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
+  gap: 56px;
   position: relative;
-  border-bottom: 3px solid #EBC8BE;
+  border-bottom: none;
 }
 
 .ps-tab-icon-wrap {
-  display: none;
+  display: flex;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: #EADCD6;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.ps-tab-btn.active .ps-tab-icon-wrap {
+  background: #EE3E34;
+}
+
+.ps-tab-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ps-tab-icon-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.1;
 }
 
 .ps-tab-btn {
-  width: 33.333%;
-  height: 58px;
-
+  width: auto;
+  height: auto;
   position: relative;
-
   background: transparent;
   border: none;
   cursor: pointer;
-
-  padding: 0 0 14px 0;
+  padding: 0;
   margin: 0;
-
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   font-family: 'Degular Demo' !important;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 18px;
-  letter-spacing: -0.01em;
-
   color: #111111;
   transition: color 0.25s ease;
-
   text-align: center;
 }
 
@@ -82,21 +101,11 @@
   color: #EE3E34;
 }
 
-.ps-tab-btn::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-
-  width: 0;
-  height: 3px;
-
-  background: #EE3E34;
-  transition: width 0.3s ease;
-}
-
-.ps-tab-btn.active::after {
-  width: 100%;
+.ps-tab-text {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
 }
 
 /* =========================
