@@ -362,38 +362,141 @@
 
 @media screen and (max-width: 768px) {
 
+  .pet-hero-{{ section.id }} {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
   .pet-hero-wrapper {
-    padding: 70px 20px 90px;
-    gap: 40px;
+    flex-direction: column-reverse !important;
+    text-align: left !important;
+    padding: 0 0 60px !important;
+    gap: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .pet-hero-content {
+    width: 100% !important;
+    min-width: unset !important;
+    margin-left: 0 !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
   }
 
   .pet-hero-heading {
-    font-size: 52px;
-    line-height: 0.95;
-    letter-spacing: -2px;
+    display: block !important;
+    font-size: 42px !important;
+    line-height: 1.05 !important;
+    letter-spacing: -1.5px !important;
+    text-align: left !important;
+    max-width: 100% !important;
   }
 
-  .pet-hero-description,
+  .pet-hero-heading span {
+    display: inline !important;
+  }
+
+  .pet-hero-heading span:nth-child(3)::before {
+    content: "\A";
+    white-space: pre !important;
+  }
+
+  .pet-hero-subtext-box {
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: 24px !important;
+    margin-inline: 0 !important;
+    text-align: left !important;
+  }
+
+  .pet-hero-description {
+    font-size: 16px !important;
+    line-height: 1.45 !important;
+    color: #1E1E1E !important;
+    margin: 0 0 16px !important;
+    text-align: left !important;
+  }
+
   .pet-hero-bold-text {
-    font-size: 18px;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    font-weight: 700 !important;
+    color: #000 !important;
+    text-align: left !important;
   }
 
   .pet-hero-button {
-    min-width: 220px;
-    height: 58px;
-    font-size: 15px;
-    margin-top: 34px;
+    min-width: 200px !important;
+    height: 56px !important;
+    font-size: 15px !important;
+    margin-top: 28px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .pet-hero-image-side {
+    width: 116% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin-left: -8% !important;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    opacity: 1 !important;
+  }
+
+  .pet-hero-animate .pet-hero-image-side {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .pet-main-image {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: contain !important;
   }
 
   .pet-heart-doodle {
-    width: 60px;
-    top: 30px;
-    left: 30px;
+    display: none !important;
   }
 
   .pet-left-curve {
-    width: 320px;
-    left: -120px;
+    width: 320px !important;
+    left: -120px !important;
+  }
+
+  .pet-hero-wave-asset {
+    opacity: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    transform: none !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    height: 100% !important;
+    display: block !important;
+    z-index: 1 !important;
+  }
+
+  .pet-hero-animate .pet-hero-wave-asset {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .pet-hero-wave-asset img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: fill !important;
   }
 }
 
