@@ -176,7 +176,8 @@
         "category_tab_Kypfmd": {
           "type": "category_tab",
           "settings": {
-            "title": "For Dogs",
+            "title": "Dogs",
+            "tab_icon": "shopify://shop_images/Layer_1_f05a10c9-1f6f-41de-9a51-b8a82a69a595.png",
             "collection": "frontpage"
           }
         },
