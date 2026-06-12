@@ -55,9 +55,54 @@
         "padding-block-start": 40,
         "padding-block-end": 80
       }
+    },
+    "1781264408ddd0144b": {
+      "type": "_blocks",
+      "blocks": {
+        "s_store_locator_storeify_dealer_form_emGU83": {
+          "type": "shopify://apps/s-store-locator/blocks/storeify-dealer-form/e7003487-cc51-4321-9488-2c47c07a5b17",
+          "settings": {}
+        },
+        "s_store_locator_storeify_storelocator_eprwhi": {
+          "type": "shopify://apps/s-store-locator/blocks/storeify-storelocator/e7003487-cc51-4321-9488-2c47c07a5b17",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "s_store_locator_storeify_dealer_form_emGU83",
+        "s_store_locator_storeify_storelocator_eprwhi"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "1781264408ddd0144b"
   ]
 }
