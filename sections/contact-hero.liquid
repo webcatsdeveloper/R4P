@@ -30,11 +30,12 @@
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} {
       padding-top: {{ section.settings.mobile_padding_top }}px;
-      padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+      padding-bottom: 0 !important;
     }
     
-    /* Reset mobile background to allow the background image to stack naturally at the bottom */
-    #shopify-section-{{ section.id }} .contact-hero-section {
+    /* Force reset mobile background to allow the background image to stack naturally in the content flow */
+    #shopify-section-{{ section.id }} .contact-hero-section,
+    .contact-hero-section {
       background-image: none !important;
     }
   }
@@ -102,14 +103,14 @@
         </div>
       </div>
 
-      <!-- Mobile-only Graphic Image Stack (Hidden on Desktop, 2nd in mobile stack) -->
+      <!-- Mobile-only Graphic Image Stack (Hidden on Desktop, 2nd in mobile stack - full width) -->
       {%- if section.settings.custom_curve_image != blank -%}
         <div class="contact-hero__mobile-image-wrap contact-hero__animate-fade delay-2">
           <img src="{{ section.settings.custom_curve_image | image_url: width: 1200 }}" alt="Right4Paws Contact" class="contact-hero__mobile-image" loading="lazy">
         </div>
       {%- endif -%}
 
-      <!-- Form Column (Right on Desktop, Bottom on Mobile - 3rd in mobile stack) -->
+      <!-- Form Column (Right on Desktop, Bottom on Mobile - 3rd in mobile stack - full width flush) -->
       <div class="contact-hero__form-col contact-hero__animate-fade delay-3">
         <div class="contact-hero__card">
           {%- if section.settings.card_title != blank -%}
@@ -484,7 +485,7 @@
   /* --- Responsive Breakpoints (Mobile Engine) --- */
   @media screen and (max-width: 989px) {
     .contact-hero__container {
-      padding: 0 24px;
+      padding: 0;
     }
 
     .contact-hero__grid {
@@ -493,38 +494,48 @@
       gap: 32px; /* Smooth padding gap on mobile */
     }
 
+    /* 1. Details column sits at top with inset padding */
     .contact-hero__info-col {
       order: 1;
       width: 100%;
       padding-top: 0;
+      padding-left: 24px;
+      padding-right: 24px;
+      box-sizing: border-box;
     }
 
+    /* 2. Mobile Image stacks in the middle (full bleed, zoomed in on girl & dog) */
     .contact-hero__mobile-image-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: block;
       width: 100%;
+      height: 105vw; /* Taller height to crop sides and zoom in on the girl & dog */
       order: 2;
       margin-top: 10px;
       margin-bottom: 10px;
+      overflow: hidden;
     }
 
     .contact-hero__mobile-image {
       width: 100%;
-      height: auto;
-      max-width: 600px;
+      height: 100%;
       display: block;
-      object-fit: contain;
+      object-fit: cover; /* Zooms/crops to fill the portrait area */
+      object-position: center bottom; /* Aligns bottom containing the bowl */
     }
 
+    /* 3. Form column stacks at the bottom (flush to screen edges) */
     .contact-hero__form-col {
       order: 3;
       width: 100%;
+      margin: 0;
     }
 
     .contact-hero__card {
-      padding: 40px 24px;
-      border-radius: 30px;
+      padding: 40px 24px 60px 24px;
+      border-radius: 30px 30px 0 0; /* Premium rounded top, flush bottom */
+      box-shadow: none; /* Shadow removed since it spans full bleed */
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .contact-hero__card-title {
