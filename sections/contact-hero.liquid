@@ -104,9 +104,13 @@
       </div>
 
       <!-- Mobile-only Graphic Image Stack (Hidden on Desktop, 2nd in mobile stack - full width) -->
-      {%- if section.settings.custom_curve_image != blank -%}
+      {%- if section.settings.mobile_image != blank or section.settings.custom_curve_image != blank -%}
         <div class="contact-hero__mobile-image-wrap contact-hero__animate-fade delay-2">
-          <img src="{{ section.settings.custom_curve_image | image_url: width: 1200 }}" alt="Right4Paws Contact" class="contact-hero__mobile-image" loading="lazy">
+          {%- if section.settings.mobile_image != blank -%}
+            <img src="{{ section.settings.mobile_image | image_url: width: 1200 }}" alt="{{ section.settings.mobile_image.alt | default: 'Right4Paws Contact' }}" class="contact-hero__mobile-image" loading="lazy">
+          {%- else -%}
+            <img src="{{ section.settings.custom_curve_image | image_url: width: 1200 }}" alt="{{ section.settings.custom_curve_image.alt | default: 'Right4Paws Contact' }}" class="contact-hero__mobile-image" loading="lazy">
+          {%- endif -%}
         </div>
       {%- endif -%}
 
@@ -556,6 +560,17 @@
 
     .contact-hero__info-list {
       gap: 24px;
+      margin-top: 0 !important; /* Override desktop margin-top: -180px */
+    }
+
+    .contact-hero__input {
+      height: 48px !important; /* Override desktop height: 30px */
+      padding: 12px 16px !important;
+    }
+
+    .contact-hero__textarea {
+      height: auto !important;
+      min-height: 120px !important;
     }
 
     .contact-hero__info-item {
@@ -653,6 +668,12 @@
       "id": "custom_curve_image",
       "label": "Full Background Image (with Girl, Dog, and curves)",
       "info": "This image will cover the entire section background on desktop, and stack at the bottom on mobile."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Illustration Image (Optional)",
+      "info": "This image will be used specifically for the mobile view. If left blank, the desktop background image will be used."
     },
     {
       "type": "select",
