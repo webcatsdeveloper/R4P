@@ -18,36 +18,53 @@
     overflow: hidden;
   }
 
+  /* Desktop Background Image Assignment */
+  {%- if section.settings.background_image != blank -%}
+    #shopify-section-{{ section.id }} .contact-hero-section {
+      background-image: url('{{ section.settings.background_image | image_url: width: 2400 }}');
+      background-size: cover;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+  {%- endif -%}
+
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} {
       padding-top: {{ section.settings.mobile_padding_top }}px;
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+    
+    /* Reset mobile background to solid color to allow mobile-only image stacking */
+    #shopify-section-{{ section.id }} .contact-hero-section {
+      background-image: none !important;
     }
   }
 {%- endstyle -%}
 
 <div class="contact-hero-section contact-hero__animate">
   
-  <!-- Curvy Background Line -->
-  <div class="contact-hero__bg-curves">
-    {%- if section.settings.custom_curve_image != blank -%}
-      <img src="{{ section.settings.custom_curve_image | image_url: width: 2000 }}" class="contact-hero__custom-curve" alt="" loading="lazy">
-    {%- else -%}
-      <svg class="contact-hero__curve-svg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path class="curve-path" d="M -100 500 C 100 500, 150 750, 50 750 C -50 750, -80 600, 50 520 C 200 420, 250 250, 220 150 C 180 50, 60 150, 100 250 C 150 380, 320 520, 480 500 C 650 480, 550 320, 720 400 C 850 480, 920 300, 1050 400 C 1180 500, 1250 620, 1380 500 C 1450 420, 1500 350, 1600 350" stroke="var(--curve-color)" stroke-width="14" stroke-linecap="round" fill="none"/>
-      </svg>
-    {%- endif -%}
-  </div>
+  <!-- Fallback Curvy SVG Background if no background image is set -->
+  {%- if section.settings.background_image == blank -%}
+    <div class="contact-hero__bg-curves">
+      {%- if section.settings.custom_curve_image != blank -%}
+        <img src="{{ section.settings.custom_curve_image | image_url: width: 2000 }}" class="contact-hero__custom-curve" alt="" loading="lazy">
+      {%- else -%}
+        <svg class="contact-hero__curve-svg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path class="curve-path" d="M -100 500 C 100 500, 150 750, 50 750 C -50 750, -80 600, 50 520 C 200 420, 250 250, 220 150 C 180 50, 60 150, 100 250 C 150 380, 320 520, 480 500 C 650 480, 550 320, 720 400 C 850 480, 920 300, 1050 400 C 1180 500, 1250 620, 1380 500 C 1450 420, 1500 350, 1600 350" stroke="var(--curve-color)" stroke-width="14" stroke-linecap="round" fill="none"/>
+        </svg>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
 
   <div class="contact-hero__container">
     <div class="contact-hero__grid">
       
-      <!-- Info Column (Left Top) -->
+      <!-- Info Column (Left Top on Mobile, Left on Desktop) -->
       <div class="contact-hero__info-col contact-hero__animate-fade delay-1">
         <div class="contact-hero__info-list">
           
           <!-- Office Block -->
-          <div class="contact-hero__info-item align-start">
+          <div class="contact-hero__info-item">
             <div class="contact-hero__icon-circle">
               <svg class="contact-hero__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
@@ -64,7 +81,7 @@
           </div>
 
           <!-- Email Block -->
-          <div class="contact-hero__info-item align-center">
+          <div class="contact-hero__info-item">
             <div class="contact-hero__icon-circle">
               <svg class="contact-hero__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="currentColor"/>
@@ -81,7 +98,7 @@
           </div>
 
           <!-- Phone Block -->
-          <div class="contact-hero__info-item align-center">
+          <div class="contact-hero__info-item">
             <div class="contact-hero__icon-circle">
               <svg class="contact-hero__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 15.95 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z" fill="currentColor"/>
@@ -100,16 +117,14 @@
         </div>
       </div>
 
-      <!-- Image Column (Left Bottom) -->
-      <div class="contact-hero__image-wrap contact-hero__animate-fade delay-3">
-        {%- if section.settings.main_image != blank -%}
-          <img src="{{ section.settings.main_image | image_url: width: 1200 }}" alt="{{ section.settings.main_image.alt | default: 'Contact Right4Paws' }}" class="contact-hero__image" loading="eager">
-        {%- else -%}
-          {{ 'image' | placeholder_svg_tag: 'contact-hero__image placeholder-svg' }}
-        {%- endif -%}
-      </div>
+      <!-- Mobile-only Graphic Image Stack (Hidden on Desktop, Stacks at bottom on Mobile) -->
+      {%- if section.settings.background_image != blank -%}
+        <div class="contact-hero__mobile-image-wrap contact-hero__animate-fade delay-3">
+          <img src="{{ section.settings.background_image | image_url: width: 1200 }}" alt="Right4Paws" class="contact-hero__mobile-image" loading="lazy">
+        </div>
+      {%- endif -%}
 
-      <!-- Form Column (Right) -->
+      <!-- Form Column (Right on Desktop, Middle on Mobile) -->
       <div class="contact-hero__form-col contact-hero__animate-fade delay-2">
         <div class="contact-hero__card">
           {%- if section.settings.card_title != blank -%}
@@ -227,36 +242,26 @@
   .contact-hero__grid {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
-    grid-template-rows: auto 1fr;
-    gap: 30px 80px;
-    align-items: start;
+    gap: 40px 80px;
+    align-items: center; /* Desktop Alignment centered vertically for layout balance */
   }
 
   /* --- Left Column Info Boxes --- */
   .contact-hero__info-col {
-    grid-column: 1;
-    grid-row: 1;
+    width: 100%;
   }
 
   .contact-hero__info-list {
     display: flex;
     flex-direction: column;
-    gap: 36px;
-    margin-top: 10px;
+    gap: 32px;
   }
 
   .contact-hero__info-item {
     display: flex;
+    align-items: flex-start; /* Aligns icons neatly to the top line of text */
     gap: 20px;
     color: var(--text-color);
-  }
-
-  .contact-hero__info-item.align-start {
-    align-items: flex-start;
-  }
-
-  .contact-hero__info-item.align-center {
-    align-items: center;
   }
 
   .contact-hero__icon-circle {
@@ -278,12 +283,13 @@
 
   .contact-hero__info-content {
     font-family: 'Outfit', sans-serif;
+    text-align: left;
   }
 
   .contact-hero__info-content.inline-style {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline;
     gap: 6px;
     line-height: 1.4;
   }
@@ -292,7 +298,7 @@
     margin: 0 0 6px 0;
     font-size: 18px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.25;
     color: var(--text-color);
   }
 
@@ -301,7 +307,7 @@
     font-size: 15px;
     line-height: 1.5;
     font-weight: 400;
-    opacity: 0.9;
+    opacity: 0.95;
   }
 
   .contact-hero__info-text.text-block {
@@ -311,10 +317,12 @@
   .contact-hero__info-inline-label {
     font-size: 16px;
     font-weight: 700;
+    color: var(--text-color);
   }
 
   .contact-hero__info-inline-value {
     font-size: 15px;
+    color: var(--text-color);
   }
 
   .contact-hero__info-inline-value p {
@@ -325,7 +333,7 @@
   .contact-hero__info-inline-value a {
     color: var(--text-color);
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 700;
     border-bottom: 1px solid transparent;
     transition: border-color 0.25s ease, color 0.25s ease;
   }
@@ -335,37 +343,14 @@
     border-bottom-color: var(--accent-color);
   }
 
-  /* --- Left Column Bottom Image --- */
-  .contact-hero__image-wrap {
-    grid-column: 1;
-    grid-row: 2;
-    align-self: end;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-    margin-top: 10px;
-  }
-
-  .contact-hero__image {
-    width: 100%;
-    max-width: {{ section.settings.image_max_width }}px;
-    height: auto;
-    display: block;
-    object-fit: contain;
-  }
-
-  .contact-hero__image.placeholder-svg {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    padding: 40px;
-    border: 1px dashed rgba(255, 255, 255, 0.3);
+  /* --- Mobile Image (hidden on desktop) --- */
+  .contact-hero__mobile-image-wrap {
+    display: none;
   }
 
   /* --- Right Column Form Card --- */
   .contact-hero__form-col {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    align-self: center;
+    width: 100%;
   }
 
   .contact-hero__card {
@@ -492,7 +477,7 @@
     padding-left: 20px;
   }
 
-  /* --- Background Hand-drawn Curves --- */
+  /* --- Fallback SVG Background Curves --- */
   .contact-hero__bg-curves {
     position: absolute;
     top: 0;
@@ -517,7 +502,7 @@
     display: block;
   }
 
-  /* --- Premium Hand-drawing Animation Engine --- */
+  /* --- SVG Drawing Animation Engine --- */
   .contact-hero__curve-svg path {
     stroke-dasharray: 4000;
     stroke-dashoffset: 4000;
@@ -573,15 +558,21 @@
       width: 100%;
     }
 
-    .contact-hero__image-wrap {
-      order: 3;
-      width: 100%;
-      margin-top: 10px;
+    .contact-hero__mobile-image-wrap {
+      display: flex;
       justify-content: center;
+      align-items: center;
+      width: 100%;
+      order: 3;
+      margin-top: 10px;
     }
 
-    .contact-hero__image {
-      max-width: 100%;
+    .contact-hero__mobile-image {
+      width: 100%;
+      height: auto;
+      max-width: 600px;
+      display: block;
+      object-fit: contain;
     }
 
     .contact-hero__card {
@@ -595,7 +586,7 @@
     }
 
     .contact-hero__info-list {
-      gap: 28px;
+      gap: 24px;
     }
 
     .contact-hero__info-item {
@@ -685,23 +676,33 @@
     },
     {
       "type": "header",
+      "content": "📸 Background Layout Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Full Background Image (with Girl, Dog, and curves)",
+      "info": "This image will cover the entire section background on desktop, and stack at the bottom on mobile."
+    },
+    {
+      "type": "header",
       "content": "📐 Spacing Controls"
     },
     {
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 180,
+      "max": 220,
       "step": 4,
       "unit": "px",
-      "label": "Padding Top",
-      "default": 80
+      "label": "Padding Top (Clears Sticky Header)",
+      "default": 140
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 180,
+      "max": 200,
       "step": 4,
       "unit": "px",
       "label": "Padding Bottom",
@@ -711,17 +712,17 @@
       "type": "range",
       "id": "mobile_padding_top",
       "min": 0,
-      "max": 120,
+      "max": 180,
       "step": 4,
       "unit": "px",
       "label": "Mobile Padding Top",
-      "default": 40
+      "default": 80
     },
     {
       "type": "range",
       "id": "mobile_padding_bottom",
       "min": 0,
-      "max": 120,
+      "max": 180,
       "step": 4,
       "unit": "px",
       "label": "Mobile Padding Bottom",
@@ -769,26 +770,7 @@
     },
     {
       "type": "header",
-      "content": "📸 Bottom Illustration Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "main_image",
-      "label": "Girl & Dog Illustration Image"
-    },
-    {
-      "type": "range",
-      "id": "image_max_width",
-      "min": 200,
-      "max": 800,
-      "step": 10,
-      "unit": "px",
-      "label": "Illustration Image Max Width",
-      "default": 580
-    },
-    {
-      "type": "header",
-      "content": "〰️ Curve Wave Settings"
+      "content": "〰️ Curve Wave Settings (Fallback)"
     },
     {
       "type": "color",
