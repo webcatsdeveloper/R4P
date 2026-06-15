@@ -148,9 +148,11 @@
       "type": "contact-hero",
       "name": "Contact Hero Canvas Pro",
       "settings": {
-        "bg_color": "#F5ABB6",
-        "text_color": "#2C2C2C",
-        "accent_color": "#C52333",
+        "bg_color": "#f5abb6",
+        "text_color": "#2c2c2c",
+        "accent_color": "#c52333",
+        "background_image": "shopify://shop_images/Banner-1_1.png",
+        "bg_position_desktop": "left bottom",
         "padding_top": 80,
         "padding_bottom": 80,
         "mobile_padding_top": 40,
@@ -161,15 +163,13 @@
         "email_values": "<p><a href=\"mailto:info@right4paws.com\">info@right4paws.com</a> | <a href=\"mailto:customercare@right4paws.com\">customercare@right4paws.com</a> | <a href=\"mailto:careers@right4paws.com\">careers@right4paws.com</a></p>",
         "phone_title": "Customer Service:",
         "phone_values": "<p><a href=\"tel:8095011112\">80950 11112</a> / <a href=\"tel:18008333150\">1800-8333150</a> (Toll-Free)</p>",
-        "curve_color": "#FFCD68",
-        "custom_curve_image": "shopify://shop_images/Banner-1_1.png",
         "card_title": "Contact Us:",
-        "card_bg": "#FFFFFF",
+        "card_bg": "#ffffff",
         "card_text": "#111111",
-        "input_border": "#E5E5E5",
-        "input_bg": "#FFFFFF",
+        "input_border": "#e5e5e5",
+        "input_bg": "#ffffff",
         "button_bg": "#000000",
-        "button_text": "#FFFFFF"
+        "button_text": "#ffffff"
       }
     }
   },
