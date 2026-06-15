@@ -151,7 +151,7 @@
         "bg_color": "#f5abb6",
         "text_color": "#2c2c2c",
         "accent_color": "#c52333",
-        "background_image": "shopify://shop_images/Banner-1_1.png",
+        "custom_curve_image": "shopify://shop_images/Banner-1_1.png",
         "bg_position_desktop": "left bottom",
         "padding_top": 80,
         "padding_bottom": 80,
