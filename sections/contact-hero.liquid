@@ -17,7 +17,7 @@
     overflow: hidden;
   }
 
-  /* Desktop Background Image Assignment mapping to custom_curve_image setting */
+  /* Premium Desktop Background Image Engine mapping to custom_curve_image setting */
   {%- if section.settings.custom_curve_image != blank -%}
     #shopify-section-{{ section.id }} .contact-hero-section {
       background-image: url('{{ section.settings.custom_curve_image | image_url: width: 2400 }}');
@@ -101,13 +101,6 @@
 
         </div>
       </div>
-
-      <!-- Mobile-only Graphic Image Stack (Hidden on Desktop, Stacks at bottom on Mobile) -->
-      {%- if section.settings.custom_curve_image != blank -%}
-        <div class="contact-hero__mobile-image-wrap contact-hero__animate-fade delay-3">
-          <img src="{{ section.settings.custom_curve_image | image_url: width: 1200 }}" alt="Right4Paws Contact" class="contact-hero__mobile-image" loading="lazy">
-        </div>
-      {%- endif -%}
 
       <!-- Form Column (Right on Desktop, Middle on Mobile) -->
       <div class="contact-hero__form-col contact-hero__animate-fade delay-2">
@@ -199,6 +192,13 @@
           {%- endform -%}
         </div>
       </div>
+
+      <!-- Mobile-only Graphic Image Stack (Hidden on Desktop, Stacks at bottom on Mobile) -->
+      {%- if section.settings.custom_curve_image != blank -%}
+        <div class="contact-hero__mobile-image-wrap contact-hero__animate-fade delay-3">
+          <img src="{{ section.settings.custom_curve_image | image_url: width: 1200 }}" alt="Right4Paws Contact" class="contact-hero__mobile-image" loading="lazy">
+        </div>
+      {%- endif -%}
 
     </div>
   </div>
