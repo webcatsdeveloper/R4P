@@ -17,10 +17,10 @@
     overflow: hidden;
   }
 
-  /* Premium Desktop Background Image Engine */
-  {%- if section.settings.background_image != blank -%}
+  /* Desktop Background Image Assignment mapping to custom_curve_image setting */
+  {%- if section.settings.custom_curve_image != blank -%}
     #shopify-section-{{ section.id }} .contact-hero-section {
-      background-image: url('{{ section.settings.background_image | image_url: width: 2400 }}');
+      background-image: url('{{ section.settings.custom_curve_image | image_url: width: 2400 }}');
       background-size: cover;
       background-position: {{ section.settings.bg_position_desktop }};
       background-repeat: no-repeat;
@@ -102,10 +102,10 @@
         </div>
       </div>
 
-      <!-- Mobile-only Graphic Stack (Hidden on Desktop, Stacks at bottom on Mobile) -->
-      {%- if section.settings.background_image != blank -%}
+      <!-- Mobile-only Graphic Image Stack (Hidden on Desktop, Stacks at bottom on Mobile) -->
+      {%- if section.settings.custom_curve_image != blank -%}
         <div class="contact-hero__mobile-image-wrap contact-hero__animate-fade delay-3">
-          <img src="{{ section.settings.background_image | image_url: width: 1200 }}" alt="Right4Paws Contact" class="contact-hero__mobile-image" loading="lazy">
+          <img src="{{ section.settings.custom_curve_image | image_url: width: 1200 }}" alt="Right4Paws Contact" class="contact-hero__mobile-image" loading="lazy">
         </div>
       {%- endif -%}
 
@@ -228,18 +228,19 @@
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 40px 80px;
-    align-items: center; /* Desktop Alignment centered vertically for layout balance */
+    align-items: start; /* Align to the top to prevent background overlap */
   }
 
   /* --- Left Column Info Boxes --- */
   .contact-hero__info-col {
     width: 100%;
+    padding-top: 40px; /* Breathing space at the top of the grid to sit cleanly below the header */
   }
 
   .contact-hero__info-list {
     display: flex;
     flex-direction: column;
-    gap: 22px; /* Snug spacing to avoid vertical clutter */
+    gap: 22px; /* Compact spacing */
   }
 
   .contact-hero__info-item {
@@ -250,7 +251,7 @@
   }
 
   .contact-hero__icon-circle {
-    width: 36px; /* Optimized, compact size matching premium mock */
+    width: 36px;
     height: 36px;
     flex-shrink: 0;
     border-radius: 50%;
@@ -281,7 +282,7 @@
 
   .contact-hero__info-title {
     margin: 0 0 4px 0;
-    font-size: 15px; /* Clean, smaller headers matching design aesthetics */
+    font-size: 15px; /* Clean, smaller headers */
     font-weight: 700;
     line-height: 1.25;
     color: var(--text-color);
@@ -289,7 +290,7 @@
 
   .contact-hero__info-text {
     margin: 0;
-    font-size: 13px; /* Compact, highly readable value text */
+    font-size: 13px; /* Compact, readable text */
     line-height: 1.45;
     font-weight: 400;
     opacity: 0.95;
@@ -494,6 +495,7 @@
     .contact-hero__info-col {
       order: 1;
       width: 100%;
+      padding-top: 0;
     }
 
     .contact-hero__form-col {
@@ -623,7 +625,7 @@
     },
     {
       "type": "image_picker",
-      "id": "background_image",
+      "id": "custom_curve_image",
       "label": "Full Background Image (with Girl, Dog, and curves)",
       "info": "This image will cover the entire section background on desktop, and stack at the bottom on mobile."
     },
