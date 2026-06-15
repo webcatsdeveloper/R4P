@@ -29,8 +29,9 @@
 
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} {
-      padding-top: {{ section.settings.mobile_padding_top }}px;
+      padding-top: calc(var(--header-group-height, 100px) + 24px) !important;
       padding-bottom: 0 !important;
+      background: linear-gradient(180deg, #F1A5AC 0%, #FCBDC4 50%, #F8C2C8 100%) !important;
     }
     
     /* Force reset mobile background to allow the background image to stack naturally in the content flow */
@@ -51,10 +52,14 @@
           
           <!-- Office Block -->
           <div class="contact-hero__info-item">
-            <div class="contact-hero__icon-circle">
-              <svg class="contact-hero__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
-              </svg>
+            <div class="contact-hero__icon-circle{% if section.settings.office_icon != blank %} contact-hero__icon-circle--custom{% endif %}">
+              {%- if section.settings.office_icon != blank -%}
+                <img src="{{ section.settings.office_icon | image_url: width: 80 }}" class="contact-hero__icon-img" alt="" loading="lazy">
+              {%- else -%}
+                <svg class="contact-hero__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
+                </svg>
+              {%- endif -%}
             </div>
             <div class="contact-hero__info-content">
               {%- if section.settings.office_title != blank -%}
@@ -68,10 +73,14 @@
 
           <!-- Email Block -->
           <div class="contact-hero__info-item">
-            <div class="contact-hero__icon-circle">
-              <svg class="contact-hero__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="currentColor"/>
-              </svg>
+            <div class="contact-hero__icon-circle{% if section.settings.email_icon != blank %} contact-hero__icon-circle--custom{% endif %}">
+              {%- if section.settings.email_icon != blank -%}
+                <img src="{{ section.settings.email_icon | image_url: width: 80 }}" class="contact-hero__icon-img" alt="" loading="lazy">
+              {%- else -%}
+                <svg class="contact-hero__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="currentColor"/>
+                </svg>
+              {%- endif -%}
             </div>
             <div class="contact-hero__info-content inline-style">
               {%- if section.settings.email_title != blank -%}
@@ -85,10 +94,14 @@
 
           <!-- Phone Block -->
           <div class="contact-hero__info-item">
-            <div class="contact-hero__icon-circle">
-              <svg class="contact-hero__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z" fill="currentColor"/>
-              </svg>
+            <div class="contact-hero__icon-circle{% if section.settings.phone_icon != blank %} contact-hero__icon-circle--custom{% endif %}">
+              {%- if section.settings.phone_icon != blank -%}
+                <img src="{{ section.settings.phone_icon | image_url: width: 80 }}" class="contact-hero__icon-img" alt="" loading="lazy">
+              {%- else -%}
+                <svg class="contact-hero__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z" fill="currentColor"/>
+                </svg>
+              {%- endif -%}
             </div>
             <div class="contact-hero__info-content inline-style">
               {%- if section.settings.phone_title != blank -%}
@@ -272,6 +285,25 @@
   .contact-hero__icon-svg {
     width: 16px;
     height: 16px;
+  }
+
+  .contact-hero__icon-img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .contact-hero__icon-circle--custom {
+    background-color: transparent !important;
+    border-radius: 0 !important;
+  }
+
+  .contact-hero__icon-circle--custom .contact-hero__icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
   }
 
   .contact-hero__info-content {
@@ -508,6 +540,24 @@
       padding: 0 !important; /* Override desktop padding: 150px 20px */
     }
 
+    .contact-hero-section.is-revealed .contact-hero__info-col {
+      padding: 0 24px !important;
+    }
+
+    .contact-hero-section.is-revealed .contact-hero__mobile-image-wrap {
+      padding: 0 !important;
+    }
+
+    .contact-hero-section.is-revealed .contact-hero__form-col {
+      padding: 0 !important;
+    }
+
+    .contact-hero__info-content.inline-style {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
     /* 1. Details column sits at top with inset padding */
     .contact-hero__info-col {
       order: 1;
@@ -735,6 +785,24 @@
     {
       "type": "header",
       "content": "📞 Info Columns Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "office_icon",
+      "label": "Custom Office Icon (Optional)",
+      "info": "Upload a custom icon image. If left blank, the standard SVG location pin will be used."
+    },
+    {
+      "type": "image_picker",
+      "id": "email_icon",
+      "label": "Custom Email Icon (Optional)",
+      "info": "Upload a custom icon image. If left blank, the standard SVG envelope will be used."
+    },
+    {
+      "type": "image_picker",
+      "id": "phone_icon",
+      "label": "Custom Phone Icon (Optional)",
+      "info": "Upload a custom icon image. If left blank, the standard SVG phone will be used."
     },
     {
       "type": "text",
