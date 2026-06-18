@@ -531,9 +531,39 @@
     margin-bottom: 8px;
   }
 
+  /* MOBILE RESPONSIVE UPDATES FOR SEAMLESS LOWER PLACEMENT (image_f22179.png) */
   @media (max-width: 991px) {
     .pet-prod-hero-section { padding: 20px 20px 40px 20px; }
-    .pet-prod-main-desktop-grid { grid-template-columns: 1fr; gap: 40px; }
+    
+    /* Turn parent container into a flex column to handle sequence ordering control settings */
+    .pet-prod-main-desktop-grid { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 30px; 
+    }
+    
+    /* Dissolve layout frame boundaries to allow children elements to mix directly into the main column flow */
+    .pet-prod-media-gallery-container { 
+      display: contents; 
+    }
+    
+    /* Assign structural orders to render everything sequentially, sending the review card to the bottom */
+    .pet-prod-main-display-frame { 
+      order: 1; 
+    }
+    .pet-prod-dynamic-thumbnails-strip { 
+      order: 2; 
+      margin-top: -10px; 
+      margin-bottom: 10px; 
+    }
+    .pet-prod-meta-buy-column { 
+      order: 3; 
+    }
+    .pet-prod-review-slider-card { 
+      order: 4; 
+      margin-top: 20px; 
+    }
+
     .pet-prod-price-and-weight-flex-row { gap: 20px; justify-content: space-between; }
     .pet-prod-action-form-matrix, .pet-prod-footer-meta-block { max-width: 100%; }
     .pet-prod-variant-pill-wrapper { margin-top: 0; }
@@ -753,7 +783,7 @@
               </button>
               <div class="pet-accordion-element-panel-slider">
                 <div class="pet-accordion-element-panel-inner-content">
-                  {{ product.metafields.custom.detailed_nutrition_analysis | default: "Crude Protein 38%, Fat content 18%, Crude Ash 8%, Crude Fibre 5%." }}
+                  {{ product.metafields.custom.detailed_nutrition_analysis | default: "Crude Protein 38%, Fat content 18%, Crude Ash 8%, Crude Fibre 5." }}
                 </div>
               </div>
             </div>
