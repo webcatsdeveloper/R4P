@@ -3,7 +3,6 @@
   Positions the 7 distinct feature points perfectly on top of Rectangle 68.jpg
 {% endcomment %}
 
-<!-- Import geometric sans-serif for sharp text reproduction -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -38,6 +37,13 @@
     object-fit: cover;
     z-index: 1;
     pointer-events: none;
+  }
+
+  .rmr-background-desktop {
+    display: block;
+  }
+  .rmr-background-mobile {
+    display: none;
   }
 
   /* Grid wrapper mapped directly to the empty layout region of your banner */
@@ -125,6 +131,14 @@
       width: 100%;
       height: auto;
     }
+    {% if section.settings.mobile_banner_image != blank %}
+      .rmr-background-desktop {
+        display: none !important;
+      }
+      .rmr-background-mobile {
+        display: block !important;
+      }
+    {% endif %}
     .rmr-content-overlay-layer {
       width: 100%;
       padding: 30px 24px 40px 24px;
@@ -150,15 +164,16 @@
 <section class="rmr-overlay-section" id="RmrOverlaySection-{{ section.id }}">
   <div class="rmr-banner-container">
     
-    <!-- Dynamic Banner Image Background Layer -->
     {%- if section.settings.base_banner_image != blank -%}
-      <img class="rmr-background-asset" src="{{ section.settings.base_banner_image | image_url: width: 1500 }}" alt="Raw Made Right Layout Banner Base">
+      <img class="rmr-background-asset rmr-background-desktop" src="{{ section.settings.base_banner_image | image_url: width: 1500 }}" alt="Raw Made Right Layout Banner Base">
     {%- else -%}
-      {% comment %} Fallback placeholder logic mimicking the layout parameters of Rectangle 68.jpg if unassigned {% endcomment %}
-      <img class="rmr-background-asset" src="https://cdn.shopify.com/s/files/1/0817/3990/7350/files/Rectangle_68_mock.png?v=1710000005" alt="Rectangle 68 Default Context File Target">
+      <img class="rmr-background-asset rmr-background-desktop" src="https://cdn.shopify.com/s/files/1/0817/3990/7350/files/Rectangle_68_mock.png?v=1710000005" alt="Rectangle 68 Default Context File Target">
     {%- endif -%}
 
-    <!-- Responsive Text Columns Layer -->
+    {%- if section.settings.mobile_banner_image != blank -%}
+      <img class="rmr-background-asset rmr-background-mobile" src="{{ section.settings.mobile_banner_image | image_url: width: 800 }}" alt="Raw Made Right Mobile Layout Banner">
+    {%- endif -%}
+
     <div class="rmr-content-overlay-layer">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
@@ -167,7 +182,6 @@
               {%- if block.settings.point_icon != blank -%}
                 <img src="{{ block.settings.point_icon | image_url: width: 50 }}" alt="{{ block.settings.title_text | escape }} Icon Accent">
               {%- else -%}
-                {% comment %} Clean structural inline SVGs matching the point list assignments {% endcomment %}
                 {%- assign loop_index = forloop.index0 -%}
                 {%- case loop_index -%}
                   {%- when 0 -%}
@@ -209,6 +223,11 @@
       "type": "image_picker",
       "id": "base_banner_image",
       "label": "Upload Rectangle 68.jpg Base Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_banner_image",
+      "label": "Mobile Background Image (Optional)"
     }
   ],
   "blocks": [
