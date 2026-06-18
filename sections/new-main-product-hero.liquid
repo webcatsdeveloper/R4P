@@ -559,18 +559,36 @@
     .pet-prod-meta-buy-column { 
       order: 3; 
     }
+    
+    /* MODIFIED: Adjusted padding to let the image snap perfectly flush with the bottom border mask */
     .pet-prod-review-slider-card { 
       order: 4; 
       margin-top: 20px; 
+      padding: 40px 30px 0 30px !important;
     }
 
     .pet-prod-price-and-weight-flex-row { gap: 20px; justify-content: space-between; }
     .pet-prod-action-form-matrix, .pet-prod-footer-meta-block { max-width: 100%; }
     .pet-prod-variant-pill-wrapper { margin-top: 0; }
-    .pet-prod-review-slide { grid-template-columns: 1fr; gap: 15px; }
-    .pet-prod-review-graphic-container { justify-content: center; }
+    
+    /* MODIFIED: Re-arranged column stacking context on mobile slide frames */
+    .pet-prod-review-slide { 
+      grid-template-columns: 1fr; 
+      gap: 10px; 
+    }
+    .pet-prod-review-graphic-container { 
+      justify-content: center; 
+      margin-bottom: 0px;
+    }
+    
+    /* MODIFIED: Restored generous height and bottom boundary placement matching Figma */
     .pet-prod-review-graphic-container img,
-    .pet-prod-review-graphic-container svg { margin-bottom: 0; max-height: 200px; }
+    .pet-prod-review-graphic-container svg { 
+      margin-bottom: 0 !important; 
+      max-height: 270px !important; 
+      width: auto;
+      object-fit: contain;
+    }
   }
 {% endstyle %}
 
