@@ -520,15 +520,14 @@
       </h1>
 
       <div class="pet-hero-subtext-box">
-        <p class="pet-hero-description">
-          {{ section.settings.subtext }}
-        </p>
+  <p class="pet-hero-description">
+    {{ section.settings.subtext }}
+  </p>
 
-        <p class="pet-hero-bold-text">
-          {{ section.settings.subtext_bold }}
-        </p>
-      </div>
-
+  <p class="pet-hero-bold-text">
+    {{ section.settings.subtext_bold | replace: "RIGHT BY THEM", '<span class="accent">RIGHT BY THEM</span>' }}
+  </p>
+</div>
       {% if section.settings.button_label != blank %}
         <a href="{{ section.settings.button_link }}" class="pet-hero-button">
           {{ section.settings.button_label }}
