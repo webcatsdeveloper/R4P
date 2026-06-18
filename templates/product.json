@@ -513,7 +513,8 @@
       ],
       "name": "Raw Made Right Dynamic Panel Layout",
       "settings": {
-        "base_banner_image": "shopify://shop_images/Rectangle_68.png"
+        "base_banner_image": "shopify://shop_images/Rectangle_68.png",
+        "mobile_banner_image": "shopify://shop_images/section-1-mobile_1.png"
       }
     },
     "science_ingredients_dkeiBD": {

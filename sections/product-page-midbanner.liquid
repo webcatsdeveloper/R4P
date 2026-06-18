@@ -123,14 +123,18 @@
   @media (max-width: 991px) {
     .rmr-banner-container {
       aspect-ratio: auto;
-      background-color: #fca0a6; /* Preserves organic color theme structure if image drops down */
+      background-color: #fca0a6;
       display: block;
     }
+    
+    /* MODIFIED: Keep images absolute on mobile to form an underlying background sheet layer */
     .rmr-background-asset {
-      position: relative;
+      position: absolute;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
     }
+
     {% if section.settings.mobile_banner_image != blank %}
       .rmr-background-desktop {
         display: none !important;
@@ -139,11 +143,21 @@
         display: block !important;
       }
     {% endif %}
+
+    /* MODIFIED: Overlay the text content on top of the image container cleanly */
     .rmr-content-overlay-layer {
+      position: relative;
       width: 100%;
-      padding: 30px 24px 40px 24px;
+      padding: 40px 24px;
       margin-top: 0;
-      background-color: #fca0a6;
+      margin-left: 0;
+      background-color: transparent !important; /* Let underlying mobile asset show through */
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+    }
+
+    .rmr-point-node {
+      width: 100%;
     }
   }
 
@@ -153,10 +167,6 @@
     }
     .rmr-banner-container {
       border-radius: 20px;
-    }
-    .rmr-content-overlay-layer {
-      grid-template-columns: 1fr;
-      row-gap: 20px;
     }
   }
 {% endstyle %}
