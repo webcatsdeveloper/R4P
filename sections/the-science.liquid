@@ -552,21 +552,8 @@
       <h3 class="sc-title">{{ section.settings.title }}</h3>
 
       <p class="sc-text">
-        <span class="desktop-only">
-          The way we prepare our food is inspired by how astronaut meals<br>
-          are handled, preserving nutrients without damaging them.<br><br>
-
-          Because when it comes to your pet’s health, every detail matters.
-        </span>
-        <span class="mobile-only">
-          The way we prepare our food is inspired by how<br>
-          astronaut meals are handled, preserving<br>
-          nutrients without damaging them.<br><br>
-
-          Because when it comes to your pet’s health,<br>
-          every detail matters.
-        </span>
-      </p>
+  {{ section.settings.description | newline_to_br }}
+</p>
 
       <div class="sc-separator"></div>
 
