@@ -125,14 +125,15 @@
       aspect-ratio: auto;
       background-color: #fca0a6;
       display: block;
+      height: auto; /* Allow dynamic extension based on mobile bounds */
     }
     
-    /* MODIFIED: Keep images absolute on mobile to form an underlying background sheet layer */
+    /* MODIFIED: Ensure background properties cover the parent container bounds fully without clipping */
     .rmr-background-asset {
       position: absolute;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: fill; /* Forces the entire image canvas to scale into frame without cropping borders */
     }
 
     {% if section.settings.mobile_banner_image != blank %}
@@ -144,14 +145,14 @@
       }
     {% endif %}
 
-    /* MODIFIED: Overlay the text content on top of the image container cleanly */
+    /* MODIFIED: Add spacing at the bottom to accommodate the dog artwork safely */
     .rmr-content-overlay-layer {
       position: relative;
       width: 100%;
-      padding: 40px 24px;
+      padding: 100px 24px 380px 24px; /* Shifts text blocks down under top header and adds structural padding below points */
       margin-top: 0;
       margin-left: 0;
-      background-color: transparent !important; /* Let underlying mobile asset show through */
+      background-color: transparent !important; 
       grid-template-columns: 1fr;
       row-gap: 24px;
     }
@@ -167,6 +168,9 @@
     }
     .rmr-banner-container {
       border-radius: 20px;
+    }
+    .rmr-content-overlay-layer {
+      padding: 90px 20px 280px 20px; /* Scaled down padding footprint matching viewport height limits */
     }
   }
 {% endstyle %}
