@@ -1,0 +1,133 @@
+{%- style -%}
+.founders-story-{{ section.id }} {
+  width: 100%;
+  background: #ffffff;
+  padding: 100px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* HEADING TYPOGRAPHY FROM FIGMA */
+.founders-story-heading {
+  max-width: 1043px;
+  width: 100%;
+  margin: 0 auto 58px;
+  
+  font-family: 'Degular Demo', sans-serif !important;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 62px;
+  line-height: 82px;
+  text-align: center;
+  color: #1E1E1E;
+}
+
+/* LANDSCAPE VIDEO WRAPPER (16:9 Aspect Ratio) */
+.founders-video-container {
+  width: 100%;
+  max-width: 1140px; /* Standard wide desktop layout */
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.founders-video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Forces perfect 16:9 landscape aspect ratio */
+  height: 0;
+  border-radius: 24px; /* Optional: smooth corners to match brand identity */
+  overflow: hidden;
+  background: #000;
+}
+
+.founders-video-wrapper video,
+.founders-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+  .founders-story-{{ section.id }} {
+    padding: 60px 0;
+  }
+  .founders-story-heading {
+    font-size: 38px;
+    line-height: 48px;
+    padding: 0 24px;
+  }
+  .founders-video-container {
+    padding: 0 20px;
+  }
+}
+{%- endstyle -%}
+
+<section class="founders-story-{{ section.id }}">
+  <div class="founders-video-container">
+    
+    {%- if section.settings.heading != blank -%}
+      <h2 class="founders-story-heading">
+        {{ section.settings.heading | newline_to_br }}
+      </h2>
+    {%- endif -%}
+
+    <div class="founders-video-wrapper">
+      {%- if section.settings.video_url != blank -%}
+        
+        {%- if section.settings.video_url.type == 'youtube' -%}
+          <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?autoplay=0&rel=0" allowfullscreen></iframe>
+        {%- elsif section.settings.video_url.type == 'vimeo' -%}
+          <iframe src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}" allowfullscreen></iframe>
+        {%- endif -%}
+
+      {%- elsif section.settings.native_video != blank -%}
+        
+        {{ section.settings.native_video | video_tag: controls: true, image_size: '1200x', preload: 'none' }}
+
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Founder Story Video",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We found ourselves doing different things for different dogs."
+    },
+    {
+      "type": "video",
+      "id": "native_video",
+      "label": "Option 1: Shopify Video Upload",
+      "info": "Upload your file directly to Shopify Files for premium performance."
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Option 2: External Video Link",
+      "accept": ["youtube", "vimeo"],
+      "info": "Or paste a Youtube/Vimeo link here."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Founder Story Video"
+    }
+  ]
+}
+{% endschema %}
