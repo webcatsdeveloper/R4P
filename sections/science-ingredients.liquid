@@ -5,7 +5,6 @@
   margin: 0 auto;
   padding: 80px 40px;
   box-sizing: border-box;
-  font-family: 'Degular Demo', -apple-system, sans-serif;
   background-color: #ffffff;
 }
 
@@ -16,7 +15,7 @@
   align-items: stretch;
 }
 
-/* LEFT SIDE ARCHITECTURE */
+/* LEFT COLUMN LAYOUT */
 .sci-ing-left-col {
   display: flex;
   flex-direction: column;
@@ -29,7 +28,7 @@
   aspect-ratio: 1 / 0.85;
   border-radius: 24px;
   overflow: hidden;
-  /* background-color: #D72329; Fallback brand accent red */
+  background-color: #e52d27;
 }
 
 .sci-ing-small-card-img {
@@ -51,28 +50,33 @@
   align-items: center;
 }
 
+/* TYPOGRAPHY SPECIFICATIONS MATCHING FIGMA (image_f1a5fa.jpg) */
 .sci-ing-small-card-text {
   margin: 0;
-  font-size: 32px;
-  line-height: 1.1;
-  font-weight: 800;
+  font-family: 'Neusa Next Std', 'Degular Demo', -apple-system, sans-serif !important;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 32px; /* Balanced scale desktop fit based on canvas metrics */
+  line-height: 1.0;
   color: #ffffff;
   text-transform: uppercase;
-  letter-spacing: -0.5px;
+  letter-spacing: 0%;
 }
 
 .sci-ing-bottom-text {
+  font-family: 'Neusa Next Std', 'Degular Demo', -apple-system, sans-serif !important;
+  font-weight: 500;
+  font-style: normal;
   font-size: 36px;
   line-height: 1.1;
-  font-weight: 700;
-  color: #b83227; /* Crimson variant color matching image context */
+  color: #b83227; 
   text-align: right;
   text-transform: uppercase;
   margin-top: 40px;
-  letter-spacing: -0.5px;
+  letter-spacing: 0%;
 }
 
-/* RIGHT SIDE ARCHITECTURE */
+/* RIGHT COLUMN LAYOUT */
 .sci-ing-large-card {
   width: 100%;
   border-radius: 24px;
@@ -87,25 +91,46 @@
   display: block;
 }
 
-/* RESPONSIVE LAYOUT RESPONSES */
+/* MOBILE ARCHITECTURE: ROW 1 IMAGE, ROW 2 ELEMENTS SIDE-BY-SIDE */
 @media screen and (max-width: 991px) {
   .sci-ing-section-{{ section.id }} {
     padding: 40px 20px;
   }
+  
   .sci-ing-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  .sci-ing-left-col {
+    display: flex;
+    flex-direction: column;
     gap: 24px;
   }
-  .sci-ing-small-card {
-    aspect-ratio: 12 / 5;
+  
+  /* Row 1 placement for the wide image */
+  .sci-ing-large-card {
+    order: 1;
   }
+  
+  /* Row 2 side-by-side horizontal alignment container split */
+  .sci-ing-left-col {
+    order: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .sci-ing-small-card {
+    aspect-ratio: 1.2 / 1;
+  }
+  
+  .sci-ing-small-card-text {
+    font-size: 22px;
+  }
+
   .sci-ing-bottom-text {
     text-align: left;
-    margin-top: 10px;
-    font-size: 28px;
+    margin-top: 0;
+    font-size: 24px;
+    line-height: 1.2;
   }
 }
 {%- endstyle -%}
@@ -154,7 +179,7 @@
 
 {% schema %}
 {
-  "name": "Science",
+  "name": "Science & Ingredients",
   "settings": [
     {
       "type": "header",
@@ -163,8 +188,7 @@
     {
       "type": "image_picker",
       "id": "small_card_image",
-      "label": "Small Card Background Image",
-      "info": "Upload a solid red shape image or background canvas element."
+      "label": "Small Card Background Image"
     },
     {
       "type": "textarea",
@@ -189,13 +213,12 @@
     {
       "type": "image_picker",
       "id": "large_card_image",
-      "label": "Main Ingredients Wide Image",
-      "info": "Upload the large comprehensive display graphic highlighting fresh raw materials."
+      "label": "Main Ingredients Wide Image"
     }
   ],
- "presets": [
+  "presets": [
     {
-      "name": "Science"
+      "name": "Science & Ingredients"
     }
   ]
 }
