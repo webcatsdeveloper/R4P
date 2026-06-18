@@ -1,0 +1,202 @@
+{%- style -%}
+.sci-ing-section-{{ section.id }} {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  box-sizing: border-box;
+  font-family: 'Degular Demo', -apple-system, sans-serif;
+  background-color: #ffffff;
+}
+
+.sci-ing-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+/* LEFT SIDE ARCHITECTURE */
+.sci-ing-left-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sci-ing-small-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 0.85;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: #e52d27; /* Fallback brand accent red */
+}
+
+.sci-ing-small-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.sci-ing-small-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.sci-ing-small-card-text {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.sci-ing-bottom-text {
+  font-size: 36px;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #b83227; /* Crimson variant color matching image context */
+  text-align: right;
+  text-transform: uppercase;
+  margin-top: 40px;
+  letter-spacing: -0.5px;
+}
+
+/* RIGHT SIDE ARCHITECTURE */
+.sci-ing-large-card {
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sci-ing-large-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* RESPONSIVE LAYOUT RESPONSES */
+@media screen and (max-width: 991px) {
+  .sci-ing-section-{{ section.id }} {
+    padding: 40px 20px;
+  }
+  .sci-ing-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .sci-ing-left-col {
+    gap: 24px;
+  }
+  .sci-ing-small-card {
+    aspect-ratio: 12 / 5;
+  }
+  .sci-ing-bottom-text {
+    text-align: left;
+    margin-top: 10px;
+    font-size: 28px;
+  }
+}
+{%- endstyle -%}
+
+<section class="sci-ing-section-{{ section.id }}">
+  <div class="sci-ing-grid">
+    
+    <!-- LEFT PANEL SIDE -->
+    <div class="sci-ing-left-col">
+      
+      <!-- TOP INTERACTIVE SMALL CARD -->
+      <div class="sci-ing-small-card">
+        {%- if section.settings.small_card_image != blank -%}
+          <img src="{{ section.settings.small_card_image | image_url: width: 600 }}" class="sci-ing-small-card-img" alt="Science Icon Frame">
+        {%- endif -%}
+        
+        <div class="sci-ing-small-card-overlay">
+          {%- if section.settings.small_card_text != blank -%}
+            <h3 class="sci-ing-small-card-text">
+              {{ section.settings.small_card_text | newline_to_br }}
+            </h3>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- LOWER EDITABLE TEXT UNIT -->
+      {%- if section.settings.lower_left_text != blank -%}
+        <div class="sci-ing-bottom-text">
+          {{ section.settings.lower_left_text | newline_to_br }}
+        </div>
+      {%- endif -%}
+
+    </div>
+
+    <!-- RIGHT PANEL DISPLAY FRAME -->
+    <div class="sci-ing-large-card">
+      {%- if section.settings.large_card_image != blank -%}
+        <img src="{{ section.settings.large_card_image | image_url: width: 1600 }}" alt="Ingredients Composition Grid Summary Layout">
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Small Card Settings (Top Left)"
+    },
+    {
+      "type": "image_picker",
+      "id": "small_card_image",
+      "label": "Small Card Background Image",
+      "info": "Upload a solid red shape image or background canvas element."
+    },
+    {
+      "type": "textarea",
+      "id": "small_card_text",
+      "label": "Small Card Text Content",
+      "default": "THE\nSCIENCE\nBEHIND IT"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Text Settings (Bottom Left)"
+    },
+    {
+      "type": "textarea",
+      "id": "lower_left_text",
+      "label": "Lower Left Text Alignment Block",
+      "default": "SPECIES\nAPPROPRIATE"
+    },
+    {
+      "type": "header",
+      "content": "Main Large Image (Right Side)"
+    },
+    {
+      "type": "image_picker",
+      "id": "large_card_image",
+      "label": "Main Ingredients Wide Image",
+      "info": "Upload the large comprehensive display graphic highlighting fresh raw materials."
+    }
+  ],
+ "presets": [
+    {
+      "name": "Science"
+    }
+  ]
+}
+{% endschema %}
