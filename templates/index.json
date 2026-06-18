@@ -86,15 +86,15 @@
         "feature_VYCMfW": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Layer_1_1.png",
-            "label": "Vet<br> Formulated",
+            "icon": "shopify://shop_images/Layer_1_3.png",
+            "label": "Vet Formulated",
             "text": "Formulated by veterinary nutritionists, not marketers."
           }
         },
         "feature_tGHzci": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Layer_1_2.png",
+            "icon": "shopify://shop_images/Layer_1_1.png",
             "label": "Minimally Processed",
             "text": "To deliver raw nutrition in every bite"
           }
@@ -102,8 +102,8 @@
         "feature_Kxt4gn": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Layer_1_3.png",
-            "label": "No <br>Nasties",
+            "icon": "shopify://shop_images/Layer_1_2.png",
+            "label": "No Nasties",
             "text": "0% Synthetic chemicals, Preservatives or Fillers"
           }
         }
