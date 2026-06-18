@@ -520,6 +520,7 @@
       "type": "science-ingredients",
       "name": "Science",
       "settings": {
+        "small_card_image": "shopify://shop_images/Rectangle_128.png",
         "small_card_text": "THE\nSCIENCE\nBEHIND IT",
         "lower_left_text": "SPECIES\nAPPROPRIATE",
         "large_card_image": "shopify://shop_images/Right4Paws_AMAZON_BTF_BANNERS_1.png"
