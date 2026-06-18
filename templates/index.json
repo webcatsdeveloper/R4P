@@ -95,16 +95,16 @@
           "type": "feature",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_2.png",
-            "label": "Real ingredients",
-            "text": "No fillers. Sourcedfrom supplierswe've vetted."
+            "label": "Minimally Processed",
+            "text": "To deliver raw nutrition in every bite"
           }
         },
         "feature_Kxt4gn": {
           "type": "feature",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_3.png",
-            "label": "Vet-formulated",
-            "text": "Designed with veterinary nutritionists, not marketers."
+            "label": "No Nasties",
+            "text": "0% Synthetic chemicals, Preservatives or Fillers"
           }
         }
       },
