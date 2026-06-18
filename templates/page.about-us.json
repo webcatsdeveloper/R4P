@@ -241,7 +241,7 @@
         "color_featured_border": "#00b4d8",
         "text_p1": "As we moved into international competitions, expectations changed. Better nutrition became more important, but also more difficult to access.",
         "text_p2": "Around the same time, a few of our dogs began facing serious health challenges. Some didn't make it through, and others developed long-term conditions.",
-        "text_p3": "That made us pause and look closer.<br><b>At what we were feeding them. At how it was made.</b>",
+        "text_p3": "That made us pause and look closer.At what we were feeding them. At how it was made.",
         "text_p4": ""
       }
     },
@@ -264,6 +264,14 @@
         "image_1": "shopify://shop_images/ChatGPT_Image_May_20_2026_12_32_31_PM_1.png",
         "image_2": "shopify://shop_images/3_1.png",
         "html_body_text": "<p>So we moved away from kibble, and began working with raw, locally available ingredients. What started as an attempt to do better turned into years of trial, learning, and experimentation. Over time, the process became more structured. Together, we began working with veterinarians and specialists in canine nutrition, grounding what we had learned in science.</p><p>Not to create something new, but to arrive at something that made sense.</p><p>After more than a decade of this work, Right4Paws came into being.</p><p>A way to make this approach more accessible, practical, and easier for everyday pet parents to trust and adopt.</p>"
+      }
+    },
+    "founders_story_VDGCPc": {
+      "type": "founders-story",
+      "name": "Founder Story Video",
+      "settings": {
+        "heading": "Founder's Story",
+        "video_url": "https://youtu.be/nqxqwqMb_CQ?si=WXpkkitiKj8UgSxs"
       }
     },
     "about_us_last_section_rwPK9B": {
@@ -290,6 +298,7 @@
     "aboutus_we_found_cQRw7M",
     "as_we_moved_jnyeWR",
     "aboutus_purple_third_section_dJwmez",
+    "founders_story_VDGCPc",
     "about_us_last_section_rwPK9B"
   ]
 }
