@@ -87,7 +87,7 @@
           "type": "feature",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_3.png",
-            "label": "Vet Formulated",
+            "label": "Vet <br>Formulated",
             "text": "Formulated by veterinary nutritionists, not marketers."
           }
         },
@@ -103,7 +103,7 @@
           "type": "feature",
           "settings": {
             "icon": "shopify://shop_images/Layer_1_2.png",
-            "label": "No Nasties",
+            "label": "No<br> Nasties",
             "text": "0% Synthetic chemicals, Preservatives or Fillers"
           }
         }
