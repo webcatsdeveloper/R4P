@@ -1,3 +1,8 @@
+{% comment %}
+  Science & Ingredients Section
+  Matches structural alignment requirements with updated mobile rows layout.
+{% endcomment %}
+
 {%- style -%}
 .sci-ing-section-{{ section.id }} {
   width: 100%;
@@ -92,7 +97,7 @@
   display: block;
 }
 
-/* MOBILE ARCHITECTURE: ROW 1 IMAGE, ROW 2 ELEMENTS SIDE-BY-SIDE */
+/* MOBILE ARCHITECTURE: ROW 1 ELEMENTS SIDE-BY-SIDE, ROW 2 LARGE IMAGE */
 @media screen and (max-width: 991px) {
   .sci-ing-section-{{ section.id }} {
     padding: 40px 20px;
@@ -104,19 +109,19 @@
     gap: 24px;
   }
   
-  /* Row 1 placement for the wide image */
-  .sci-ing-large-card {
-    order: 1;
-  }
-  
-  /* Row 2 side-by-side horizontal alignment container split */
+  /* Row 1: Side-by-side horizontal alignment container split for small card + text */
   .sci-ing-left-col {
-    order: 2;
+    order: 1; /* Swapped from 2 to 1 to bring it to the top */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
     align-items: center;
     justify-content: space-between;
+  }
+  
+  /* Row 2: Placement for the wide image */
+  .sci-ing-large-card {
+    order: 2; /* Swapped from 1 to 2 to move it underneath */
   }
   
   .sci-ing-small-card {
