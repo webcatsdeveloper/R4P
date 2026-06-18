@@ -516,6 +516,15 @@
         "base_banner_image": "shopify://shop_images/Rectangle_68.png"
       }
     },
+    "science_ingredients_dkeiBD": {
+      "type": "science-ingredients",
+      "name": "Science",
+      "settings": {
+        "small_card_text": "THE\nSCIENCE\nBEHIND IT",
+        "lower_left_text": "SPECIES\nAPPROPRIATE",
+        "large_card_image": "shopify://shop_images/Right4Paws_AMAZON_BTF_BANNERS_1.png"
+      }
+    },
     "behind_the_product_jbGP4Y": {
       "type": "behind-the-product",
       "name": "Science Behind It",
@@ -703,6 +712,7 @@
     "product_recommendations_qggXJq",
     "new_main_product_hero_iMpxqL",
     "product_page_midbanner_6VMjyr",
+    "science_ingredients_dkeiBD",
     "behind_the_product_jbGP4Y",
     "1780768721094785e6",
     "instagram_reels_section_aiqM4g",
