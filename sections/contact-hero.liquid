@@ -11,10 +11,13 @@
     --button-text: {{ section.settings.button_text }};
     
     padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: 0px !important; /* Set to 0 to prevent container bleeding below the graphic */
+    padding-bottom: 0px !important;
     background-color: var(--bg-color);
+    
+    /* --- Z-index & Overlap Controls --- */
     position: relative;
-    overflow: hidden;
+    z-index: 1 !important; /* Kept lower so footer at z-index: 2+ stays on top */
+    margin-bottom: -60px !important; /* Pulls the footer up over the curve */
   }
 
   /* Premium Desktop Background Image Engine mapping to custom_curve_image setting */
@@ -32,9 +35,9 @@
       padding-top: calc(var(--header-group-height, 100px) + 24px) !important;
       padding-bottom: 0 !important;
       background: linear-gradient(180deg, #F1A5AC 0%, #FCBDC4 50%, #F8C2C8 100%) !important;
+      margin-bottom: 0 !important; /* Reset on mobile where full bleed flush is needed */
     }
     
-    /* Force reset mobile background to allow the background image to stack naturally in the content flow */
     #shopify-section-{{ section.id }} .contact-hero-section,
     .contact-hero-section {
       background-image: none !important;
@@ -225,7 +228,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 720px; /* Ensures background matches container height aspect ratio */
+    min-height: 720px;
   }
 
   .contact-hero__container {
@@ -364,7 +367,6 @@
     border-bottom-color: var(--accent-color);
   }
 
-  /* --- Mobile Image Stack --- */
   .contact-hero__mobile-image-wrap {
     display: none;
   }
@@ -381,7 +383,7 @@
     padding: 40px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.04);
     box-sizing: border-box;
-    margin: -210px 0 30px 0; /* Reduced bottom margin drastically to pull footer flush */
+    margin: -210px 0 0px 0; /* Kept tight to align bottom assets cleanly */
   }
 
   .contact-hero__card-title {
@@ -415,7 +417,7 @@
     border: 1px solid var(--input-border);
     outline: none;
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    height: 48px; /* Fixed height for consistency */
+    height: 48px;
   }
 
   .contact-hero__input::placeholder {
@@ -507,7 +509,6 @@
   .contact-hero-section.is-revealed .contact-hero__animate-fade {
     opacity: 1;
     transform: translateY(0);
-    /* Removed large variable paddings that altered height during transitions */
   }
 
   .delay-1 { transition-delay: 0.15s; }
