@@ -17,15 +17,7 @@
 
     <div class="pet-banner-graphic-frame pet-scroll-trigger delay-2">
       {% if section.settings.composite_pet_image != blank %}
-        <div class="pet-composite-wrapper">
-          {{ section.settings.composite_pet_image | image_url: width: 1200 | image_tag: class: 'pet-composite-img', loading: 'eager', alt: 'Pet layout graphic' }}
-          
-          <div class="pet-figma-arrow-adding">
-            <svg viewBox="0 0 46 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 7H43M43 7L37 1M43 7L37 13" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
+        {{ section.settings.composite_pet_image | image_url: width: 1200 | image_tag: class: 'pet-composite-img', loading: 'eager', alt: 'Pet layout graphic' }}
       {% else %}
         <div class="pet-banner-placeholder-box">
           {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -47,7 +39,7 @@
   #PetBanner-{{ section.id }} {
     position: relative;
     width: 100%;
-    padding: 80px 20px 0px 20px !important;
+    padding: 80px 20px 0px 20px !important; /* Space for the wave */
     overflow: hidden;
     box-sizing: border-box;
   }
@@ -96,34 +88,11 @@
     position: relative;
     z-index: 3;
   }
-
-  .pet-composite-wrapper {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-  }
-
   .pet-composite-img {
     width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
-  }
-
-  /* --- Exact Figma Absolute Alignment & Match for Arrow --- */
-  .pet-figma-arrow-adding {
-    position: absolute;
-    top: 3.5%;
-    left: 51.5%;
-    width: 48px;
-    height: auto;
-    z-index: 20;
-    pointer-events: none;
-  }
-  .pet-figma-arrow-adding svg {
-    width: 100%;
-    height: auto;
-    display: block;
   }
 
   .pet-banner-placeholder-box {
@@ -139,12 +108,14 @@
     margin-bottom: 15px;
   }
 
+  /* Reverted to Image Upload for Wave, with Alignment Settings */
   .pet-banner-wave-footer {
     position: absolute;
     left: 0;
     width: 100%;
     z-index: 2;
     pointer-events: none;
+    /* This controls the dynamic top/bottom alignment from your settings */
     bottom: {{ section.settings.wave_vertical_offset }}px; 
   }
   .pet-banner-wave-footer img {
@@ -154,7 +125,7 @@
   }
 
   /* =========================================
-      SCROLL ANIMATION STYLES 
+     SCROLL ANIMATION STYLES 
      ========================================= */
   .pet-scroll-trigger {
     opacity: 0;
@@ -165,8 +136,9 @@
   .pet-scroll-trigger.is-visible {
     opacity: 1;
     transform: translateY(0);
-    z-index: 0 !important;
+    z-index:0 !important;
   }
+  /* Delays for a staggered effect */
   .delay-1 { transition-delay: 0.1s; }
   .delay-2 { transition-delay: 0.3s; }
   .delay-3 { transition-delay: 0.5s; }
@@ -177,22 +149,16 @@
     }
 
     .pet-scroll-trigger.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-      z-index: 5 !important;
+    opacity: 1;
+    transform: translateY(0);
+    z-index:5 !important;
     }
 
     .pet-banner-swirl-accent { width: 70px; top: 15px; left: 0px; }
     .pet-banner-main-title { font-size: 24px; margin-bottom: 30px; padding: 0 10px; }
     .pet-banner-graphic-frame { max-width: 100%; }
     
-    /* Scale down arrow for responsive layouts instead of hiding */
-    .pet-figma-arrow-adding {
-      width: 32px;
-      top: 3.5%;
-      left: 51%;
-    }
-
+    /* Adjust bottom wave position slightly for mobile if needed */
     .pet-banner-wave-footer {
       bottom: calc({{ section.settings.wave_vertical_offset }}px / 2);
     }
@@ -204,18 +170,19 @@
     const observerOptions = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.15
+      threshold: 0.15 // Triggers when 15% of the element is visible
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
+          observer.unobserve(entry.target); // Runs only once per element
         }
       });
     }, observerOptions);
 
+    // Select only elements within this specific section
     const triggers = document.querySelectorAll('#PetBanner-{{ section.id }} .pet-scroll-trigger');
     triggers.forEach(trigger => {
       observer.observe(trigger);
