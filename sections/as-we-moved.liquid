@@ -18,9 +18,6 @@
   #section-{{ section.id }} .purp-section-content .purp-p4 {
     font-size:18px !important;
     font-weight:100;
-  /* Selected/Featured Card Border Accent */
-  #section-{{ section.id }} .purp-card.purp-card-featured {
-    border: 4px solid {{ section.settings.color_featured_border }};
   }
 
   /* Auto-Scroll Speed Control */
@@ -31,8 +28,6 @@
 
 <div id="section-{{ section.id }}" class="purp-section">
   <div class="purp-section-container">
-    {% comment %} <div class="purp-dot purp-dot-tl"></div>
-    <div class="purp-dot purp-dot-tr"></div> {% endcomment %}
 
     <div class="purp-section-content">
       {% if section.settings.text_p1 != blank %}
@@ -55,8 +50,7 @@
         <div class="purp-marquee-group">
           {% for block in section.blocks %}
             {% if block.type == 'card' %}
-              {% assign card_index = forloop.index | modulo: 6 | plus: 1 %}
-              <div class="purp-card purp-card-{{ card_index }} {% if block.settings.is_featured %}purp-card-featured{% else %}purp-card-vertical{% endif %}" {{ block.shopify_attributes }}>
+              <div class="purp-card" {{ block.shopify_attributes }}>
                 <div class="purp-card-inner">
                   {% if block.settings.image != blank %}
                     {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.image.alt, class: 'purp-card-img' }}
@@ -72,8 +66,7 @@
         <div class="purp-marquee-group" aria-hidden="true">
           {% for block in section.blocks %}
             {% if block.type == 'card' %}
-              {% assign card_index = forloop.index | modulo: 6 | plus: 1 %}
-              <div class="purp-card purp-card-{{ card_index }} {% if block.settings.is_featured %}purp-card-featured{% else %}purp-card-vertical{% endif %}">
+              <div class="purp-card">
                 <div class="purp-card-inner">
                   {% if block.settings.image != blank %}
                     {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.image.alt, class: 'purp-card-img' }}
@@ -108,19 +101,6 @@
     position: relative;
   }
 
-  /* White Corner Accents */
-  .purp-dot {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: white;
-    top: -40px;
-    z-index: 20;
-  }
-  .purp-dot-tl { left: 40px; }
-  .purp-dot-tr { right: 40px; }
-
   /* Description Box Styles */
   .purp-section-content {
     text-align: center;
@@ -131,7 +111,7 @@
   }
   .purp-section-content p {
     margin: 0 auto 1.4em auto;
-    font-weight:0;
+    font-weight: 0;
   }
   .purp-section-content p:last-child {
     margin-bottom: 0;
@@ -141,7 +121,7 @@
   .purp-marquee-viewport {
     width: 100%;
     overflow: hidden;
-    padding: 60px 0;
+    padding: 40px 0;
     position: relative;
     display: flex;
   }
@@ -158,11 +138,11 @@
 
   .purp-marquee-group {
     display: flex;
-    align-items: flex-end; /* Keeps alignment flat along baseline */
+    align-items: center;
     justify-content: space-around;
   }
 
-  /* Individual Card Base Setup */
+  /* Individual Card Base Setup (Clean Flat Layout) */
   .purp-card {
     background-color: #e5e5e5;
     box-shadow: 0 12px 30px rgba(0,0,0,0.15);
@@ -170,23 +150,8 @@
     border-radius: 6px;
     margin: 0 28px; 
     flex-shrink: 0;
-    transition: transform 0.3s ease, border 0.2s ease;
-  }
-
-  /* Standard Base Cards = Vertical Shape */
-  .purp-card-vertical {
     width: 230px;
     height: 320px;
-  }
-
-  /* Selected Card Configuration = Horizontal Shape */
-  .purp-card.purp-card-featured {
-    width: 320px;
-    height: 230px;
-    z-index: 15 !important;
-    /* Elevated scale, slight angle pop, and lifted elevation offset */
-    transform: scale(1.08) rotate(5deg) translateY(-20px) !important;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
   }
 
   .purp-card-inner {
@@ -205,14 +170,6 @@
     object-fit: cover;
   }
 
-  /* Precise fanned transformation offsets to match screenshot curves */
-  .purp-card-1 { transform: rotate(-13deg) translateY(20px); }
-  .purp-card-2 { transform: rotate(-7deg) translateY(5px); }
-  .purp-card-3 { transform: rotate(-2deg) translateY(0px); }
-  .purp-card-4 { transform: rotate(5deg) translateY(8px); }
-  .purp-card-5 { transform: rotate(11deg) translateY(22px); }
-  .purp-card-6 { transform: rotate(16deg) translateY(36px); }
-
   /* Infinite Scrolling CSS Marquee Engine Keyframes */
   @keyframes purpMarquee {
     0% { transform: translate3d(0, 0, 0); }
@@ -220,7 +177,7 @@
   }
 
   /* =========================================
-     SCROLL ANIMATION ENGINE STYLES
+      SCROLL ANIMATION ENGINE STYLES
      ========================================= */
   .purp-scroll-animate {
     opacity: 0;
@@ -239,32 +196,15 @@
   .stagger-2 { transition-delay: 0.25s; }
   .stagger-3 { transition-delay: 0.4s; }
   .stagger-4 { transition-delay: 0.55s; }
-  .stagger-5 { transition-delay: 0.7s; } /* Carousel fades up cleanly last */
+  .stagger-5 { transition-delay: 0.7s; }
 
   /* Responsive Scaling Adjustments */
   @media screen and (max-width: 767px) {
-    .purp-card-vertical {
+    .purp-card {
       width: 160px;
       height: 220px;
-    }
-    .purp-card.purp-card-featured {
-      width: 220px;
-      height: 160px;
-      transform: scale(1.05) rotate(4deg) translateY(-10px) !important;
-    }
-    .purp-card {
       margin: 0 15px;
     }
-    .purp-card-1 { transform: rotate(-10deg) translateY(12px); }
-    .purp-card-2 { transform: rotate(-5deg) translateY(4px); }
-    .purp-card-3 { transform: rotate(-1deg) translateY(0px); }
-    .purp-card-4 { transform: rotate(4deg) translateY(4px); }
-    .purp-card-5 { transform: rotate(8deg) translateY(12px); }
-    .purp-card-6 { transform: rotate(12deg) translateY(20px); }
-    
-    .purp-dot { top: -20px; }
-    .purp-dot-tl { left: 20px; }
-    .purp-dot-tr { right: 20px; }
   }
 </style>
 
@@ -274,12 +214,12 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-animated');
-          purpAnimationObserver.unobserve(entry.target); // Animates once
+          purpAnimationObserver.unobserve(entry.target);
         }
       });
     }, {
       root: null,
-      threshold: 0.12, // Triggers when 12% visible
+      threshold: 0.12,
       rootMargin: '0px 0px -50px 0px'
     });
 
@@ -370,16 +310,6 @@
     },
     {
       "type": "header",
-      "content": "Featured Card Design"
-    },
-    {
-      "type": "color",
-      "id": "color_featured_border",
-      "label": "Featured Border Color",
-      "default": "#00B4D8"
-    },
-    {
-      "type": "header",
       "content": "Story Text Settings"
     },
     {
@@ -416,12 +346,6 @@
           "type": "image_picker",
           "id": "image",
           "label": "Card Picture Image"
-        },
-        {
-          "type": "checkbox",
-          "id": "is_featured",
-          "label": "Select/Feature This Card (Turns Horizontal)",
-          "default": false
         }
       ]
     }
@@ -433,7 +357,7 @@
         { "type": "card" },
         { "type": "card" },
         { "type": "card" },
-        { "type": "card", "settings": { "is_featured": true } },
+        { "type": "card" },
         { "type": "card" },
         { "type": "card" }
       ]
