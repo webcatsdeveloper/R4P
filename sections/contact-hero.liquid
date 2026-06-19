@@ -14,19 +14,8 @@
     padding-bottom: {{ section.settings.padding_bottom }}px;
     background-color: var(--bg-color);
     position: relative;
-    
-    /* Base stacking level for this section */
-    z-index: 1; 
-    /* Pulls the footer up by the exact radius of its corner curves */
-    margin-bottom: -45px; 
-  }
-
-  /* Target the next section (the footer) and force it to layer ABOVE the pink background */
-  #shopify-section-{{ section.id }} + .shopify-section,
-  #shopify-section-{{ section.id }} + div,
-  #shopify-section-{{ section.id }} + footer {
-    position: relative !important;
-    z-index: 0 !important;
+    overflow: hidden;
+    margin-bottom:-50px;
   }
 
   /* Premium Desktop Background Image Engine mapping to custom_curve_image setting */
@@ -44,7 +33,6 @@
       padding-top: calc(var(--header-group-height, 100px) + 24px) !important;
       padding-bottom: 0 !important;
       background: linear-gradient(180deg, #F1A5AC 0%, #FCBDC4 50%, #F8C2C8 100%) !important;
-      margin-bottom: 0 !important;
     }
     
     /* Force reset mobile background to allow the background image to stack naturally in the content flow */
@@ -59,9 +47,11 @@
   <div class="contact-hero__container">
     <div class="contact-hero__grid">
       
+      <!-- Info Column (Left on Desktop, Top on Mobile - 1st in mobile stack) -->
       <div class="contact-hero__info-col contact-hero__animate-fade delay-1">
         <div class="contact-hero__info-list">
           
+          <!-- Office Block -->
           <div class="contact-hero__info-item">
             <div class="contact-hero__icon-circle{% if section.settings.office_icon != blank %} contact-hero__icon-circle--custom{% endif %}">
               {%- if section.settings.office_icon != blank -%}
@@ -82,6 +72,7 @@
             </div>
           </div>
 
+          <!-- Email Block -->
           <div class="contact-hero__info-item">
             <div class="contact-hero__icon-circle{% if section.settings.email_icon != blank %} contact-hero__icon-circle--custom{% endif %}">
               {%- if section.settings.email_icon != blank -%}
@@ -102,6 +93,7 @@
             </div>
           </div>
 
+          <!-- Phone Block -->
           <div class="contact-hero__info-item">
             <div class="contact-hero__icon-circle{% if section.settings.phone_icon != blank %} contact-hero__icon-circle--custom{% endif %}">
               {%- if section.settings.phone_icon != blank -%}
@@ -125,6 +117,7 @@
         </div>
       </div>
 
+      <!-- Mobile-only Graphic Image Stack (Hidden on Desktop, 2nd in mobile stack - full width) -->
       {%- if section.settings.mobile_image != blank or section.settings.custom_curve_image != blank -%}
         <div class="contact-hero__mobile-image-wrap contact-hero__animate-fade delay-2">
           {%- if section.settings.mobile_image != blank -%}
@@ -135,6 +128,7 @@
         </div>
       {%- endif -%}
 
+      <!-- Form Column (Right on Desktop, Bottom on Mobile - 3rd in mobile stack - full width flush) -->
       <div class="contact-hero__form-col contact-hero__animate-fade delay-3">
         <div class="contact-hero__card">
           {%- if section.settings.card_title != blank -%}
@@ -253,26 +247,26 @@
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 40px 80px;
-    align-items: start;
+    align-items: start; /* Align to the top to prevent background overlap */
     padding:150px 0 0 0;
   }
 
   /* --- Left Column Info Boxes --- */
   .contact-hero__info-col {
     width: 100%;
-    padding-top: 40px;
+    padding-top: 40px; /* Breathing space at the top of the grid to sit cleanly below the header */
   }
 
   .contact-hero__info-list {
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 22px; /* Compact spacing */
     margin-top:-180px;
   }
 
   .contact-hero__info-item {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start; /* Aligns icons neatly to the top line of text */
     gap: 16px;
     color: var(--text-color);
   }
@@ -329,7 +323,7 @@
 
   .contact-hero__info-title {
     margin: 0 0 4px 0;
-    font-size: 15px;
+    font-size: 15px; /* Clean, smaller headers */
     font-weight: 700;
     line-height: 1.25;
     color: var(--text-color);
@@ -337,7 +331,7 @@
 
   .contact-hero__info-text {
     margin: 0;
-    font-size: 13px;
+    font-size: 13px; /* Compact, readable text */
     line-height: 1.45;
     font-weight: 400;
     opacity: 0.95;
@@ -376,7 +370,7 @@
     border-bottom-color: var(--accent-color);
   }
 
-  /* --- Mobile Image Stack --- */
+  /* --- Mobile Image Stack (Hidden on desktop) --- */
   .contact-hero__mobile-image-wrap {
     display: none;
   }
@@ -471,7 +465,7 @@
     transform: translateY(0);
   }
 
-  /* --- Alerts --- */
+  /* --- Alerts Structural Styling --- */
   .contact-hero__success-alert,
   .contact-hero__error-alert {
     display: flex;
@@ -512,7 +506,7 @@
     padding-left: 20px;
   }
 
-  /* --- Animations --- */
+  /* --- Elements Fade-in Animations --- */
   .contact-hero__animate-fade {
     opacity: 0;
     transform: translateY(30px);
@@ -526,11 +520,12 @@
     padding:150px 20px;
   }
 
+  /* Delay alignments for Text (1st), Image (2nd), and Form (3rd) */
   .delay-1 { transition-delay: 0.15s; }
   .delay-2 { transition-delay: 0.3s; }
   .delay-3 { transition-delay: 0.45s; }
 
-  /* --- Responsive Mobile Breakpoints --- */
+  /* --- Responsive Breakpoints (Mobile Engine) --- */
   @media screen and (max-width: 989px) {
     .contact-hero__container {
       padding: 0;
@@ -540,11 +535,11 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      padding: 0;
+      padding: 0; /* Override desktop padding: 150px 0 0 0 */
     }
 
     .contact-hero-section.is-revealed .contact-hero__animate-fade {
-      padding: 0 !important;
+      padding: 0 !important; /* Override desktop padding: 150px 20px */
     }
 
     .contact-hero-section.is-revealed .contact-hero__info-col {
@@ -565,6 +560,7 @@
       gap: 4px;
     }
 
+    /* 1. Details column sits at top with inset padding */
     .contact-hero__info-col {
       order: 1;
       width: 100%;
@@ -575,10 +571,11 @@
       box-sizing: border-box;
     }
 
+    /* 2. Mobile Image stacks in the middle (full bleed, zoomed in on girl & dog) */
     .contact-hero__mobile-image-wrap {
       display: block;
       width: 100%;
-      height: 95vw;
+      height: 95vw; /* Perfectly matches mobile aspect ratio */
       order: 2;
       margin: 0;
       overflow: hidden;
@@ -588,10 +585,11 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover;
-      object-position: center bottom;
+      object-fit: cover; /* Zooms/crops to fill the portrait area */
+      object-position: center bottom; /* Aligns bottom containing the bowl */
     }
 
+    /* 3. Form column stacks at the bottom (flush to screen edges) */
     .contact-hero__form-col {
       order: 3;
       width: 100%;
@@ -600,9 +598,9 @@
 
     .contact-hero__card {
       padding: 40px 24px 60px 24px;
-      margin: 0 !important;
-      border-radius: 40px 40px 0 0;
-      box-shadow: none;
+      margin: 0 !important; /* Override desktop margin: -100px 0 300px 0 */
+      border-radius: 40px 40px 0 0; /* Match desktop corner curves consistently */
+      box-shadow: none; /* Shadow removed since it spans full bleed */
       width: 100%;
       box-sizing: border-box;
       margin-bottom:-30px!important;
@@ -615,11 +613,11 @@
 
     .contact-hero__info-list {
       gap: 24px;
-      margin-top: 0 !important;
+      margin-top: 0 !important; /* Override desktop margin-top: -180px */
     }
 
     .contact-hero__input {
-      height: 48px !important;
+      height: 48px !important; /* Override desktop height: 30px */
       padding: 12px 16px !important;
     }
 
