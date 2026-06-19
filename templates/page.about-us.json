@@ -194,6 +194,7 @@
         "card_frixhX": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_124.png",
             "is_featured": true
           }
         },
