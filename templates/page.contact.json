@@ -157,7 +157,7 @@
         "mobile_image": "shopify://shop_images/Banner-1_1mobile.png",
         "bg_position_desktop": "left bottom",
         "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_bottom": 100,
         "mobile_padding_top": 180,
         "mobile_padding_bottom": 40,
         "office_icon": "shopify://shop_images/Group_59522.png",
