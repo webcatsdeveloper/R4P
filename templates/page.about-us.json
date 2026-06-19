@@ -271,6 +271,7 @@
       "name": "Founder Story Video",
       "settings": {
         "heading": "Founder's Story",
+        "native_video": "shopify://files/videos/5120486_People_Human_3840x2160 (1).mov",
         "video_url": ""
       }
     },
