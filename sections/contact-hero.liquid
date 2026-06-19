@@ -386,7 +386,7 @@
     padding: 40px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.04);
     box-sizing: border-box;
-    margin:-250px 0 200px 0;
+    margin:-250px 0 0 0; /* FIXED: Removed 200px bottom margin */
   }
 
   .contact-hero__card-title {
@@ -516,7 +516,7 @@
   .contact-hero-section.is-revealed .contact-hero__animate-fade {
     opacity: 1;
     transform: translateY(0);
-    padding:150px 20px;
+    /* FIXED: Removed padding:150px 20px; layout override */
   }
 
   /* Delay alignments for Text (1st), Image (2nd), and Form (3rd) */
@@ -538,7 +538,7 @@
     }
 
     .contact-hero-section.is-revealed .contact-hero__animate-fade {
-      padding: 0 !important; /* Override desktop padding: 150px 20px */
+      padding: 0 !important; /* Override desktop padding */
     }
 
     .contact-hero-section.is-revealed .contact-hero__info-col {
@@ -597,7 +597,7 @@
 
     .contact-hero__card {
       padding: 40px 24px 60px 24px;
-      margin: 0 !important; /* Override desktop margin: -100px 0 300px 0 */
+      margin: 0 !important; /* Override desktop margin */
       border-radius: 40px 40px 0 0; /* Match desktop corner curves consistently */
       box-shadow: none; /* Shadow removed since it spans full bleed */
       width: 100%;
