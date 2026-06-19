@@ -11,10 +11,12 @@
     --button-text: {{ section.settings.button_text }};
     
     padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-bottom: 0px;
     background-color: var(--bg-color);
     position: relative;
-    overflow: hidden;
+    /* Removed overflow: hidden to allow the card to sit outside into the footer area */
+    overflow: visible; 
+    display: block;
   }
 
   /* Premium Desktop Background Image Engine mapping to custom_curve_image setting */
@@ -32,6 +34,7 @@
       padding-top: calc(var(--header-group-height, 100px) + 24px) !important;
       padding-bottom: 0 !important;
       background: linear-gradient(180deg, #F1A5AC 0%, #FCBDC4 50%, #F8C2C8 100%) !important;
+      overflow: hidden;
     }
     
     /* Force reset mobile background to allow the background image to stack naturally in the content flow */
@@ -46,11 +49,9 @@
   <div class="contact-hero__container">
     <div class="contact-hero__grid">
       
-      <!-- Info Column (Left on Desktop, Top on Mobile - 1st in mobile stack) -->
       <div class="contact-hero__info-col contact-hero__animate-fade delay-1">
         <div class="contact-hero__info-list">
           
-          <!-- Office Block -->
           <div class="contact-hero__info-item">
             <div class="contact-hero__icon-circle{% if section.settings.office_icon != blank %} contact-hero__icon-circle--custom{% endif %}">
               {%- if section.settings.office_icon != blank -%}
@@ -71,7 +72,6 @@
             </div>
           </div>
 
-          <!-- Email Block -->
           <div class="contact-hero__info-item">
             <div class="contact-hero__icon-circle{% if section.settings.email_icon != blank %} contact-hero__icon-circle--custom{% endif %}">
               {%- if section.settings.email_icon != blank -%}
@@ -92,7 +92,6 @@
             </div>
           </div>
 
-          <!-- Phone Block -->
           <div class="contact-hero__info-item">
             <div class="contact-hero__icon-circle{% if section.settings.phone_icon != blank %} contact-hero__icon-circle--custom{% endif %}">
               {%- if section.settings.phone_icon != blank -%}
@@ -116,7 +115,6 @@
         </div>
       </div>
 
-      <!-- Mobile-only Graphic Image Stack (Hidden on Desktop, 2nd in mobile stack - full width) -->
       {%- if section.settings.mobile_image != blank or section.settings.custom_curve_image != blank -%}
         <div class="contact-hero__mobile-image-wrap contact-hero__animate-fade delay-2">
           {%- if section.settings.mobile_image != blank -%}
@@ -127,7 +125,6 @@
         </div>
       {%- endif -%}
 
-      <!-- Form Column (Right on Desktop, Bottom on Mobile - 3rd in mobile stack - full width flush) -->
       <div class="contact-hero__form-col contact-hero__animate-fade delay-3">
         <div class="contact-hero__card">
           {%- if section.settings.card_title != blank -%}
@@ -237,35 +234,35 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 100px 40px 0 40px;
+    padding: 0 40px;
     position: relative;
     z-index: 2;
   }
 
   .contact-hero__grid {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1.1fr 0.9fr;
     gap: 40px 80px;
-    align-items: start; /* Align to the top to prevent background overlap */
-    padding:150px 0 0 0;
+    align-items: center; 
+    padding: 110px 0 0 0;
+    position: relative;
   }
 
   /* --- Left Column Info Boxes --- */
   .contact-hero__info-col {
     width: 100%;
-    padding-top: 40px; /* Breathing space at the top of the grid to sit cleanly below the header */
   }
 
   .contact-hero__info-list {
     display: flex;
     flex-direction: column;
-    gap: 22px; /* Compact spacing */
-    margin-top:-180px;
+    gap: 22px;
+    margin-top: -80px;
   }
 
   .contact-hero__info-item {
     display: flex;
-    align-items: flex-start; /* Aligns icons neatly to the top line of text */
+    align-items: flex-start;
     gap: 16px;
     color: var(--text-color);
   }
@@ -304,7 +301,7 @@
     height: 75%;
     object-fit: contain;
     display: block;
-    margin-top:-15px;
+    margin-top: -15px;
   }
 
   .contact-hero__info-content {
@@ -322,7 +319,7 @@
 
   .contact-hero__info-title {
     margin: 0 0 4px 0;
-    font-size: 15px; /* Clean, smaller headers */
+    font-size: 15px;
     font-weight: 700;
     line-height: 1.25;
     color: var(--text-color);
@@ -330,7 +327,7 @@
 
   .contact-hero__info-text {
     margin: 0;
-    font-size: 13px; /* Compact, readable text */
+    font-size: 13px;
     line-height: 1.45;
     font-weight: 400;
     opacity: 0.95;
@@ -377,20 +374,23 @@
   /* --- Right Column Form Card --- */
   .contact-hero__form-col {
     width: 100%;
+    position: relative;
+    z-index: 10;
   }
 
   .contact-hero__card {
     background-color: var(--card-bg);
     color: var(--card-text);
     border-radius: 40px;
-    padding: 40px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.04);
+    padding: 45px 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
     box-sizing: border-box;
-    margin:-250px 0 200px 0;
+    /* Shifts the card downwards cleanly across the section partition line into the footer zone */
+    transform: translateY(90px); 
   }
 
   .contact-hero__card-title {
-    margin: 0 0 20px 0;
+    margin: 0 0 24px 0;
     font-family: 'Outfit', sans-serif;
     font-size: 32px;
     font-weight: 700;
@@ -401,7 +401,7 @@
   .contact-hero__form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 
   .contact-hero__field {
@@ -420,7 +420,7 @@
     border: 1px solid var(--input-border);
     outline: none;
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    height:30px;
+    height: 48px;
   }
 
   .contact-hero__input::placeholder {
@@ -436,6 +436,7 @@
   .contact-hero__textarea {
     resize: vertical;
     min-height: 120px;
+    height: auto;
   }
 
   .contact-hero__submit-btn {
@@ -460,66 +461,25 @@
     transform: translateY(-2px);
   }
 
-  .contact-hero__submit-btn:active {
-    transform: translateY(0);
-  }
-
-  /* --- Alerts Structural Styling --- */
-  .contact-hero__success-alert,
-  .contact-hero__error-alert {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  .contact-hero__success-alert {
-    background-color: #e6f9ed;
-    color: #1e7e34;
-    border: 1px solid #c3e6cb;
-  }
-
-  .contact-hero__error-alert {
-    background-color: #fdf2f2;
-    color: #c53030;
-    border: 1px solid #f8b4b4;
-  }
-
-  .alert-icon {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-  }
-
-  .alert-message {
-    margin: 0;
-  }
-
-  .alert-message ul {
-    margin: 0;
-    padding-left: 20px;
-  }
-
-  /* --- Elements Fade-in Animations --- */
+  /* --- Element Fade-in Animations --- */
   .contact-hero__animate-fade {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
   }
 
-  .contact-hero-section.is-revealed .contact-hero__animate-fade {
+  /* Maintain layout position adjustments within activation sequence rules */
+  .contact-hero-section.is-revealed .contact-hero__form-col.contact-hero__animate-fade {
     opacity: 1;
     transform: translateY(0);
-    padding:150px 20px;
+  }
+  
+  .contact-hero-section.is-revealed .contact-hero__info-col.contact-hero__animate-fade,
+  .contact-hero-section.is-revealed .contact-hero__mobile-image-wrap.contact-hero__animate-fade {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  /* Delay alignments for Text (1st), Image (2nd), and Form (3rd) */
   .delay-1 { transition-delay: 0.15s; }
   .delay-2 { transition-delay: 0.3s; }
   .delay-3 { transition-delay: 0.45s; }
@@ -534,23 +494,19 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      padding: 0; /* Override desktop padding: 150px 0 0 0 */
+      padding: 0;
+    }
+
+    .contact-hero__card {
+      transform: none !important; /* Reset layout offset engine mapping on alternative screen scopes */
     }
 
     .contact-hero-section.is-revealed .contact-hero__animate-fade {
-      padding: 0 !important; /* Override desktop padding: 150px 20px */
+      padding: 0 !important;
     }
 
     .contact-hero-section.is-revealed .contact-hero__info-col {
       padding: 140px 24px 0 24px !important;
-    }
-
-    .contact-hero-section.is-revealed .contact-hero__mobile-image-wrap {
-      padding: 0 !important;
-    }
-
-    .contact-hero-section.is-revealed .contact-hero__form-col {
-      padding: 0 !important;
     }
 
     .contact-hero__info-content.inline-style {
@@ -559,22 +515,17 @@
       gap: 4px;
     }
 
-    /* 1. Details column sits at top with inset padding */
     .contact-hero__info-col {
       order: 1;
       width: 100%;
-      padding-top: 0;
-      padding-left: 24px;
-      padding-right: 24px;
       margin-bottom: 32px;
       box-sizing: border-box;
     }
 
-    /* 2. Mobile Image stacks in the middle (full bleed, zoomed in on girl & dog) */
     .contact-hero__mobile-image-wrap {
       display: block;
       width: 100%;
-      height: 95vw; /* Perfectly matches mobile aspect ratio */
+      height: 95vw;
       order: 2;
       margin: 0;
       overflow: hidden;
@@ -584,11 +535,10 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover; /* Zooms/crops to fill the portrait area */
-      object-position: center bottom; /* Aligns bottom containing the bowl */
+      object-fit: cover;
+      object-position: center bottom;
     }
 
-    /* 3. Form column stacks at the bottom (flush to screen edges) */
     .contact-hero__form-col {
       order: 3;
       width: 100%;
@@ -597,9 +547,9 @@
 
     .contact-hero__card {
       padding: 40px 24px 60px 24px;
-      margin: 0 !important; /* Override desktop margin: -100px 0 300px 0 */
-      border-radius: 40px 40px 0 0; /* Match desktop corner curves consistently */
-      box-shadow: none; /* Shadow removed since it spans full bleed */
+      margin: 0 !important;
+      border-radius: 40px 40px 0 0;
+      box-shadow: none;
       width: 100%;
       box-sizing: border-box;
     }
@@ -611,47 +561,7 @@
 
     .contact-hero__info-list {
       gap: 24px;
-      margin-top: 0 !important; /* Override desktop margin-top: -180px */
-    }
-
-    .contact-hero__input {
-      height: 48px !important; /* Override desktop height: 30px */
-      padding: 12px 16px !important;
-    }
-
-    .contact-hero__textarea {
-      height: auto !important;
-      min-height: 120px !important;
-    }
-
-    .contact-hero__info-item {
-      gap: 16px;
-    }
-
-    .contact-hero__icon-circle {
-      width: 40px;
-      height: 40px;
-    }
-
-    .contact-hero__icon-svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    .contact-hero__info-title {
-      font-size: 16px;
-    }
-
-    .contact-hero__info-text {
-      font-size: 14px;
-    }
-
-    .contact-hero__info-inline-label {
-      font-size: 15px;
-    }
-
-    .contact-hero__info-inline-value {
-      font-size: 14px;
+      margin-top: 0 !important;
     }
 
     .contact-hero__submit-btn {
@@ -764,46 +674,8 @@
       "default": 80
     },
     {
-      "type": "range",
-      "id": "mobile_padding_top",
-      "min": 0,
-      "max": 180,
-      "step": 4,
-      "unit": "px",
-      "label": "Mobile Padding Top",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "mobile_padding_bottom",
-      "min": 0,
-      "max": 180,
-      "step": 4,
-      "unit": "px",
-      "label": "Mobile Padding Bottom",
-      "default": 40
-    },
-    {
       "type": "header",
       "content": "📞 Info Columns Content"
-    },
-    {
-      "type": "image_picker",
-      "id": "office_icon",
-      "label": "Custom Office Icon (Optional)",
-      "info": "Upload a custom icon image. If left blank, the standard SVG location pin will be used."
-    },
-    {
-      "type": "image_picker",
-      "id": "email_icon",
-      "label": "Custom Email Icon (Optional)",
-      "info": "Upload a custom icon image. If left blank, the standard SVG envelope will be used."
-    },
-    {
-      "type": "image_picker",
-      "id": "phone_icon",
-      "label": "Custom Phone Icon (Optional)",
-      "info": "Upload a custom icon image. If left blank, the standard SVG phone will be used."
     },
     {
       "type": "text",
@@ -826,7 +698,7 @@
     {
       "type": "richtext",
       "id": "email_values",
-      "label": "Email List (Use bold for labels and links)",
+      "label": "Email List",
       "default": "<p><a href=\"mailto:info@right4paws.com\">info@right4paws.com</a> | <a href=\"mailto:customercare@right4paws.com\">customercare@right4paws.com</a> | <a href=\"mailto:careers@right4paws.com\">careers@right4paws.com</a></p>"
     },
     {
@@ -838,7 +710,7 @@
     {
       "type": "richtext",
       "id": "phone_values",
-      "label": "Phone values (Use bold for labels and links)",
+      "label": "Phone values",
       "default": "<p><a href=\"tel:8095011112\">80950 11112</a> / <a href=\"tel:18008333150\">1800-8333150</a> (Toll-Free)</p>"
     },
     {
