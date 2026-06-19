@@ -208,6 +208,7 @@
         "card_daVw78": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_May_20_2026_03_43_22_PM_1.png",
             "is_featured": true
           }
         },
