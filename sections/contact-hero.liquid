@@ -11,14 +11,10 @@
     --button-text: {{ section.settings.button_text }};
     
     padding-top: {{ section.settings.padding_top }}px;
-    /* Extra padding added below to compensate for the negative margin overlap */
-    padding-bottom: calc({{ section.settings.padding_bottom }}px + 60px);
+    padding-bottom: {{ section.settings.padding_bottom }}px;
     background-color: var(--bg-color);
     position: relative;
     overflow: hidden;
-    /* Pulls the next section up to seamlessly mask the white gaps on the rounded corners */
-    margin-bottom: -60px;
-    z-index: 1;
   }
 
   /* Premium Desktop Background Image Engine mapping to custom_curve_image setting */
@@ -36,7 +32,6 @@
       padding-top: calc(var(--header-group-height, 100px) + 24px) !important;
       padding-bottom: 0 !important;
       background: linear-gradient(180deg, #F1A5AC 0%, #FCBDC4 50%, #F8C2C8 100%) !important;
-      margin-bottom: 0 !important;
     }
     
     /* Force reset mobile background to allow the background image to stack naturally in the content flow */
