@@ -19,6 +19,11 @@
     z-index: -1; 
     /* Pulls the footer up by the exact radius of its corner curves */
     margin-bottom: -45px; 
+    
+    /* Prevents the container from pulling wide and flattening the photo */
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* Target the next section (the footer) and force it to layer ABOVE the pink background */
@@ -29,12 +34,12 @@
     z-index: 2 !important;
   }
 
-  /* Full-Bleed Adaptive Canvas Engine */
+  /* Proportional Aspect Ratio Auto-Sizing Engine */
   {%- if section.settings.custom_curve_image != blank -%}
     #shopify-section-{{ section.id }} .contact-hero-section {
       background-image: url('{{ section.settings.custom_curve_image | image_url: width: 2400 }}');
-      background-size: 100% 100%; /* Dynamically matches the canvas dimensions exactly */
-      background-position: center bottom;
+      background-size: cover; /* Keeps standard aspect proportions intact */
+      background-position: center center;
       background-repeat: no-repeat;
     }
   {%- endif -%}
@@ -45,6 +50,7 @@
       padding-bottom: 0 !important;
       background: linear-gradient(180deg, #F1A5AC 0%, #FCBDC4 50%, #F8C2C8 100%) !important;
       margin-bottom: 0 !important;
+      max-width: 100%;
     }
     
     /* Force reset mobile background to allow the background image to stack naturally in the content flow */
