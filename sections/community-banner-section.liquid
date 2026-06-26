@@ -4,8 +4,7 @@
 
 {%- style -%}
   .community-banner-{{ section.id }} {
-    padding: 120px 0 80px 0;
-    /* FIX: Prevents absolute children from overflowing upwards and blocking sections above */
+    padding: 100px 0 80px 0;
     overflow: hidden; 
     font-family: "Degular Demo", -apple-system, BlinkMacSystemFont, sans-serif;
   }
@@ -56,8 +55,10 @@
   .community-person-wrap {
     position: absolute;
     bottom: 0;
-    left: 150px;
-    width: 630px;
+    /* FIX: Changed from absolute left: 150px to a relative percentage layout to stop overlapping text on scale changes */
+    left: 8%; 
+    width: 45%;
+    max-width: 630px;
     height: 786px;
     z-index: 10;
 
@@ -69,11 +70,11 @@
   }
 
   .community-person-img {
-    width: 80%;
+    width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
-    object-position: bottom;
+    object-position: bottom left;
   }
 
   /* Content */
@@ -166,15 +167,19 @@
     }
 
     .community-person-wrap {
-      width: 500px;
-      left: 40px;
+      width: 42%;
+      left: 4px;
+    }
+    
+    .community-heading {
+      font-size: 54px !important;
+      line-height: 50px !important;
     }
   }
 
   @media (max-width: 1024px) {
     .community-banner-{{ section.id }} {
       padding: 60px 0 !important;
-      /* Allows visible layout strategies on mobile frames */
       overflow: visible !important; 
     }
 
