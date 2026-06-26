@@ -1,11 +1,10 @@
 {% comment %}
-  The Science Behind It - Fixed Height Alignment Section
-  Ensures the left side yellow box perfectly aligns with the right side components.
+  The Science Behind It - Uniform Grid Spacing Alignment Section
 {% endcomment %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;700;800&display=swap" rel="stylesheet">
 
 {% style %}
   .science-section {
@@ -20,21 +19,21 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 24px; /* Standardized uniform gap */
     box-sizing: border-box;
-    align-items: stretch; /* Forces equal height matching for both main columns */
+    align-items: stretch; 
   }
 
-  /* --- LEFT HERO BANNER PANEL (HEIGHT ALIGNED) --- */
+  /* --- LEFT HERO BANNER PANEL --- */
   .science-left-hero {
-    background-color: #f7cb4d; /* Yellow matching image_f326c5.jpg */
+    background-color: #f7cb4d; 
     border-radius: 28px;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: flex-end;
-    height: 100%; /* Spans the exact calculated footprint of the right side */
-    min-height: 500px; /* Sensible desktop fallback safeguard */
+    height: 100%; 
+    min-height: 500px; 
   }
 
   .science-hero-bg-img {
@@ -92,7 +91,6 @@
     letter-spacing: -0.1px;
   }
 
-  /* Precise percentages to maintain consistent tracking along the path curve */
   .node-mfc {
     left: 12%;
     bottom: 20%;
@@ -110,27 +108,25 @@
 
   /* --- RIGHT SIDE GRID LAYOUT --- */
   .science-right-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    justify-content: space-between; /* Ensures balanced distribution */
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 24px; /* Matches layout gap exactly */
   }
 
   /* Top nested row splitting header card and fresh meat card */
   .science-right-top-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 24px; /* Matches layout gap exactly */
   }
 
   .science-title-card {
-    background-color: #90D7EE; /* Red accent matching image_f326c5.jpg */
+    background-color: #90D7EE; 
     border-radius: 28px;
     padding: 40px 35px;
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    aspect-ratio: 1.15 / 1;
   }
 
   .science-main-heading {
@@ -146,7 +142,7 @@
   .science-image-card {
     border-radius: 28px;
     overflow: hidden;
-    aspect-ratio: 1.15 / 1;
+    display: block;
   }
 
   .science-image-card img {
@@ -164,7 +160,7 @@
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 24px; /* Matches layout gap exactly */
   }
 
   .science-icon-node {
@@ -207,7 +203,6 @@
   @media (max-width: 1024px) {
     .science-main-container {
       grid-template-columns: 1fr;
-      align-items: stretch;
     }
     .science-left-hero {
       height: 450px;
@@ -222,20 +217,23 @@
     .science-section {
       padding: 40px 16px;
     }
+    .science-main-container,
+    .science-right-stack,
+    .science-right-top-row {
+      gap: 16px; /* Scaled down uniformly for compact mobile screens */
+    }
     .science-left-hero {
       height: 380px;
     }
     .science-right-top-row {
       grid-template-columns: 1fr;
-      gap: 20px;
     }
     .science-bottom-features-card {
       grid-template-columns: repeat(2, 1fr);
-      row-gap: 30px;
+      gap: 20px;
       padding: 35px 20px;
     }
     .science-title-card, .science-image-card {
-      aspect-ratio: auto;
       padding: 35px 25px;
     }
     .science-hero-node {
