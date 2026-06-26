@@ -245,6 +245,8 @@
       align-items: center !important;
       opacity: 1 !important;
       transform: none !important;
+      /* FIX: Ensures content stacks visually and interactively above the absolute-positioned person element on mobile */
+      z-index: 25 !important;
     }
 
     .community-heading {
@@ -301,7 +303,6 @@
     <div class="community-box">
 
 
-      <!-- Curve -->
       <div class="community-curvy-line">
         {% if section.settings.curve_image != blank %}
           <img
@@ -314,6 +315,7 @@
               d="M-100 400 Q 100 50, 400 350 T 900 100"
               stroke="#F8B426"
               stroke-width="12"
+              stroke-linecap="round"
               fill="none"
               opacity="0.4"
             />
@@ -321,7 +323,6 @@
         {% endif %}
       </div>
 
-      <!-- Content -->
       <div class="community-content">
         <h2 class="community-heading">
           {{ section.settings.heading | replace: 'do things right.', '<span>do things right.</span>' }}
