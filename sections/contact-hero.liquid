@@ -29,11 +29,11 @@
     z-index: 2 !important;
   }
 
-  /* Premium Desktop Background Image Engine mapping to custom_curve_image setting */
+  /* Premium Desktop Background Image Engine with Contain Fix */
   {%- if section.settings.custom_curve_image != blank -%}
     #shopify-section-{{ section.id }} .contact-hero-section {
       background-image: url('{{ section.settings.custom_curve_image | image_url: width: 2400 }}');
-      background-size: cover;
+      background-size: contain; /* Prevents the image elements from cutting off */
       background-position: {{ section.settings.bg_position_desktop }};
       background-repeat: no-repeat;
     }
