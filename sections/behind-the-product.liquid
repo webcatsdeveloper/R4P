@@ -1,10 +1,10 @@
 {% comment %}
-  The Science Behind It - Uniform Grid Spacing Alignment Section
+  The Science Behind It - Uniform Grid Spacing & Perfect Figma Text-Wrap Alignment Section
 {% endcomment %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 
 {% style %}
   .science-section {
@@ -196,7 +196,24 @@
     font-weight: 500;
     line-height: 1.4;
     margin: 0;
-    max-width: 130px;
+    word-break: break-word;
+  }
+
+  /* Precise column width constraints to replicate the Figma line breaks exactly */
+  .science-icon-node:nth-child(1) .science-icon-label {
+    max-width: 90px;
+  }
+
+  .science-icon-node:nth-child(2) .science-icon-label {
+    max-width: 110px;
+  }
+
+  .science-icon-node:nth-child(3) .science-icon-label {
+    max-width: 70px;
+  }
+
+  .science-icon-node:nth-child(4) .science-icon-label {
+    max-width: 80px;
   }
 
   /* --- RESPONSIVE BREAKPOINTS --- */
@@ -242,6 +259,13 @@
     }
     .science-hero-node p {
       font-size: 9px;
+    }
+    /* Reset text constraints on mobile layout for better fluid scaling */
+    .science-icon-node:nth-child(1) .science-icon-label,
+    .science-icon-node:nth-child(2) .science-icon-label,
+    .science-icon-node:nth-child(3) .science-icon-label,
+    .science-icon-node:nth-child(4) .science-icon-label {
+      max-width: 100%;
     }
   }
 {% endstyle %}
