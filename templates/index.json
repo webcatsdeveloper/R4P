@@ -268,6 +268,18 @@
           "settings": {
             "video_url": "https://cdn.shopify.com/videos/c/o/v/22326509bd9147c29164850ae4d5e315.mp4"
           }
+        },
+        "reel_adkHcU": {
+          "type": "reel",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/491022adcd834e53850c0980ade3bed3.mp4"
+          }
+        },
+        "reel_X7fCJb": {
+          "type": "reel",
+          "settings": {
+            "video_url": ""
+          }
         }
       },
       "block_order": [
@@ -277,7 +289,9 @@
         "reel_iQxeAY",
         "reel_G3FyxN",
         "reel_dhbEdV",
-        "reel_Gdn7Ny"
+        "reel_Gdn7Ny",
+        "reel_adkHcU",
+        "reel_X7fCJb"
       ],
       "name": "Instagram Reels",
       "settings": {
