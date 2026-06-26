@@ -34,7 +34,10 @@
     #shopify-section-{{ section.id }} .contact-hero-section {
       background-image: url('{{ section.settings.custom_curve_image | image_url: width: 2400 }}');
       background-size: contain; /* Prevents the image elements from cutting off */
-      background-position: {{ section.settings.bg_position_desktop }};
+    
+
+/* To this: */
+background-position: center bottom;
       background-repeat: no-repeat;
     }
   {%- endif -%}
