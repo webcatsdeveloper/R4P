@@ -29,15 +29,12 @@
     z-index: 2 !important;
   }
 
-  /* Premium Desktop Background Image Engine with Contain Fix */
+  /* Full-Bleed Adaptive Canvas Engine */
   {%- if section.settings.custom_curve_image != blank -%}
     #shopify-section-{{ section.id }} .contact-hero-section {
       background-image: url('{{ section.settings.custom_curve_image | image_url: width: 2400 }}');
-      background-size: contain; /* Prevents the image elements from cutting off */
-    
-
-/* To this: */
-background-position: center bottom;
+      background-size: 100% 100%; /* Dynamically matches the canvas dimensions exactly */
+      background-position: center bottom;
       background-repeat: no-repeat;
     }
   {%- endif -%}
