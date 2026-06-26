@@ -255,7 +255,6 @@
 
 <section class="reels-{{ section.id }}" id="reels-section-{{ section.id }}">
 
-  <!-- WAVE -->
   <div class="reels-wave-bg">
     <svg viewBox="0 0 2039 273" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -268,7 +267,6 @@
 
   <div class="reels-container">
 
-    <!-- HEADER -->
     <div class="reels-header">
 
       <h2 class="reels-heading">
@@ -281,7 +279,6 @@
 
     </div>
 
-    <!-- VIDEOS -->
     <div class="reels-carousel-outer">
 
       <div class="reels-track">
@@ -298,6 +295,7 @@
                   autoplay
                   muted
                   loop
+                  preload="auto"
                   playsinline>
                 </video>
 
@@ -317,7 +315,6 @@
 
       </div>
 
-      <!-- DOTS -->
       <div class="reels-dots">
         <span class="reels-dot active"></span>
         <span class="reels-dot"></span>
@@ -335,11 +332,18 @@
 document.addEventListener("DOMContentLoaded", function(){
 
   const section = document.querySelector("#reels-section-{{ section.id }}");
+  const track = section.querySelector(".reels-track");
+  const videos = section.querySelectorAll("video");
+  const dots = section.querySelectorAll(".reels-dot");
 
+  // Fix: Ensure all duplicated videos play properly on intersection
   const observer = new IntersectionObserver((entries)=>{
     entries.forEach((entry)=>{
       if(entry.isIntersecting){
         section.classList.add("show");
+        videos.forEach(video => {
+          video.play().catch(error => console.log("Autoplay prevented:", error));
+        });
       }
     });
   },{
@@ -348,6 +352,25 @@ document.addEventListener("DOMContentLoaded", function(){
 
   observer.observe(section);
 
+  // Fix: Animate dots to sync with CSS infinite scroll timeline (4 items, 20s total animation)
+  let activeIndex = 0;
+  let interval;
+
+  function startDotAnimation() {
+    // 20 seconds total / 4 blocks = 5000ms per card shift
+    interval = setInterval(() => {
+      // Don't cycle dots if user is hovering over track (paused)
+      if (window.getComputedStyle(track).animationPlayState === 'paused') return;
+
+      dots[activeIndex].classList.remove("active");
+      activeIndex = (activeIndex + 1) % dots.length;
+      dots[activeIndex].classList.add("active");
+    }, 5000); 
+  }
+
+  if(dots.length > 0) {
+    startDotAnimation();
+  }
 });
 </script>
 
