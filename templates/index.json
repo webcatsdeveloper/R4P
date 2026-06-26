@@ -21,10 +21,21 @@
             "button_text": "WHAT’S IN A BOWL?",
             "button_link": ""
           }
+        },
+        "slide_QQEtTE": {
+          "type": "slide",
+          "settings": {
+            "bg_image": "shopify://shop_images/Homepage_1.png",
+            "hero_heading": "You love them like family.",
+            "hero_description": "And that’s why every choice matters, especially what goes into their bowl.",
+            "button_text": "WHAT’S IN A BOWL?",
+            "button_link": ""
+          }
         }
       },
       "block_order": [
-        "slide_WGFHtG"
+        "slide_WGFHtG",
+        "slide_QQEtTE"
       ],
       "name": "Custom Hero",
       "settings": {
