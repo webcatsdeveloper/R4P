@@ -387,7 +387,7 @@
 
           {% assign pet_handle = block.settings.title | handle %}
 
-          <a href="{{ block.settings.link }}" class="pet-nav-card pet-nav-card--{{ pet_handle }}" {{ block.shopify_attributes }}>
+          {% comment %} <a href="{{ block.settings.link }}" class="pet-nav-card pet-nav-card--{{ pet_handle }}" {{ block.shopify_attributes }}> {% endcomment %}
 
             <div class="pet-image-hold">
 
