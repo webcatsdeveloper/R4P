@@ -131,6 +131,7 @@
         "image": "shopify://shop_images/Group_59486.png",
         "title": "ENGINEERED FOR THE LONG RUIN",
         "description": "Real fresh food, stabilised and preserved by technology. \nIngredients, carefully chosen and crafted with a genuine understanding of your pet's digestive system. All locked in space-grade packaging.\n\nThe result? \n\nNutrition built to mission standards, so your pet stays younger, for longer.",
+        "button_text": "OUR APPROACH",
         "link": "",
         "left_curve": "shopify://shop_images/Vector_8.png",
         "right_curve": "shopify://shop_images/Vector_7.png"
@@ -230,7 +231,7 @@
           "type": "reel",
           "settings": {
             "image": "shopify://shop_images/b546c9ef711af7846e87f9f3aa87a26c57c486da.png",
-            "video_url": ""
+            "video_url": "https://vimeo.com/1204753238?share=copy&fl=sv&fe=ci"
           }
         },
         "reel_LqUiLH": {
