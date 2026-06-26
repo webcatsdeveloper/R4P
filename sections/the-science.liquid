@@ -581,9 +581,9 @@
 
       </div>
 
-      <a href="{{ section.settings.link }}" class="sc-button">
-        OUR APPROACH
-      </a>
+     <a href="{{ section.settings.link }}" class="sc-button">
+  {{ section.settings.button_text }}
+</a>
 
     </div>
   </div>
@@ -656,7 +656,13 @@ document.addEventListener("DOMContentLoaded", function () {
       "type": "image_picker",
       "id": "right_curve",
       "label": "Right Curve"
-    }
+    },
+    {
+  "type": "text",
+  "id": "button_text",
+  "label": "Button Text",
+  "default": "OUR APPROACH"
+}
   ],
   "blocks": [
     {
