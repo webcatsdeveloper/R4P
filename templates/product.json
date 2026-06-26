@@ -549,43 +549,37 @@
         "reel_FE8cnt": {
           "type": "reel",
           "settings": {
-            "image": "shopify://shop_images/b546c9ef711af7846e87f9f3aa87a26c57c486da.png",
-            "video_url": ""
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/fe204bb43bcd49c0bb765dc00530c20f.mp4"
           }
         },
         "reel_M9JGnY": {
           "type": "reel",
           "settings": {
-            "image": "shopify://shop_images/9fd9744dd9c1e4504778e6c89078593c823e208d.png",
-            "video_url": ""
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/2a184d52038047aca4a9276324d58065.mp4"
           }
         },
         "reel_3nBedy": {
           "type": "reel",
           "settings": {
-            "image": "shopify://shop_images/a4648c94134e110969bce360504dba1ee4b45f80.png",
-            "video_url": ""
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/b0bdcf93de3e43cb9e1d2a409af5fe36.mp4"
           }
         },
         "reel_hDtXzA": {
           "type": "reel",
           "settings": {
-            "image": "shopify://shop_images/62bbd6a15548046769cd6767b9f75e822f95f802.png",
-            "video_url": ""
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/bffb671a4fca4ed285061527f229453a.mp4"
           }
         },
         "reel_xNK4xe": {
           "type": "reel",
           "settings": {
-            "image": "shopify://shop_images/9fd9744dd9c1e4504778e6c89078593c823e208d.png",
-            "video_url": ""
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/fe70a86adf0c480bad3ac12bc50c49cf.mp4"
           }
         },
         "reel_hiiPcN": {
           "type": "reel",
           "settings": {
-            "image": "shopify://shop_images/62bbd6a15548046769cd6767b9f75e822f95f802.png",
-            "video_url": ""
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/9454db17e6734a1b82cfe459afc6aa4b.mp4"
           }
         }
       },
