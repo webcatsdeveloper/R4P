@@ -216,7 +216,6 @@
         "bg_image": "shopify://shop_images/Group_59517_1.png",
         "title_black": "Our",
         "title_red": "Solution",
-        "top_left_image": "shopify://shop_images/Group_59514_7ad811de-8a3a-428a-af52-3bbddc257987.png",
         "top_right_heading": "We feed your pet <span class=\"os-bold-text-red\">real food</span>, <br>not processed science experiments",
         "top_right_subtext": "Real foods contain over 26000 distinct bio-active compounds, these compounds play critical roles in modulating inflammation, supporting gut microbiome and preventing chronic disease",
         "mid_left_text": "Whole food also bring in the benefits of co-factors also called \"The Entourage Effect\" bringing the synergistic benefit of real food",
@@ -268,13 +267,16 @@
         "padding_top": 100,
         "padding_bottom": 100,
         "heading": "<p>The meats we use are from <strong>HACCP approved, ISO certified plants</strong><br/>with full traceability and are <strong>anti-biotic residue free</strong><br/>The fish we use are <strong>wild caught</strong></p>",
-        "subtext": "Safety is non-negotiable, which is why we enforce a strict kill step at every stage of our process including Bacteriophages, traditional Curing agents (vinegar/citric acid), low temperature long duration pasteurization and UV exposure before packing. As a final protective barrier, the packs are vacuum-sealed and flushed with modified atmospheric gases."
+        "subtext": "Safety is non-negotiable, which is why we enforce a strict kill step at every stage of our process including Bacteriophages, traditional Curing agents (vinegar/citric acid), low temperature long duration pasteurization and UV exposure before packing. As a final protective barrier, the packs are vacuum-sealed and flushed with modified atmospheric gases.",
+        "button_label": "READ THE DOGRISK REPORT",
+        "button_link": ""
       }
     },
     "mfcd_minimal_processing": {
       "type": "mfcd-minimal-processing",
       "settings": {
         "bg_image": "shopify://shop_images/8_951.png",
+        "bg_image_mobile": "shopify://shop_images/Group_59508_1424b9c7-6020-445e-b50d-634d59d58e70.png",
         "padding_top": 80,
         "padding_bottom": 80,
         "heading": "MFCD\nMinimal\nprocessing",
