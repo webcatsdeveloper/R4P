@@ -145,10 +145,173 @@
         "desc_font_size": 16,
         "desc_max_width": 460
       }
+    },
+    "ultra_processing": {
+      "type": "problems-with-ultra-processing",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "title": "Loaded with Fillers",
+            "description": "Extruded kibble and processed treats often contain high levels of starch and binders that add bulk, not meaningful nutrition."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "title": "Calories That Actually Nourish",
+            "description": "Calories from protein and healthy fats support growth, repair, and vitality, whereas calories from starch and filler just fill the bowl"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "title": "Created Under Extreme Heat",
+            "description": "The high heat and pressure used during extrusion can form Advanced Glycation End Products (AGEs), compounds linked to chronic health issues."
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "title": "Nature Over Synthetic",
+            "description": "Ultra-processing destroys natural nutrients and replaces them with synthetic alternatives that may not be absorbed as effectively by the body."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "heading_black": "Problems with",
+        "heading_red": "Ultra-Processing",
+        "impact_black": "Whats the impact ?",
+        "impact_red": "The deficit shows up in your pet's health."
+      }
+    },
+    "our_solution": {
+      "type": "our-solution",
+      "settings": {
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "title_black": "Our",
+        "title_red": "Solution",
+        "top_right_heading": "We feed your pet <span class='os-bold-text-red'>real food</span>, <br>not processed science experiments",
+        "top_right_subtext": "Real foods contain over 26000 distinct bio-active compounds, these compounds play critical roles in modulating inflammation, supporting gut microbiome and preventing chronic disease",
+        "mid_left_text": "Whole food also bring in the benefits of co-factors also called \"The Entourage Effect\" bringing the synergistic benefit of real food",
+        "bot_heading": "Our formulations have human-grade, bioavailable ingredients best suited to your pet's digestive system.",
+        "bot_subtext": "Since all nutrients are not equal, we source specific amino acid profiles to build muscle and immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it.",
+        "bot_left_text": "No GMO, No Fillers, No Synthetic Chemicals, No Preservatives, No Binders"
+      }
+    },
+    "our_certifications": {
+      "type": "our-certifications",
+      "blocks": {
+        "logo_1": {
+          "type": "logo"
+        },
+        "logo_2": {
+          "type": "logo"
+        },
+        "logo_3": {
+          "type": "logo"
+        },
+        "logo_4": {
+          "type": "logo"
+        },
+        "logo_5": {
+          "type": "logo"
+        },
+        "logo_6": {
+          "type": "logo"
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "logo_5",
+        "logo_6"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "heading": "<p>The meats we use are from <strong>HACCP approved, ISO certified plants</strong><br>with full traceability and are <strong>anti-biotic residue free</strong><br>The fish we use are <strong>wild caught</strong></p>",
+        "subtext": "Safety is non-negotiable, which is why we enforce a strict kill step at every stage of our process including Bacteriophages, traditional Curing agents (vinegar/citric acid), low temperature long duration pasteurization and UV exposure before packing. As a final protective barrier, the packs are vacuum-sealed and flushed with modified atmospheric gases."
+      }
+    },
+    "mfcd_minimal_processing": {
+      "type": "mfcd-minimal-processing",
+      "settings": {
+        "subtext_1": "Our dry Flakes are 'Dehydrated Fresh Food' produced using our\nproprietary, patent-pending MFCD technology. By precisely controlling\ntemperature, airflow, humidity, and time during dehydration, we preserve\nnutritional integrity and enzymatic activity",
+        "subtext_2": "The result? The unmatched nutrition of a raw diet with the ultimate\nconvenience of shelf-stable scoop-and-serve."
+      }
+    },
+    "naturally_fresh": {
+      "type": "naturally-fresh",
+      "settings": {}
+    },
+    "pet_benefits": {
+      "type": "pet-benefits",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Best nutrition\nabsorption, Just as\nnature intended."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Vibrant energy,\nbetter Immunity and\nlesser sick days."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Food that works\nwith their biology,\nnot against it."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3"
+      ],
+      "settings": {}
+    },
+    "end_banner": {
+      "type": "end-banner",
+      "settings": {
+        "bg_color": "#7d75b3",
+        "ribbon_color": "#f4cb55",
+        "heading": "More Good Years Together",
+        "btn1_text": "MAKE THE SWITCH !",
+        "btn1_link": "",
+        "btn2_text": "",
+        "btn2_link": "",
+        "model_image": "shopify://shop_images/Group_59513.png",
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
     "main",
-    "pet_food_hero_ARqKUK"
+    "pet_food_hero_ARqKUK",
+    "ultra_processing",
+    "our_solution",
+    "our_certifications",
+    "mfcd_minimal_processing",
+    "naturally_fresh",
+    "pet_benefits",
+    "end_banner"
   ]
 }

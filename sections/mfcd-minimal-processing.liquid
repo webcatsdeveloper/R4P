@@ -1,0 +1,153 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    aspect-ratio: 1920 / 900;
+    {% if section.settings.bg_image %}
+      background-image: url('{{ section.settings.bg_image | img_url: 'master' }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    {% else %}
+      background-color: #d92b2b;
+    {% endif %}
+  }
+
+  .mfcd-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+  }
+
+  .mfcd-left {
+    max-width: 600px; /* Widened so explicit line breaks control the wrap */
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+  }
+
+  .mfcd-heading {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 40px;
+  }
+
+  .mfcd-text-1 {
+    font-size: 18px; /* Increased font size slightly */
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  
+  .mfcd-text-2 {
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 900px) {
+    #shopify-section-{{ section.id }} {
+      aspect-ratio: auto;
+      min-height: 800px;
+      background-position: right center;
+    }
+
+    .mfcd-container {
+      flex-direction: column;
+      padding: 0 20px;
+      justify-content: flex-start;
+      height: auto;
+    }
+    
+    .mfcd-left {
+      padding-top: 40px;
+      background: rgba(217, 43, 43, 0.8); /* Add semi-transparent background on mobile if text overlaps dog */
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .mfcd-heading {
+      font-size: 40px;
+    }
+  }
+</style>
+
+<div class="mfcd-container">
+  <div class="mfcd-left">
+    <div class="mfcd-heading">
+      {{ section.settings.heading | newline_to_br }}
+    </div>
+    <div class="mfcd-text-1">
+      {{ section.settings.subtext_1 | newline_to_br }}
+    </div>
+    <div class="mfcd-text-2">
+      {{ section.settings.subtext_2 | newline_to_br }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "MFCD Minimal Processing",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image (Includes Dog)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "MFCD\nMinimal\nprocessing"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext_1",
+      "label": "First Paragraph",
+      "default": "Our dry Flakes are 'Dehydrated Fresh Food' produced using our\nproprietary, patent-pending MFCD technology. By precisely controlling\ntemperature, airflow, humidity, and time during dehydration, we preserve\nnutritional integrity and enzymatic activity"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext_2",
+      "label": "Second Paragraph",
+      "default": "The result? The unmatched nutrition of a raw diet with the ultimate\nconvenience of shelf-stable scoop-and-serve."
+    }
+  ],
+  "presets": [
+    {
+      "name": "MFCD Minimal Processing"
+    }
+  ]
+}
+{% endschema %}

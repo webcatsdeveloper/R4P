@@ -1,0 +1,176 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  .certifications-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .certifications-heading {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: #111111;
+    line-height: 1.4;
+    max-width: 900px;
+    margin-bottom: 40px;
+  }
+
+  .certifications-heading strong {
+    font-weight: 700;
+    color: #d92b2b;
+  }
+
+  .certifications-subtext {
+    font-family: var(--font-primary--family), sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #444444;
+    line-height: 1.6;
+    max-width: 1000px;
+    margin-bottom: 80px;
+  }
+
+  .certifications-logo-strip {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+  }
+
+  .certifications-logo-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 150px;
+  }
+
+  .certifications-logo-item img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 900px) {
+    .certifications-heading {
+      font-size: 24px;
+    }
+    .certifications-logo-strip {
+      gap: 30px;
+    }
+    .certifications-logo-item {
+      max-width: 100px;
+    }
+  }
+</style>
+
+<div class="certifications-container">
+  {% if section.settings.heading != blank %}
+    <div class="certifications-heading">
+      {{ section.settings.heading }}
+    </div>
+  {% endif %}
+
+  {% if section.settings.subtext != blank %}
+    <div class="certifications-subtext">
+      {{ section.settings.subtext }}
+    </div>
+  {% endif %}
+
+  <div class="certifications-logo-strip">
+    {% for block in section.blocks %}
+      <div class="certifications-logo-item" {{ block.shopify_attributes }}>
+        {% if block.settings.logo_image %}
+          <img src="{{ block.settings.logo_image | img_url: '400x' }}" alt="Certification Logo" loading="lazy">
+        {% else %}
+          <div style="width: 120px; height: 120px; background-color: #f0f0f0; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size: 12px; color: #888;">Logo {{ forloop.index }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Certifications",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 100
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>The meats we use are from <strong>HACCP approved, ISO certified plants</strong><br>with full traceability and are <strong>anti-biotic residue free</strong><br>The fish we use are <strong>wild caught</strong></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Safety is non-negotiable, which is why we enforce a strict kill step at every stage of our process including Bacteriophages, traditional Curing agents (vinegar/citric acid), low temperature long duration pasteurization and UV exposure before packing. As a final protective barrier, the packs are vacuum-sealed and flushed with modified atmospheric gases."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Certification Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Certifications",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}
