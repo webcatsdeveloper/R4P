@@ -63,6 +63,21 @@
     object-fit: contain;
   }
 
+  .certifications-logo-full-width {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .certifications-logo-full-width img {
+    width: 100%;
+    max-width: 1920px;
+    height: auto;
+    object-fit: contain;
+  }
+
   @media screen and (max-width: 900px) {
     .certifications-heading {
       font-size: 24px;
@@ -89,23 +104,36 @@
     </div>
   {% endif %}
 
-  <div class="certifications-logo-strip">
-    {% for block in section.blocks %}
-      <div class="certifications-logo-item" {{ block.shopify_attributes }}>
-        {% if block.settings.logo_image %}
-          <img src="{{ block.settings.logo_image | img_url: '400x' }}" alt="Certification Logo" loading="lazy">
-        {% else %}
-          <div style="width: 120px; height: 120px; background-color: #f0f0f0; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size: 12px; color: #888;">Logo {{ forloop.index }}</div>
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
+  {% if section.settings.single_logo_image == blank %}
+    <div class="certifications-logo-strip">
+      {% for block in section.blocks %}
+        <div class="certifications-logo-item" {{ block.shopify_attributes }}>
+          {% if block.settings.logo_image %}
+            <img src="{{ block.settings.logo_image | img_url: '400x' }}" alt="Certification Logo" loading="lazy">
+          {% else %}
+            <div style="width: 120px; height: 120px; background-color: #f0f0f0; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size: 12px; color: #888;">Logo {{ forloop.index }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 </div>
+
+{% if section.settings.single_logo_image != blank %}
+  <div class="certifications-logo-full-width">
+    <img src="{{ section.settings.single_logo_image | img_url: 'master' }}" alt="Certification Logos" loading="lazy">
+  </div>
+{% endif %}
 
 {% schema %}
 {
   "name": "Certifications",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "single_logo_image",
+      "label": "Single Full-Width Logo Image (Overrides blocks)"
+    },
     {
       "type": "color",
       "id": "bg_color",
