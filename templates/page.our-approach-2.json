@@ -277,7 +277,7 @@
       "settings": {
         "bg_image": "shopify://shop_images/8_951.png",
         "bg_image_mobile": "shopify://shop_images/Group_59508_1424b9c7-6020-445e-b50d-634d59d58e70.png",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
         "heading": "MFCD\nMinimal\nprocessing",
         "subtext_1": "Our dry Flakes are 'Dehydrated Fresh Food' produced using our\nproprietary, patent-pending MFCD technology. By precisely controlling\ntemperature, airflow, humidity, and time during dehydration, we preserve\nnutritional integrity and enzymatic activity",
