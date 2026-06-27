@@ -211,10 +211,12 @@
     "our_solution": {
       "type": "our-solution",
       "settings": {
-        "padding_top": 80,
+        "padding_top": 40,
         "padding_bottom": 80,
+        "bg_image": "shopify://shop_images/Group_59517_1.png",
         "title_black": "Our",
         "title_red": "Solution",
+        "top_left_image": "shopify://shop_images/Group_59514_7ad811de-8a3a-428a-af52-3bbddc257987.png",
         "top_right_heading": "We feed your pet <span class=\"os-bold-text-red\">real food</span>, <br>not processed science experiments",
         "top_right_subtext": "Real foods contain over 26000 distinct bio-active compounds, these compounds play critical roles in modulating inflammation, supporting gut microbiome and preventing chronic disease",
         "mid_left_text": "Whole food also bring in the benefits of co-factors also called \"The Entourage Effect\" bringing the synergistic benefit of real food",
@@ -260,16 +262,18 @@
         "logo_6"
       ],
       "settings": {
+        "single_logo_image": "shopify://shop_images/Content_Review_2_1.png",
         "bg_color": "#ffffff",
         "padding_top": 100,
         "padding_bottom": 100,
-        "heading": "<p>The meats we use are from <strong>HACCP approved, ISO certified plants</strong><br>with full traceability and are <strong>anti-biotic residue free</strong><br>The fish we use are <strong>wild caught</strong></p>",
+        "heading": "<p>The meats we use are from <strong>HACCP approved, ISO certified plants</strong><br/>with full traceability and are <strong>anti-biotic residue free</strong><br/>The fish we use are <strong>wild caught</strong></p>",
         "subtext": "Safety is non-negotiable, which is why we enforce a strict kill step at every stage of our process including Bacteriophages, traditional Curing agents (vinegar/citric acid), low temperature long duration pasteurization and UV exposure before packing. As a final protective barrier, the packs are vacuum-sealed and flushed with modified atmospheric gases."
       }
     },
     "mfcd_minimal_processing": {
       "type": "mfcd-minimal-processing",
       "settings": {
+        "bg_image": "shopify://shop_images/8_951.png",
         "padding_top": 80,
         "padding_bottom": 80,
         "heading": "MFCD\nMinimal\nprocessing",
@@ -283,7 +287,8 @@
         "bg_color": "#ffffff",
         "padding_top": 100,
         "padding_bottom": 100,
-        "top_text": "Naturally fresh, scientifically preserved food made use smart, clean technology to\nlock in a long shelf life—with absolutely zero synthetic preservatives"
+        "top_text": "Naturally fresh, scientifically preserved food made use smart, clean technology to\nlock in a long shelf life—with absolutely zero synthetic preservatives",
+        "main_image": "shopify://shop_images/Group_59517_2.png"
       }
     },
     "pet_benefits": {
@@ -292,18 +297,21 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
+            "icon": "shopify://shop_images/Group_59518.png",
             "text": "Best nutrition\nabsorption, Just as\nnature intended."
           }
         },
         "benefit_2": {
           "type": "benefit",
           "settings": {
+            "icon": "shopify://shop_images/Group_59519_cdc4c157-bd3e-421e-9412-85c87c01bb44.png",
             "text": "Vibrant energy,\nbetter Immunity and\nlesser sick days."
           }
         },
         "benefit_3": {
           "type": "benefit",
           "settings": {
+            "icon": "shopify://shop_images/Group_59520_77ad20f7-8fa7-4df3-8f92-65f3ee1d46ae.png",
             "text": "Food that works\nwith their biology,\nnot against it."
           }
         }
