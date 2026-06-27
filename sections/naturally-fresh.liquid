@@ -24,7 +24,33 @@
     font-weight: 500;
   }
 
+  .naturally-fresh-image-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .naturally-fresh-bg-wave {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+
+  .naturally-fresh-bg-wave img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
   .naturally-fresh-image-wrapper {
+    position: relative;
+    z-index: 1;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -36,16 +62,26 @@
     max-width: 100%;
     height: auto;
     object-fit: contain;
-    border-radius: 20px; /* To match the rounded corners in the design */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   }
 
   @media screen and (max-width: 768px) {
     .naturally-fresh-text {
-      font-size: 16px;
+      font-size: 26px; /* Match large Figma size */
+      line-height: 1.4;
       margin-bottom: 40px;
+      padding: 0 15px;
+      color: #2c2c2c;
     }
     .naturally-fresh-container {
+      padding: 0;
+    }
+    .naturally-fresh-image-wrapper {
       padding: 0 20px;
+    }
+    .naturally-fresh-image-wrapper img {
+      border-radius: 24px;
     }
   }
 </style>
@@ -57,10 +93,18 @@
     </div>
   {% endif %}
 
-  <div class="naturally-fresh-image-wrapper">
-    {% if section.settings.main_image %}
-      <img src="{{ section.settings.main_image | img_url: 'master' }}" alt="Flakes not a pellet" loading="lazy">
+  <div class="naturally-fresh-image-container">
+    {% if section.settings.bg_wave %}
+      <div class="naturally-fresh-bg-wave">
+        <img src="{{ section.settings.bg_wave | img_url: 'master' }}" alt="Background Wave" loading="lazy">
+      </div>
     {% endif %}
+
+    <div class="naturally-fresh-image-wrapper">
+      {% if section.settings.main_image %}
+        <img src="{{ section.settings.main_image | img_url: 'master' }}" alt="Flakes not a pellet" loading="lazy">
+      {% endif %}
+    </div>
   </div>
 </div>
 
@@ -104,6 +148,11 @@
       "type": "image_picker",
       "id": "main_image",
       "label": "Main Image block"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_wave",
+      "label": "Background Wave Image (Optional)"
     }
   ],
   "presets": [

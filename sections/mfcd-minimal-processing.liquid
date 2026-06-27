@@ -57,8 +57,14 @@
   @media screen and (max-width: 900px) {
     #shopify-section-{{ section.id }} {
       aspect-ratio: auto;
-      min-height: 800px;
-      background-position: right center;
+      min-height: auto;
+      background-position: bottom center;
+      background-color: #d92b2b;
+      {% if section.settings.bg_image_mobile %}
+        background-image: url('{{ section.settings.bg_image_mobile | img_url: 'master' }}');
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+      {% endif %}
     }
 
     .mfcd-container {
@@ -69,15 +75,39 @@
     }
     
     .mfcd-left {
-      padding-top: 40px;
-      background: rgba(217, 43, 43, 0.8); /* Add semi-transparent background on mobile if text overlaps dog */
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
+      padding-top: 40px; 
+      padding-bottom: 135vw; /* Dynamically reserve space for the dog so text NEVER overlaps */
+      background: transparent;
+      align-items: center;
+      text-align: center;
+      width: 100%;
     }
 
     .mfcd-heading {
-      font-size: 40px;
+      font-size: 42px; /* Matched Figma size */
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 25px;
+    }
+
+    .mfcd-text-1, .mfcd-text-2 {
+      text-align: center;
+      font-size: 16px; /* Matched Figma size */
+      line-height: 1.5;
+      max-width: 340px; /* Forces exact Figma natural wrap */
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Disable desktop forced line-breaks on mobile */
+    .mfcd-text-1 br, .mfcd-text-2 br {
+      display: none;
+    }
+    
+    /* Hide ONLY the second line break in the heading to merge "Minimal" and "processing" on mobile */
+    .mfcd-heading br:nth-of-type(2) {
+      display: none;
     }
   }
 </style>
@@ -103,7 +133,12 @@
     {
       "type": "image_picker",
       "id": "bg_image",
-      "label": "Background Image (Includes Dog)"
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Background Image (Mobile)"
     },
     {
       "type": "range",
@@ -129,7 +164,7 @@
       "type": "textarea",
       "id": "heading",
       "label": "Heading",
-      "default": "MFCD\nMinimal\nprocessing"
+      "default": "MFCD\nMinimal processing"
     },
     {
       "type": "textarea",
