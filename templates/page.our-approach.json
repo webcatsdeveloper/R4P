@@ -298,6 +298,28 @@
         "mobile_bheart_right": "-10"
       }
     },
+    "oursollution1_gTGRUe": {
+      "type": "oursollution1",
+      "name": "Solution Header Workspace",
+      "settings": {
+        "wave_bg_desktop": "shopify://shop_images/Vector_2_2.png",
+        "grey_loop_image": "shopify://shop_images/Vector_8_2.png",
+        "loop_x_pos": -2,
+        "loop_y_pos": 85,
+        "loop_width": 140,
+        "loop_x_pos_mobile": -5,
+        "loop_y_pos_mobile": 40,
+        "loop_width_mobile": 90,
+        "title_part_1": "Our",
+        "title_part_2": "Solution",
+        "intro_richtext": "<p>We feed your pet <strong>real food</strong>,<br/>not processed science experiments</p>",
+        "heading_rotation": -1.5,
+        "heading_rotation_mobile": -1,
+        "heading_y_offset": 10,
+        "text_color_dark": "#1a1a1a",
+        "text_color_accent": "#d93829"
+      }
+    },
     "section3_HbKKeE": {
       "type": "section3",
       "name": "Our Solution Plate Map",
@@ -468,6 +490,7 @@
     "pet_food_hero_ARqKUK",
     "new_section_w8WTAF",
     "we_know_Wh9cYW",
+    "oursollution1_gTGRUe",
     "section3_HbKKeE",
     "you_bring_the_love_7rpmFw",
     "pet_benefits_slider_XeT6Pj",
