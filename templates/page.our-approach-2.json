@@ -222,6 +222,165 @@
         "curve_width": 180
       }
     },
+    "solution_head_Gcqm97": {
+      "type": "solution-head",
+      "blocks": {
+        "letter_mTMUCN": {
+          "type": "letter",
+          "settings": {
+            "char": "O",
+            "color_accent": false,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_9Xgja8": {
+          "type": "letter",
+          "settings": {
+            "char": "u",
+            "color_accent": false,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_aGttyf": {
+          "type": "letter",
+          "settings": {
+            "char": "r",
+            "color_accent": false,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_PrHtPw": {
+          "type": "letter",
+          "settings": {
+            "char": "",
+            "color_accent": false,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_jdpw7G": {
+          "type": "letter",
+          "settings": {
+            "char": "S",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_NE7typ": {
+          "type": "letter",
+          "settings": {
+            "char": "o",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_4JYDz6": {
+          "type": "letter",
+          "settings": {
+            "char": "l",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_pgeeyb": {
+          "type": "letter",
+          "settings": {
+            "char": "u",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_8xNcAJ": {
+          "type": "letter",
+          "settings": {
+            "char": "t",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_iagdKM": {
+          "type": "letter",
+          "settings": {
+            "char": "i",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_i7ge6y": {
+          "type": "letter",
+          "settings": {
+            "char": "o",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_rPFpyH": {
+          "type": "letter",
+          "settings": {
+            "char": "n",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "letter_mTMUCN",
+        "letter_9Xgja8",
+        "letter_aGttyf",
+        "letter_PrHtPw",
+        "letter_jdpw7G",
+        "letter_NE7typ",
+        "letter_4JYDz6",
+        "letter_pgeeyb",
+        "letter_8xNcAJ",
+        "letter_iagdKM",
+        "letter_i7ge6y",
+        "letter_rPFpyH"
+      ],
+      "name": "Solution Header Workspace",
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "wave_bg_desktop": "shopify://shop_images/Vector_2.png",
+        "grey_loop_image": "shopify://shop_images/Vector_8_1_6fa8effe-8b87-4b5a-88aa-930fcca98252.png",
+        "global_start_offset": 25,
+        "global_letter_spacing": 2,
+        "global_x_offset": 0,
+        "global_y_offset": 10,
+        "loop_x_pos": -2,
+        "loop_y_pos": 115,
+        "loop_width": 140,
+        "title_part_1": "Our",
+        "title_part_2": "Solution",
+        "intro_richtext": "",
+        "mobile_bg_color": "#fcd36a",
+        "text_color_dark": "#1a1a1a",
+        "text_color_accent": "#d93829"
+      }
+    },
     "our_approach_bottom": {
       "type": "our-approach-bottom",
       "settings": {
@@ -376,6 +535,7 @@
     "pet_food_hero_ARqKUK",
     "our_solutions_2nd_section_W8NWQL",
     "ultra_processing",
+    "solution_head_Gcqm97",
     "our_approach_bottom",
     "our_certifications",
     "mfcd_minimal_processing",
