@@ -316,7 +316,7 @@
           "settings": {
             "char": "u",
             "color_accent": false,
-            "x_shift": -20,
+            "x_shift": -10,
             "y_shift": 10,
             "rotation": 0
           }
@@ -327,7 +327,7 @@
             "char": "r",
             "color_accent": false,
             "x_shift": 0,
-            "y_shift": -20,
+            "y_shift": -10,
             "rotation": 0
           }
         },
