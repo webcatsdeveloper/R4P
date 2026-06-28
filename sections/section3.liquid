@@ -68,6 +68,13 @@
     height: auto;
     display: block;
     object-fit: contain;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Desktop Hidden Mobile Text Ring */
+  .safety-sourcing-v2-{{ section.id }} .mobile-text-ring {
+    display: none;
   }
 
   /* Central Main Headings Typography Block */
@@ -98,28 +105,51 @@
     opacity: 0.95;
   }
 
-  /* Clean responsive stacking breakpoints */
+  /* Clean responsive stacking breakpoints matching image_189dbf.png perfectly */
   @media (max-width: 768px) {
     .safety-sourcing-v2-{{ section.id }} .asymmetric-asset-grid {
       grid-template-columns: 1fr;
       text-align: center;
-      gap: 25px;
-      padding-top: 20px;
+      gap: 0;
+      padding-top: 50px;
     }
     .safety-sourcing-v2-{{ section.id }} .left-tags-column {
-      padding-top: 0;
-      order: 2;
-    }
-    .safety-sourcing-v2-{{ section.id }} .center-plate-column {
-      order: 1;
+      display: none; /* Hidden on mobile to use the perfect circular wrap path instead */
     }
     .safety-sourcing-v2-{{ section.id }} .center-plate-column .plate-image-wrapper {
-      max-width: 320px;
+      max-width: 280px; /* Scaled precisely to fit screen boundaries with text ring space */
+      margin: 0 auto;
     }
+    
+    /* Activating and shaping the circular text ring around the plate graphic */
+    .safety-sourcing-v2-{{ section.id }} .mobile-text-ring {
+      display: block;
+      position: absolute;
+      top: -35px;
+      left: -35px;
+      width: calc(100% + 70px);
+      height: calc(100% + 70px);
+      z-index: 1;
+      pointer-events: none;
+      animation: rotateSourcingRing 40s linear infinite; /* Subtle premium rotation */
+    }
+
     .safety-sourcing-v2-{{ section.id }} .main-statement-typography p {
-      font-size: 1.3rem;
+      font-size: 1.45rem;
+      line-height: 1.45;
       padding: 0 10px;
+      margin: 45px auto 30px auto;
     }
+    .safety-sourcing-v2-{{ section.id }} .fineprint-compliance-text {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      padding: 0 15px;
+    }
+  }
+
+  @keyframes rotateSourcingRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 {%- endstyle -%}
 
@@ -137,7 +167,7 @@
     <!-- Plate Showcase Row Layout Grid -->
     <div class="asymmetric-asset-grid">
       
-      <!-- Left Column text strings -->
+      <!-- Left Column text strings (Desktop Only) -->
       <div class="left-tags-column">
         {{ section.settings.left_tags | newline_to_br }}
       </div>
@@ -150,6 +180,16 @@
           {%- else -%}
             {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
           {%- endif -%}
+
+          <!-- Exact Circular Typography Ring Asset matching image_189dbf.png -->
+          <svg class="mobile-text-ring" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <path id="mobileCirclePath-{{ section.id }}" d="M 250,250 m -218,0 a 218,218 0 1,1 436,0 a 218,218 0 1,1 -436,0" fill="transparent" />
+            <text fill="{{ section.settings.text_color_main }}" font-size="14.5" font-weight="700" letter-spacing="3.5px" text-transform="uppercase">
+              <textPath href="#mobileCirclePath-{{ section.id }}" startOffset="0%">
+                • No GMO • No Fillers • No Synthetic Chemicals • No Preservatives • No Binders • No GMO • No Fillers • No Synthetic Chemicals • No Preservatives • No Binders
+              </textPath>
+            </text>
+          </svg>
         </div>
       </div>
 
