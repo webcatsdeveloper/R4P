@@ -227,6 +227,7 @@
       "blocks": {
         "letter_mTMUCN": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "O",
             "color_accent": false,
@@ -237,6 +238,7 @@
         },
         "letter_9Xgja8": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "u",
             "color_accent": false,
@@ -247,6 +249,7 @@
         },
         "letter_aGttyf": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "r",
             "color_accent": false,
@@ -257,6 +260,7 @@
         },
         "letter_PrHtPw": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "",
             "color_accent": false,
@@ -267,6 +271,7 @@
         },
         "letter_jdpw7G": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "S",
             "color_accent": true,
@@ -277,6 +282,7 @@
         },
         "letter_NE7typ": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "o",
             "color_accent": true,
@@ -287,6 +293,7 @@
         },
         "letter_4JYDz6": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "l",
             "color_accent": true,
@@ -297,6 +304,7 @@
         },
         "letter_pgeeyb": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "u",
             "color_accent": true,
@@ -307,6 +315,7 @@
         },
         "letter_8xNcAJ": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "t",
             "color_accent": true,
@@ -317,6 +326,7 @@
         },
         "letter_iagdKM": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "i",
             "color_accent": true,
@@ -327,6 +337,7 @@
         },
         "letter_i7ge6y": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "o",
             "color_accent": true,
@@ -337,6 +348,7 @@
         },
         "letter_rPFpyH": {
           "type": "letter",
+          "disabled": true,
           "settings": {
             "char": "n",
             "color_accent": true,
@@ -364,7 +376,7 @@
       "settings": {
         "padding_top": 0,
         "padding_bottom": 0,
-        "wave_bg_desktop": "shopify://shop_images/Vector_2.png",
+        "wave_bg_desktop": "shopify://shop_images/Group_59521_1.png",
         "grey_loop_image": "shopify://shop_images/Vector_8_1_6fa8effe-8b87-4b5a-88aa-930fcca98252.png",
         "global_start_offset": 25,
         "global_letter_spacing": 2,
@@ -376,7 +388,7 @@
         "title_part_1": "Our",
         "title_part_2": "Solution",
         "intro_richtext": "",
-        "mobile_bg_color": "#FFCD67",
+        "mobile_bg_color": "#ffcd67",
         "text_color_dark": "#1a1a1a",
         "text_color_accent": "#d93829"
       }
