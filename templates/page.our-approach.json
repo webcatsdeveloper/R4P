@@ -436,15 +436,22 @@
         "global_letter_spacing": 2,
         "global_x_offset": 0,
         "global_y_offset": 10,
-        "global_x_offset_mobile": 0,
-        "global_y_offset_mobile": 0,
         "loop_x_pos": -2,
         "loop_y_pos": 135,
         "loop_width": 140,
-        "loop_x_pos_mobile": -5,
-        "loop_y_pos_mobile": 40,
-        "loop_width_mobile": 90,
+        "title_part_1": "Our",
+        "title_part_2": "Solution",
         "intro_richtext": "<p>We feed your pet <strong>real food</strong>,<br/>not processed science experiments</p>",
+        "mobile_bg_color": "#fcd36a",
+        "text_color_dark": "#1a1a1a",
+        "text_color_accent": "#d93829"
+      }
+    },
+    "oursollution2_K8GBWH": {
+      "type": "oursollution2",
+      "name": "Perfection Matrix Layout",
+      "settings": {
+        "bg_color": "#fcd36a",
         "text_color_dark": "#1a1a1a",
         "text_color_accent": "#d93829"
       }
@@ -620,6 +627,7 @@
     "new_section_w8WTAF",
     "we_know_Wh9cYW",
     "oursollution1_gTGRUe",
+    "oursollution2_K8GBWH",
     "section3_HbKKeE",
     "you_bring_the_love_7rpmFw",
     "pet_benefits_slider_XeT6Pj",

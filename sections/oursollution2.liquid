@@ -1,238 +1,206 @@
 {%- style -%}
-  .matrix-section-{{ section.id }} {
-    --bg-color: {{ section.settings.bg_color }};
+  .sol-matrix-{{ section.id }} {
     --text-dark: {{ section.settings.text_color_dark }};
     --text-accent: {{ section.settings.text_color_accent }};
-    background-color: var(--bg-color);
-    padding: 80px 0;
+    background-color: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
     overflow: hidden;
     font-family: inherit;
+    position: relative;
   }
 
-  /* Desktop Locked Workspace Box matching canvas blueprint spec */
-  .matrix-section-{{ section.id }} .matrix-desktop-canvas {
-    max-width: 1347px;
+  .sol-matrix-{{ section.id }} .matrix-workspace-canvas {
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 20px;
     position: relative;
-    box-sizing: border-box;
+    z-index: 3;
   }
 
-  /* Core Alternating Composition Layout Layout */
-  .matrix-section-{{ section.id }} .matrix-upper-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 50px;
-    margin-bottom: 40px;
-  }
-
-  .matrix-section-{{ section.id }} .fresh-bowl-block {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    position: relative;
-  }
-
-  .matrix-section-{{ section.id }} .fresh-bowl-block img {
-    max-width: 340px;
-    height: auto;
-    object-fit: contain;
-  }
-
-  .matrix-section-{{ section.id }} .top-right-text-block {
-    flex: 1;
-    max-width: 360px;
-    color: var(--text-dark);
-    font-size: 0.92rem;
-    line-height: 1.6;
-    font-weight: 500;
-  }
-
-  /* Central Focal Area (Arched text floating cleanly over center bowl) */
-  .matrix-section-{{ section.id }} .matrix-middle-row {
+  /* Asymmetric Desktop Layout Grid Configuration */
+  .sol-matrix-{{ section.id }} .matrix-main-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr 1fr;
+    grid-template-columns: 1.1fr 1fr;
     align-items: center;
-    margin-top: -30px;
-    margin-bottom: 60px;
-  }
-
-  .matrix-section-{{ section.id }} .mid-left-text-block {
-    max-width: 280px;
-    justify-self: end;
-    text-align: right;
-    color: var(--text-dark);
-    font-size: 0.92rem;
-    line-height: 1.6;
-    font-weight: 500;
-  }
-
-  .matrix-section-{{ section.id }} .center-bowl-showcase {
+    gap: 40px;
     position: relative;
+  }
+
+  /* Left Column: Combined Graphic Asset & Bottom Left Paragraph */
+  .sol-matrix-{{ section.id }} .matrix-left-col {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 30px;
   }
 
-  .matrix-section-{{ section.id }} .center-bowl-showcase img {
-    max-width: 350px;
+  .sol-matrix-{{ section.id }} .combined-showcase-image {
+    width: 100%;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .sol-matrix-{{ section.id }} .combined-showcase-image img {
+    width: 100%;
     height: auto;
     display: block;
     object-fit: contain;
-    position: relative;
-    z-index: 2;
   }
 
-  /* Precision Arched Typography Overlay Engine */
-  .matrix-section-{{ section.id }} .center-bowl-showcase svg.heading-arch {
-    position: absolute;
-    top: {{ section.settings.arch_y_offset }}px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 130%;
-    height: auto;
-    z-index: 3;
-    pointer-events: none;
+  .sol-matrix-{{ section.id }} .para-bottom-left {
+    max-width: 380px;
+    align-self: flex-end;
+    text-align: left;
   }
 
-  .matrix-section-{{ section.id }} .center-bowl-showcase svg.heading-arch text {
-    font-size: 30px;
-    font-weight: 800;
-    fill: var(--text-accent);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  /* Right Column: Top Right Paragraph & Middle Right Heading */
+  .sol-matrix-{{ section.id }} .matrix-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    padding-top: 40px;
   }
 
-  /* Bottom Statement Blocks Stack */
-  .matrix-section-{{ section.id }} .matrix-bottom-stack {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
+  .sol-matrix-{{ section.id }} .para-top-right {
+    max-width: 380px;
+    text-align: left;
   }
 
-  .matrix-section-{{ section.id }} .matrix-main-statement p {
-    font-size: 1.55rem;
-    font-weight: 800;
+  .sol-matrix-{{ section.id }} .heading-right-side {
+    max-width: 460px;
+    text-align: left;
+  }
+
+  /* Typography Styles matching image blueprints */
+  .sol-matrix-{{ section.id }} .matrix-text-block p {
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: var(--text-dark);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .sol-matrix-{{ section.id }} .heading-right-side h3,
+  .sol-matrix-{{ section.id }} .heading-right-side p {
+    font-size: 1.45rem;
+    font-weight: 800;
     line-height: 1.4;
-    margin: 0 0 30px 0;
+    color: var(--text-dark);
+    margin: 0;
     letter-spacing: -0.01em;
   }
 
-  .matrix-section-{{ section.id }} .matrix-sub-statement p {
+  /* Center Aligned Baseline Paragraph Style */
+  .sol-matrix-{{ section.id }} .center-aligned-baseline-para {
+    max-width: 850px;
+    margin: 60px auto 0 auto;
+    text-align: center;
+  }
+
+  .sol-matrix-{{ section.id }} .center-aligned-baseline-para p {
     font-size: 0.88rem;
     line-height: 1.6;
     color: var(--text-dark);
     font-weight: 500;
-    max-width: 780px;
-    margin: 0 auto;
     opacity: 0.95;
+    margin: 0;
   }
 
-  /* Decorative Directional Micro-Arrows Positioning */
-  .matrix-section-{{ section.id }} .indicator-arrow-asset {
+  /* Position-Controlled Arrow Blocks */
+  .sol-matrix-{{ section.id }} .controlled-arrow {
     position: absolute;
-    width: 35px;
-    height: auto;
-    opacity: 0.85;
-  }
-  .matrix-section-{{ section.id }} .arrow-top {
-    top: 45%;
-    right: 52%;
-  }
-  .matrix-section-{{ section.id }} .arrow-mid {
-    top: 42%;
-    left: 28%;
+    z-index: 5;
+    pointer-events: none;
   }
 
-  /* Clean responsive scaling parameters */
-  @media (max-width: 1024px) {
-    .matrix-section-{{ section.id }} .matrix-desktop-canvas {
-      max-width: 100%;
-      padding: 0 20px;
-    }
-    .matrix-section-{{ section.id }} .matrix-middle-row {
+  .sol-matrix-{{ section.id }} .controlled-arrow img {
+    display: block;
+    height: auto;
+  }
+
+  .sol-matrix-{{ section.id }} .arrow-instance-1 {
+    left: {{ section.settings.arrow_1_x }}%;
+    top: {{ section.settings.arrow_1_y }}%;
+    width: {{ section.settings.arrow_1_w }}px;
+  }
+
+  .sol-matrix-{{ section.id }} .arrow-instance-2 {
+    left: {{ section.settings.arrow_2_x }}%;
+    top: {{ section.settings.arrow_2_y }}%;
+    width: {{ section.settings.arrow_2_w }}px;
+  }
+
+  /* Responsive Breakdown Stacking Rules */
+  @media (max-width: 768px) {
+    .sol-matrix-{{ section.id }} .matrix-main-grid {
       grid-template-columns: 1fr;
       gap: 40px;
-      margin-top: 20px;
     }
-    .matrix-section-{{ section.id }} .mid-left-text-block {
+    .sol-matrix-{{ section.id }} .matrix-right-col {
+      gap: 40px;
+      padding-top: 0;
+    }
+    .sol-matrix-{{ section.id }} .para-bottom-left,
+    .sol-matrix-{{ section.id }} .para-top-right,
+    .sol-matrix-{{ section.id }} .heading-right-side {
+      max-width: 100%;
       text-align: center;
-      justify-self: center;
+      align-self: center;
     }
-    .matrix-section-{{ section.id }} .matrix-upper-row {
-      flex-direction: column;
-      text-align: center;
-      gap: 30px;
+    .sol-matrix-{{ section.id }} .heading-right-side h3,
+    .sol-matrix-{{ section.id }} .heading-right-side p {
+      font-size: 1.25rem;
     }
-    .matrix-section-{{ section.id }} .fresh-bowl-block {
-      justify-content: center;
-    }
-    .matrix-section-{{ section.id }} .indicator-arrow-asset {
-      display: none;
+    .sol-matrix-{{ section.id }} .controlled-arrow {
+      display: none; /* Hidden on mobile screen targets to avoid collision overlap layouts */
     }
   }
 {%- endstyle -%}
 
-<section class="matrix-section-{{ section.id }}">
-  <div class="matrix-desktop-canvas">
+<section class="sol-matrix-{{ section.id }}">
+  <div class="matrix-workspace-canvas">
     
-    <div class="matrix-upper-row">
-      <div class="fresh-bowl-block">
-        {%- if section.settings.fresh_bowl_img != blank -%}
-          {{ section.settings.fresh_bowl_img | image_url: width: 700 | image_tag: loading: 'eager', alt: 'Fresh Ingredients Plate Asset' }}
-        {%- else -%}
-          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-        {%- endif -%}
+    {%- if section.settings.arrow_1_img != blank -%}
+      <div class="controlled-arrow arrow-instance-1">
+        <img src="{{ section.settings.arrow_1_img | image_url: width: 150 }}" alt="Indicator Pointer Link">
+      </div>
+    {%- endif -%}
 
-        {%- if section.settings.arrow_graphic != blank -%}
-          <img class="indicator-arrow-asset arrow-top" src="{{ section.settings.arrow_graphic | image_url: width: 100 }}" alt="Indicator Link Line">
-        {%- endif -%}
+    {%- if section.settings.arrow_2_img != blank -%}
+      <div class="controlled-arrow arrow-instance-2">
+        <img src="{{ section.settings.arrow_2_img | image_url: width: 150 }}" alt="Indicator Pointer Link">
+      </div>
+    {%- endif -%}
+
+    <div class="matrix-main-grid">
+      
+      <div class="matrix-left-col">
+        <div class="combined-showcase-image">
+          {%- if section.settings.combined_image != blank -%}
+            {{ section.settings.combined_image | image_url: width: 1100 | image_tag: loading: 'eager', alt: 'Our Diets Sourcing Showcase' }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        <div class="matrix-text-block para-bottom-left">
+          {{ section.settings.bottom_left_para }}
+        </div>
       </div>
 
-      <div class="top-right-text-block">
-        {{ section.settings.top_right_text }}
+      <div class="matrix-right-col">
+        <div class="matrix-text-block para-top-right">
+          {{ section.settings.top_right_para }}
+        </div>
+
+        <div class="heading-right-side">
+          {{ section.settings.right_heading }}
+        </div>
       </div>
+
     </div>
 
-    <div class="matrix-middle-row">
-      <div class="mid-left-text-block">
-        {{ section.settings.mid_left_text }}
-      </div>
-
-      <div class="center-bowl-showcase">
-        <svg class="heading-arch" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
-          <path id="archPathText-{{ section.id }}" d="M 60,210 Q 300,45 540,210" fill="transparent" />
-          <text>
-            <textPath href="#archPathText-{{ section.id }}" startOffset="50%" text-anchor="middle">
-              {{ section.settings.arched_heading_text }}
-            </textPath>
-          </text>
-        </svg>
-
-        {%- if section.settings.center_bowl_img != blank -%}
-          {{ section.settings.center_bowl_img | image_url: width: 700 | image_tag: loading: 'lazy', alt: 'Finished Pet Food Bowl Asset' }}
-        {%- else -%}
-          {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
-        {%- endif -%}
-
-        {%- if section.settings.arrow_graphic != blank -%}
-          <img class="indicator-arrow-asset arrow-mid" src="{{ section.settings.arrow_graphic | image_url: width: 100 }}" alt="Indicator Link Line">
-        {%- endif -%}
-      </div>
-
-      <div class="empty-right-block" aria-hidden="true"></div>
-    </div>
-
-    <div class="matrix-bottom-stack">
-      <div class="matrix-main-statement">
-        {{ section.settings.bottom_headline }}
-      </div>
-      <div class="matrix-sub-statement">
-        {{ section.settings.bottom_subtext }}
-      </div>
+    <div class="center-aligned-baseline-para">
+      {{ section.settings.center_baseline_para }}
     </div>
 
   </div>
@@ -240,101 +208,173 @@
 
 {% schema %}
 {
-  "name": "Perfection Matrix Layout",
+  "name": "Solution Matrix Blocks",
   "settings": [
     {
       "type": "header",
-      "content": "Image Component Asset Managers"
-    },
-    {
-      "type": "image_picker",
-      "id": "fresh_bowl_img",
-      "label": "Top Left Fresh Food Bowl Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "center_bowl_img",
-      "label": "Center Pet Food Bowl Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "arrow_graphic",
-      "label": "Small Indicator Handdrawn Arrow Image"
-    },
-    {
-      "type": "header",
-      "content": "Typography Content Layouts"
-    },
-    {
-      "type": "richtext",
-      "id": "top_right_text",
-      "label": "Top Right Description text",
-      "default": "<p>Real foods contain over 26000 distinct bio-active compounds, these compounds play critical roles in modulating inflammation, supporting gut microbiome and preventing chronic disease</p>"
-    },
-    {
-      "type": "text",
-      "id": "arched_heading_text",
-      "label": "Arched Heading Text over center bowl",
-      "default": "Our diets are made from real foods"
-    },
-    {
-      "type": "richtext",
-      "id": "mid_left_text",
-      "label": "Middle Left Side Description Text",
-      "default": "<p>Whole food also bring in the benefits of co-factors also called \"The Entourage Effect\" bringing the synergistic benefit of real food</p>"
-    },
-    {
-      "type": "richtext",
-      "id": "bottom_headline",
-      "label": "Bottom Bold Focal Headline",
-      "default": "<p>Our Formulations have human-grade, bioavailable ingredients best suited to your pet's digestive system.</p>"
-    },
-    {
-      "type": "richtext",
-      "id": "bottom_subtext",
-      "label": "Bottom Subtext Footnote Wording",
-      "default": "<p>Since all nutrients are not equal, we source specific amino acid profiles to build muscle and immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it.</p>"
-    },
-    {
-      "type": "header",
-      "content": "Layout Tuning Offsets"
+      "content": "Section Base Canvas Setup"
     },
     {
       "type": "range",
-      "id": "arch_y_offset",
-      "min": -150,
-      "max": 50,
+      "id": "padding_top",
+      "min": 20,
+      "max": 160,
       "step": 5,
       "unit": "px",
-      "label": "Arched Typography Height Adjuster (Y Offset)",
-      "default": -75
+      "label": "Top Spacing Padding",
+      "default": 80
     },
     {
-      "type": "header",
-      "content": "Section Theme Canvas Styling Colors"
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Spacing Padding",
+      "default": 80
     },
     {
       "type": "color",
       "id": "bg_color",
-      "label": "Background Soft Color Tone",
+      "label": "Canvas Background Fill Color",
       "default": "#fcd36a"
+    },
+    {
+      "type": "header",
+      "content": "Core Media Graphic Assets"
+    },
+    {
+      "type": "image_picker",
+      "id": "combined_image",
+      "label": "Combined Double Bowl Image File (6 1 (2).jpg)"
+    },
+    {
+      "type": "image_picker",
+      "id": "arrow_1_img",
+      "label": "Arrow Icon Asset 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "arrow_2_img",
+      "label": "Arrow Icon Asset 2"
+    },
+    {
+      "type": "header",
+      "content": "Arrow 1 Precision X & Y Coordinates"
+    },
+    {
+      "type": "range",
+      "id": "arrow_1_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Arrow 1 Horizontal Coordinate (Left)",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "arrow_1_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Arrow 1 Vertical Coordinate (Top)",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "arrow_1_w",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Arrow 1 Structural Sizing Scale Width",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Arrow 2 Precision X & Y Coordinates"
+    },
+    {
+      "type": "range",
+      "id": "arrow_2_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Arrow 2 Horizontal Coordinate (Left)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "arrow_2_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Arrow 2 Vertical Coordinate (Top)",
+      "default": 46
+    },
+    {
+      "type": "range",
+      "id": "arrow_2_w",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Arrow 2 Structural Sizing Scale Width",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Text Element Content Libraries"
+    },
+    {
+      "type": "richtext",
+      "id": "top_right_para",
+      "label": "Top Right Description text",
+      "default": "<p>Real foods contain over 26000 distinct bio-active compounds, these compounds play critical roles in modulating inflammation, supporting gut microbiome and preventing chronic disease</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "bottom_left_para",
+      "label": "Bottom Left Description text",
+      "default": "<p>Whole food also bring in the benefits of co-factors also called \"The Entourage Effect\" bringing the synergistic benefit of real food</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "right_heading",
+      "label": "Right Side Main Bold Heading",
+      "default": "<p>Our Formulations have human-grade, bioavailable ingredients best suited to your pet's digestive system.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "center_baseline_para",
+      "label": "Center Aligned Baseline Paragraph text",
+      "default": "<p>Since all nutrients are not equal, we source specific amino acid profiles to build muscle and immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Global Design Theme Palette Overrides"
     },
     {
       "type": "color",
       "id": "text_color_dark",
-      "label": "Primary Base Dark Wording",
+      "label": "Primary Base Dark Typography Color",
       "default": "#1a1a1a"
     },
     {
       "type": "color",
       "id": "text_color_accent",
-      "label": "Brand Custom Red Accent Accent Color",
+      "label": "Brand Focal Accent Highlight Color",
       "default": "#d93829"
     }
   ],
   "presets": [
     {
-      "name": "Perfection Matrix Layout"
+      "name": "Solution Matrix Blocks"
     }
   ]
 }
