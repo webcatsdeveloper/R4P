@@ -431,7 +431,7 @@
         "padding_bottom": 60,
         "wave_bg_desktop": "shopify://shop_images/Vector_2_2.png",
         "grey_loop_image": "shopify://shop_images/Vector_8_2.png",
-        "global_start_offset": 25,
+        "global_start_offset": 50,
         "global_letter_spacing": 2,
         "global_x_offset": 0,
         "global_y_offset": 10,
