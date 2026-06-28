@@ -7,13 +7,13 @@
     position: relative;
   }
 
-  /* Main Workspace Container Box matching image_247b00.png layout space */
+  /* Main Workspace Container Box matching canvas space bounds */
   .perf-canvas-{{ section.id }} .canvas-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
     position: relative;
-    min-height: 850px;
+    min-height: 900px;
   }
 
   /* Base Styles for Absolute Canvas Layer Items */
@@ -43,33 +43,33 @@
     letter-spacing: -0.01em;
   }
 
-  /* --- DESKTOP POSITION ENGINE (All 5 Control Points) --- */
+  /* --- DESKTOP POSITION ENGINE (All 5 Control Points mapped via % coords) --- */
   @media (min-width: 769px) {
     /* Point 1: Main Combined Image Controls */
     .perf-canvas-{{ section.id }} .item-main-image {
       left: {{ section.settings.img_x }}%;
-      top: {{ section.settings.img_y }}px;
+      top: {{ section.settings.img_y }}%;
       width: {{ section.settings.img_w }}px;
     }
 
     /* Point 2: Arrow 1 Controls */
     .perf-canvas-{{ section.id }} .item-arrow-1 {
       left: {{ section.settings.arrow_1_x }}%;
-      top: {{ section.settings.arrow_1_y }}px;
+      top: {{ section.settings.arrow_1_y }}%;
       width: {{ section.settings.arrow_1_w }}px;
     }
 
     /* Point 2: Arrow 2 Controls */
     .perf-canvas-{{ section.id }} .item-arrow-2 {
       left: {{ section.settings.arrow_2_x }}%;
-      top: {{ section.settings.arrow_2_y }}px;
+      top: {{ section.settings.arrow_2_y }}%;
       width: {{ section.settings.arrow_2_w }}px;
     }
 
     /* Point 3: Top Right Paragraph Controls */
     .perf-canvas-{{ section.id }} .item-top-right-para {
       left: {{ section.settings.tr_para_x }}%;
-      top: {{ section.settings.tr_para_y }}px;
+      top: {{ section.settings.tr_para_y }}%;
       max-width: {{ section.settings.tr_para_w }}px;
       text-align: left;
     }
@@ -77,7 +77,7 @@
     /* Point 3: Bottom Left Paragraph Controls */
     .perf-canvas-{{ section.id }} .item-bottom-left-para {
       left: {{ section.settings.bl_para_x }}%;
-      top: {{ section.settings.bl_para_y }}px;
+      top: {{ section.settings.bl_para_y }}%;
       max-width: {{ section.settings.bl_para_w }}px;
       text-align: left;
     }
@@ -85,7 +85,7 @@
     /* Point 4: Right Side Heading Controls */
     .perf-canvas-{{ section.id }} .item-right-heading {
       left: {{ section.settings.r_heading_x }}%;
-      top: {{ section.settings.r_heading_y }}px;
+      top: {{ section.settings.r_heading_y }}%;
       max-width: {{ section.settings.r_heading_w }}px;
       text-align: left;
     }
@@ -93,7 +93,7 @@
     /* Point 5: Center Aligned Paragraph Controls */
     .perf-canvas-{{ section.id }} .item-center-para {
       left: {{ section.settings.c_para_x }}%;
-      top: {{ section.settings.c_para_y }}px;
+      top: {{ section.settings.c_para_y }}%;
       max-width: {{ section.settings.c_para_w }}px;
       text-align: center;
       transform: translateX(-50%);
@@ -135,7 +135,6 @@
 <section class="perf-canvas-{{ section.id }}">
   <div class="canvas-container">
     
-    <!-- Point 1: Combined Dual Bowl Image (6 1 (2).jpg / image_247b00.png asset) -->
     <div class="canvas-item item-main-image">
       {%- if section.settings.combined_image != blank -%}
         {{ section.settings.combined_image | image_url: width: 1000 | image_tag: loading: 'eager', alt: 'Food Composition Panel' }}
@@ -144,36 +143,30 @@
       {%- endif -%}
     </div>
 
-    <!-- Point 2: Custom Arrow Asset 1 -->
     {%- if section.settings.arrow_1_img != blank -%}
       <div class="canvas-item item-arrow-1">
         <img src="{{ section.settings.arrow_1_img | image_url: width: 200 }}" style="width:100%; height:auto;" alt="Visual Path Arrow Link 1">
       </div>
     {%- endif -%}
 
-    <!-- Point 2: Custom Arrow Asset 2 -->
     {%- if section.settings.arrow_2_img != blank -%}
       <div class="canvas-item item-arrow-2">
         <img src="{{ section.settings.arrow_2_img | image_url: width: 200 }}" style="width:100%; height:auto;" alt="Visual Path Arrow Link 2">
       </div>
     {%- endif -%}
 
-    <!-- Point 3: Top Right Paragraph -->
     <div class="canvas-item canvas-para item-top-right-para">
       {{ section.settings.top_right_para }}
     </div>
 
-    <!-- Point 3: Bottom Left Paragraph -->
     <div class="canvas-item canvas-para item-bottom-left-para">
       {{ section.settings.bottom_left_para }}
     </div>
 
-    <!-- Point 4: Right Side Bold Heading Element -->
     <div class="canvas-item canvas-heading item-right-heading">
       {{ section.settings.right_heading }}
     </div>
 
-    <!-- Point 5: Center Aligned Core Paragraph Layout -->
     <div class="canvas-item canvas-para item-center-para">
       {{ section.settings.center_para }}
     </div>
@@ -251,32 +244,32 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "label": "Horizontal Grid Alignment (From Left)",
+      "label": "Horizontal Alignment (X)",
       "default": 10
     },
     {
       "type": "range",
       "id": "img_y",
       "min": 0,
-      "max": 800,
-      "step": 8,
-      "unit": "px",
-      "label": "Vertical Baseline Drop (From Top)",
-      "default": 24
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical Alignment (Y)",
+      "default": 5
     },
     {
       "type": "range",
       "id": "img_w",
-      "min": 200,
-      "max": 700,
-      "step": 5,
+      "min": 100,
+      "max": 1000,
+      "step": 10,
       "unit": "px",
-      "label": "Graphic Scale Bounds Width",
+      "label": "Graphic Scale Width",
       "default": 440
     },
     {
       "type": "header",
-      "content": "Point 2: Arrow 1 Asset Coords"
+      "content": "Point 2: Arrow 1 Positioning"
     },
     {
       "type": "range",
@@ -285,32 +278,32 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "label": "Arrow 1 Horizontal Coordinate",
+      "label": "Arrow 1 Horizontal Position (X)",
       "default": 42
     },
     {
       "type": "range",
       "id": "arrow_1_y",
       "min": 0,
-      "max": 800,
-      "step": 8,
-      "unit": "px",
-      "label": "Arrow 1 Vertical Coordinate",
-      "default": 120
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Arrow 1 Vertical Position (Y)",
+      "default": 15
     },
     {
       "type": "range",
       "id": "arrow_1_w",
-      "min": 15,
-      "max": 115,
-      "step": 1,
+      "min": 10,
+      "max": 200,
+      "step": 5,
       "unit": "px",
       "label": "Arrow 1 Vector Width Scale",
       "default": 40
     },
     {
       "type": "header",
-      "content": "Point 2: Arrow 2 Asset Coords"
+      "content": "Point 2: Arrow 2 Positioning"
     },
     {
       "type": "range",
@@ -319,25 +312,25 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "label": "Arrow 2 Horizontal Coordinate",
+      "label": "Arrow 2 Horizontal Position (X)",
       "default": 25
     },
     {
       "type": "range",
       "id": "arrow_2_y",
       "min": 0,
-      "max": 800,
-      "step": 8,
-      "unit": "px",
-      "label": "Arrow 2 Vertical Coordinate",
-      "default": 456
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Arrow 2 Vertical Position (Y)",
+      "default": 45
     },
     {
       "type": "range",
       "id": "arrow_2_w",
-      "min": 15,
-      "max": 115,
-      "step": 1,
+      "min": 10,
+      "max": 200,
+      "step": 5,
       "unit": "px",
       "label": "Arrow 2 Vector Width Scale",
       "default": 35
@@ -359,27 +352,27 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "label": "Horizontal Placement (From Left)",
+      "label": "Horizontal Placement (X)",
       "default": 52
     },
     {
       "type": "range",
       "id": "tr_para_y",
       "min": 0,
-      "max": 800,
-      "step": 8,
-      "unit": "px",
-      "label": "Vertical Placement (From Top)",
-      "default": 200
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical Placement (Y)",
+      "default": 25
     },
     {
       "type": "range",
       "id": "tr_para_w",
-      "min": 150,
-      "max": 650,
-      "step": 5,
+      "min": 100,
+      "max": 1000,
+      "step": 10,
       "unit": "px",
-      "label": "Paragraph Max Text Wrapping Box Width",
+      "label": "Paragraph Box Text Max Width",
       "default": 420
     },
     {
@@ -399,27 +392,27 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "label": "Horizontal Placement (From Left)",
+      "label": "Horizontal Placement (X)",
       "default": 20
     },
     {
       "type": "range",
       "id": "bl_para_y",
       "min": 0,
-      "max": 800,
-      "step": 8,
-      "unit": "px",
-      "label": "Vertical Placement (From Top)",
-      "default": 552
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical Placement (Y)",
+      "default": 70
     },
     {
       "type": "range",
       "id": "bl_para_w",
-      "min": 150,
-      "max": 650,
-      "step": 5,
+      "min": 100,
+      "max": 1000,
+      "step": 10,
       "unit": "px",
-      "label": "Paragraph Max Text Wrapping Box Width",
+      "label": "Paragraph Box Text Max Width",
       "default": 380
     },
     {
@@ -439,27 +432,27 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "label": "Horizontal Placement (From Left)",
+      "label": "Horizontal Placement (X)",
       "default": 52
     },
     {
       "type": "range",
       "id": "r_heading_y",
       "min": 0,
-      "max": 800,
-      "step": 8,
-      "unit": "px",
-      "label": "Vertical Placement (From Top)",
-      "default": 384
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical Placement (Y)",
+      "default": 48
     },
     {
       "type": "range",
       "id": "r_heading_w",
-      "min": 200,
-      "max": 800,
-      "step": 6,
+      "min": 100,
+      "max": 1000,
+      "step": 10,
       "unit": "px",
-      "label": "Heading Max Text Wrapping Box Width",
+      "label": "Heading Box Text Max Width",
       "default": 500
     },
     {
@@ -479,24 +472,24 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "label": "Anchor Center Position Axis",
+      "label": "Anchor Center Position Axis (X)",
       "default": 50
     },
     {
       "type": "range",
       "id": "c_para_y",
       "min": 0,
-      "max": 800,
-      "step": 8,
-      "unit": "px",
-      "label": "Vertical Drop Position Offset (From Top)",
-      "default": 680
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical Drop Position Offset (Y)",
+      "default": 85
     },
     {
       "type": "range",
       "id": "c_para_w",
-      "min": 300,
-      "max": 1100,
+      "min": 200,
+      "max": 1200,
       "step": 10,
       "unit": "px",
       "label": "Text Block Width Boundary Limit",
