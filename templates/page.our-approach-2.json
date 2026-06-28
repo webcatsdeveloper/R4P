@@ -349,6 +349,13 @@
         "heading": "What does this mean for your Pet?"
       }
     },
+    "our_approach_bottom": {
+      "type": "our-approach-bottom",
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "end_banner": {
       "type": "end-banner",
       "settings": {
@@ -374,6 +381,7 @@
     "mfcd_minimal_processing",
     "naturally_fresh",
     "pet_benefits",
+    "our_approach_bottom",
     "end_banner"
   ]
 }

@@ -1,0 +1,345 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  #shopify-section-{{ section.id }} {
+    position: relative;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: transparent;
+    overflow: visible;
+  }
+
+  .oab-wrapper {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #F6C45E;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .oab-container {
+    position: relative;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+    font-family: 'Baloo Chettan 2', sans-serif;
+  }
+
+  /* TOP BLOCK STYLING */
+  .oab-top-block {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9.5;
+    {% if section.settings.top_bg_image %}
+      background-image: url('{{ section.settings.top_bg_image | img_url: 'master' }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    {% endif %}
+  }
+
+  .oab-top-heading {
+    position: absolute;
+    top: 10%;
+    right: 40px;
+    width: 45%;
+    font-size: clamp(24px, 2.6vw, 36px);
+    font-weight: 800;
+    line-height: 1.2;
+    color: #111111;
+    text-align: right;
+  }
+
+  .oab-text-red {
+    color: #d92b2b !important;
+  }
+
+  /* BOTTOM BLOCK STYLING */
+  .oab-bottom-block {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    {% if section.settings.bg_image %}
+      background-image: url('{{ section.settings.bg_image | img_url: 'master' }}');
+      background-size: cover;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    {% endif %}
+  }
+
+  .oab-text-1 {
+    position: absolute;
+    top: 15%;
+    right: 40px;
+    width: 50%;
+    font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 800;
+    line-height: 1.25;
+    color: #111111;
+    text-align: left;
+  }
+
+  .oab-text-2 {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 63%;
+    font-size: clamp(14px, 1.2vw, 16px);
+    font-weight: 500;
+    line-height: 1.6;
+    color: #111111;
+    text-align: center;
+  }
+
+  .oab-text-3 {
+    position: absolute;
+    bottom: 12%;
+    left: 40px;
+    width: 32%;
+    font-size: clamp(14px, 1.2vw, 16px);
+    font-weight: 600;
+    line-height: 1.4;
+    color: #111111;
+    text-align: left;
+  }
+
+  /* Desktop-only positioning adjustments for attaching sections */
+  @media screen and (min-width: 990px) {
+    .oab-mobile-only {
+      display: none !important;
+    }
+    .oab-top-block {
+      z-index: 5;
+      margin-bottom: -9.5vw; /* Overlaps bottom block to hide the gap */
+    }
+    .oab-bottom-block {
+      z-index: 2;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    .oab-desktop-only {
+      display: none !important;
+    }
+
+    .oab-wrapper {
+      width: 100%;
+      left: 0;
+      transform: none;
+    }
+
+    /* TOP BLOCK RESPONSIVE */
+    .oab-top-block {
+      aspect-ratio: auto;
+      width: 100%;
+      background-color: #F6C45E;
+      background-blend-mode: multiply;
+      {% if section.settings.top_bg_image_mobile %}
+        background-image: url('{{ section.settings.top_bg_image_mobile | img_url: 'master' }}');
+      {% elsif section.settings.top_bg_image %}
+        background-image: url('{{ section.settings.top_bg_image | img_url: 'master' }}');
+      {% else %}
+        background-image: none;
+      {% endif %}
+      background-position: center bottom;
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
+
+    .oab-top-block .oab-container {
+      padding: 50px 20px clamp(200px, 60vw, 380px) 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .oab-top-heading {
+      position: static !important;
+      width: 100% !important;
+      transform: none !important;
+      text-align: center !important;
+      font-size: clamp(20px, 6vw, 28px);
+    }
+
+    /* BOTTOM BLOCK RESPONSIVE */
+    .oab-bottom-block {
+      aspect-ratio: auto;
+      width: 100%;
+      {% if section.settings.bg_image_mobile %}
+        background-image: url('{{ section.settings.bg_image_mobile | img_url: 'master' }}');
+      {% elsif section.settings.bg_image %}
+        background-image: url('{{ section.settings.bg_image | img_url: 'master' }}');
+      {% else %}
+        background-image: none;
+      {% endif %}
+      background-position: center bottom;
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
+
+    .oab-bottom-block .oab-container {
+      padding: 40px 20px clamp(320px, 92vw, 520px) 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+      height: auto;
+      position: relative;
+    }
+
+    .oab-text-1, .oab-text-2, .oab-text-3 {
+      position: static;
+      width: 100% !important;
+      transform: none !important;
+      text-align: center !important;
+    }
+
+    .oab-text-1 {
+      font-size: clamp(22px, 6.5vw, 30px);
+      font-weight: 800;
+    }
+
+    .oab-text-2 {
+      font-size: 15px;
+      font-weight: 400;
+      color: #333333;
+    }
+  }
+</style>
+
+<div class="oab-wrapper">
+  
+  <!-- TOP BLOCK (BOWL GRAPHIC + RIGHT HEADING) -->
+  <div class="oab-top-block">
+    <div class="oab-container">
+      {% if section.settings.top_heading != blank %}
+        <div class="oab-top-heading oab-desktop-only">
+          {{ section.settings.top_heading }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- BOTTOM BLOCK (RAW FOOD BOWL + THREE TEXTS) -->
+  <div class="oab-bottom-block">
+    <div class="oab-container">
+      {% if section.settings.text_1 != blank %}
+        <div class="oab-text-1">
+          {{ section.settings.text_1 }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.text_2 != blank %}
+        <div class="oab-text-2">
+          {{ section.settings.text_2 }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.text_3 != blank %}
+        <div class="oab-text-3 oab-desktop-only">
+          {{ section.settings.text_3 }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Our Approach Bottom",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top Block Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_bg_image",
+      "label": "Top Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_bg_image_mobile",
+      "label": "Top Background Image (Mobile)"
+    },
+    {
+      "type": "textarea",
+      "id": "top_heading",
+      "label": "Top Right Heading",
+      "default": "We feed your pet <span class=\"oab-text-red\">real food</span>,<br class=\"oab-desktop-only\">not processed science experiments"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Block Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Bottom Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Bottom Background Image (Mobile)"
+    },
+    {
+      "type": "textarea",
+      "id": "text_1",
+      "label": "Bottom Top Right Heading",
+      "default": "Our formulations have human-grade, bioavailable <br class=\"oab-desktop-only\">ingredients best suited to your pet's digestive system."
+    },
+    {
+      "type": "textarea",
+      "id": "text_2",
+      "label": "Bottom Middle Subtext",
+      "default": "Since all nutrients are not equal, we source specific amino acid profiles to build muscle and <br class=\"oab-desktop-only\">immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it."
+    },
+    {
+      "type": "textarea",
+      "id": "text_3",
+      "label": "Bottom Left List (Desktop)",
+      "default": "No GMO, No Fillers, No Synthetic <br class=\"oab-desktop-only\">Chemicals, No Preservatives, No Binders"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Approach Bottom"
+    }
+  ]
+}
+{% endschema %}
