@@ -307,7 +307,7 @@
             "char": "O",
             "color_accent": false,
             "x_shift": 40,
-            "y_shift": 0,
+            "y_shift": 20,
             "rotation": 0
           }
         },
