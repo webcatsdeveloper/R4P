@@ -209,8 +209,8 @@
         "main_image": "shopify://shop_images/Group_59522_1.png",
         "green_curve": "shopify://shop_images/Vector_7_1.png",
         "curve_x": 0,
-        "curve_y": 0,
-        "curve_width": 150
+        "curve_y": -80,
+        "curve_width": 200
       }
     },
     "we_know_Wh9cYW": {
