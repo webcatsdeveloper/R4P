@@ -377,7 +377,7 @@
             "char": "t",
             "color_accent": true,
             "x_shift": 0,
-            "y_shift": 0,
+            "y_shift": -15,
             "rotation": 0
           }
         },
