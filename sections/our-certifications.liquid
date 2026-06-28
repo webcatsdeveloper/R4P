@@ -40,21 +40,37 @@
     margin-bottom: 80px;
   }
 
+  .certifications-logo-wrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+  }
+
   .certifications-logo-strip {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap; /* Keep blocks in a single line on desktop */
+    justify-content: flex-start;
     align-items: center;
-    gap: 60px;
-    width: 100%;
+    gap: 50px;
+    width: max-content;
+    min-width: max-content;
+    flex-shrink: 0;
+    animation: marquee-desktop 25s linear infinite;
+  }
+
+  .certifications-logo-wrapper:hover .certifications-logo-strip {
+    animation-play-state: paused;
   }
 
   .certifications-logo-item {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 150px;
+    width: 140px;
+    max-width: 140px;
+    flex-shrink: 0; /* Prevent shrinking in scroll container */
   }
 
   .certifications-logo-item img {
@@ -77,7 +93,7 @@
   }
 
   .certifications-logo-item.dup {
-    display: none;
+    display: flex; /* Display duplicate items for seamless loop marquee */
   }
 
   .certifications-logo-full-width {
@@ -95,37 +111,78 @@
     object-fit: contain;
   }
 
+  .cert-bold-red {
+    font-weight: 700;
+    color: #d92b2b;
+  }
+
+  .cert-desktop-heading {
+    display: block;
+  }
+
+  .cert-mobile-heading {
+    display: none;
+  }
+
+  @keyframes marquee-desktop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 25px)); } /* Half width + half gap */
+  }
+
   @media screen and (max-width: 900px) {
-    .certifications-heading {
-      font-size: 20px;
+    .cert-desktop-heading {
+      display: none;
     }
-    .certifications-heading br {
-      display: none; /* Let text wrap naturally on mobile */
+
+    .cert-mobile-heading {
+      display: block;
+      font-family: 'Baloo Chettan 2', sans-serif;
+      font-size: 26px;
+      font-weight: 500;
+      color: #111111;
+      line-height: 1.35;
+      margin-bottom: 30px;
+      text-align: center;
     }
+
     .certifications-subtext {
-      font-size: 11px;
-      line-height: 1.5;
-      margin-bottom: 40px;
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 320px;
+      margin: 0 auto 40px auto;
     }
+
+    .certifications-logo-wrapper {
+      justify-content: flex-start; /* Let marquee start scrolling from the left boundary */
+    }
+
     .certifications-logo-strip {
       flex-wrap: nowrap;
       width: max-content;
+      min-width: max-content;
+      flex-shrink: 0;
       gap: 40px;
-      animation: marquee 15s linear infinite;
+      animation: marquee-mobile 15s linear infinite;
+    }
+    
+    .certifications-logo-item {
+      max-width: 100px; /* Sizing match for mobile viewport */
+      width: 100px;
+      flex-shrink: 0; /* Prevent shrinking in scroll container */
     }
     
     .certifications-logo-item.dup {
       display: flex;
     }
     
-    @keyframes marquee {
+    @keyframes marquee-mobile {
       0% { transform: translateX(0); }
       100% { transform: translateX(calc(-50% - 20px)); } /* Half width + half gap */
     }
 
     .certifications-container {
       overflow-x: hidden; /* Hide scrollbar */
-      padding: 0 20px;
+      padding: 0 15px;
     }
 
     .certifications-button {
@@ -139,8 +196,17 @@
 
 <div class="certifications-container">
   {% if section.settings.heading != blank %}
-    <div class="certifications-heading">
+    <div class="certifications-heading cert-desktop-heading">
       {{ section.settings.heading }}
+    </div>
+    <div class="certifications-heading cert-mobile-heading">
+      The meats we use are<br>
+      from <span class="cert-bold-red">HACCP approved,</span><br>
+      <span class="cert-bold-red">ISO certified plants</span><br>
+      with full traceability and<br>
+      are <span class="cert-bold-red">anti-biotic residue</span><br>
+      <span class="cert-bold-red">free</span> The fish we use are<br>
+      <span class="cert-bold-red">wild caught</span>
     </div>
   {% endif %}
 
@@ -151,7 +217,7 @@
   {% endif %}
 
   {% if section.settings.single_logo_image == blank %}
-    <div style="width: 100%; overflow: hidden; display: flex; justify-content: center;">
+    <div class="certifications-logo-wrapper">
       <div class="certifications-logo-strip">
         {% for block in section.blocks %}
           <div class="certifications-logo-item" {{ block.shopify_attributes }}>
@@ -164,7 +230,7 @@
         {% endfor %}
         <!-- Duplicated for seamless mobile marquee -->
         {% for block in section.blocks %}
-          <div class="certifications-logo-item dup">
+          <div class="certifications-logo-item dup" {{ block.shopify_attributes }}>
             {% if block.settings.logo_image %}
               <img src="{{ block.settings.logo_image | img_url: '400x' }}" alt="Certification Logo" loading="lazy">
             {% else %}
