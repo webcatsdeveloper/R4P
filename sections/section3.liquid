@@ -1,6 +1,5 @@
 {%- style -%}
-  .safety-sourcing-{{ section.id }} {
-    --bg-accent-color: {{ section.settings.bg_accent_color }};
+  .safety-sourcing-v2-{{ section.id }} {
     --text-main: {{ section.settings.text_color_main }};
     --text-brand: {{ section.settings.text_color_brand }};
     padding: 0 0 80px 0;
@@ -10,142 +9,161 @@
     overflow: hidden;
   }
 
-  /* Curved Top Wave Background */
-  .safety-sourcing-{{ section.id }} .curved-header-bg {
+  /* Absolute Top Layer Vector/Graphic Placement */
+  .safety-sourcing-v2-{{ section.id }} .graphic-bg-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 320px;
-    background-color: var(--bg-accent-color);
-    border-bottom-left-radius: 50% 40%;
-    border-bottom-right-radius: 50% 40%;
     z-index: 1;
+    pointer-events: none;
+  }
+  .safety-sourcing-v2-{{ section.id }} .graphic-bg-layer img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
-  .safety-sourcing-{{ section.id }} .section-inner-wrapper {
-    max-width: 1100px;
+  /* Content Wrapper Container sitting safely above background layer */
+  .safety-sourcing-v2-{{ section.id }} .content-interactive-container {
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 30px;
     position: relative;
     z-index: 2;
   }
 
-  /* Asymmetric Top Row: Left Text & Centered Plate */
-  .safety-sourcing-{{ section.id }} .top-showcase-grid {
+  /* Grid structure to lock asymmetrical text and plate asset placement */
+  .safety-sourcing-v2-{{ section.id }} .asymmetric-asset-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1.2fr 2fr 1.2fr;
     align-items: center;
-    margin-top: 40px;
-    gap: 20px;
+    padding-top: 40px;
+    gap: 30px;
   }
 
-  .safety-sourcing-{{ section.id }} .left-exclusion-tags {
+  /* Left Exclusions Taglines Copy Placement */
+  .safety-sourcing-v2-{{ section.id }} .left-tags-column {
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--text-main);
     font-weight: 500;
-    opacity: 0.85;
-    padding-top: 60px;
+    opacity: 0.9;
+    padding-top: 120px;
   }
 
-  .safety-sourcing-{{ section.id }} .center-plate-media {
+  /* Center Stage Plate Asset Handler */
+  .safety-sourcing-v2-{{ section.id }} .center-plate-column {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
-  .safety-sourcing-{{ section.id }} .center-plate-media img {
-    max-width: 100%;
+  .safety-sourcing-v2-{{ section.id }} .center-plate-column .plate-image-wrapper {
+    width: 100%;
+    max-width: 520px;
+    position: relative;
+  }
+  .safety-sourcing-v2-{{ section.id }} .center-plate-column img {
+    width: 100%;
     height: auto;
+    display: block;
     object-fit: contain;
-    filter: drop-shadow(0px 15px 30px rgba(0,0,0,0.12));
   }
 
-  /* Sourcing Primary Statement */
-  .safety-sourcing-{{ section.id }} .sourcing-statement-block p {
+  /* Central Main Headings Typography Block */
+  .safety-sourcing-v2-{{ section.id }} .main-statement-typography p {
     text-align: center;
-    max-width: 850px;
-    margin: 60px auto 40px auto;
+    max-width: 900px;
+    margin: 50px auto 35px auto;
     font-size: 1.65rem;
     font-weight: 700;
     line-height: 1.4;
     color: var(--text-main);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
-
-  .safety-sourcing-{{ section.id }} .sourcing-statement-block strong {
+  .safety-sourcing-v2-{{ section.id }} .main-statement-typography strong {
     color: var(--text-brand);
     font-weight: 800;
   }
 
-  /* Safety Subtext Paragraph Block */
-  .safety-sourcing-{{ section.id }} .safety-compliance-body {
+  /* Footnote Process details block */
+  .safety-sourcing-v2-{{ section.id }} .fineprint-compliance-text {
     text-align: center;
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
     font-size: 0.88rem;
     line-height: 1.6;
     color: #4a4a4a;
     font-weight: 400;
+    opacity: 0.95;
   }
 
-  /* Mobile Responsive Adaptations */
+  /* Clean responsive stacking breakpoints */
   @media (max-width: 768px) {
-    .safety-sourcing-{{ section.id }} .curved-header-bg {
-      height: 180px;
-      border-bottom-left-radius: 50% 20%;
-      border-bottom-right-radius: 50% 20%;
-    }
-    .safety-sourcing-{{ section.id }} .top-showcase-grid {
+    .safety-sourcing-v2-{{ section.id }} .asymmetric-asset-grid {
       grid-template-columns: 1fr;
       text-align: center;
-      margin-top: 20px;
-      gap: 30px;
+      gap: 25px;
+      padding-top: 20px;
     }
-    .safety-sourcing-{{ section.id }} .left-exclusion-tags {
+    .safety-sourcing-v2-{{ section.id }} .left-tags-column {
       padding-top: 0;
       order: 2;
     }
-    .safety-sourcing-{{ section.id }} .center-plate-media {
+    .safety-sourcing-v2-{{ section.id }} .center-plate-column {
       order: 1;
-      max-width: 280px;
-      margin: 0 auto;
     }
-    .safety-sourcing-{{ section.id }} .sourcing-statement-block p {
-      font-size: 1.25rem;
+    .safety-sourcing-v2-{{ section.id }} .center-plate-column .plate-image-wrapper {
+      max-width: 320px;
+    }
+    .safety-sourcing-v2-{{ section.id }} .main-statement-typography p {
+      font-size: 1.3rem;
       padding: 0 10px;
     }
   }
 {%- endstyle -%}
 
-<section class="safety-sourcing-{{ section.id }}">
-  <div class="curved-header-bg"></div>
+<section class="safety-sourcing-v2-{{ section.id }}">
+  
+  <!-- Manual Upload Yellow Background Image Component Layer -->
+  <div class="graphic-bg-layer">
+    {%- if section.settings.yellow_bg_image != blank -%}
+      {{ section.settings.yellow_bg_image | image_url: width: 2000 | image_tag: loading: 'eager', alt: 'Background Layer Curve' }}
+    {%- endif -%}
+  </div>
 
-  <div class="section-inner-wrapper">
+  <div class="content-interactive-container">
     
-    <div class="top-showcase-grid">
-      <div class="left-exclusion-tags">
+    <!-- Plate Showcase Row Layout Grid -->
+    <div class="asymmetric-asset-grid">
+      
+      <!-- Left Column text strings -->
+      <div class="left-tags-column">
         {{ section.settings.left_tags | newline_to_br }}
       </div>
 
-      <div class="center-plate-media">
-        {%- if section.settings.plate_image != blank -%}
-          {{ section.settings.plate_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.plate_image.alt }}
-        {%- else -%}
-          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-        {%- endif -%}
+      <!-- Center Segment Plate Image Container -->
+      <div class="center-plate-column">
+        <div class="plate-image-wrapper">
+          {%- if section.settings.plate_image != blank -%}
+            {{ section.settings.plate_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.plate_image.alt }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
       </div>
 
-      <div class="right-spacer-column" aria-hidden="true"></div>
+      <!-- Right Spacer to push structure naturally into asymmetric layout look -->
+      <div class="right-empty-spacer" aria-hidden="true"></div>
     </div>
 
-    <!-- Outputs the rich text block safely with permitted HTML line breaks -->
-    <div class="sourcing-statement-block">
+    <!-- Multi-Line Dynamic Accent Brand Copy Typography Block -->
+    <div class="main-statement-typography">
       {{ section.settings.main_statement }}
     </div>
 
-    <div class="safety-compliance-body">
+    <!-- Production Sourcing Fineprint Copy Container -->
+    <div class="fineprint-compliance-text">
       {{ section.settings.safety_body_text | newline_to_br }}
     </div>
 
@@ -154,65 +172,64 @@
 
 {% schema %}
 {
-  "name": "Safety & Sourcing Panel",
+  "name": "Sourcing Layout (Manual)",
   "settings": [
     {
       "type": "header",
-      "content": "Color Setup"
+      "content": "Custom Image Asset Managers"
     },
     {
-      "type": "color",
-      "id": "bg_accent_color",
-      "label": "Top Curved Accent Background",
-      "default": "#fcd36a"
+      "type": "image_picker",
+      "id": "yellow_bg_image",
+      "label": "Yellow Arc Background Graphic Asset"
+    },
+    {
+      "type": "image_picker",
+      "id": "plate_image",
+      "label": "Central Plate Food Graphic Asset (688x688)"
+    },
+    {
+      "type": "header",
+      "content": "Global Theme Color Overrides"
     },
     {
       "type": "color",
       "id": "text_color_main",
-      "label": "Dark Text Color",
+      "label": "Dark Baseline Typography Color",
       "default": "#1a1a1a"
     },
     {
       "type": "color",
       "id": "text_color_brand",
-      "label": "Red Brand Color Focus",
+      "label": "Red Focal Highlight Color",
       "default": "#d93829"
     },
     {
       "type": "header",
-      "content": "Visual Assets & Side Copy"
-    },
-    {
-      "type": "image_picker",
-      "id": "plate_image",
-      "label": "Center Sourcing Ingredient Plate Graphic"
+      "content": "Section Typography Settings"
     },
     {
       "type": "textarea",
       "id": "left_tags",
-      "label": "Left Side Exclusion Taglines",
+      "label": "Left Side Exclusion Phrases",
       "default": "No GMO, No Fillers, No Synthetic\nChemicals, No Preservatives, No Binders"
-    },
-    {
-      "type": "header",
-      "content": "Typography Content Layouts"
     },
     {
       "type": "richtext",
       "id": "main_statement",
-      "label": "Main Central Highlight Statement",
+      "label": "Center Large Copy Block Statement",
       "default": "<p>The meats we use are from <strong>HACCP approved, ISO certified plants</strong><br>with full traceability and are <strong>anti-biotic residue free</strong><br>The fish we use are <strong>wild caught</strong></p>"
     },
     {
       "type": "textarea",
       "id": "safety_body_text",
-      "label": "Safety Compliance Subtext",
+      "label": "Compliance Safety Footnote Content",
       "default": "Safety is non-negotiable, which is why we enforce a strict kill step at every stage of our process including Bacteriophages, traditional Curing agents (vinegar/citric acid), low temperature long duration pasteurization and UV exposure before packing.\nAs a final protective barrier, the packs are vacuum-sealed and flushed with modified atmospheric gases."
     }
   ],
   "presets": [
     {
-      "name": "Safety & Sourcing Panel"
+      "name": "Sourcing Layout (Manual)"
     }
   ]
 }
