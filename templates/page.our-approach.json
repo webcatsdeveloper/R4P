@@ -205,7 +205,7 @@
       "settings": {
         "bg_color": "#ffffff",
         "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_bottom": 32,
         "heading_black": "Problems with",
         "heading_red": "Ultra-Processing",
         "impact_black": "Whats the impact ?",
