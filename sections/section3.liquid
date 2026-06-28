@@ -1,0 +1,452 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2 family=Baloo+Chettan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    position: relative;
+    overflow: hidden;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  /* White Top Wave Layout Layer */
+  .solution-wave-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .solution-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Baloo Chettan 2', sans-serif;
+  }
+
+  /* Heading Styles */
+  .solution-main-title {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .solution-main-title .text-black { color: #111111; }
+  .solution-main-title .text-red { color: #d92b2b; }
+
+  .solution-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111111;
+    text-align: right;
+    align-self: flex-end;
+    margin-right: 80px;
+    margin-bottom: 40px;
+    line-height: 1.3;
+  }
+  .solution-subtitle span {
+    color: #d92b2b;
+  }
+
+  /* Interactive Middle Graphic & Info Layout */
+  .solution-interactive-layout {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 620px;
+    margin-bottom: 40px;
+  }
+
+  .solution-text-block {
+    position: absolute;
+    max-width: 280px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #222222;
+    line-height: 1.45;
+  }
+  .solution-text-block.top-right {
+    top: 60px;
+    right: 40px;
+  }
+  .solution-text-block.bottom-left {
+    bottom: 120px;
+    left: 20px;
+  }
+
+  /* Individual Graphic Asset Placements */
+  .img-asset-fresh-bowl {
+    position: absolute;
+    top: 0px;
+    left: 180px;
+    width: {{ section.settings.fresh_bowl_width }}px;
+    height: auto;
+  }
+
+  .img-asset-curved-text {
+    position: absolute;
+    top: 230px;
+    left: 140px;
+    width: {{ section.settings.curved_text_width }}px;
+    height: auto;
+    z-index: 3;
+  }
+
+  .img-asset-final-bowl {
+    position: absolute;
+    bottom: 40px;
+    left: 320px;
+    width: {{ section.settings.final_bowl_width }}px;
+    height: auto;
+    z-index: 2;
+  }
+
+  /* Bottom Statement Section */
+  .solution-footer-messages {
+    max-width: 780px;
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .solution-bold-statement {
+    font-size: 24px;
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.3;
+  }
+
+  .solution-fine-print {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.5;
+    padding: 0 20px;
+  }
+
+  /* ******************************************
+     Mobile Layout Adjustments (Exact Stack Match)
+     ****************************************** */
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    .solution-container {
+      padding: 0 20px;
+    }
+
+    .solution-main-title {
+      font-size: 56px;
+      margin-bottom: 32px;
+    }
+    .solution-main-title span {
+      display: block;
+    }
+
+    .solution-subtitle {
+      display: none; /* Subtitle hidden on mobile to reflect mockup specification */
+    }
+
+    /* Convert absolute layout map into clean vertical standard flow */
+    .solution-interactive-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: auto;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .solution-text-block {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      max-width: 100%;
+      text-align: center;
+      padding: 0 10px;
+      font-size: 16px;
+    }
+
+    .img-asset-fresh-bowl,
+    .img-asset-curved-text,
+    .img-asset-final-bowl {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      margin: 0 auto;
+    }
+
+    .img-asset-fresh-bowl {
+      width: 80%;
+      max-width: 260px;
+      order: 2;
+    }
+
+    .img-asset-curved-text {
+      width: 90%;
+      max-width: 320px;
+      margin-top: -10px;
+      margin-bottom: -10px;
+      order: 3;
+    }
+
+    .img-asset-final-bowl {
+      width: 80%;
+      max-width: 260px;
+      order: 4;
+    }
+
+    /* Re-order text components around graphics based on mobile mock image */
+    .solution-text-block.top-right { order: 1; }
+    .solution-text-block.bottom-left { order: 5; }
+
+    .solution-bold-statement {
+      font-size: 21px;
+      padding: 0 10px;
+    }
+
+    .solution-fine-print {
+      font-size: 14px;
+      padding: 0;
+    }
+  }
+</style>
+
+<div class="solution-wrapper">
+  {% if section.settings.top_wave_image != blank %}
+    <img class="solution-wave-top" src="{{ section.settings.top_wave_image | img_url: 'master' }}" alt="" loading="lazy">
+  {% endif %}
+
+  <div class="solution-container">
+    <h2 class="solution-main-title">
+      <span class="text-black">{{ section.settings.title_black }}</span>
+      <span class="text-red">{{ section.settings.title_red }}</span>
+    </h2>
+
+    {% if section.settings.subtitle_text != blank %}
+      <div class="solution-subtitle">{{ section.settings.subtitle_text }}</div>
+    {% endif %}
+
+    <div class="solution-interactive-layout">
+      {% if section.settings.fresh_bowl_image != blank %}
+        <img class="img-asset-fresh-bowl" src="{{ section.settings.fresh_bowl_image | img_url: 'master' }}" alt="Fresh real pet food ingredients" loading="lazy">
+      {% endif %}
+
+      <div class="solution-text-block top-right">
+        {{ section.settings.text_top_right }}
+      </div>
+
+      {% if section.settings.curved_text_image != blank %}
+        <img class="img-asset-curved-text" src="{{ section.settings.curved_text_image | img_url: 'master' }}" alt="Our diets are made from real foods ribbon banner" loading="lazy">
+      {% endif %}
+
+      {% if section.settings.final_bowl_image != blank %}
+        <img class="img-asset-final-bowl" src="{{ section.settings.final_bowl_image | img_url: 'master' }}" alt="Completed human grade pet formulation" loading="lazy">
+      {% endif %}
+
+      <div class="solution-text-block bottom-left">
+        {{ section.settings.text_bottom_left }}
+      </div>
+    </div>
+
+    <div class="solution-footer-messages">
+      <div class="solution-bold-statement">{{ section.settings.footer_bold_statement }}</div>
+      <div class="solution-fine-print">{{ section.settings.footer_fine_print }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Solution Plate Map",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Color Schemes & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fcd269"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Core Heading Content"
+    },
+    {
+      "type": "text",
+      "id": "title_black",
+      "label": "Main Heading Prefix (Black)",
+      "default": "Our"
+    },
+    {
+      "type": "text",
+      "id": "title_red",
+      "label": "Main Heading Suffix (Red)",
+      "default": "Solution"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle_text",
+      "label": "Desktop Callout Subtitle",
+      "default": "We feed your pet <span>real food</span>,<br>not processed science experiments"
+    },
+    {
+      "type": "header",
+      "content": "Graphic Elements Assets"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "White Top Wave Overlap Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "fresh_bowl_image",
+      "label": "Fresh Bowl Image Component"
+    },
+    {
+      "type": "image_picker",
+      "id": "curved_text_image",
+      "label": "Our Diets Banner Image Component"
+    },
+    {
+      "type": "image_picker",
+      "id": "final_bowl_image",
+      "label": "Final Bowled Food Product Component"
+    },
+    {
+      "type": "header",
+      "content": "Graphic Dimensions Calibration (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "fresh_bowl_width",
+      "min": 150,
+      "max": 450,
+      "step": 5,
+      "unit": "px",
+      "label": "Fresh Bowl Width",
+      "default": 310
+    },
+    {
+      "type": "range",
+      "id": "curved_text_width",
+      "min": 200,
+      "max": 600,
+      "step": 5,
+      "unit": "px",
+      "label": "Curved Text Width",
+      "default": 440
+    },
+    {
+      "type": "range",
+      "id": "final_bowl_width",
+      "min": 150,
+      "max": 450,
+      "step": 5,
+      "unit": "px",
+      "label": "Final Bowl Width",
+      "default": 325
+    },
+    {
+      "type": "header",
+      "content": "Side Information Blocks Description Content"
+    },
+    {
+      "type": "textarea",
+      "id": "text_top_right",
+      "label": "Top Right Paragraph text",
+      "default": "Real foods contain over 26000 distinct bio-active compounds, these compounds play critical roles in modulating inflammation, supporting gut microbiome and preventing chronic disease"
+    },
+    {
+      "type": "textarea",
+      "id": "text_bottom_left",
+      "label": "Bottom Left Paragraph text",
+      "default": "Whole food also bring in the benefits of co-factors also called 'The Entourage Effect' bringing the synergistic benefit of real food"
+    },
+    {
+      "type": "header",
+      "content": "Footer Statements Elements"
+    },
+    {
+      "type": "textarea",
+      "id": "footer_bold_statement",
+      "label": "Bold Suitability Statement Summary",
+      "default": "Our formulations have human-grade, bioavailable ingredients best suited to your pet's digestive system."
+    },
+    {
+      "type": "textarea",
+      "id": "footer_fine_print",
+      "label": "Nutrient Fine Print Detail",
+      "default": "Since all nutrients are not equal, we source specific amino acid profiles to build muscle and immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Solution Plate Map"
+    }
+  ]
+}
+{% endschema %}
