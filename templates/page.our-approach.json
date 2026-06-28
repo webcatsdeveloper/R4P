@@ -300,22 +300,150 @@
     },
     "oursollution1_gTGRUe": {
       "type": "oursollution1",
+      "blocks": {
+        "letter_etq8Nh": {
+          "type": "letter",
+          "settings": {
+            "char": "O",
+            "color_accent": false,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_CQGehC": {
+          "type": "letter",
+          "settings": {
+            "char": "u",
+            "color_accent": false,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_ieTp8Q": {
+          "type": "letter",
+          "settings": {
+            "char": "r",
+            "color_accent": false,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_bEdaJ4": {
+          "type": "letter",
+          "settings": {
+            "char": "S",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_C47cDf": {
+          "type": "letter",
+          "settings": {
+            "char": "o",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_YLwWg6": {
+          "type": "letter",
+          "settings": {
+            "char": "l",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_f4mnjg": {
+          "type": "letter",
+          "settings": {
+            "char": "u",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_gnxdV9": {
+          "type": "letter",
+          "settings": {
+            "char": "t",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_DF4jaV": {
+          "type": "letter",
+          "settings": {
+            "char": "i",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_dPC8z6": {
+          "type": "letter",
+          "settings": {
+            "char": "o",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        },
+        "letter_XreX6Y": {
+          "type": "letter",
+          "settings": {
+            "char": "n",
+            "color_accent": true,
+            "x_shift": 0,
+            "y_shift": 0,
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "letter_etq8Nh",
+        "letter_CQGehC",
+        "letter_ieTp8Q",
+        "letter_bEdaJ4",
+        "letter_C47cDf",
+        "letter_YLwWg6",
+        "letter_f4mnjg",
+        "letter_gnxdV9",
+        "letter_DF4jaV",
+        "letter_dPC8z6",
+        "letter_XreX6Y"
+      ],
       "name": "Solution Header Workspace",
       "settings": {
+        "padding_top": 60,
+        "padding_bottom": 20,
         "wave_bg_desktop": "shopify://shop_images/Vector_2_2.png",
         "grey_loop_image": "shopify://shop_images/Vector_8_2.png",
+        "global_start_offset": 25,
+        "global_letter_spacing": 2,
+        "global_x_offset": 0,
+        "global_y_offset": 10,
+        "global_x_offset_mobile": 0,
+        "global_y_offset_mobile": 0,
         "loop_x_pos": -2,
         "loop_y_pos": 85,
         "loop_width": 140,
         "loop_x_pos_mobile": -5,
         "loop_y_pos_mobile": 40,
         "loop_width_mobile": 90,
-        "title_part_1": "Our",
-        "title_part_2": "Solution",
         "intro_richtext": "<p>We feed your pet <strong>real food</strong>,<br/>not processed science experiments</p>",
-        "heading_rotation": -1.5,
-        "heading_rotation_mobile": -1,
-        "heading_y_offset": 10,
         "text_color_dark": "#1a1a1a",
         "text_color_accent": "#d93829"
       }
