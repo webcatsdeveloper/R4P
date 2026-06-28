@@ -8,7 +8,7 @@
     padding-bottom: {{ section.settings.padding_bottom }}px;
     background-color: {{ section.settings.bg_color }};
     overflow: hidden;
-    position: relative; /* Essential for relative positioning of the arrow */
+    position: relative; /* Essential for relative positioning of the arrow and outer curve */
   }
 
   .ultra-processing-container {
@@ -86,6 +86,14 @@
     height: 28px;
     border-radius: 6px;
     display: block;
+  }
+
+  .ultra-processing-icon-custom {
+    width: 28px;
+    height: auto;
+    max-height: 28px;
+    display: block;
+    object-fit: contain;
   }
 
   .ultra-processing-icon-mobile {
@@ -276,8 +284,9 @@
       height: auto;
     }
     
-    .has-mobile-icon .ultra-processing-icon-desktop {
-      display: none;
+    .has-mobile-icon .ultra-processing-icon-desktop,
+    .has-mobile-icon .ultra-processing-icon-custom {
+      display: none !important;
     }
 
     .ultra-processing-item-title {
@@ -338,11 +347,11 @@
   }
 </style>
 
-<div class="ultra-processing-container">
-  {% if section.settings.green_curve != blank %}
-    <img class="ultra-processing-green-curve" src="{{ section.settings.green_curve | img_url: 'master' }}" alt="Green Curve background" loading="lazy">
-  {% endif %}
+{% if section.settings.green_curve != blank %}
+  <img class="ultra-processing-green-curve" src="{{ section.settings.green_curve | img_url: 'master' }}" alt="Green Curve background" loading="lazy">
+{% endif %}
 
+<div class="ultra-processing-container">
   <div class="ultra-processing-left">
     <h2 class="ultra-processing-heading">
       <span class="heading-black">{{ section.settings.heading_black }}</span>
@@ -355,8 +364,10 @@
           <div class="ultra-processing-icon-wrapper">
             {% if block.settings.icon_image != blank %}
               <img class="ultra-processing-icon-mobile" src="{{ block.settings.icon_image | img_url: 'master' }}" alt="{{ block.settings.title }}" loading="lazy">
+              <img class="ultra-processing-icon-custom" src="{{ block.settings.icon_image | img_url: 'master' }}" alt="{{ block.settings.title }}" loading="lazy">
+            {% else %}
+              <div class="ultra-processing-icon-desktop" style="background-color: {{ block.settings.icon_color }};"></div>
             {% endif %}
-            <div class="ultra-processing-icon-desktop" style="background-color: {{ block.settings.icon_color }};"></div>
           </div>
           <div class="ultra-processing-item-title">{{ block.settings.title }}</div>
           <div class="ultra-processing-item-desc">{{ block.settings.description }}</div>
@@ -501,7 +512,7 @@
         {
           "type": "image_picker",
           "id": "icon_image",
-          "label": "Icon Image (Mobile only)"
+          "label": "Icon Image"
         },
         {
           "type": "text",
