@@ -155,6 +155,11 @@
         "desc_max_width": 460
       }
     },
+    "our_solutions_2nd_section_W8NWQL": {
+      "type": "our-solutions-2nd-section",
+      "name": "Ultra-Processing",
+      "settings": {}
+    },
     "ultra_processing": {
       "type": "problems-with-ultra-processing",
       "blocks": {
@@ -209,8 +214,12 @@
         "heading_red": "Ultra-Processing",
         "impact_black": "Whats the impact ?",
         "impact_red": "The deficit shows up in your pet's health.",
-        "main_image": "shopify://shop_images/Group_59516_438e50e8-55e9-4708-b06d-94bc8f8fd076.png",
-        "main_image_mobile": "shopify://shop_images/7_1.png"
+        "main_image": "shopify://shop_images/Group_59522_1.png",
+        "main_image_mobile": "shopify://shop_images/7_1.png",
+        "green_curve": "shopify://shop_images/Vector_7_1.png",
+        "curve_x": -5,
+        "curve_y": -80,
+        "curve_width": 180
       }
     },
     "our_solution": {
@@ -375,6 +384,7 @@
   "order": [
     "main",
     "pet_food_hero_ARqKUK",
+    "our_solutions_2nd_section_W8NWQL",
     "ultra_processing",
     "our_solution",
     "our_certifications",
