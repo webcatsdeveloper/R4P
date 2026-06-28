@@ -87,38 +87,54 @@
     font-weight: 700;
   }
 
-  /* Mobile Layout Adaptations */
+  /* Desktop Hidden Mobile Layout Title Container */
+  .sol-header-{{ section.id }} .sol-mobile-title-wrapper {
+    display: none;
+  }
+
+  /* Strict Mobile Layout Adaptations Matching image_245c80.png Exactly */
   @media (max-width: 768px) {
     .sol-header-{{ section.id }} {
-      padding-top: calc({{ section.settings.padding_top }}px * 0.7);
-      padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
+      padding-top: 0;
+      padding-bottom: 0;
+      background-color: {{ section.settings.mobile_bg_color }}; /* Enforces clean solid canvas fill */
     }
-    .sol-header-{{ section.id }} .sol-header-svg-alignment-wrapper {
-      transform: translate({{ section.settings.global_x_offset_mobile }}px, {{ section.settings.global_y_offset_mobile }}px);
-    }
-    .sol-header-{{ section.id }} .sol-header-svg-alignment-wrapper svg text {
-      font-size: 50px;
-      letter-spacing: calc({{ section.settings.global_letter_spacing }}px * 0.6);
-    }
-    .sol-header-{{ section.id }} .wavy-bg-canvas {
-      margin-top: 10px;
-    }
-    .sol-header-{{ section.id }} .wavy-inner-content {
-      position: relative;
-      right: unset;
-      bottom: unset;
-      margin: -40px auto 0 auto;
-      padding: 0 24px 20px 24px;
-      text-align: left;
-      max-width: 100%;
-    }
-    .sol-header-{{ section.id }} .sol-intro-text p {
-      font-size: 1.15rem;
+    .sol-header-{{ section.id }} .sol-header-container {
+      display: none !important; /* Disables Desktop dynamic curved text wrapper */
     }
     .sol-header-{{ section.id }} .grey-loop-decorator {
-      left: {{ section.settings.loop_x_pos_mobile }}%;
-      top: {{ section.settings.loop_y_pos_mobile }}px;
-      width: {{ section.settings.loop_width_mobile }}px;
+      display: none !important; /* Strips grey loop curve line from mobile layouts */
+    }
+    .sol-header-{{ section.id }} .wavy-bg-canvas {
+      display: none !important; /* Hides image wave canvas layers completely */
+    }
+    .sol-header-{{ section.id }} .wavy-inner-content {
+      display: none !important; /* Strips bottom explanation paragraph block */
+    }
+
+    /* Activates and formats the clean stacked text look */
+    .sol-header-{{ section.id }} .sol-mobile-title-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+      width: 100%;
+    }
+    .sol-header-{{ section.id }} .sol-mobile-title-wrapper span {
+      font-size: 4.6rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      display: block;
+    }
+    .sol-header-{{ section.id }} .sol-mobile-title-wrapper .sol-mob-dark {
+      color: var(--text-dark);
+      margin-bottom: 5px;
+    }
+    .sol-header-{{ section.id }} .sol-mobile-title-wrapper .sol-mob-accent {
+      color: var(--text-accent);
     }
   }
 {%- endstyle -%}
@@ -132,11 +148,16 @@
     </div>
   {%- endif -%}
 
+  <!-- Flat Stacked Mobile Title Display Engine (Activates only on viewports below 768px) -->
+  <div class="sol-mobile-title-wrapper">
+    <span class="sol-mob-dark">{{ section.settings.title_part_1 }}</span>
+    <span class="sol-mob-accent">{{ section.settings.title_part_2 }}</span>
+  </div>
+
   <div class="sol-header-container">
     <!-- Fluid Wave Text Path Mapping Positioner Block -->
     <div class="sol-header-svg-alignment-wrapper">
       <svg viewBox="0 0 1100 160" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-        <!-- Re-engineered bezier baseline path flowing downward to align perfectly with the background graphic vector -->
         <path id="headingWavePath-{{ section.id }}" d="M 50,75 Q 380,122 1050,105" fill="transparent" />
         <text>
           <textPath href="#headingWavePath-{{ section.id }}" startOffset="{{ section.settings.global_start_offset }}%">
@@ -152,7 +173,7 @@
                   {%- if block.settings.char != blank -%}
                     {{ block.settings.char }}
                   {%- else -%}
-                    &nbsp;<!-- Preserves clean breaking layout space character values -->
+                    &nbsp;
                   {%- endif -%}
                 </tspan>
               {%- endif -%}
@@ -279,26 +300,6 @@
       "default": 10
     },
     {
-      "type": "range",
-      "id": "global_x_offset_mobile",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Mobile Global Move Right/Left",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "global_y_offset_mobile",
-      "min": -50,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Mobile Global Move Up/Down",
-      "default": 0
-    },
-    {
       "type": "header",
       "content": "Grey Curve Positioning Coordinates"
     },
@@ -333,38 +334,20 @@
       "default": 140
     },
     {
-      "type": "range",
-      "id": "loop_x_pos_mobile",
-      "min": -20,
-      "max": 80,
-      "step": 1,
-      "unit": "%",
-      "label": "Mobile X Position",
-      "default": -5
-    },
-    {
-      "type": "range",
-      "id": "loop_y_pos_mobile",
-      "min": -50,
-      "max": 200,
-      "step": 5,
-      "unit": "px",
-      "label": "Mobile Y Position",
-      "default": 65
-    },
-    {
-      "type": "range",
-      "id": "loop_width_mobile",
-      "min": 30,
-      "max": 200,
-      "step": 5,
-      "unit": "px",
-      "label": "Mobile Loop Scale Width",
-      "default": 90
-    },
-    {
       "type": "header",
-      "content": "Paragraph Copy Elements"
+      "content": "Typography Copy Elements"
+    },
+    {
+      "type": "text",
+      "id": "title_part_1",
+      "label": "Main Title Wording 1",
+      "default": "Our"
+    },
+    {
+      "type": "text",
+      "id": "title_part_2",
+      "label": "Main Title Wording 2",
+      "default": "Solution"
     },
     {
       "type": "richtext",
@@ -374,7 +357,13 @@
     },
     {
       "type": "header",
-      "content": "Global Theme Colors"
+      "content": "Global and Mobile Custom Color Canvas Setup"
+    },
+    {
+      "type": "color",
+      "id": "mobile_bg_color",
+      "label": "Mobile Solid Yellow Background",
+      "default": "#fcd36a"
     },
     {
       "type": "color",
