@@ -176,15 +176,15 @@
       aspect-ratio: auto;
       width: 100%;
       {% if section.settings.bg_image_mobile %}
-        background-image: url('{{ section.settings.bg_image_mobile | img_url: 'master' }}');
+        background-image: url('{{ section.settings.bg_image_mobile | img_url: 'master' }}'), linear-gradient(to bottom, #F6C45E 70%, transparent 70%);
       {% elsif section.settings.bg_image %}
-        background-image: url('{{ section.settings.bg_image | img_url: 'master' }}');
+        background-image: url('{{ section.settings.bg_image | img_url: 'master' }}'), linear-gradient(to bottom, #F6C45E 70%, transparent 70%);
       {% else %}
-        background-image: none;
+        background-image: linear-gradient(to bottom, #F6C45E 70%, transparent 70%);
       {% endif %}
-      background-position: center bottom;
-      background-size: 100% auto;
-      background-repeat: no-repeat;
+      background-position: center bottom, center top;
+      background-size: 100% auto, 100% 100%;
+      background-repeat: no-repeat, no-repeat;
     }
 
     .oab-bottom-block .oab-container {
