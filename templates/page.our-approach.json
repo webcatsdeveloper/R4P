@@ -162,6 +162,7 @@
           "type": "feature",
           "settings": {
             "icon_color": "#fcebb6",
+            "icon_image": "shopify://shop_images/Layer_1_6.png",
             "title": "Loaded with Fillers",
             "description": "<br>Extruded kibble and processed treats often contain high levels of starch and binders that add bulk, not meaningful nutrition."
           }
@@ -170,6 +171,7 @@
           "type": "feature",
           "settings": {
             "icon_color": "#fcebb6",
+            "icon_image": "shopify://shop_images/Layer_1_7.png",
             "title": "Calories That Actually Nourish",
             "description": "Calories from protein and healthy fats support growth, repair, and vitality, whereas calories from starch and filler just fill the bowl"
           }
@@ -178,6 +180,7 @@
           "type": "feature",
           "settings": {
             "icon_color": "#fcebb6",
+            "icon_image": "shopify://shop_images/Layer_1_8.png",
             "title": "Created Under Extreme Heat",
             "description": "The high heat and pressure used during extrusion can form Advanced Glycation End Products (AGEs), compounds linked to chronic health issues."
           }
@@ -186,6 +189,7 @@
           "type": "feature",
           "settings": {
             "icon_color": "#fcebb6",
+            "icon_image": "shopify://shop_images/Layer_1_9.png",
             "title": "Nature Over Synthetic",
             "description": "<br>Ultra-processing destroys natural nutrients and replaces them with synthetic alternatives that may not be absorbed as effectively by the body."
           }
