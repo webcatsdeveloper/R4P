@@ -25,11 +25,11 @@
   }
 
   .ultra-processing-left {
-    flex: 1.2;
     display: flex;
     flex-direction: column;
     z-index: 1; /* Keep content above arrow on mobile */
     padding-left:80px;
+    flex: 1.2;
   }
 
   .ultra-processing-right {
@@ -143,8 +143,8 @@
 
   .ultra-processing-img-desktop {
     display: block;
-    width: 200%;
-    max-width: 750px;
+    width: 180%;
+    max-width: 700px;
     height: auto;
     object-fit: contain;
   }
@@ -209,25 +209,19 @@
 
   @media screen and (max-width: 767px) {
     #shopify-section-{{ section.id }} {
-      padding-top: 40px;
-      padding-bottom: 40px;
+      padding-top: 48px;
+      padding-bottom: 0px; /* Seamless flow into colored yellow bottom zone */
     }
     
-    /* Re-position arrow for small screens */
+    /* Strictly disable desktop pseudo arrow graphics on mobile design */
     #shopify-section-{{ section.id }}::before {
-        display: block;
-        top: 20px; /* Shifted up relative to section content */
-        left: 20%;
-        width: 80%;
-        height: 60%;
-        background-position: top left;
-        opacity: 0.8; /* Subtle */
+        display: none !important;
     }
 
     .ultra-processing-container {
-      flex-direction: column-reverse; /* Reverses order so image is above text */
-      padding: 0 24px;
-      gap: 48px;
+      flex-direction: column; /* Regular top-down layout order matching mobile design */
+      padding: 0 20px;
+      gap: 0px;
     }
     
     .ultra-processing-left {
@@ -237,24 +231,46 @@
 
     .ultra-processing-right {
       width: 100%;
+      margin-top: 40px;
+      background: linear-gradient(to bottom, transparent 25%, #fcd269 25%); /* Matching layout curve highlight blend */
+      padding-top: 20px;
     }
 
     .ultra-processing-heading {
-      font-size: 40px;
+      font-size: 34px;
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 48px;
+    }
+
+    .ultra-processing-heading .heading-black,
+    .ultra-processing-heading .heading-red {
+      display: inline; /* Keep heading components tight and centered together */
+    }
+    .ultra-processing-heading .heading-red {
+      display: block; 
+      margin-top: 4px;
     }
 
     .ultra-processing-grid {
       grid-template-columns: 1fr;
-      gap: 32px;
-      margin-bottom: 36px;
+      gap: 40px;
+      margin-bottom: 0px;
       width: 100%;
+    }
+
+    .ultra-processing-item {
+      align-items: center;
+      text-align: center;
+    }
+
+    .ultra-processing-icon-wrapper {
+      margin-bottom: 12px;
+      height: auto;
     }
 
     .has-mobile-icon .ultra-processing-icon-mobile {
       display: block;
-      width: 32px;
+      width: 44px;
       height: auto;
     }
     
@@ -263,38 +279,58 @@
     }
 
     .ultra-processing-item-title {
-      font-size: 20px;
+      font-size: 24px;
+      margin-bottom: 12px;
     }
 
     .ultra-processing-item-desc {
-      font-size: 14px;
+      font-size: 15px;
+      color: #444444;
+      line-height: 1.5;
     }
 
+    /* ******************************************
+       Mobile Bottom Yellow Background Area
+       ****************************************** */
     .ultra-processing-impact {
-      align-items: center;
-      text-align: center;
       position: relative;
       bottom: auto;
       left: auto;
+      background-color: #fcd269;
+      width: 100vw;
+      margin-left: -20px; /* Offset parent row gap variables safely */
+      padding: 40px 24px 60px 24px;
+      align-items: center;
+      text-align: center;
+      box-sizing: border-box;
     }
 
     .ultra-impact-black {
-      font-size: 20px;
+      font-size: 28px;
+      color: #111111;
+      margin-bottom: 12px;
     }
 
     .ultra-impact-red {
-      font-size: 24px;
+      font-size: 36px;
+      color: #d92b2b;
+      padding-left: 0px; /* Flush central text alignments */
+      font-weight: 800;
+      line-height: 1.15;
     }
 
     .ultra-processing-img-desktop {
-      display: none;
+      display: none !important;
     }
 
     .ultra-processing-img-mobile {
-      display: block;
+      display: block !important;
       width: 100%;
-      max-width: 340px;
+      max-width: 320px;
       margin: 0 auto;
+      height: auto;
+      z-index: 2;
+      position: relative;
     }
   }
 </style>
@@ -324,11 +360,6 @@
         </div>
       {% endfor %}
     </div>
-
-    <div class="ultra-processing-impact">
-      <div class="ultra-impact-black">{{ section.settings.impact_black }}</div>
-      <div class="ultra-impact-red">{{ section.settings.impact_red }}</div>
-    </div>
   </div>
 
   <div class="ultra-processing-right">
@@ -339,8 +370,13 @@
       <img class="ultra-processing-img-mobile" src="{{ section.settings.main_image_mobile | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
     {% comment %} Fallback to desktop image if mobile picker is left blank {% endcomment %}
     {% elsif section.settings.main_image %}
-      <img class="ultra-processing-img-mobile fallback" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
+      <img class="ultra-processing-img-mobile" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
     {% endif %}
+  </div>
+
+  <div class="ultra-processing-impact">
+    <div class="ultra-impact-black">{{ section.settings.impact_black }}</div>
+    <div class="ultra-impact-red">{{ section.settings.impact_red }}</div>
   </div>
 </div>
 
