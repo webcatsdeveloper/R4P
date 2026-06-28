@@ -397,7 +397,7 @@
             "char": "o",
             "color_accent": true,
             "x_shift": 0,
-            "y_shift": -15,
+            "y_shift": -10,
             "rotation": 0
           }
         },
@@ -428,7 +428,7 @@
       "name": "Solution Header Workspace",
       "settings": {
         "padding_top": 60,
-        "padding_bottom": 20,
+        "padding_bottom": 60,
         "wave_bg_desktop": "shopify://shop_images/Vector_2_2.png",
         "grey_loop_image": "shopify://shop_images/Vector_8_2.png",
         "global_start_offset": 25,
