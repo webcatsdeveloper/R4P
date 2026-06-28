@@ -236,27 +236,39 @@
       "blocks": {
         "logo_1": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "logo_image": "shopify://shop_images/Screenshot_2026-06-28_141627.png"
+          }
         },
         "logo_2": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "logo_image": "shopify://shop_images/Screenshot_2026-06-28_141634.png"
+          }
         },
         "logo_3": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "logo_image": "shopify://shop_images/Screenshot_2026-06-28_141645.png"
+          }
         },
         "logo_4": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "logo_image": "shopify://shop_images/Screenshot_2026-06-28_141704.png"
+          }
         },
         "logo_5": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "logo_image": "shopify://shop_images/Screenshot_2026-06-28_141652.png"
+          }
         },
         "logo_6": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "logo_image": "shopify://shop_images/Screenshot_2026-06-28_141722.png"
+          }
         }
       },
       "block_order": [
@@ -268,7 +280,6 @@
         "logo_6"
       ],
       "settings": {
-        "single_logo_image": "shopify://shop_images/Content_Review_2_1.png",
         "bg_color": "#ffffff",
         "padding_top": 100,
         "padding_bottom": 100,
