@@ -206,7 +206,17 @@
         "heading_red": "Ultra-Processing",
         "impact_black": "Whats the impact ?",
         "impact_red": "The deficit shows up in your pet's health.",
-        "main_image": "shopify://shop_images/Group_59516_438e50e8-55e9-4708-b06d-94bc8f8fd076.png"
+        "arrow_image": "shopify://shop_images/Vector_27.png",
+        "main_image": "shopify://shop_images/Products_3_1.png",
+        "green_curve_image": "shopify://shop_images/Vector_7_1.png",
+        "curve_pos_x": 0,
+        "curve_pos_y": 0,
+        "curve_width": 150,
+        "img_offset_x": 0,
+        "img_offset_y": 0,
+        "impact_margin_top": 12,
+        "impact_offset_x": 0,
+        "impact_offset_y": 0
       }
     },
     "we_know_Wh9cYW": {
