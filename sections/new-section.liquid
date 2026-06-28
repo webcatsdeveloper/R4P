@@ -322,13 +322,15 @@
     {% elsif section.settings.main_image %}
       <img class="ultra-processing-img-mobile fallback" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
     {% endif %}
-  </div>
 
-  <div class="ultra-processing-impact">
+     <div class="ultra-processing-impact">
       <div class="ultra-impact-black">{{ section.settings.impact_black }}</div>
       <div class="ultra-impact-red">{{ section.settings.impact_red }}</div>
     </div>
-    
+  </div>
+
+ 
+
 </div>
 
 {% schema %}
