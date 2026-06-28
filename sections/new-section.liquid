@@ -26,7 +26,7 @@
   .ultra-processing-left {
     display: flex;
     flex-direction: column;
-    z-index: 1;
+    z-index: 2;
     padding-left: 80px;
     flex: 1.2;
   }
@@ -37,7 +37,16 @@
     justify-content: end !important;
     align-items: center;
     position: relative;
-    z-index: 1;
+    z-index: 2;
+  }
+
+  /* Fixed Canvas Wrapper keeping the dog and curve tightly coupled together */
+  .ultra-processing-right .dog-illustration-canvas {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    display: block;
   }
 
   .ultra-processing-heading {
@@ -139,10 +148,11 @@
 
   .ultra-processing-img-desktop {
     display: block;
-    width: 180%;
-    max-width: 700px;
+    width: 100%;
     height: auto;
     object-fit: contain;
+    position: relative;
+    z-index: 2;
   }
 
   .ultra-processing-img-mobile {
@@ -155,7 +165,7 @@
     right: {{ section.settings.curve_x }}px;
     width: {{ section.settings.curve_width }}px;
     height: auto;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
     display: block;
   }
@@ -322,6 +332,11 @@
       padding-top: 0px;
     }
 
+    .ultra-processing-right .dog-illustration-canvas {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
     .ultra-processing-heading {
       font-size: 34px;
       text-align: center;
@@ -467,13 +482,15 @@
   </div>
 
   <div class="ultra-processing-right">
-    {% if section.settings.green_curve != blank %}
-      <img class="ultra-processing-green-curve" src="{{ section.settings.green_curve | img_url: 'master' }}" alt="Green Curve background" loading="lazy">
-    {% endif %}
+    <div class="dog-illustration-canvas">
+      {% if section.settings.green_curve != blank %}
+        <img class="ultra-processing-green-curve" src="{{ section.settings.green_curve | img_url: 'master' }}" alt="Green Curve background" loading="lazy">
+      {% endif %}
 
-    {% if section.settings.main_image != blank %}
-      <img class="ultra-processing-img-desktop" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }}" width="600" height="auto" loading="lazy">
-    {% endif %}
+      {% if section.settings.main_image != blank %}
+        <img class="ultra-processing-img-desktop" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }}" width="600" height="auto" loading="lazy">
+      {% endif %}
+    </div>
     
     {% if section.settings.main_image_mobile != blank %}
       <img class="ultra-processing-img-mobile" src="{{ section.settings.main_image_mobile | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
@@ -564,32 +581,32 @@
     {
       "type": "range",
       "id": "curve_x",
-      "min": -100,
-      "max": 400,
-      "step": 5,
+      "min": -300,
+      "max": 300,
+      "step": 6,
       "unit": "px",
-      "label": "Green Curve X Position (Right Side)",
-      "default": 0
+      "label": "Green Curve Horizontal Position (X)",
+      "default": -60
     },
     {
       "type": "range",
       "id": "curve_y",
-      "min": -100,
-      "max": 400,
-      "step": 5,
+      "min": -200,
+      "max": 200,
+      "step": 4,
       "unit": "px",
-      "label": "Green Curve Y Position (Top Side)",
-      "default": 0
+      "label": "Green Curve Vertical Position (Y)",
+      "default": -40
     },
     {
       "type": "range",
       "id": "curve_width",
       "min": 50,
-      "max": 500,
-      "step": 5,
+      "max": 450,
+      "step": 4,
       "unit": "px",
       "label": "Green Curve Width",
-      "default": 180
+      "default": 178
     }
   ],
   "blocks": [
