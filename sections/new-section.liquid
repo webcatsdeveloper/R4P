@@ -2,13 +2,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<style>
+{%- style -%}
   #shopify-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     background-color: {{ section.settings.bg_color }};
     overflow: hidden;
-    position: relative; /* Essential for relative positioning of the arrow */
+    position: relative;
   }
 
   .ultra-processing-container {
@@ -20,15 +20,14 @@
     align-items: center;
     gap: 60px;
     position: relative;
-    /* Extra padding at bottom to prevent footer overlap from absolute impact text */
     padding-bottom: 120px; 
   }
 
   .ultra-processing-left {
     display: flex;
     flex-direction: column;
-    z-index: 1; /* Keep content above arrow on mobile */
-    padding-left:80px;
+    z-index: 1;
+    padding-left: 80px;
     flex: 1.2;
   }
 
@@ -38,7 +37,7 @@
     justify-content: end !important;
     align-items: center;
     position: relative;
-    z-index: 1; /* Keep content above arrow on mobile */
+    z-index: 1;
   }
 
   .ultra-processing-heading {
@@ -65,7 +64,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 70px 95px;
     margin-bottom: 48px;
-    width:90%;
+    width: 90%;
   }
 
   .ultra-processing-item {
@@ -109,9 +108,6 @@
     line-height: 1.45;
   }
 
-  /* ******************************************
-     Impact Module Below Arrow
-     ****************************************** */
   .ultra-processing-impact {
     display: flex;
     flex-direction: column;
@@ -137,7 +133,7 @@
     color: #d92b2b;
     line-height: 1.2;
     position: relative;
-    z-index: 1; /* Text above arrow */
+    z-index: 1;
     padding-left: 60px;
   }
 
@@ -153,9 +149,6 @@
     display: none;
   }
 
-  /* ******************************************
-     Isolated Green Curve Styling & Position
-     ****************************************** */
   .ultra-processing-green-curve {
     position: absolute;
     top: {{ section.settings.curve_y }}px;
@@ -167,16 +160,13 @@
     display: block;
   }
 
-  /* ******************************************
-     Desktop Arrow Positioning (Match Figma)
-     ****************************************** */
   #shopify-section-{{ section.id }}::before {
     content: '';
     position: absolute;
-    top: {{ section.settings.padding_top }}px; /* Aligns top of arrow with top of heading */
-    left: 45%; /* Starting point across header */
-    width: calc(100% - 45% + 40px); /* Extend beyond right edge of container */
-    height: calc(100% - {{ section.settings.padding_top }}px - 140px); /* Shortened slightly to stay completely above text output loop */
+    top: {{ section.settings.padding_top }}px;
+    left: 45%;
+    width: calc(100% - 45% + 40px);
+    height: calc(100% - {{ section.settings.padding_top }}px - 140px);
     background-image: url('{{ "thick_black_arrow.png" | asset_url }}');
     background-size: contain;
     background-repeat: no-repeat;
@@ -184,9 +174,6 @@
     z-index: 0;
   }
   
-  /* ******************************************
-     Mobile Breakpoints
-     ****************************************** */
   @media screen and (max-width: 991px) {
     .ultra-processing-container {
       gap: 40px;
@@ -195,10 +182,9 @@
     .ultra-processing-heading {
       font-size: 52px;
     }
-    /* Hide decorative layers on intermediate screens where it won't align */
     #shopify-section-{{ section.id }}::before,
     .ultra-processing-green-curve {
-        display: none;
+      display: none !important;
     }
     .ultra-processing-impact {
       position: relative;
@@ -214,7 +200,7 @@
     }
     
     #shopify-section-{{ section.id }}::before {
-        display: none !important;
+      display: none !important;
     }
 
     .ultra-processing-container {
@@ -228,7 +214,106 @@
       padding-left: 0px;
     }
 
-    /* Fixed space around dog image by making the element flush against viewport edge boundaries */
+    .ultra-processing-container .matrix-right-col {
+      gap: 40px;
+      padding-top: 0;
+    }
+
+    .sol-header-{{ section.id }} .wavy-inner-content {
+      position: relative;
+      right: unset;
+      bottom: unset;
+      margin: -60px auto 0 auto;
+      padding: 0 20px 40px 20px;
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .sol-header-{{ section.id }} .sol-intro-text p {
+      font-size: 1.15rem;
+    }
+
+    .perf-canvas-{{ section.id }} .canvas-item p {
+      text-align: center !important;
+    }
+
+    .perf-canvas-{{ section.id }} .item-main-image {
+      max-width: 320px !important;
+    }
+
+    .perf-canvas-{{ section.id }} .item-arrow-1,
+    .perf-canvas-{{ section.id }} .item-arrow-2 {
+      display: none !important;
+    }
+
+    .perf-canvas-{{ section.id }} .canvas-item {
+      position: relative !important;
+      left: unset !important;
+      top: unset !important;
+      transform: none !important;
+      max-width: 100% !important;
+      text-align: center !important;
+      width: 100% !important;
+    }
+
+    .perf-canvas-{{ section.id }} .canvas-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      min-height: auto;
+      padding: 0 24px;
+    }
+
+    .sol-header-{{ section.id }} .grey-loop-decorator {
+      display: none !important;
+    }
+
+    .sol-header-{{ section.id }} .wavy-bg-canvas {
+      display: none !important;
+    }
+
+    .sol-header-{{ section.id }} .wavy-inner-content {
+      display: none !important;
+    }
+
+    .sol-header-{{ section.id }} .sol-mobile-title-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+      width: 100%;
+    }
+
+    .sol-header-{{ section.id }} .sol-mobile-title-wrapper span {
+      font-size: 4.6rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      display: block;
+    }
+
+    .sol-header-{{ section.id }} .sol-mobile-title-wrapper .sol-mob-dark {
+      color: var(--text-dark);
+      margin-bottom: 5px;
+    }
+
+    .sol-header-{{ section.id }} .sol-mobile-title-wrapper .sol-mob-accent {
+      color: var(--text-accent);
+    }
+
+    .sol-header-{{ section.id }} .sol-header-container {
+      display: none !important;
+    }
+
+    .sol-header-{{ section.id }} {
+      padding-top: 0;
+      padding-bottom: 0;
+      background-color: {{ section.settings.mobile_bg_color }};
+    }
+
     .ultra-processing-right {
       width: 100vw;
       margin-left: -24px;
@@ -259,7 +344,6 @@
       width: 100%;
     }
 
-    /* Fixed: Changed text alignment from center to left */
     .ultra-processing-item {
       align-items: flex-start;
       text-align: left;
@@ -289,12 +373,9 @@
       font-size: 15px;
       color: #444444;
       line-height: 1.5;
-      width:92%;
+      width: 92%;
     }
 
-    /* ******************************************
-       Mobile Bottom Yellow Background Area
-       ****************************************** */
     .ultra-processing-impact {
       position: relative;
       bottom: auto;
@@ -314,12 +395,36 @@
       margin-bottom: 12px;
     }
 
-    .ultra-impact-red {
-      font-size: 50px;
-      color: #d92b2b;
-      padding-left: 0px; 
-      font-weight: 800;
-      line-height: 0.9;
+    .perf-canvas-{{ section.id }} .canvas-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      min-height: auto;
+      padding: 0 24px;
+    }
+
+    .perf-canvas-{{ section.id }} .canvas-item {
+      position: relative !important;
+      left: unset !important;
+      top: unset !important;
+      transform: none !important;
+      max-width: 100% !important;
+      text-align: center !important;
+      width: 100% !important;
+    }
+
+    .perf-canvas-{{ section.id }} .canvas-item p {
+      text-align: center !important;
+    }
+
+    .perf-canvas-{{ section.id }} .item-arrow-1,
+    .perf-canvas-{{ section.id }} .item-arrow-2 {
+      display: none !important;
+    }
+
+    .perf-canvas-{{ section.id }} .item-main-image {
+      max-width: 320px !important;
     }
 
     .ultra-processing-img-desktop {
@@ -336,13 +441,9 @@
       position: relative;
     }
   }
-</style>
+{%- endstyle -%}
 
 <div class="ultra-processing-container">
-  {% if section.settings.green_curve != blank %}
-    <img class="ultra-processing-green-curve" src="{{ section.settings.green_curve | img_url: 'master' }}" alt="Green Curve background" loading="lazy">
-  {% endif %}
-
   <div class="ultra-processing-left">
     <h2 class="ultra-processing-heading">
       <span class="heading-black">{{ section.settings.heading_black }}</span>
@@ -366,12 +467,17 @@
   </div>
 
   <div class="ultra-processing-right">
-    {% if section.settings.main_image %}
+    {% if section.settings.green_curve != blank %}
+      <img class="ultra-processing-green-curve" src="{{ section.settings.green_curve | img_url: 'master' }}" alt="Green Curve background" loading="lazy">
+    {% endif %}
+
+    {% if section.settings.main_image != blank %}
       <img class="ultra-processing-img-desktop" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }}" width="600" height="auto" loading="lazy">
     {% endif %}
-    {% if section.settings.main_image_mobile %}
+    
+    {% if section.settings.main_image_mobile != blank %}
       <img class="ultra-processing-img-mobile" src="{{ section.settings.main_image_mobile | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
-    {% elsif section.settings.main_image %}
+    {% elsif section.settings.main_image != blank %}
       <img class="ultra-processing-img-mobile fallback" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
     {% endif %}
   </div>
