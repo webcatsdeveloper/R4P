@@ -155,6 +155,60 @@
         "desc_max_width": 460
       }
     },
+    "new_section_w8WTAF": {
+      "type": "new-section",
+      "blocks": {
+        "feature_mG4KEz": {
+          "type": "feature",
+          "settings": {
+            "icon_color": "#fcebb6",
+            "title": "Loaded with Fillers",
+            "description": "Extruded kibble and processed treats often contain high levels of starch and binders that add bulk, not meaningful nutrition."
+          }
+        },
+        "feature_bxxx6z": {
+          "type": "feature",
+          "settings": {
+            "icon_color": "#fcebb6",
+            "title": "Calories That Actually Nourish",
+            "description": "Calories from protein and healthy fats support growth, repair, and vitality, whereas calories from starch and filler just fill the bowl"
+          }
+        },
+        "feature_H6m6tj": {
+          "type": "feature",
+          "settings": {
+            "icon_color": "#fcebb6",
+            "title": "Created Under Extreme Heat",
+            "description": "The high heat and pressure used during extrusion can form Advanced Glycation End Products (AGEs), compounds linked to chronic health issues."
+          }
+        },
+        "feature_yThaih": {
+          "type": "feature",
+          "settings": {
+            "icon_color": "#fcebb6",
+            "title": "Nature Over Synthetic",
+            "description": "Ultra-processing destroys natural nutrients and replaces them with synthetic alternatives that may not be absorbed as effectively by the body."
+          }
+        }
+      },
+      "block_order": [
+        "feature_mG4KEz",
+        "feature_bxxx6z",
+        "feature_H6m6tj",
+        "feature_yThaih"
+      ],
+      "name": "Ultra-Processing",
+      "settings": {
+        "bg_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "heading_black": "Problems with",
+        "heading_red": "Ultra-Processing",
+        "impact_black": "Whats the impact ?",
+        "impact_red": "The deficit shows up in your pet's health.",
+        "main_image": "shopify://shop_images/Group_59516_438e50e8-55e9-4708-b06d-94bc8f8fd076.png"
+      }
+    },
     "we_know_Wh9cYW": {
       "type": "we-know",
       "name": "Pet Info Section",
@@ -389,6 +443,7 @@
   "order": [
     "main",
     "pet_food_hero_ARqKUK",
+    "new_section_w8WTAF",
     "we_know_Wh9cYW",
     "you_bring_the_love_7rpmFw",
     "pet_benefits_slider_XeT6Pj",
