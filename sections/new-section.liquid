@@ -1,0 +1,373 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+    overflow: hidden;
+  }
+
+  .ultra-processing-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .ultra-processing-left {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ultra-processing-right {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .ultra-processing-heading {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 48px;
+    letter-spacing: -0.02em;
+  }
+
+  .ultra-processing-heading .heading-black {
+    color: #111111;
+    display: block;
+  }
+
+  .ultra-processing-heading .heading-red {
+    color: #d92b2b;
+    display: block;
+  }
+
+  .ultra-processing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 32px;
+    margin-bottom: 48px;
+  }
+
+  .ultra-processing-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ultra-processing-icon-wrapper {
+    margin-bottom: 16px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ultra-processing-icon-desktop {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: block;
+  }
+
+  .ultra-processing-icon-mobile {
+    display: none;
+  }
+
+  .ultra-processing-item-title {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #111111;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .ultra-processing-item-desc {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #555555;
+    line-height: 1.45;
+  }
+
+  .ultra-processing-impact {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .ultra-impact-black {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.2;
+  }
+
+  .ultra-impact-red {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #d92b2b;
+    line-height: 1.2;
+  }
+
+  .ultra-processing-img-desktop {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .ultra-processing-img-mobile {
+    display: none;
+  }
+
+  /* Responsive Breakpoints */
+  @media screen and (max-width: 991px) {
+    .ultra-processing-container {
+      gap: 40px;
+    }
+    .ultra-processing-heading {
+      font-size: 52px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    .ultra-processing-container {
+      flex-direction: column-reverse;
+      padding: 0 24px;
+      gap: 48px;
+    }
+    
+    .ultra-processing-left {
+      width: 100%;
+    }
+
+    .ultra-processing-right {
+      width: 100%;
+    }
+
+    .ultra-processing-heading {
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .ultra-processing-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+
+    .has-mobile-icon .ultra-processing-icon-mobile {
+      display: block;
+      width: 32px;
+      height: auto;
+    }
+    
+    .has-mobile-icon .ultra-processing-icon-desktop {
+      display: none;
+    }
+
+    .ultra-processing-item-title {
+      font-size: 20px;
+    }
+
+    .ultra-processing-item-desc {
+      font-size: 14px;
+    }
+
+    .ultra-processing-impact {
+      align-items: center;
+      text-align: center;
+    }
+
+    .ultra-impact-black {
+      font-size: 20px;
+    }
+
+    .ultra-impact-red {
+      font-size: 24px;
+    }
+
+    .ultra-processing-img-desktop {
+      display: none;
+    }
+
+    .ultra-processing-img-mobile {
+      display: block;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<div class="ultra-processing-container">
+  <div class="ultra-processing-left">
+    <h2 class="ultra-processing-heading">
+      <span class="heading-black">{{ section.settings.heading_black }}</span>
+      <span class="heading-red">{{ section.settings.heading_red }}</span>
+    </h2>
+
+    <div class="ultra-processing-grid">
+      {% for block in section.blocks %}
+        <div class="ultra-processing-item {% if block.settings.icon_image != blank %}has-mobile-icon{% endif %}" {{ block.shopify_attributes }}>
+          <div class="ultra-processing-icon-wrapper">
+            {% if block.settings.icon_image != blank %}
+              <img class="ultra-processing-icon-mobile" src="{{ block.settings.icon_image | img_url: 'master' }}" alt="{{ block.settings.title }}" loading="lazy">
+            {% endif %}
+            <div class="ultra-processing-icon-desktop" style="background-color: {{ block.settings.icon_color }};"></div>
+          </div>
+          <div class="ultra-processing-item-title">{{ block.settings.title }}</div>
+          <div class="ultra-processing-item-desc">{{ block.settings.description }}</div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="ultra-processing-impact">
+      <div class="ultra-impact-black">{{ section.settings.impact_black }}</div>
+      <div class="ultra-impact-red">{{ section.settings.impact_red }}</div>
+    </div>
+  </div>
+
+  <div class="ultra-processing-right">
+    {% if section.settings.main_image %}
+      <img class="ultra-processing-img-desktop" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }}" width="600" height="auto" loading="lazy">
+    {% endif %}
+    {% if section.settings.main_image_mobile %}
+      <img class="ultra-processing-img-mobile" src="{{ section.settings.main_image_mobile | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
+    {% comment %} Fallback to desktop image if mobile picker is left blank {% endcomment %}
+    {% elsif section.settings.main_image %}
+      <img class="ultra-processing-img-mobile" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ultra-Processing",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "text",
+      "id": "heading_black",
+      "label": "Heading (Black text)",
+      "default": "Problems with"
+    },
+    {
+      "type": "text",
+      "id": "heading_red",
+      "label": "Heading (Red text)",
+      "default": "Ultra-Processing"
+    },
+    {
+      "type": "text",
+      "id": "impact_black",
+      "label": "Impact Question Text",
+      "default": "Whats the impact ?"
+    },
+    {
+      "type": "text",
+      "id": "impact_red",
+      "label": "Impact Answer Text",
+      "default": "The deficit shows up in your pet's health."
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Right Image (Dog with Arrow)"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image_mobile",
+      "label": "Mobile Main Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Bullet",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color",
+          "default": "#fcebb6"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image (Mobile only)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Feature Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ultra-Processing",
+      "blocks": [
+        { "type": "feature", "settings": { "title": "Loaded with Fillers", "description": "Extruded kibble and processed treats often contain high levels of starch and binders that add bulk, not meaningful nutrition." } },
+        { "type": "feature", "settings": { "title": "Calories That Actually Nourish", "description": "Calories from protein and healthy fats support growth, repair, and vitality, whereas calories from starch and filler just fill the bowl" } },
+        { "type": "feature", "settings": { "title": "Created Under Extreme Heat", "description": "The high heat and pressure used during extrusion can form Advanced Glycation End Products (AGEs), compounds linked to chronic health issues." } },
+        { "type": "feature", "settings": { "title": "Nature Over Synthetic", "description": "Ultra-processing destroys natural nutrients and replaces them with synthetic alternatives that may not be absorbed as effectively by the body." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
