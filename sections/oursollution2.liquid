@@ -1,7 +1,5 @@
 {%- style -%}
-  .sol-matrix-{{ section.id }} {
-    --text-dark: {{ section.settings.text_color_dark }};
-    --text-accent: {{ section.settings.text_color_accent }};
+  .perf-canvas-{{ section.id }} {
     background-color: {{ section.settings.bg_color }};
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
     overflow: hidden;
@@ -9,198 +7,175 @@
     position: relative;
   }
 
-  .sol-matrix-{{ section.id }} .matrix-workspace-canvas {
-    max-width: 1200px;
+  /* Main Workspace Container Box matching image_247b00.png layout space */
+  .perf-canvas-{{ section.id }} .canvas-container {
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
     position: relative;
+    min-height: 850px;
+  }
+
+  /* Base Styles for Absolute Canvas Layer Items */
+  .perf-canvas-{{ section.id }} .canvas-item {
+    position: absolute;
     z-index: 3;
+    transition: none;
   }
 
-  /* Asymmetric Desktop Layout Grid Configuration */
-  .sol-matrix-{{ section.id }} .matrix-main-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    align-items: center;
-    gap: 40px;
-    position: relative;
-  }
-
-  /* Left Column: Combined Graphic Asset & Bottom Left Paragraph */
-  .sol-matrix-{{ section.id }} .matrix-left-col {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .sol-matrix-{{ section.id }} .combined-showcase-image {
-    width: 100%;
-    max-width: 540px;
-    margin: 0 auto;
-  }
-
-  .sol-matrix-{{ section.id }} .combined-showcase-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-  }
-
-  .sol-matrix-{{ section.id }} .para-bottom-left {
-    max-width: 380px;
-    align-self: flex-end;
-    text-align: left;
-  }
-
-  /* Right Column: Top Right Paragraph & Middle Right Heading */
-  .sol-matrix-{{ section.id }} .matrix-right-col {
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
-    padding-top: 40px;
-  }
-
-  .sol-matrix-{{ section.id }} .para-top-right {
-    max-width: 380px;
-    text-align: left;
-  }
-
-  .sol-matrix-{{ section.id }} .heading-right-side {
-    max-width: 460px;
-    text-align: left;
-  }
-
-  /* Typography Styles matching image blueprints */
-  .sol-matrix-{{ section.id }} .matrix-text-block p {
-    font-size: 0.95rem;
+  /* Typography Design Tokens */
+  .perf-canvas-{{ section.id }} .canvas-para p {
+    font-size: 1rem;
     line-height: 1.6;
-    color: var(--text-dark);
+    color: {{ section.settings.text_color_dark }};
     font-weight: 500;
     margin: 0;
   }
 
-  .sol-matrix-{{ section.id }} .heading-right-side h3,
-  .sol-matrix-{{ section.id }} .heading-right-side p {
-    font-size: 1.45rem;
+  .perf-canvas-{{ section.id }} .canvas-heading h3,
+  .perf-canvas-{{ section.id }} .canvas-heading p,
+  .perf-canvas-{{ section.id }} .canvas-heading {
+    font-size: 1.6rem;
     font-weight: 800;
     line-height: 1.4;
-    color: var(--text-dark);
+    color: {{ section.settings.text_color_dark }};
     margin: 0;
     letter-spacing: -0.01em;
   }
 
-  /* Center Aligned Baseline Paragraph Style */
-  .sol-matrix-{{ section.id }} .center-aligned-baseline-para {
-    max-width: 850px;
-    margin: 60px auto 0 auto;
-    text-align: center;
-  }
-
-  .sol-matrix-{{ section.id }} .center-aligned-baseline-para p {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: var(--text-dark);
-    font-weight: 500;
-    opacity: 0.95;
-    margin: 0;
-  }
-
-  /* Position-Controlled Arrow Blocks */
-  .sol-matrix-{{ section.id }} .controlled-arrow {
-    position: absolute;
-    z-index: 5;
-    pointer-events: none;
-  }
-
-  .sol-matrix-{{ section.id }} .controlled-arrow img {
-    display: block;
-    height: auto;
-  }
-
-  .sol-matrix-{{ section.id }} .arrow-instance-1 {
-    left: {{ section.settings.arrow_1_x }}%;
-    top: {{ section.settings.arrow_1_y }}%;
-    width: {{ section.settings.arrow_1_w }}px;
-  }
-
-  .sol-matrix-{{ section.id }} .arrow-instance-2 {
-    left: {{ section.settings.arrow_2_x }}%;
-    top: {{ section.settings.arrow_2_y }}%;
-    width: {{ section.settings.arrow_2_w }}px;
-  }
-
-  /* Responsive Breakdown Stacking Rules */
-  @media (max-width: 768px) {
-    .sol-matrix-{{ section.id }} .matrix-main-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
+  /* --- DESKTOP POSITION ENGINE (All 5 Control Points) --- */
+  @media (min-width: 769px) {
+    /* Point 1: Main Combined Image Controls */
+    .perf-canvas-{{ section.id }} .item-main-image {
+      left: {{ section.settings.img_x }}%;
+      top: {{ section.settings.img_y }}px;
+      width: {{ section.settings.img_w }}px;
     }
-    .sol-matrix-{{ section.id }} .matrix-right-col {
-      gap: 40px;
-      padding-top: 0;
+
+    /* Point 2: Arrow 1 Controls */
+    .perf-canvas-{{ section.id }} .item-arrow-1 {
+      left: {{ section.settings.arrow_1_x }}%;
+      top: {{ section.settings.arrow_1_y }}px;
+      width: {{ section.settings.arrow_1_w }}px;
     }
-    .sol-matrix-{{ section.id }} .para-bottom-left,
-    .sol-matrix-{{ section.id }} .para-top-right,
-    .sol-matrix-{{ section.id }} .heading-right-side {
-      max-width: 100%;
+
+    /* Point 2: Arrow 2 Controls */
+    .perf-canvas-{{ section.id }} .item-arrow-2 {
+      left: {{ section.settings.arrow_2_x }}%;
+      top: {{ section.settings.arrow_2_y }}px;
+      width: {{ section.settings.arrow_2_w }}px;
+    }
+
+    /* Point 3: Top Right Paragraph Controls */
+    .perf-canvas-{{ section.id }} .item-top-right-para {
+      left: {{ section.settings.tr_para_x }}%;
+      top: {{ section.settings.tr_para_y }}px;
+      max-width: {{ section.settings.tr_para_w }}px;
+      text-align: left;
+    }
+
+    /* Point 3: Bottom Left Paragraph Controls */
+    .perf-canvas-{{ section.id }} .item-bottom-left-para {
+      left: {{ section.settings.bl_para_x }}%;
+      top: {{ section.settings.bl_para_y }}px;
+      max-width: {{ section.settings.bl_para_w }}px;
+      text-align: left;
+    }
+
+    /* Point 4: Right Side Heading Controls */
+    .perf-canvas-{{ section.id }} .item-right-heading {
+      left: {{ section.settings.r_heading_x }}%;
+      top: {{ section.settings.r_heading_y }}px;
+      max-width: {{ section.settings.r_heading_w }}px;
+      text-align: left;
+    }
+
+    /* Point 5: Center Aligned Paragraph Controls */
+    .perf-canvas-{{ section.id }} .item-center-para {
+      left: {{ section.settings.c_para_x }}%;
+      top: {{ section.settings.c_para_y }}px;
+      max-width: {{ section.settings.c_para_w }}px;
       text-align: center;
-      align-self: center;
+      transform: translateX(-50%);
     }
-    .sol-matrix-{{ section.id }} .heading-right-side h3,
-    .sol-matrix-{{ section.id }} .heading-right-side p {
-      font-size: 1.25rem;
+  }
+
+  /* --- MOBILE FALLBACK RESPONSIVE STACKING --- */
+  @media (max-width: 768px) {
+    .perf-canvas-{{ section.id }} .canvas-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      min-height: auto;
+      padding: 0 24px;
     }
-    .sol-matrix-{{ section.id }} .controlled-arrow {
-      display: none; /* Hidden on mobile screen targets to avoid collision overlap layouts */
+    .perf-canvas-{{ section.id }} .canvas-item {
+      position: relative !important;
+      left: unset !important;
+      top: unset !important;
+      transform: none !important;
+      max-width: 100% !important;
+      text-align: center !important;
+      width: 100% !important;
+    }
+    .perf-canvas-{{ section.id }} .canvas-item p {
+      text-align: center !important;
+    }
+    .perf-canvas-{{ section.id }} .item-arrow-1,
+    .perf-canvas-{{ section.id }} .item-arrow-2 {
+      display: none !important;
+    }
+    .perf-canvas-{{ section.id }} .item-main-image {
+      max-width: 320px !important;
     }
   }
 {%- endstyle -%}
 
-<section class="sol-matrix-{{ section.id }}">
-  <div class="matrix-workspace-canvas">
+<section class="perf-canvas-{{ section.id }}">
+  <div class="canvas-container">
     
-    {%- if section.settings.arrow_1_img != blank -%}
-      <div class="controlled-arrow arrow-instance-1">
-        <img src="{{ section.settings.arrow_1_img | image_url: width: 150 }}" alt="Indicator Pointer Link">
-      </div>
-    {%- endif -%}
-
-    {%- if section.settings.arrow_2_img != blank -%}
-      <div class="controlled-arrow arrow-instance-2">
-        <img src="{{ section.settings.arrow_2_img | image_url: width: 150 }}" alt="Indicator Pointer Link">
-      </div>
-    {%- endif -%}
-
-    <div class="matrix-main-grid">
-      
-      <div class="matrix-left-col">
-        <div class="combined-showcase-image">
-          {%- if section.settings.combined_image != blank -%}
-            {{ section.settings.combined_image | image_url: width: 1100 | image_tag: loading: 'eager', alt: 'Our Diets Sourcing Showcase' }}
-          {%- else -%}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          {%- endif -%}
-        </div>
-
-        <div class="matrix-text-block para-bottom-left">
-          {{ section.settings.bottom_left_para }}
-        </div>
-      </div>
-
-      <div class="matrix-right-col">
-        <div class="matrix-text-block para-top-right">
-          {{ section.settings.top_right_para }}
-        </div>
-
-        <div class="heading-right-side">
-          {{ section.settings.right_heading }}
-        </div>
-      </div>
-
+    <!-- Point 1: Combined Dual Bowl Image (6 1 (2).jpg / image_247b00.png asset) -->
+    <div class="canvas-item item-main-image">
+      {%- if section.settings.combined_image != blank -%}
+        {{ section.settings.combined_image | image_url: width: 1000 | image_tag: loading: 'eager', alt: 'Food Composition Panel' }}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
     </div>
 
-    <div class="center-aligned-baseline-para">
-      {{ section.settings.center_baseline_para }}
+    <!-- Point 2: Custom Arrow Asset 1 -->
+    {%- if section.settings.arrow_1_img != blank -%}
+      <div class="canvas-item item-arrow-1">
+        <img src="{{ section.settings.arrow_1_img | image_url: width: 200 }}" style="width:100%; height:auto;" alt="Visual Path Arrow Link 1">
+      </div>
+    {%- endif -%}
+
+    <!-- Point 2: Custom Arrow Asset 2 -->
+    {%- if section.settings.arrow_2_img != blank -%}
+      <div class="canvas-item item-arrow-2">
+        <img src="{{ section.settings.arrow_2_img | image_url: width: 200 }}" style="width:100%; height:auto;" alt="Visual Path Arrow Link 2">
+      </div>
+    {%- endif -%}
+
+    <!-- Point 3: Top Right Paragraph -->
+    <div class="canvas-item canvas-para item-top-right-para">
+      {{ section.settings.top_right_para }}
+    </div>
+
+    <!-- Point 3: Bottom Left Paragraph -->
+    <div class="canvas-item canvas-para item-bottom-left-para">
+      {{ section.settings.bottom_left_para }}
+    </div>
+
+    <!-- Point 4: Right Side Bold Heading Element -->
+    <div class="canvas-item canvas-heading item-right-heading">
+      {{ section.settings.right_heading }}
+    </div>
+
+    <!-- Point 5: Center Aligned Core Paragraph Layout -->
+    <div class="canvas-item canvas-para item-center-para">
+      {{ section.settings.center_para }}
     </div>
 
   </div>
@@ -208,31 +183,11 @@
 
 {% schema %}
 {
-  "name": "Solution Matrix Blocks",
+  "name": "Asymmetric Perfect Canvas",
   "settings": [
     {
       "type": "header",
-      "content": "Section Base Canvas Setup"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 20,
-      "max": 160,
-      "step": 5,
-      "unit": "px",
-      "label": "Top Spacing Padding",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 20,
-      "max": 160,
-      "step": 5,
-      "unit": "px",
-      "label": "Bottom Spacing Padding",
-      "default": 80
+      "content": "Canvas Structure & Spacing"
     },
     {
       "type": "color",
@@ -241,27 +196,87 @@
       "default": "#fcd36a"
     },
     {
+      "type": "color",
+      "id": "text_color_dark",
+      "label": "Global Core Typography Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Structural Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Structural Padding",
+      "default": 80
+    },
+    {
       "type": "header",
-      "content": "Core Media Graphic Assets"
+      "content": "Graphic Media Library Uploads"
     },
     {
       "type": "image_picker",
       "id": "combined_image",
-      "label": "Combined Double Bowl Image File (6 1 (2).jpg)"
+      "label": "1. Combined Double Bowl Image File"
     },
     {
       "type": "image_picker",
       "id": "arrow_1_img",
-      "label": "Arrow Icon Asset 1"
+      "label": "2. Decorative Graphic Arrow 1"
     },
     {
       "type": "image_picker",
       "id": "arrow_2_img",
-      "label": "Arrow Icon Asset 2"
+      "label": "2. Decorative Graphic Arrow 2"
     },
     {
       "type": "header",
-      "content": "Arrow 1 Precision X & Y Coordinates"
+      "content": "Point 1: Main Image Position"
+    },
+    {
+      "type": "range",
+      "id": "img_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Horizontal Grid Alignment (From Left)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "img_y",
+      "min": 0,
+      "max": 800,
+      "step": 8,
+      "unit": "px",
+      "label": "Vertical Baseline Drop (From Top)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "img_w",
+      "min": 200,
+      "max": 700,
+      "step": 5,
+      "unit": "px",
+      "label": "Graphic Scale Bounds Width",
+      "default": 440
+    },
+    {
+      "type": "header",
+      "content": "Point 2: Arrow 1 Asset Coords"
     },
     {
       "type": "range",
@@ -270,32 +285,32 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "label": "Arrow 1 Horizontal Coordinate (Left)",
+      "label": "Arrow 1 Horizontal Coordinate",
       "default": 42
     },
     {
       "type": "range",
       "id": "arrow_1_y",
       "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "label": "Arrow 1 Vertical Coordinate (Top)",
-      "default": 18
+      "max": 800,
+      "step": 8,
+      "unit": "px",
+      "label": "Arrow 1 Vertical Coordinate",
+      "default": 120
     },
     {
       "type": "range",
       "id": "arrow_1_w",
-      "min": 20,
-      "max": 120,
-      "step": 2,
+      "min": 15,
+      "max": 115,
+      "step": 1,
       "unit": "px",
-      "label": "Arrow 1 Structural Sizing Scale Width",
-      "default": 36
+      "label": "Arrow 1 Vector Width Scale",
+      "default": 40
     },
     {
       "type": "header",
-      "content": "Arrow 2 Precision X & Y Coordinates"
+      "content": "Point 2: Arrow 2 Asset Coords"
     },
     {
       "type": "range",
@@ -304,77 +319,193 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "label": "Arrow 2 Horizontal Coordinate (Left)",
-      "default": 24
+      "label": "Arrow 2 Horizontal Coordinate",
+      "default": 25
     },
     {
       "type": "range",
       "id": "arrow_2_y",
       "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "label": "Arrow 2 Vertical Coordinate (Top)",
-      "default": 46
+      "max": 800,
+      "step": 8,
+      "unit": "px",
+      "label": "Arrow 2 Vertical Coordinate",
+      "default": 456
     },
     {
       "type": "range",
       "id": "arrow_2_w",
-      "min": 20,
-      "max": 120,
-      "step": 2,
+      "min": 15,
+      "max": 115,
+      "step": 1,
       "unit": "px",
-      "label": "Arrow 2 Structural Sizing Scale Width",
-      "default": 36
+      "label": "Arrow 2 Vector Width Scale",
+      "default": 35
     },
     {
       "type": "header",
-      "content": "Text Element Content Libraries"
+      "content": "Point 3: Top Right Paragraph"
     },
     {
       "type": "richtext",
       "id": "top_right_para",
-      "label": "Top Right Description text",
+      "label": "Top Right Content Wording",
       "default": "<p>Real foods contain over 26000 distinct bio-active compounds, these compounds play critical roles in modulating inflammation, supporting gut microbiome and preventing chronic disease</p>"
+    },
+    {
+      "type": "range",
+      "id": "tr_para_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Horizontal Placement (From Left)",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "tr_para_y",
+      "min": 0,
+      "max": 800,
+      "step": 8,
+      "unit": "px",
+      "label": "Vertical Placement (From Top)",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "tr_para_w",
+      "min": 150,
+      "max": 650,
+      "step": 5,
+      "unit": "px",
+      "label": "Paragraph Max Text Wrapping Box Width",
+      "default": 420
+    },
+    {
+      "type": "header",
+      "content": "Point 3: Bottom Left Paragraph"
     },
     {
       "type": "richtext",
       "id": "bottom_left_para",
-      "label": "Bottom Left Description text",
+      "label": "Bottom Left Content Wording",
       "default": "<p>Whole food also bring in the benefits of co-factors also called \"The Entourage Effect\" bringing the synergistic benefit of real food</p>"
+    },
+    {
+      "type": "range",
+      "id": "bl_para_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Horizontal Placement (From Left)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "bl_para_y",
+      "min": 0,
+      "max": 800,
+      "step": 8,
+      "unit": "px",
+      "label": "Vertical Placement (From Top)",
+      "default": 552
+    },
+    {
+      "type": "range",
+      "id": "bl_para_w",
+      "min": 150,
+      "max": 650,
+      "step": 5,
+      "unit": "px",
+      "label": "Paragraph Max Text Wrapping Box Width",
+      "default": 380
+    },
+    {
+      "type": "header",
+      "content": "Point 4: Right Side Heading"
     },
     {
       "type": "richtext",
       "id": "right_heading",
-      "label": "Right Side Main Bold Heading",
+      "label": "Right Heading Content Wording",
       "default": "<p>Our Formulations have human-grade, bioavailable ingredients best suited to your pet's digestive system.</p>"
     },
     {
-      "type": "richtext",
-      "id": "center_baseline_para",
-      "label": "Center Aligned Baseline Paragraph text",
-      "default": "<p>Since all nutrients are not equal, we source specific amino acid profiles to build muscle and immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it.</p>"
+      "type": "range",
+      "id": "r_heading_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Horizontal Placement (From Left)",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "r_heading_y",
+      "min": 0,
+      "max": 800,
+      "step": 8,
+      "unit": "px",
+      "label": "Vertical Placement (From Top)",
+      "default": 384
+    },
+    {
+      "type": "range",
+      "id": "r_heading_w",
+      "min": 200,
+      "max": 800,
+      "step": 6,
+      "unit": "px",
+      "label": "Heading Max Text Wrapping Box Width",
+      "default": 500
     },
     {
       "type": "header",
-      "content": "Global Design Theme Palette Overrides"
+      "content": "Point 5: Center Aligned Para"
     },
     {
-      "type": "color",
-      "id": "text_color_dark",
-      "label": "Primary Base Dark Typography Color",
-      "default": "#1a1a1a"
+      "type": "richtext",
+      "id": "center_para",
+      "label": "Center Paragraph Content Wording",
+      "default": "<p>Since all nutrients are not equal, we source specific amino acid profiles to build muscle and immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it.</p>"
     },
     {
-      "type": "color",
-      "id": "text_color_accent",
-      "label": "Brand Focal Accent Highlight Color",
-      "default": "#d93829"
+      "type": "range",
+      "id": "c_para_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Anchor Center Position Axis",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "c_para_y",
+      "min": 0,
+      "max": 800,
+      "step": 8,
+      "unit": "px",
+      "label": "Vertical Drop Position Offset (From Top)",
+      "default": 680
+    },
+    {
+      "type": "range",
+      "id": "c_para_w",
+      "min": 300,
+      "max": 1100,
+      "step": 10,
+      "unit": "px",
+      "label": "Text Block Width Boundary Limit",
+      "default": 850
     }
   ],
   "presets": [
     {
-      "name": "Solution Matrix Blocks"
+      "name": "Asymmetric Perfect Canvas"
     }
   ]
 }
