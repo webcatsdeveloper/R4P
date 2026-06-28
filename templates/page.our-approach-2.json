@@ -222,22 +222,19 @@
         "curve_width": 180
       }
     },
-    "our_solution": {
-      "type": "our-solution",
+    "our_approach_bottom": {
+      "type": "our-approach-bottom",
       "settings": {
-        "padding_top": 40,
-        "padding_bottom": 80,
-        "bg_image": "shopify://shop_images/Group_59517_1.png",
-        "title_black": "Our",
-        "title_red": "Solution",
-        "top_right_heading": "We feed your pet <span class=\"os-bold-text-red\">real food</span>, <br>not processed science experiments",
-        "top_right_subtext": "Real foods contain over 26000 distinct bio-active compounds, these compounds play critical roles in modulating inflammation, supporting gut microbiome and preventing chronic disease",
-        "mid_left_text": "Whole food also bring in the benefits of co-factors also called \"The Entourage Effect\" bringing the synergistic benefit of real food",
-        "mid_image": "shopify://shop_images/Group_59521_0061c006-c4df-47f1-a246-c3a165bea2f1.png",
-        "bot_heading": "Our formulations have human-grade, bioavailable ingredients best suited to your pet's digestive system.",
-        "bot_subtext": "Since all nutrients are not equal, we source specific amino acid profiles to build muscle and immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it.",
-        "bot_image": "shopify://shop_images/ChatGPT_Image_Jun_18_2026_03_12_11_PM_1.png",
-        "bot_left_text": "No GMO, No Fillers, No Synthetic Chemicals, No Preservatives, No Binders"
+        "top_bg_image": "shopify://shop_images/Group_59517_4.png",
+        "top_bg_image_mobile": "shopify://shop_images/Group_59513_dac6f3c4-e010-412d-a4eb-3887de97bf0c.png",
+        "top_heading": "We feed your pet <span class=\"oab-text-red\">real food</span>,<br class=\"oab-desktop-only\">not processed science experiments",
+        "bg_image": "shopify://shop_images/Group_59518_1.png",
+        "bg_image_mobile": "shopify://shop_images/Group_59510_23f0e0e3-8f24-4364-9441-6233d574e395.png",
+        "text_1": "Our formulations have human-grade, bioavailable <br class=\"oab-desktop-only\">ingredients best suited to your pet's digestive system.",
+        "text_2": "Since all nutrients are not equal, we source specific amino acid profiles to build muscle and <br class=\"oab-desktop-only\">immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it.",
+        "text_3": "No GMO, No Fillers, No Synthetic <br class=\"oab-desktop-only\">Chemicals, No Preservatives, No Binders",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "our_certifications": {
@@ -358,13 +355,6 @@
         "heading": "What does this mean for your Pet?"
       }
     },
-    "our_approach_bottom": {
-      "type": "our-approach-bottom",
-      "settings": {
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "end_banner": {
       "type": "end-banner",
       "settings": {
@@ -386,12 +376,11 @@
     "pet_food_hero_ARqKUK",
     "our_solutions_2nd_section_W8NWQL",
     "ultra_processing",
-    "our_solution",
+    "our_approach_bottom",
     "our_certifications",
     "mfcd_minimal_processing",
     "naturally_fresh",
     "pet_benefits",
-    "our_approach_bottom",
     "end_banner"
   ]
 }
