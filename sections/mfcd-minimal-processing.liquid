@@ -54,6 +54,13 @@
     font-weight: 600;
   }
 
+  .desktop-only-text {
+    display: block !important;
+  }
+  .mobile-only-text {
+    display: none !important;
+  }
+
   @media screen and (max-width: 900px) {
     #shopify-section-{{ section.id }} {
       aspect-ratio: auto;
@@ -95,33 +102,62 @@
       text-align: center;
       font-size: 16px; /* Matched Figma size */
       line-height: 1.5;
-      max-width: 340px; /* Forces exact Figma natural wrap */
+      max-width: 380px; /* Forces exact Figma natural wrap */
       margin-left: auto;
       margin-right: auto;
     }
     
     /* Disable desktop forced line-breaks on mobile */
-    .mfcd-text-1 br, .mfcd-text-2 br {
+    .mfcd-text-1 br, .mfcd-text-2 br, .desktop-only-br {
       display: none;
     }
-    
-    /* Hide ONLY the second line break in the heading to merge "Minimal" and "processing" on mobile */
-    .mfcd-heading br:nth-of-type(2) {
-      display: none;
+
+    .desktop-only-text {
+      display: none !important;
+    }
+    .mobile-only-text {
+      display: block !important;
     }
   }
 </style>
 
 <div class="mfcd-container">
   <div class="mfcd-left">
-    <div class="mfcd-heading">
-      {{ section.settings.heading | newline_to_br }}
+    <!-- Desktop-only view of heading and text paragraphs -->
+    <div class="desktop-only-text">
+      <div class="mfcd-heading">
+        {{ section.settings.heading | newline_to_br }}
+      </div>
+      <div class="mfcd-text-1">
+        {{ section.settings.subtext_1 | newline_to_br }}
+      </div>
+      <div class="mfcd-text-2">
+        {{ section.settings.subtext_2 | newline_to_br }}
+      </div>
     </div>
-    <div class="mfcd-text-1">
-      {{ section.settings.subtext_1 | newline_to_br }}
-    </div>
-    <div class="mfcd-text-2">
-      {{ section.settings.subtext_2 | newline_to_br }}
+
+    <!-- Mobile-only view of heading and text paragraphs -->
+    <div class="mobile-only-text">
+      <div class="mfcd-heading">
+        {% assign clean_heading = section.settings.heading | newline_to_br | replace: '<br />', '[BR]' | replace: '<br>', '[BR]' | replace: '<br/>', '[BR]' %}
+        {% assign heading_parts = clean_heading | split: '[BR]' %}
+        {% for part in heading_parts %}
+          {{ part | strip }}
+          {% unless forloop.last %}
+            {% if forloop.index == 1 %}
+              <br>
+            {% else %}
+              {{ ' ' }}
+            {% endif %}
+          {% endunless %}
+        {% endfor %}
+      </div>
+      <div class="mfcd-text-1">
+        {{ section.settings.subtext_1 | newline_to_br | replace: '<br />', ' ' | replace: '<br>', ' ' | replace: '<br/>', ' ' }}
+      </div>
+      <div class="mfcd-text-2">
+        {{ section.settings.subtext_2 | newline_to_br | replace: '<br />', ' ' | replace: '<br>', ' ' | replace: '<br/>', ' ' }}
+      </div>
     </div>
   </div>
 </div>

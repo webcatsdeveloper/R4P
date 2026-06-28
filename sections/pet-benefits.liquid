@@ -83,6 +83,19 @@
       align-items: center;
       gap: 60px;
     }
+
+    .pet-benefits-item {
+      max-width: 280px;
+    }
+
+    .pet-benefits-text {
+      max-width: 260px;
+      margin: 0 auto;
+    }
+
+    .desktop-only-br {
+      display: none;
+    }
   }
 </style>
 
@@ -100,7 +113,7 @@
           {% endif %}
         </div>
         <div class="pet-benefits-text">
-          {{ block.settings.text | newline_to_br }}
+          {{ block.settings.text | newline_to_br | replace: '<br />', ' <br class="desktop-only-br" />' | replace: '<br>', ' <br class="desktop-only-br">' }}
         </div>
       </div>
     {% endfor %}
