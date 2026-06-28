@@ -298,6 +298,16 @@
         "mobile_bheart_right": "-10"
       }
     },
+    "section3_HbKKeE": {
+      "type": "section3",
+      "name": "Our Solution Plate Map",
+      "settings": {
+        "padding_top": 120,
+        "padding_bottom": 100,
+        "title_black": "Our",
+        "title_red": "Solution"
+      }
+    },
     "you_bring_the_love_7rpmFw": {
       "type": "you-bring-the-love",
       "blocks": {
@@ -454,6 +464,7 @@
     "pet_food_hero_ARqKUK",
     "new_section_w8WTAF",
     "we_know_Wh9cYW",
+    "section3_HbKKeE",
     "you_bring_the_love_7rpmFw",
     "pet_benefits_slider_XeT6Pj",
     "end_banner_tKEwHr"

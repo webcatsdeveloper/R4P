@@ -1,451 +1,477 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2 family=Baloo+Chettan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   #shopify-section-{{ section.id }} {
-    background-color: {{ section.settings.bg_color }};
     position: relative;
-    overflow: hidden;
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: transparent;
+    overflow: hidden;
   }
-
-  /* White Top Wave Layout Layer */
-  .solution-wave-top {
+  
+  .our-solution-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     z-index: 1;
+    overflow: hidden;
     pointer-events: none;
   }
+  .our-solution-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: top center;
+  }
 
-  .solution-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
+  .our-solution-container {
     position: relative;
     z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
     font-family: 'Baloo Chettan 2', sans-serif;
   }
 
-  /* Heading Styles */
-  .solution-main-title {
+  .os-title {
+    font-family: 'Baloo Chettan 2', sans-serif;
     font-size: 72px;
     font-weight: 800;
-    line-height: 1.1;
     text-align: center;
-    margin-bottom: 20px;
-    letter-spacing: -0.01em;
-  }
-  .solution-main-title .text-black { color: #111111; }
-  .solution-main-title .text-red { color: #d92b2b; }
-
-  .solution-subtitle {
-    font-size: 24px;
-    font-weight: 700;
+    margin-bottom: 40px; /* Increased to match Figma spacing */
+    line-height: 1.1;
     color: #111111;
-    text-align: right;
-    align-self: flex-end;
-    margin-right: 80px;
-    margin-bottom: 40px;
-    line-height: 1.3;
   }
-  .solution-subtitle span {
+  .os-title-red {
     color: #d92b2b;
   }
 
-  /* Interactive Middle Graphic & Info Layout */
-  .solution-interactive-layout {
+  /* Helper visibility classes */
+  .mobile-only-heading {
+    display: none !important;
+  }
+  .desktop-only-heading {
+    display: block !important;
+  }
+
+  /* Top Right Text (Mobile only layout helper) */
+  .os-top-right-text {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .os-top-right-text .os-bold-text {
+    max-width: 380px;
+    text-align: right;
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 700;
+    color: #111111;
+  }
+  .os-bold-text-red {
+    color: #d92b2b;
+  }
+
+  /* Middle Section Flex Layout */
+  .os-middle-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 10px auto;
+  }
+
+  .os-middle-image-wrapper {
+    position: relative;
+    width: 480px;
+    max-width: 100%;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+  .os-middle-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Desktop Position for side texts */
+  @media screen and (min-width: 901px) {
+    .os-side-text-left {
+      position: absolute;
+      right: 104%;
+      bottom: 22%;
+      width: 190px; /* Constrained to wrap exactly as in Figma */
+      text-align: right; /* Right-aligned as in Figma */
+      z-index: 3;
+    }
+
+    .os-side-content-right {
+      position: absolute;
+      left: 100%; /* Positioned closer to top bowl */
+      top: 5%; /* Aligned vertically with top raw bowl */
+      width: 380px; /* Wider to allow 'not processed science experiments' on one line */
+      text-align: right; /* Right-aligned as in Figma */
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; /* Align flex items to the right */
+      gap: 12px;
+    }
+    .os-side-content-right .os-bold-text {
+      font-size: 24px;
+      line-height: 1.25;
+      font-weight: 700;
+      color: #111111;
+      text-align: right; /* Right-aligned as in Figma */
+    }
+    .os-side-content-right .os-sub-text {
+      max-width: 220px; /* Constrained to wrap exactly as in Figma */
+      text-align: right; /* Right-aligned as in Figma */
+    }
+  }
+
+  .os-sub-text {
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  /* Bottom Text Area */
+  .os-bottom-text-area {
+    text-align: center;
+    max-width: 780px; /* Increased to fit 'system.' on Line 2 */
+    margin: 20px auto 15px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .os-bottom-text-area .os-bold-text {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #111111;
+  }
+
+  .os-bottom-text-area .os-sub-text {
+    max-width: 630px; /* Constrained to wrap exactly as in Figma */
+    margin: 0 auto;
+  }
+
+  /* Bottom Section Flex Layout */
+  .os-bottom-section {
     position: relative;
     width: 100%;
     max-width: 900px;
-    height: 620px;
-    margin-bottom: 40px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
   }
 
-  .solution-text-block {
+  .os-bottom-image-wrapper {
+    width: 380px;
+    max-width: 100%;
+    flex-shrink: 0;
+    z-index: 2;
+    margin-bottom: -30px; /* Overlaps bottom wave curve */
+  }
+  .os-bottom-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .os-bottom-left-text {
     position: absolute;
-    max-width: 280px;
-    font-size: 15px;
-    font-weight: 500;
-    color: #222222;
-    line-height: 1.45;
-  }
-  .solution-text-block.top-right {
-    top: 60px;
-    right: 40px;
-  }
-  .solution-text-block.bottom-left {
-    bottom: 120px;
     left: 20px;
-  }
-
-  /* Individual Graphic Asset Placements */
-  .img-asset-fresh-bowl {
-    position: absolute;
-    top: 0px;
-    left: 180px;
-    width: {{ section.settings.fresh_bowl_width }}px;
-    height: auto;
-  }
-
-  .img-asset-curved-text {
-    position: absolute;
-    top: 230px;
-    left: 140px;
-    width: {{ section.settings.curved_text_width }}px;
-    height: auto;
+    bottom: -38px; /* Aligns bottom of text container with bottom of bowl image */
+    max-width: 280px; /* Restrict width to wrap after 'Synthetic' exactly as in Figma (2 lines) */
+    text-align: left;
     z-index: 3;
   }
-
-  .img-asset-final-bowl {
-    position: absolute;
-    bottom: 40px;
-    left: 320px;
-    width: {{ section.settings.final_bowl_width }}px;
-    height: auto;
-    z-index: 2;
-  }
-
-  /* Bottom Statement Section */
-  .solution-footer-messages {
-    max-width: 780px;
-    text-align: center;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .solution-bold-statement {
-    font-size: 24px;
-    font-weight: 800;
+  .os-bottom-left-text .os-sub-text {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 600;
     color: #111111;
-    line-height: 1.3;
-  }
-
-  .solution-fine-print {
-    font-size: 15px;
-    font-weight: 500;
-    color: #333333;
-    line-height: 1.5;
-    padding: 0 20px;
   }
 
   /* ******************************************
-     Mobile Layout Adjustments (Exact Stack Match)
+     Mobile Breakpoints (Exactly matching image_165fbc.png)
      ****************************************** */
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 900px) {
     #shopify-section-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top_mobile }}px;
-      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      padding-top: 40px;
+      padding-bottom: 40px;
     }
 
-    .solution-container {
+    .our-solution-container {
       padding: 0 20px;
-    }
-
-    .solution-main-title {
-      font-size: 56px;
-      margin-bottom: 32px;
-    }
-    .solution-main-title span {
-      display: block;
-    }
-
-    .solution-subtitle {
-      display: none; /* Subtitle hidden on mobile to reflect mockup specification */
-    }
-
-    /* Convert absolute layout map into clean vertical standard flow */
-    .solution-interactive-layout {
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: auto;
-      gap: 32px;
-      margin-bottom: 32px;
     }
 
-    .solution-text-block {
-      position: relative !important;
-      top: auto !important;
-      left: auto !important;
-      right: auto !important;
-      bottom: auto !important;
+    .os-title { 
+      font-size: 54px; 
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    /* Enforce strict vertical stacked sequence layout */
+    .os-middle-section,
+    .os-middle-image-wrapper,
+    .os-bottom-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      width: 100%;
       max-width: 100%;
-      text-align: center;
-      padding: 0 10px;
-      font-size: 16px;
+      margin: 0 auto;
+      height: auto;
+      transform: none;
     }
 
-    .img-asset-fresh-bowl,
-    .img-asset-curved-text,
-    .img-asset-final-bowl {
-      position: relative !important;
-      top: auto !important;
-      left: auto !important;
-      right: auto !important;
-      bottom: auto !important;
+    /* Target descriptive blocks layout order precisely */
+    .os-side-content-right {
+      order: 1;
+      width: 100%;
+      text-align: center;
+      margin: 0 auto 32px auto;
+      padding: 0;
+    }
+    .os-side-content-right .os-sub-text {
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #111111;
+      max-width: 100%;
+    }
+
+    .os-middle-image-wrapper img {
+      order: 2;
+      width: 85%;
+      max-width: 290px;
       margin: 0 auto;
     }
 
-    .img-asset-fresh-bowl {
-      width: 80%;
-      max-width: 260px;
-      order: 2;
-    }
-
-    .img-asset-curved-text {
-      width: 90%;
-      max-width: 320px;
-      margin-top: -10px;
-      margin-bottom: -10px;
+    .os-bottom-image-wrapper {
       order: 3;
+      width: 95%;
+      max-width: 340px;
+      margin: 20px auto;
     }
 
-    .img-asset-final-bowl {
-      width: 80%;
-      max-width: 260px;
+    .os-side-text-left {
       order: 4;
-    }
-
-    /* Re-order text components around graphics based on mobile mock image */
-    .solution-text-block.top-right { order: 1; }
-    .solution-text-block.bottom-left { order: 5; }
-
-    .solution-bold-statement {
-      font-size: 21px;
-      padding: 0 10px;
-    }
-
-    .solution-fine-print {
-      font-size: 14px;
+      width: 100%;
+      text-align: center;
+      margin: 24px auto 32px auto;
       padding: 0;
+    }
+    .os-side-text-left .os-sub-text {
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #111111;
+    }
+
+    .os-bottom-text-area {
+      order: 5;
+      width: 100%;
+      margin: 0 auto 24px auto;
+      text-align: center;
+      gap: 16px;
+    }
+    .os-bottom-text-area .os-bold-text {
+      font-size: 22px;
+      line-height: 1.3;
+    }
+    .os-bottom-text-area .os-sub-text {
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 100%;
+    }
+
+    /* Completely hide auxiliary helper visibility modules inherited from legacy desktop layouts */
+    .mobile-only-heading,
+    .desktop-only-heading,
+    .os-top-right-text,
+    .os-bottom-left-text {
+      display: none !important;
     }
   }
 </style>
 
-<div class="solution-wrapper">
-  {% if section.settings.top_wave_image != blank %}
-    <img class="solution-wave-top" src="{{ section.settings.top_wave_image | img_url: 'master' }}" alt="" loading="lazy">
-  {% endif %}
+{% if section.settings.bg_image %}
+  <img class="our-solution-bg" src="{{ section.settings.bg_image | img_url: 'master' }}" alt="Background">
+{% endif %}
 
-  <div class="solution-container">
-    <h2 class="solution-main-title">
-      <span class="text-black">{{ section.settings.title_black }}</span>
-      <span class="text-red">{{ section.settings.title_red }}</span>
-    </h2>
+<div class="our-solution-container">
+  <h2 class="os-title">
+    <span class="os-title-black">{{ section.settings.title_black }}</span>
+    <span class="os-title-red">{{ section.settings.title_red }}</span>
+  </h2>
 
-    {% if section.settings.subtitle_text != blank %}
-      <div class="solution-subtitle">{{ section.settings.subtitle_text }}</div>
-    {% endif %}
+  <div class="os-top-right-text mobile-only-heading">
+    <div class="os-bold-text">{{ section.settings.top_right_heading }}</div>
+  </div>
 
-    <div class="solution-interactive-layout">
-      {% if section.settings.fresh_bowl_image != blank %}
-        <img class="img-asset-fresh-bowl" src="{{ section.settings.fresh_bowl_image | img_url: 'master' }}" alt="Fresh real pet food ingredients" loading="lazy">
+  <div class="os-middle-section">
+    <div class="os-middle-image-wrapper">
+      {% if section.settings.mid_image %}
+        <img src="{{ section.settings.mid_image | img_url: 'master' }}" alt="Middle Graphic">
       {% endif %}
-
-      <div class="solution-text-block top-right">
-        {{ section.settings.text_top_right }}
+      
+      <div class="os-side-text-left">
+        <div class="os-sub-text">{{ section.settings.mid_left_text }}</div>
       </div>
-
-      {% if section.settings.curved_text_image != blank %}
-        <img class="img-asset-curved-text" src="{{ section.settings.curved_text_image | img_url: 'master' }}" alt="Our diets are made from real foods ribbon banner" loading="lazy">
-      {% endif %}
-
-      {% if section.settings.final_bowl_image != blank %}
-        <img class="img-asset-final-bowl" src="{{ section.settings.final_bowl_image | img_url: 'master' }}" alt="Completed human grade pet formulation" loading="lazy">
-      {% endif %}
-
-      <div class="solution-text-block bottom-left">
-        {{ section.settings.text_bottom_left }}
+      
+      <div class="os-side-content-right">
+        <div class="os-bold-text desktop-only-heading">{{ section.settings.top_right_heading }}</div>
+        <div class="os-sub-text">{{ section.settings.top_right_subtext }}</div>
       </div>
     </div>
+  </div>
 
-    <div class="solution-footer-messages">
-      <div class="solution-bold-statement">{{ section.settings.footer_bold_statement }}</div>
-      <div class="solution-fine-print">{{ section.settings.footer_fine_print }}</div>
+  <div class="os-bottom-text-area">
+    <div class="os-bold-text">{{ section.settings.bot_heading }}</div>
+    <div class="os-sub-text">{{ section.settings.bot_subtext }}</div>
+  </div>
+
+  <div class="os-bottom-section">
+    <div class="os-bottom-image-wrapper">
+      {% if section.settings.bot_image %}
+        <img src="{{ section.settings.bot_image | img_url: 'master' }}" alt="Bottom Bowl">
+      {% endif %}
+    </div>
+    
+    <div class="os-bottom-left-text">
+      <div class="os-sub-text">{{ section.settings.bot_left_text }}</div>
     </div>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Our Solution Plate Map",
+  "name": "Our Solution",
   "settings": [
-    {
-      "type": "header",
-      "content": "Color Schemes & Spacing"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background Color",
-      "default": "#fcd269"
-    },
     {
       "type": "range",
       "id": "padding_top",
-      "min": 40,
+      "min": 0,
       "max": 200,
       "step": 4,
       "unit": "px",
-      "label": "Desktop Padding Top",
-      "default": 120
+      "label": "Padding Top",
+      "default": 80
     },
     {
       "type": "range",
       "id": "padding_bottom",
-      "min": 40,
+      "min": 0,
       "max": 200,
       "step": 4,
       "unit": "px",
-      "label": "Desktop Padding Bottom",
-      "default": 100
+      "label": "Padding Bottom",
+      "default": 80
     },
     {
-      "type": "range",
-      "id": "padding_top_mobile",
-      "min": 20,
-      "max": 140,
-      "step": 4,
-      "unit": "px",
-      "label": "Mobile Padding Top",
-      "default": 60
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom_mobile",
-      "min": 20,
-      "max": 140,
-      "step": 4,
-      "unit": "px",
-      "label": "Mobile Padding Bottom",
-      "default": 60
-    },
-    {
-      "type": "header",
-      "content": "Core Heading Content"
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image (Yellow shape)"
     },
     {
       "type": "text",
       "id": "title_black",
-      "label": "Main Heading Prefix (Black)",
+      "label": "Title (Black text)",
       "default": "Our"
     },
     {
       "type": "text",
       "id": "title_red",
-      "label": "Main Heading Suffix (Red)",
+      "label": "Title (Red text)",
       "default": "Solution"
     },
     {
-      "type": "textarea",
-      "id": "subtitle_text",
-      "label": "Desktop Callout Subtitle",
-      "default": "We feed your pet <span>real food</span>,<br>not processed science experiments"
-    },
-    {
       "type": "header",
-      "content": "Graphic Elements Assets"
-    },
-    {
-      "type": "image_picker",
-      "id": "top_wave_image",
-      "label": "White Top Wave Overlap Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "fresh_bowl_image",
-      "label": "Fresh Bowl Image Component"
-    },
-    {
-      "type": "image_picker",
-      "id": "curved_text_image",
-      "label": "Our Diets Banner Image Component"
-    },
-    {
-      "type": "image_picker",
-      "id": "final_bowl_image",
-      "label": "Final Bowled Food Product Component"
-    },
-    {
-      "type": "header",
-      "content": "Graphic Dimensions Calibration (Desktop)"
-    },
-    {
-      "type": "range",
-      "id": "fresh_bowl_width",
-      "min": 150,
-      "max": 450,
-      "step": 5,
-      "unit": "px",
-      "label": "Fresh Bowl Width",
-      "default": 310
-    },
-    {
-      "type": "range",
-      "id": "curved_text_width",
-      "min": 200,
-      "max": 600,
-      "step": 5,
-      "unit": "px",
-      "label": "Curved Text Width",
-      "default": 440
-    },
-    {
-      "type": "range",
-      "id": "final_bowl_width",
-      "min": 150,
-      "max": 450,
-      "step": 5,
-      "unit": "px",
-      "label": "Final Bowl Width",
-      "default": 325
-    },
-    {
-      "type": "header",
-      "content": "Side Information Blocks Description Content"
+      "content": "Middle Section (Image + Text)"
     },
     {
       "type": "textarea",
-      "id": "text_top_right",
-      "label": "Top Right Paragraph text",
+      "id": "top_right_heading",
+      "label": "Top Right Heading",
+      "default": "We feed your pet <span class='os-bold-text-red'>real food</span>, <br>not processed science experiments"
+    },
+    {
+      "type": "textarea",
+      "id": "top_right_subtext",
+      "label": "Top Right Subtext",
       "default": "Real foods contain over 26000 distinct bio-active compounds, these compounds play critical roles in modulating inflammation, supporting gut microbiome and preventing chronic disease"
     },
     {
+      "type": "header",
+      "content": "Middle Grid"
+    },
+    {
       "type": "textarea",
-      "id": "text_bottom_left",
-      "label": "Bottom Left Paragraph text",
-      "default": "Whole food also bring in the benefits of co-factors also called 'The Entourage Effect' bringing the synergistic benefit of real food"
+      "id": "mid_left_text",
+      "label": "Middle Left Text",
+      "default": "Whole food also bring in the benefits of co-factors also called \"The Entourage Effect\" bringing the synergistic benefit of real food"
+    },
+    {
+      "type": "image_picker",
+      "id": "mid_image",
+      "label": "Middle Image (Kibble bowl)"
     },
     {
       "type": "header",
-      "content": "Footer Statements Elements"
+      "content": "Bottom Text Area"
     },
     {
       "type": "textarea",
-      "id": "footer_bold_statement",
-      "label": "Bold Suitability Statement Summary",
+      "id": "bot_heading",
+      "label": "Bottom Heading",
       "default": "Our formulations have human-grade, bioavailable ingredients best suited to your pet's digestive system."
     },
     {
       "type": "textarea",
-      "id": "footer_fine_print",
-      "label": "Nutrient Fine Print Detail",
+      "id": "bot_subtext",
+      "label": "Bottom Subtext",
       "default": "Since all nutrients are not equal, we source specific amino acid profiles to build muscle and immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it."
+    },
+    {
+      "type": "header",
+      "content": "Bottom Grid"
+    },
+    {
+      "type": "image_picker",
+      "id": "bot_image",
+      "label": "Bottom Center Image (Divided raw bowl)"
+    },
+    {
+      "type": "textarea",
+      "id": "bot_left_text",
+      "label": "Bottom Left Text",
+      "default": "No GMO, No Fillers, No Synthetic Chemicals, No Preservatives, No Binders"
     }
   ],
   "presets": [
     {
-      "name": "Our Solution Plate Map"
+      "name": "Our Solution"
     }
   ]
 }
