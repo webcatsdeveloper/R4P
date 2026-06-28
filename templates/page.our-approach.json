@@ -301,7 +301,15 @@
     "section3_HbKKeE": {
       "type": "section3",
       "name": "Our Solution Plate Map",
-      "settings": {}
+      "settings": {
+        "yellow_bg_image": "shopify://shop_images/Intersect.png",
+        "plate_image": "shopify://shop_images/ChatGPT_Image_Jun_18_2026_03_12_11_PM_1_79bf2784-62e5-4e09-9f3c-04545d7ad69f.png",
+        "text_color_main": "#1a1a1a",
+        "text_color_brand": "#d93829",
+        "left_tags": "No GMO, No Fillers, No Synthetic\nChemicals, No Preservatives, No Binders",
+        "main_statement": "<p>The meats we use are from <strong>HACCP approved, ISO certified plants</strong><br/>with full traceability and are <strong>anti-biotic residue free</strong><br/>The fish we use are <strong>wild caught</strong></p>",
+        "safety_body_text": "Safety is non-negotiable, which is why we enforce a strict kill step at every stage of our process including Bacteriophages, traditional Curing agents (vinegar/citric acid), low temperature long duration pasteurization and UV exposure before packing.\nAs a final protective barrier, the packs are vacuum-sealed and flushed with modified atmospheric gases."
+      }
     },
     "you_bring_the_love_7rpmFw": {
       "type": "you-bring-the-love",
