@@ -9,13 +9,13 @@
   }
 
   .ultra-processing-container {
-    max-width: 1200px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: 0 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 60px;
+    gap: 80px;
   }
 
   .ultra-processing-left {
@@ -33,7 +33,7 @@
 
   .ultra-processing-heading {
     font-family: 'Baloo Chettan 2', sans-serif;
-    font-size: 64px;
+    font-size: 72px;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 60px;
@@ -61,17 +61,25 @@
     flex-direction: column;
   }
 
-  .ultra-processing-icon {
-    width: 24px;
-    height: 24px;
-    background-color: #fcebb6;
-    border-radius: 4px;
-    margin-bottom: 16px;
+  /* Icon styles */
+  .ultra-processing-icon-wrapper {
+    margin-bottom: 20px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+  }
+  .ultra-processing-icon-mobile {
+    display: none;
+  }
+  .ultra-processing-icon-desktop {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
   }
 
   .ultra-processing-item-title {
     font-family: 'Baloo Chettan 2', sans-serif;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 800;
     color: #111111;
     margin-bottom: 12px;
@@ -79,34 +87,42 @@
 
   .ultra-processing-item-desc {
     font-family: 'Baloo Chettan 2', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     color: #555555;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   .ultra-processing-impact {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
   }
 
   .ultra-impact-black {
     font-family: 'Baloo Chettan 2', sans-serif;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 800;
     color: #111111;
   }
 
   .ultra-impact-red {
     font-family: 'Baloo Chettan 2', sans-serif;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 800;
     color: #d92b2b;
     margin-left: 40px;
   }
 
-  .ultra-processing-right img {
+  /* Image responsive display */
+  .ultra-processing-img-desktop {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  .ultra-processing-img-mobile {
+    display: none;
     max-width: 100%;
     height: auto;
     object-fit: contain;
@@ -120,14 +136,65 @@
     
     .ultra-processing-grid {
       grid-template-columns: 1fr;
+      gap: 30px;
     }
 
     .ultra-processing-heading {
-      font-size: 48px;
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 40px;
     }
-    
+
+    .ultra-processing-item {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    /* Icon mobile rendering */
+    .ultra-processing-icon-wrapper {
+      margin-bottom: 16px;
+      height: auto;
+      display: block;
+    }
+    .has-mobile-icon .ultra-processing-icon-mobile {
+      display: block;
+      width: 44px; /* Size matching Figma mockup */
+      height: auto;
+    }
+    .has-mobile-icon .ultra-processing-icon-desktop {
+      display: none;
+    }
+
+    .ultra-processing-item-title {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .ultra-processing-item-desc {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .ultra-impact-black {
+      font-size: 20px;
+      text-align: center;
+    }
+
     .ultra-impact-red {
-      margin-left: 20px;
+      font-size: 24px;
+      margin-left: 0;
+      text-align: center;
+    }
+
+    /* Mobile image toggle */
+    .ultra-processing-img-desktop {
+      display: none;
+    }
+    .ultra-processing-img-mobile {
+      display: block;
+      width: 100%;
+      max-width: 320px; /* Aligns dog image layout nicely on mobile */
+      margin: 0 auto;
     }
   }
 </style>
@@ -141,8 +208,13 @@
 
     <div class="ultra-processing-grid">
       {% for block in section.blocks %}
-        <div class="ultra-processing-item" {{ block.shopify_attributes }}>
-          <div class="ultra-processing-icon" style="background-color: {{ block.settings.icon_color }};"></div>
+        <div class="ultra-processing-item {% if block.settings.icon_image != blank %}has-mobile-icon{% endif %}" {{ block.shopify_attributes }}>
+          <div class="ultra-processing-icon-wrapper">
+            {% if block.settings.icon_image != blank %}
+              <img class="ultra-processing-icon-mobile" src="{{ block.settings.icon_image | img_url: 'master' }}" alt="{{ block.settings.title }}" loading="lazy">
+            {% endif %}
+            <div class="ultra-processing-icon-desktop" style="background-color: {{ block.settings.icon_color }};"></div>
+          </div>
           <div class="ultra-processing-item-title">{{ block.settings.title }}</div>
           <div class="ultra-processing-item-desc">{{ block.settings.description }}</div>
         </div>
@@ -157,7 +229,12 @@
 
   <div class="ultra-processing-right">
     {% if section.settings.main_image %}
-      <img src="{{ section.settings.main_image | img_url: 'master' }}" alt="Pet Health Impact" width="800" height="auto" loading="lazy">
+      <img class="ultra-processing-img-desktop" src="{{ section.settings.main_image | img_url: 'master' }}" alt="Pet Health Impact" width="800" height="auto" loading="lazy">
+    {% endif %}
+    {% if section.settings.main_image_mobile %}
+      <img class="ultra-processing-img-mobile" src="{{ section.settings.main_image_mobile | img_url: 'master' }}" alt="Pet Health Impact Mobile" width="800" height="auto" loading="lazy">
+    {% elsif section.settings.main_image %}
+      <img class="ultra-processing-img-mobile fallback" src="{{ section.settings.main_image | img_url: 'master' }}" alt="Pet Health Impact Mobile" width="800" height="auto" loading="lazy">
     {% endif %}
   </div>
 </div>
@@ -220,6 +297,11 @@
       "type": "image_picker",
       "id": "main_image",
       "label": "Main Right Image (Dog with Arrow)"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image_mobile",
+      "label": "Mobile Main Image (Dog without Arrow)"
     }
   ],
   "blocks": [
@@ -233,6 +315,11 @@
           "id": "icon_color",
           "label": "Icon Color",
           "default": "#fcebb6"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image (Mobile only)"
         },
         {
           "type": "text",

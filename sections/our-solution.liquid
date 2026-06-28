@@ -42,7 +42,7 @@
     font-size: 72px;
     font-weight: 800;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px; /* Increased to match Figma spacing */
     line-height: 1.1;
     color: #111111;
   }
@@ -50,7 +50,15 @@
     color: #d92b2b;
   }
 
-  /* Top Right Text perfectly aligned */
+  /* Helper visibility classes */
+  .mobile-only-heading {
+    display: none !important;
+  }
+  .desktop-only-heading {
+    display: block !important;
+  }
+
+  /* Top Right Text (Mobile only layout helper) */
   .os-top-right-text {
     width: 100%;
     max-width: 820px;
@@ -100,18 +108,33 @@
       position: absolute;
       right: 104%;
       bottom: 22%;
-      width: 250px;
-      text-align: left;
+      width: 190px; /* Constrained to wrap exactly as in Figma */
+      text-align: right; /* Right-aligned as in Figma */
       z-index: 3;
     }
 
-    .os-side-text-right {
+    .os-side-content-right {
       position: absolute;
-      left: 104%;
-      top: 22%;
-      width: 250px;
-      text-align: left;
+      left: 100%; /* Positioned closer to top bowl */
+      top: 5%; /* Aligned vertically with top raw bowl */
+      width: 380px; /* Wider to allow 'not processed science experiments' on one line */
+      text-align: right; /* Right-aligned as in Figma */
       z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; /* Align flex items to the right */
+      gap: 12px;
+    }
+    .os-side-content-right .os-bold-text {
+      font-size: 24px;
+      line-height: 1.25;
+      font-weight: 700;
+      color: #111111;
+      text-align: right; /* Right-aligned as in Figma */
+    }
+    .os-side-content-right .os-sub-text {
+      max-width: 220px; /* Constrained to wrap exactly as in Figma */
+      text-align: right; /* Right-aligned as in Figma */
     }
   }
 
@@ -125,7 +148,7 @@
   /* Bottom Text Area */
   .os-bottom-text-area {
     text-align: center;
-    max-width: 720px;
+    max-width: 780px; /* Increased to fit 'system.' on Line 2 */
     margin: 20px auto 15px auto;
     display: flex;
     flex-direction: column;
@@ -133,10 +156,15 @@
   }
 
   .os-bottom-text-area .os-bold-text {
-    font-size: 22px;
+    font-size: 32px;
     font-weight: 800;
-    line-height: 1.35;
+    line-height: 1.25;
     color: #111111;
+  }
+
+  .os-bottom-text-area .os-sub-text {
+    max-width: 630px; /* Constrained to wrap exactly as in Figma */
+    margin: 0 auto;
   }
 
   /* Bottom Section Flex Layout */
@@ -166,19 +194,27 @@
   .os-bottom-left-text {
     position: absolute;
     left: 20px;
-    bottom: 10px;
-    max-width: 260px;
+    bottom: -38px; /* Aligns bottom of text container with bottom of bowl image */
+    max-width: 280px; /* Restrict width to wrap after 'Synthetic' exactly as in Figma (2 lines) */
     text-align: left;
     z-index: 3;
   }
   .os-bottom-left-text .os-sub-text {
-    font-size: 12px;
+    font-size: 16px;
     line-height: 1.4;
-    color: #444444;
+    font-weight: 600;
+    color: #111111;
   }
 
   @media screen and (max-width: 900px) {
     .os-title { font-size: 50px; }
+    
+    .mobile-only-heading {
+      display: flex !important;
+    }
+    .desktop-only-heading {
+      display: none !important;
+    }
     
     .os-top-right-text {
       justify-content: center;
@@ -194,12 +230,27 @@
       margin: 20px auto;
     }
     
-    .os-side-text-left, .os-side-text-right {
+    .os-side-text-left, .os-side-content-right {
       position: static;
       width: 100%;
       text-align: center;
       margin: 20px auto;
       padding: 0 10px;
+    }
+    
+    .os-side-content-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    .os-side-content-right .os-bold-text {
+      font-size: 20px;
+      text-align: center;
+    }
+    .os-side-content-right .os-sub-text {
+      text-align: center;
+      max-width: 100%;
     }
     
     .os-bottom-section {
@@ -217,6 +268,12 @@
       text-align: center;
       margin: 10px auto;
     }
+    .os-bottom-left-text .os-sub-text {
+      font-size: 14px;
+    }
+    .os-bottom-text-area .os-bold-text {
+      font-size: 24px;
+    }
   }
 </style>
 
@@ -230,7 +287,7 @@
     <span class="os-title-red">{{ section.settings.title_red }}</span>
   </div>
 
-  <div class="os-top-right-text">
+  <div class="os-top-right-text mobile-only-heading">
     <div class="os-bold-text">{{ section.settings.top_right_heading }}</div>
   </div>
 
@@ -244,7 +301,8 @@
         <div class="os-sub-text">{{ section.settings.mid_left_text }}</div>
       </div>
       
-      <div class="os-side-text-right">
+      <div class="os-side-content-right">
+        <div class="os-bold-text desktop-only-heading">{{ section.settings.top_right_heading }}</div>
         <div class="os-sub-text">{{ section.settings.top_right_subtext }}</div>
       </div>
     </div>
