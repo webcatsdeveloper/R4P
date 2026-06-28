@@ -1,0 +1,326 @@
+{%- style -%}
+  .sol-header-{{ section.id }} {
+    --text-dark: {{ section.settings.text_color_dark }};
+    --text-accent: {{ section.settings.text_color_accent }};
+    background-color: #ffffff;
+    position: relative;
+    padding-top: 60px;
+    overflow: hidden;
+    font-family: inherit;
+  }
+
+  .sol-header-{{ section.id }} .sol-header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* Asymmetric Playful Curved Heading Styling matching image_2302c5.png */
+  .sol-header-{{ section.id }} .sol-main-title {
+    font-size: 4.5rem;
+    font-weight: 900;
+    text-align: center;
+    color: var(--text-dark);
+    margin: 0 auto 20px auto;
+    letter-spacing: -0.02em;
+    display: block;
+    transform: rotate({{ section.settings.heading_rotation }}deg) translateY({{ section.settings.heading_y_offset }}px);
+    transform-origin: center center;
+  }
+  
+  .sol-header-{{ section.id }} .sol-main-title span {
+    color: var(--text-accent);
+  }
+
+  /* Absolute Positioned Decorative Grey Curve with dynamic X/Y coordinates */
+  .sol-header-{{ section.id }} .grey-loop-decorator {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    left: {{ section.settings.loop_x_pos }}%;
+    top: {{ section.settings.loop_y_pos }}px;
+    width: {{ section.settings.loop_width }}px;
+    height: auto;
+  }
+  .sol-header-{{ section.id }} .grey-loop-decorator img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Layered Adaptive Wave Background Graphic Base */
+  .sol-header-{{ section.id }} .wavy-bg-canvas {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    margin-top: -50px;
+  }
+  .sol-header-{{ section.id }} .wavy-bg-canvas img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Content Wrapper floating safely inside the yellow wave territory */
+  .sol-header-{{ section.id }} .wavy-inner-content {
+    position: absolute;
+    bottom: 15%;
+    right: 10%;
+    max-width: 480px;
+    text-align: right;
+    z-index: 5;
+  }
+
+  .sol-header-{{ section.id }} .sol-intro-text p {
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--text-dark);
+    margin: 0;
+  }
+  .sol-header-{{ section.id }} .sol-intro-text strong {
+    color: var(--text-accent);
+    font-weight: 700;
+  }
+
+  /* Mobile Layout Adaptations */
+  @media (max-width: 768px) {
+    .sol-header-{{ section.id }} {
+      padding-top: 40px;
+    }
+    .sol-header-{{ section.id }} .sol-main-title {
+      font-size: 2.8rem;
+      transform: rotate({{ section.settings.heading_rotation_mobile }}deg);
+      margin-bottom: 40px;
+    }
+    .sol-header-{{ section.id }} .wavy-bg-canvas {
+      margin-top: 0;
+    }
+    .sol-header-{{ section.id }} .wavy-inner-content {
+      position: relative;
+      right: unset;
+      bottom: unset;
+      margin: -60px auto 0 auto;
+      padding: 0 20px 40px 20px;
+      text-align: center;
+      max-width: 100%;
+    }
+    .sol-header-{{ section.id }} .sol-intro-text p {
+      font-size: 1.15rem;
+    }
+    .sol-header-{{ section.id }} .grey-loop-decorator {
+      left: {{ section.settings.loop_x_pos_mobile }}%;
+      top: {{ section.settings.loop_y_pos_mobile }}px;
+      width: {{ section.settings.loop_width_mobile }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="sol-header-{{ section.id }}">
+  
+  <!-- Manual Position-Controlled Grey Loop Curve Utility Graphic -->
+  {%- if section.settings.grey_loop_image != blank -%}
+    <div class="grey-loop-decorator">
+      {{ section.settings.grey_loop_image | image_url: width: 400 | image_tag: loading: 'eager', alt: 'Decorative Contour Line' }}
+    </div>
+  {%- endif -%}
+
+  <div class="sol-header-container">
+    <!-- Main Heading Display Layout -->
+    <h1 class="sol-main-title">
+      {{ section.settings.title_part_1 }} <span>{{ section.settings.title_part_2 }}</span>
+    </h1>
+  </div>
+
+  <!-- Responsive Wave Matrix Layer -->
+  <div class="wavy-bg-canvas">
+    <picture>
+      {%- if section.settings.wave_bg_mobile != blank -%}
+        <source media="(max-width: 768px)" srcset="{{ section.settings.wave_bg_mobile | image_url: width: 768 }}">
+      {%- endif -%}
+      {%- if section.settings.wave_bg_desktop != blank -%}
+        <img src="{{ section.settings.wave_bg_desktop | image_url: width: 2200 }}" loading="eager" alt="Wave Background Trim">
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </picture>
+
+    <!-- Anchored Inline Copy Elements -->
+    <div class="wavy-inner-content">
+      <div class="sol-intro-text">
+        {{ section.settings.intro_richtext }}
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Solution Header Workspace",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Graphic Core Assets"
+    },
+    {
+      "type": "image_picker",
+      "id": "wave_bg_desktop",
+      "label": "Yellow Wave Background (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "wave_bg_mobile",
+      "label": "Yellow Wave Background (Mobile)"
+    },
+    {
+      "type": "image_picker",
+      "id": "grey_loop_image",
+      "label": "Grey Loop Graphic Asset"
+    },
+    {
+      "type": "header",
+      "content": "Grey Curve X & Y Axis Positioning Coordinates"
+    },
+    {
+      "type": "range",
+      "id": "loop_x_pos",
+      "min": -10,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Desktop X Position (From Left Edge)",
+      "default": -2
+    },
+    {
+      "type": "range",
+      "id": "loop_y_pos",
+      "min": -50,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop Y Position (From Top Edge)",
+      "default": 85
+    },
+    {
+      "type": "range",
+      "id": "loop_width",
+      "min": 50,
+      "max": 350,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop Loop Scale Width",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "loop_x_pos_mobile",
+      "min": -20,
+      "max": 80,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile X Position",
+      "default": -5
+    },
+    {
+      "type": "range",
+      "id": "loop_y_pos_mobile",
+      "min": -50,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Y Position",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "loop_width_mobile",
+      "min": 30,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Loop Scale Width",
+      "default": 90
+    },
+    {
+      "type": "header",
+      "content": "Typography Copy Elements"
+    },
+    {
+      "type": "text",
+      "id": "title_part_1",
+      "label": "Main Title (Dark Wording)",
+      "default": "Our"
+    },
+    {
+      "type": "text",
+      "id": "title_part_2",
+      "label": "Main Title (Accent Color Wording)",
+      "default": "Solution"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_richtext",
+      "label": "Right Sub-Banner Text Content",
+      "default": "<p>We feed your pet <strong>real food</strong>,<br>not processed science experiments</p>"
+    },
+    {
+      "type": "header",
+      "content": "Typography Curvature & Alignment Offsets"
+    },
+    {
+      "type": "range",
+      "id": "heading_rotation",
+      "min": -10,
+      "max": 10,
+      "step": 0.5,
+      "unit": "deg",
+      "label": "Desktop Heading Tilt Angle",
+      "default": -1.5
+    },
+    {
+      "type": "range",
+      "id": "heading_rotation_mobile",
+      "min": -10,
+      "max": 10,
+      "step": 0.5,
+      "unit": "deg",
+      "label": "Mobile Heading Tilt Angle",
+      "default": -1
+    },
+    {
+      "type": "range",
+      "id": "heading_y_offset",
+      "min": -50,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Vertical Push (Y Offset)",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Global Theme Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color_dark",
+      "label": "Primary Base Dark Wording",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color_accent",
+      "label": "Brand Focal Accent Red",
+      "default": "#d93829"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Solution Header Workspace"
+    }
+  ]
+}
+{% endschema %}
