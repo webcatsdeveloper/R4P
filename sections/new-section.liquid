@@ -20,6 +20,8 @@
     align-items: center;
     gap: 60px;
     position: relative;
+    /* Extra padding at bottom to prevent footer overlap from absolute impact text */
+    padding-bottom: 120px; 
   }
 
   .ultra-processing-left {
@@ -107,11 +109,17 @@
     line-height: 1.45;
   }
 
+  /* ******************************************
+     Impact Module Below Arrow
+     ****************************************** */
   .ultra-processing-impact {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-top: 12px;
+    position: absolute;
+    bottom: 20px;
+    left: 120px; 
+    z-index: 3;
   }
 
   .ultra-impact-black {
@@ -128,6 +136,8 @@
     font-weight: 800;
     color: #d92b2b;
     line-height: 1.2;
+    position: relative;
+    z-index: 1; /* Text above arrow */
   }
 
   .ultra-processing-img-desktop {
@@ -165,18 +175,12 @@
     top: {{ section.settings.padding_top }}px; /* Aligns top of arrow with top of heading */
     left: 45%; /* Starting point across header */
     width: calc(100% - 45% + 40px); /* Extend beyond right edge of container */
-    height: calc(100% - {{ section.settings.padding_top }}px - 40px); /* Calculated to end at impact statement T */
+    height: calc(100% - {{ section.settings.padding_top }}px - 140px); /* Shortened slightly to stay completely above text output loop */
     background-image: url('{{ "thick_black_arrow.png" | asset_url }}');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: top center;
     z-index: 0;
-  }
-
-  /* Calculate exact ending based on layout (Align with T of text) */
-  .ultra-impact-red {
-    position: relative;
-    z-index: 1; /* Text above arrow */
   }
   
   /* ******************************************
@@ -185,6 +189,7 @@
   @media screen and (max-width: 991px) {
     .ultra-processing-container {
       gap: 40px;
+      padding-bottom: 0px;
     }
     .ultra-processing-heading {
       font-size: 52px;
@@ -193,6 +198,11 @@
     #shopify-section-{{ section.id }}::before,
     .ultra-processing-green-curve {
         display: none;
+    }
+    .ultra-processing-impact {
+      position: relative;
+      bottom: auto;
+      left: auto;
     }
   }
 
@@ -221,6 +231,7 @@
     
     .ultra-processing-left {
       width: 100%;
+      padding-left: 0px;
     }
 
     .ultra-processing-right {
@@ -237,6 +248,7 @@
       grid-template-columns: 1fr;
       gap: 32px;
       margin-bottom: 36px;
+      width: 100%;
     }
 
     .has-mobile-icon .ultra-processing-icon-mobile {
@@ -260,6 +272,9 @@
     .ultra-processing-impact {
       align-items: center;
       text-align: center;
+      position: relative;
+      bottom: auto;
+      left: auto;
     }
 
     .ultra-impact-black {
