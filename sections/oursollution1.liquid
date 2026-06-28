@@ -18,20 +18,21 @@
     z-index: 3;
   }
 
-  /* Fluid Wavy SVG Heading Engine matching image_231628.png blueprint curve */
-  .sol-header-{{ section.id }} .sol-header-svg-title {
+  /* Position Wrapper for independent X and Y control matching image_232166.png */
+  .sol-header-{{ section.id }} .sol-header-svg-alignment-wrapper {
     width: 100%;
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
     display: block;
-    transform: translateY({{ section.settings.heading_y_offset }}px);
+    transform: translate({{ section.settings.heading_x_offset }}px, {{ section.settings.heading_y_offset }}px);
+    transform-origin: center center;
   }
   
-  .sol-header-{{ section.id }} .sol-header-svg-title text {
-    font-size: 86px;
+  .sol-header-{{ section.id }} .sol-header-svg-alignment-wrapper svg text {
+    font-size: 84px;
     font-weight: 900;
     font-family: inherit;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
 
   /* Absolute Positioned Decorative Grey Curve with dynamic X/Y coordinates */
@@ -63,13 +64,13 @@
     display: block;
   }
 
-  /* Content Wrapper floating safely inside the yellow wave territory (Left-Aligned) */
+  /* Content Wrapper floating safely inside the yellow wave territory (Strict Left-Aligned) */
   .sol-header-{{ section.id }} .wavy-inner-content {
     position: absolute;
     bottom: 18%;
     right: 8%;
     max-width: 520px;
-    text-align: left; /* Changed from right to left alignment */
+    text-align: left;
     z-index: 5;
   }
 
@@ -79,7 +80,7 @@
     line-height: 1.45;
     color: var(--text-dark);
     margin: 0;
-    text-align: left; /* Enforces strict left alignment on block text */
+    text-align: left;
   }
   .sol-header-{{ section.id }} .sol-intro-text strong {
     color: var(--text-accent);
@@ -92,8 +93,11 @@
       padding-top: calc({{ section.settings.padding_top }}px * 0.7);
       padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
     }
-    .sol-header-{{ section.id }} .sol-header-svg-title text {
-      font-size: 52px; /* Scale down cleanly for compact viewports */
+    .sol-header-{{ section.id }} .sol-header-svg-alignment-wrapper {
+      transform: translate({{ section.settings.heading_x_offset_mobile }}px, {{ section.settings.heading_y_offset_mobile }}px);
+    }
+    .sol-header-{{ section.id }} .sol-header-svg-alignment-wrapper svg text {
+      font-size: 54px;
     }
     .sol-header-{{ section.id }} .wavy-bg-canvas {
       margin-top: 10px;
@@ -120,6 +124,7 @@
 
 <section class="sol-header-{{ section.id }}">
   
+  <!-- Manual Position-Controlled Grey Loop Curve Utility Graphic -->
   {%- if section.settings.grey_loop_image != blank -%}
     <div class="grey-loop-decorator">
       {{ section.settings.grey_loop_image | image_url: width: 400 | image_tag: loading: 'eager', alt: 'Decorative Contour Line' }}
@@ -127,11 +132,13 @@
   {%- endif -%}
 
   <div class="sol-header-container">
-    <div class="sol-header-svg-title">
-      <svg viewBox="0 0 1000 140" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-        <path id="headingWavePath-{{ section.id }}" d="M 120,110 Q 340,60 540,95 T 880,80" fill="transparent" />
-        <text startOffset="50%" text-anchor="middle">
-          <textPath href="#headingWavePath-{{ section.id }}" startOffset="50%" text-anchor="middle">
+    <!-- Fluid Wave Text Path Mapping Positioner Block -->
+    <div class="sol-header-svg-alignment-wrapper">
+      <svg viewBox="0 0 1000 150" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <!-- Re-engineered bezier baseline path flowing downward to align perfectly with the background graphic vector -->
+        <path id="headingWavePath-{{ section.id }}" d="M 100,75 Q 380,118 880,105" fill="transparent" />
+        <text>
+          <textPath href="#headingWavePath-{{ section.id }}" startOffset="45%" text-anchor="middle">
             <tspan fill="var(--text-dark)">{{ section.settings.title_part_1 }} </tspan>
             <tspan fill="var(--text-accent)">{{ section.settings.title_part_2 }}</tspan>
           </textPath>
@@ -140,6 +147,7 @@
     </div>
   </div>
 
+  <!-- Responsive Wave Matrix Layer -->
   <div class="wavy-bg-canvas">
     <picture>
       {%- if section.settings.wave_bg_mobile != blank -%}
@@ -152,6 +160,7 @@
       {%- endif -%}
     </picture>
 
+    <!-- Anchored Left-Aligned Subtext Box Container -->
     <div class="wavy-inner-content">
       <div class="sol-intro-text">
         {{ section.settings.intro_richtext }}
@@ -210,7 +219,51 @@
     },
     {
       "type": "header",
-      "content": "Grey Curve X & Y Axis Positioning Coordinates"
+      "content": "Heading Fine Positioning (X & Y Control)"
+    },
+    {
+      "type": "range",
+      "id": "heading_x_offset",
+      "min": -150,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop Move Horizontal (Right/Left)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_y_offset",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop Move Vertical (Up/Down)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "heading_x_offset_mobile",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Move Horizontal",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "heading_y_offset_mobile",
+      "min": -50,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Move Vertical",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Grey Curve Positioning Coordinates"
     },
     {
       "type": "range",
@@ -293,20 +346,6 @@
       "id": "intro_richtext",
       "label": "Right Sub-Banner Text Content",
       "default": "<p>We feed your pet <strong>real food</strong>,<br>not processed science experiments</p>"
-    },
-    {
-      "type": "header",
-      "content": "Typography Curvature & Alignment Offsets"
-    },
-    {
-      "type": "range",
-      "id": "heading_y_offset",
-      "min": -50,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Heading Vertical Push (Y Offset)",
-      "default": 10
     },
     {
       "type": "header",
