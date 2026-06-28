@@ -18,21 +18,21 @@
     z-index: 3;
   }
 
-  /* Position Wrapper for independent X and Y control matching image_232166.png */
+  /* SVG Character Path Control Wrapper Container */
   .sol-header-{{ section.id }} .sol-header-svg-alignment-wrapper {
     width: 100%;
-    max-width: 950px;
+    max-width: 1100px;
     margin: 0 auto;
     display: block;
-    transform: translate({{ section.settings.heading_x_offset }}px, {{ section.settings.heading_y_offset }}px);
+    transform: translate({{ section.settings.global_x_offset }}px, {{ section.settings.global_y_offset }}px);
     transform-origin: center center;
   }
   
   .sol-header-{{ section.id }} .sol-header-svg-alignment-wrapper svg text {
-    font-size: 84px;
+    font-size: 86px;
     font-weight: 900;
     font-family: inherit;
-    letter-spacing: -0.01em;
+    letter-spacing: {{ section.settings.global_letter_spacing }}px;
   }
 
   /* Absolute Positioned Decorative Grey Curve with dynamic X/Y coordinates */
@@ -94,10 +94,11 @@
       padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
     }
     .sol-header-{{ section.id }} .sol-header-svg-alignment-wrapper {
-      transform: translate({{ section.settings.heading_x_offset_mobile }}px, {{ section.settings.heading_y_offset_mobile }}px);
+      transform: translate({{ section.settings.global_x_offset_mobile }}px, {{ section.settings.global_y_offset_mobile }}px);
     }
     .sol-header-{{ section.id }} .sol-header-svg-alignment-wrapper svg text {
-      font-size: 54px;
+      font-size: 50px;
+      letter-spacing: calc({{ section.settings.global_letter_spacing }}px * 0.6);
     }
     .sol-header-{{ section.id }} .wavy-bg-canvas {
       margin-top: 10px;
@@ -134,13 +135,29 @@
   <div class="sol-header-container">
     <!-- Fluid Wave Text Path Mapping Positioner Block -->
     <div class="sol-header-svg-alignment-wrapper">
-      <svg viewBox="0 0 1000 150" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 1100 160" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
         <!-- Re-engineered bezier baseline path flowing downward to align perfectly with the background graphic vector -->
-        <path id="headingWavePath-{{ section.id }}" d="M 100,75 Q 380,118 880,105" fill="transparent" />
+        <path id="headingWavePath-{{ section.id }}" d="M 50,75 Q 380,122 1050,105" fill="transparent" />
         <text>
-          <textPath href="#headingWavePath-{{ section.id }}" startOffset="45%" text-anchor="middle">
-            <tspan fill="var(--text-dark)">{{ section.settings.title_part_1 }} </tspan>
-            <tspan fill="var(--text-accent)">{{ section.settings.title_part_2 }}</tspan>
+          <textPath href="#headingWavePath-{{ section.id }}" startOffset="{{ section.settings.global_start_offset }}%">
+            
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'letter' -%}
+                <tspan 
+                  fill="{% if block.settings.color_accent %}var(--text-accent){% else %}var(--text-dark){% endif %}"
+                  dx="{{ block.settings.x_shift }}"
+                  dy="{{ block.settings.y_shift }}"
+                  rotate="{{ block.settings.rotation }}"
+                  {{ block.shopify_attributes }}>
+                  {%- if block.settings.char != blank -%}
+                    {{ block.settings.char }}
+                  {%- else -%}
+                    &nbsp;<!-- Preserves clean breaking layout space character values -->
+                  {%- endif -%}
+                </tspan>
+              {%- endif -%}
+            {%- endfor -%}
+
           </textPath>
         </text>
       </svg>
@@ -219,46 +236,66 @@
     },
     {
       "type": "header",
-      "content": "Heading Fine Positioning (X & Y Control)"
+      "content": "Global Word Matrix Tracking Controls"
     },
     {
       "type": "range",
-      "id": "heading_x_offset",
+      "id": "global_start_offset",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Global Slide Along Path (X Shift)",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "global_letter_spacing",
+      "min": -10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Global Text tracking Space",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "global_x_offset",
       "min": -150,
       "max": 300,
       "step": 5,
       "unit": "px",
-      "label": "Desktop Move Horizontal (Right/Left)",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "heading_y_offset",
-      "min": -50,
-      "max": 150,
-      "step": 2,
-      "unit": "px",
-      "label": "Desktop Move Vertical (Up/Down)",
-      "default": 10
-    },
-    {
-      "type": "range",
-      "id": "heading_x_offset_mobile",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "Mobile Move Horizontal",
+      "label": "Desktop Global Move Right/Left",
       "default": 0
     },
     {
       "type": "range",
-      "id": "heading_y_offset_mobile",
+      "id": "global_y_offset",
+      "min": -50,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop Global Move Up/Down",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "global_x_offset_mobile",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Global Move Right/Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "global_y_offset_mobile",
       "min": -50,
       "max": 100,
       "step": 2,
       "unit": "px",
-      "label": "Mobile Move Vertical",
+      "label": "Mobile Global Move Up/Down",
       "default": 0
     },
     {
@@ -327,19 +364,7 @@
     },
     {
       "type": "header",
-      "content": "Typography Copy Elements"
-    },
-    {
-      "type": "text",
-      "id": "title_part_1",
-      "label": "Main Title Wording 1",
-      "default": "Our"
-    },
-    {
-      "type": "text",
-      "id": "title_part_2",
-      "label": "Main Title Wording 2",
-      "default": "Solution"
+      "content": "Paragraph Copy Elements"
     },
     {
       "type": "richtext",
@@ -364,9 +389,73 @@
       "default": "#d93829"
     }
   ],
+  "blocks": [
+    {
+      "type": "letter",
+      "name": "Individual Character",
+      "settings": [
+        {
+          "type": "text",
+          "id": "char",
+          "label": "Letter Wording (Leave blank for Space)",
+          "default": "A"
+        },
+        {
+          "type": "checkbox",
+          "id": "color_accent",
+          "label": "Turn Accent Color (Red)",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "x_shift",
+          "min": -40,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Horizontal Micro-Shift (X)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "y_shift",
+          "min": -50,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Vertical Baseline Shift (Y)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "rotation",
+          "min": -50,
+          "max": 50,
+          "step": 1,
+          "unit": "deg",
+          "label": "Character Micro-Rotation",
+          "default": 0
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Solution Header Workspace"
+      "name": "Solution Header Workspace",
+      "blocks": [
+        { "type": "letter", "settings": { "char": "O" } },
+        { "type": "letter", "settings": { "char": "u" } },
+        { "type": "letter", "settings": { "char": "r" } },
+        { "type": "letter", "settings": { "char": "" } },
+        { "type": "letter", "settings": { "char": "S", "color_accent": true } },
+        { "type": "letter", "settings": { "char": "o", "color_accent": true } },
+        { "type": "letter", "settings": { "char": "l", "color_accent": true } },
+        { "type": "letter", "settings": { "char": "u", "color_accent": true } },
+        { "type": "letter", "settings": { "char": "t", "color_accent": true } },
+        { "type": "letter", "settings": { "char": "i", "color_accent": true } },
+        { "type": "letter", "settings": { "char": "o", "color_accent": true } },
+        { "type": "letter", "settings": { "char": "n", "color_accent": true } }
+      ]
     }
   ]
 }
