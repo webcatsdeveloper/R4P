@@ -326,8 +326,8 @@
           "settings": {
             "char": "r",
             "color_accent": false,
-            "x_shift": 25,
-            "y_shift": -10,
+            "x_shift": 0,
+            "y_shift": 25,
             "rotation": 0
           }
         },
