@@ -217,8 +217,8 @@
         "main_image": "shopify://shop_images/Group_59522_1.png",
         "main_image_mobile": "shopify://shop_images/7_1.png",
         "green_curve": "shopify://shop_images/Vector_7_1.png",
-        "curve_x": -5,
-        "curve_y": -80,
+        "curve_x": 0,
+        "curve_y": 0,
         "curve_width": 180
       }
     },
