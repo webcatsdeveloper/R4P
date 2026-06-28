@@ -8,6 +8,7 @@
     padding-bottom: {{ section.settings.padding_bottom }}px;
     background-color: {{ section.settings.bg_color }};
     overflow: hidden;
+    position: relative; /* Essential for relative positioning of the arrow */
   }
 
   .ultra-processing-container {
@@ -24,6 +25,7 @@
     flex: 1.2;
     display: flex;
     flex-direction: column;
+    z-index: 1; /* Keep content above arrow on mobile */
   }
 
   .ultra-processing-right {
@@ -32,6 +34,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    z-index: 1; /* Keep content above arrow on mobile */
   }
 
   .ultra-processing-heading {
@@ -136,13 +139,42 @@
     display: none;
   }
 
-  /* Responsive Breakpoints */
+  /* ******************************************
+     Desktop Arrow Positioning (Match Figma)
+     ****************************************** */
+  #shopify-section-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    top: {{ section.settings.padding_top }}px; /* Aligns top of arrow with top of heading */
+    left: 45%; /* Starting point across header */
+    width: calc(100% - 45% + 40px); /* Extend beyond right edge of container */
+    height: calc(100% - {{ section.settings.padding_top }}px - 40px); /* Calculated to end at impact statement T */
+    background-image: url('{{ "thick_black_arrow.png" | asset_url }}');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top center;
+    z-index: 0;
+  }
+
+  /* Calculate exact ending based on layout (Align with T of text) */
+  .ultra-impact-red {
+    position: relative;
+    z-index: 1; /* Text above arrow * /
+  }
+  
+  /* ******************************************
+     Mobile Breakpoints
+     ****************************************** */
   @media screen and (max-width: 991px) {
     .ultra-processing-container {
       gap: 40px;
     }
     .ultra-processing-heading {
       font-size: 52px;
+    }
+    /* Hide arrow on intermediate screens where it won't align * /
+    #shopify-section-{{ section.id }}::before {
+        display: none;
     }
   }
 
@@ -151,9 +183,20 @@
       padding-top: 40px;
       padding-bottom: 40px;
     }
+    
+    /* Re-position arrow for small screens * /
+    #shopify-section-{{ section.id }}::before {
+        display: block;
+        top: 20px; /* Shifted up relative to section content * /
+        left: 20%;
+        width: 80%;
+        height: 60%;
+        background-position: top left;
+        opacity: 0.8; /* Subtle * /
+    }
 
     .ultra-processing-container {
-      flex-direction: column-reverse;
+      flex-direction: column-reverse; /* Reverses order so image is above text * /
       padding: 0 24px;
       gap: 48px;
     }
@@ -258,7 +301,7 @@
       <img class="ultra-processing-img-mobile" src="{{ section.settings.main_image_mobile | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
     {% comment %} Fallback to desktop image if mobile picker is left blank {% endcomment %}
     {% elsif section.settings.main_image %}
-      <img class="ultra-processing-img-mobile" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
+      <img class="ultra-processing-img-mobile fallback" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
     {% endif %}
   </div>
 </div>
@@ -320,7 +363,7 @@
     {
       "type": "image_picker",
       "id": "main_image",
-      "label": "Main Right Image (Dog with Arrow)"
+      "label": "Main Right Image (Dog without Arrow)"
     },
     {
       "type": "image_picker",
