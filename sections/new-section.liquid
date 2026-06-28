@@ -8,7 +8,7 @@
     padding-bottom: {{ section.settings.padding_bottom }}px;
     background-color: {{ section.settings.bg_color }};
     overflow: hidden;
-    position: relative; /* Essential for relative positioning of the arrow */
+    position: relative;
   }
 
   .ultra-processing-container {
@@ -19,13 +19,14 @@
     flex-direction: row;
     align-items: center;
     gap: 60px;
+    position: relative;
   }
 
   .ultra-processing-left {
     flex: 1.2;
     display: flex;
     flex-direction: column;
-    z-index: 1; /* Keep content above arrow on mobile */
+    z-index: 2;
   }
 
   .ultra-processing-right {
@@ -34,7 +35,8 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 1; /* Keep content above arrow on mobile */
+    z-index: 2;
+    transform: translate({{ section.settings.img_offset_x }}px, {{ section.settings.img_offset_y }}px);
   }
 
   .ultra-processing-heading {
@@ -104,11 +106,15 @@
     line-height: 1.45;
   }
 
+  /* ******************************************
+     Impact Wrapper Fine-tuning Controls
+     ****************************************** */
   .ultra-processing-impact {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-top: 12px;
+    margin-top: {{ section.settings.impact_margin_top }}px;
+    transform: translate({{ section.settings.impact_offset_x }}px, {{ section.settings.impact_offset_y }}px);
   }
 
   .ultra-impact-black {
@@ -125,6 +131,8 @@
     font-weight: 800;
     color: #d92b2b;
     line-height: 1.2;
+    position: relative;
+    z-index: 3;
   }
 
   .ultra-processing-img-desktop {
@@ -140,30 +148,41 @@
   }
 
   /* ******************************************
-     Desktop Arrow Positioning (Match Figma)
+     Decorative Dynamic Background Components
      ****************************************** */
   #shopify-section-{{ section.id }}::before {
     content: '';
     position: absolute;
-    top: {{ section.settings.padding_top }}px; /* Aligns top of arrow with top of heading */
-    left: 45%; /* Starting point across header */
-    width: calc(100% - 45% + 40px); /* Extend beyond right edge of container */
-    height: calc(100% - {{ section.settings.padding_top }}px - 40px); /* Calculated to end at impact statement T */
-    background-image: url('{{ "thick_black_arrow.png" | asset_url }}');
+    top: {{ section.settings.padding_top }}px;
+    left: 42%;
+    width: calc(58% + 40px);
+    height: calc(100% - {{ section.settings.padding_top }}px - 20px);
+    {% if section.settings.arrow_image != blank %}
+      background-image: url('{{ section.settings.arrow_image | img_url: "master" }}');
+    {% else %}
+      background-image: url('{{ "thick_black_arrow.png" | asset_url }}');
+    {% endif %}
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: top center;
-    z-index: 0;
+    background-position: top left;
+    z-index: 1;
+    pointer-events: none;
   }
 
-  /* Calculate exact ending based on layout (Align with T of text) */
-  .ultra-impact-red {
-    position: relative;
-    z-index: 1; /* Text above arrow * /
+  {% if section.settings.green_curve_image != blank %}
+  .ultra-processing-green-curve {
+    position: absolute;
+    top: {{ section.settings.curve_pos_y }}px;
+    right: {{ section.settings.curve_pos_x }}px;
+    width: {{ section.settings.curve_width }}px;
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
   }
-  
+  {% endif %}
+
   /* ******************************************
-     Mobile Breakpoints
+     Responsive Breakpoints
      ****************************************** */
   @media screen and (max-width: 991px) {
     .ultra-processing-container {
@@ -172,9 +191,11 @@
     .ultra-processing-heading {
       font-size: 52px;
     }
-    /* Hide arrow on intermediate screens where it won't align * /
     #shopify-section-{{ section.id }}::before {
-        display: none;
+      display: none;
+    }
+    .ultra-processing-green-curve {
+      display: none;
     }
   }
 
@@ -183,20 +204,9 @@
       padding-top: 40px;
       padding-bottom: 40px;
     }
-    
-    /* Re-position arrow for small screens * /
-    #shopify-section-{{ section.id }}::before {
-        display: block;
-        top: 20px; /* Shifted up relative to section content * /
-        left: 20%;
-        width: 80%;
-        height: 60%;
-        background-position: top left;
-        opacity: 0.8; /* Subtle * /
-    }
 
     .ultra-processing-container {
-      flex-direction: column-reverse; /* Reverses order so image is above text * /
+      flex-direction: column-reverse;
       padding: 0 24px;
       gap: 48px;
     }
@@ -207,6 +217,7 @@
 
     .ultra-processing-right {
       width: 100%;
+      transform: none !important;
     }
 
     .ultra-processing-heading {
@@ -242,6 +253,8 @@
     .ultra-processing-impact {
       align-items: center;
       text-align: center;
+      margin-top: 24px;
+      transform: none !important;
     }
 
     .ultra-impact-black {
@@ -266,6 +279,10 @@
 </style>
 
 <div class="ultra-processing-container">
+  {% if section.settings.green_curve_image != blank %}
+    <img class="ultra-processing-green-curve" src="{{ section.settings.green_curve_image | img_url: 'master' }}" alt="Decorative graphic layer" loading="lazy">
+  {% endif %}
+
   <div class="ultra-processing-left">
     <h2 class="ultra-processing-heading">
       <span class="heading-black">{{ section.settings.heading_black }}</span>
@@ -299,7 +316,6 @@
     {% endif %}
     {% if section.settings.main_image_mobile %}
       <img class="ultra-processing-img-mobile" src="{{ section.settings.main_image_mobile | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
-    {% comment %} Fallback to desktop image if mobile picker is left blank {% endcomment %}
     {% elsif section.settings.main_image %}
       <img class="ultra-processing-img-mobile fallback" src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.heading_red }} Mobile" width="400" height="auto" loading="lazy">
     {% endif %}
@@ -310,6 +326,10 @@
 {
   "name": "Ultra-Processing",
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
     {
       "type": "color",
       "id": "bg_color",
@@ -337,6 +357,10 @@
       "default": 80
     },
     {
+      "type": "header",
+      "content": "Text Strings"
+    },
+    {
       "type": "text",
       "id": "heading_black",
       "label": "Heading (Black text)",
@@ -361,14 +385,120 @@
       "default": "The deficit shows up in your pet's health."
     },
     {
+      "type": "header",
+      "content": "Artwork Layers"
+    },
+    {
+      "type": "image_picker",
+      "id": "arrow_image",
+      "label": "Thick Black Arrow Asset"
+    },
+    {
       "type": "image_picker",
       "id": "main_image",
-      "label": "Main Right Image (Dog without Arrow)"
+      "label": "Main Image Layer (Dog & Bowl)"
     },
     {
       "type": "image_picker",
       "id": "main_image_mobile",
       "label": "Mobile Main Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "green_curve_image",
+      "label": "Separate Green Curve Asset"
+    },
+    {
+      "type": "header",
+      "content": "Green Curve Fine-Tuning"
+    },
+    {
+      "type": "range",
+      "id": "curve_pos_x",
+      "min": -100,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Green Curve X Offset (Right)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "curve_pos_y",
+      "min": -100,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Green Curve Y Offset (Top)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "curve_width",
+      "min": 50,
+      "max": 400,
+      "step": 5,
+      "unit": "px",
+      "label": "Green Curve Graphic Width",
+      "default": 180
+    },
+    {
+      "type": "header",
+      "content": "Main Image Fine-Tuning"
+    },
+    {
+      "type": "range",
+      "id": "img_offset_x",
+      "min": -150,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Dog Image Horizontal (X) Shift",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "img_offset_y",
+      "min": -150,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Dog Image Vertical (Y) Shift",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Impact Text Fine-Tuning"
+    },
+    {
+      "type": "range",
+      "id": "impact_margin_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Spacer Above Impact Module",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "impact_offset_x",
+      "min": -150,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Impact Module Horizontal (X) Shift",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "impact_offset_y",
+      "min": -150,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Impact Module Vertical (Y) Shift",
+      "default": 0
     }
   ],
   "blocks": [
