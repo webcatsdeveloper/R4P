@@ -106,32 +106,38 @@
     opacity: 0.95;
   }
 
-  /* Mobile Responsive Realization matching image_18a4e0.png perfectly */
+  /* Mobile Responsive Realization matching image_190638.png perfectly */
   @media (max-width: 768px) {
     .safety-sourcing-v2-{{ section.id }} .asymmetric-asset-grid {
       grid-template-columns: 1fr;
       text-align: center;
       gap: 0;
-      padding-top: 25px;
+      padding-top: 35px;
     }
     .safety-sourcing-v2-{{ section.id }} .left-tags-column {
       display: none;
     }
     .safety-sourcing-v2-{{ section.id }} .center-plate-column .plate-image-wrapper {
-      max-width: 310px;
+      max-width: 290px;
       margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
-    /* Configured static circular text ring matching visual frame of image_18a4e0.png */
+    /* Perfect center-aligned automatic spinning configuration */
     .safety-sourcing-v2-{{ section.id }} .mobile-text-ring {
       display: block;
       position: absolute;
-      top: -30px;
-      left: -30px;
-      width: calc(100% + 60px);
-      height: calc(100% + 60px);
+      top: 50%;
+      left: 50%;
+      width: 126%; 
+      height: 126%;
       z-index: 1;
       pointer-events: none;
+      transform-origin: center center;
+      animation: smoothSpinRing 35s linear infinite;
+      will-change: transform;
     }
 
     .safety-sourcing-v2-{{ section.id }} .main-statement-typography p {
@@ -146,11 +152,21 @@
       padding: 0 20px;
     }
   }
+
+  /* Anti-wobble rotation matrix calculation */
+  @keyframes smoothSpinRing {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
 {%- endstyle -%}
 
 <section class="safety-sourcing-v2-{{ section.id }}">
   
-  <!-- Adaptive Background Image System: Swaps cleanly based on device viewport widths -->
+  <!-- Adaptive Background Image System -->
   <picture class="graphic-bg-layer">
     {%- if section.settings.yellow_bg_image_mobile != blank -%}
       <source media="(max-width: 768px)" srcset="{{ section.settings.yellow_bg_image_mobile | image_url: width: 768 }}">
@@ -182,10 +198,10 @@
             {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
           {%- endif -%}
 
-          <!-- Exact Circular Typography Ring Asset matching layout bounds of image_18a4e0.png -->
-          <svg class="mobile-text-ring" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <!-- Mathematical exact 1:1 circle path to prevent geometric distortion -->
+          <svg class="mobile-text-ring" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
             <path id="mobileCirclePath-{{ section.id }}" d="M 250,250 m -222,0 a 222,222 0 1,1 444,0 a 222,222 0 1,1 -444,0" fill="transparent" />
-            <text fill="{{ section.settings.text_color_main }}" font-size="14.5" font-weight="700" letter-spacing="3.8px">
+            <text fill="{{ section.settings.text_color_main }}" font-size="14" font-weight="700" letter-spacing="4px">
               <textPath href="#mobileCirclePath-{{ section.id }}" startOffset="0%">
                 • No GMO • No Fillers • No Synthetic Chemicals • No Preservatives • No Binders • No GMO • No Fillers • No Synthetic Chemicals • No Preservatives • No Binders
               </textPath>
