@@ -2,7 +2,7 @@
   .sol-header-{{ section.id }} {
     --text-dark: {{ section.settings.text_color_dark }};
     --text-accent: {{ section.settings.text_color_accent }};
-    background-color: #ffffff;
+    background-color: {{ section.settings.mobile_bg_color }};
     position: relative;
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -93,12 +93,102 @@
     display: none;
   }
 
+  /* Desktop Flat Content Layout */
+  .sol-header-{{ section.id }} .sol-desktop-content-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 60px 80px 100px 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+  }
+
+  .sol-header-{{ section.id }} .sol-desktop-title-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .sol-header-{{ section.id }} .sol-desktop-title-wrapper span {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 110px;
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    display: block;
+  }
+
+  .sol-header-{{ section.id }} .sol-desktop-title-wrapper .sol-desk-dark {
+    color: var(--text-dark);
+  }
+
+  .sol-header-{{ section.id }} .sol-desktop-title-wrapper .sol-desk-accent {
+    color: var(--text-accent);
+  }
+
+  .sol-header-{{ section.id }} .sol-desktop-text-wrapper {
+    max-width: 440px;
+    font-family: 'Baloo Chettan 2', sans-serif;
+    text-align: left;
+  }
+
+  .sol-header-{{ section.id }} .sol-desktop-text-wrapper p {
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--text-dark);
+    margin: 0;
+  }
+
+  .sol-header-{{ section.id }} .sol-desktop-text-wrapper strong {
+    color: var(--text-accent);
+    font-weight: 800;
+  }
+
+  @media (min-width: 769px) {
+    .sol-header-{{ section.id }} .sol-header-container,
+    .sol-header-{{ section.id }} .wavy-bg-canvas {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .sol-header-{{ section.id }} .sol-desktop-content-container {
+      padding: 40px 40px 80px 40px;
+    }
+    .sol-header-{{ section.id }} .sol-desktop-title-wrapper span {
+      font-size: 80px;
+    }
+    .sol-header-{{ section.id }} .sol-desktop-text-wrapper p {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .sol-header-{{ section.id }} .sol-desktop-content-container {
+      padding: 30px 20px 60px 20px;
+      gap: 30px;
+    }
+    .sol-header-{{ section.id }} .sol-desktop-title-wrapper span {
+      font-size: 64px;
+    }
+    .sol-header-{{ section.id }} .sol-desktop-text-wrapper p {
+      font-size: 18px;
+    }
+  }
+
   /* Strict Mobile Layout Adaptations Matching image_245c80.png Exactly */
   @media (max-width: 768px) {
     .sol-header-{{ section.id }} {
       padding-top: 0;
       padding-bottom: 0;
       background-color: {{ section.settings.mobile_bg_color }}; /* Enforces clean solid canvas fill */
+    }
+    .sol-header-{{ section.id }} .sol-desktop-content-container {
+      display: none !important;
     }
     .sol-header-{{ section.id }} .sol-header-container {
       display: none !important; /* Disables Desktop dynamic curved text wrapper */
@@ -153,6 +243,17 @@
   <div class="sol-mobile-title-wrapper">
     <span class="sol-mob-dark">{{ section.settings.title_part_1 }}</span>
     <span class="sol-mob-accent">{{ section.settings.title_part_2 }}</span>
+  </div>
+
+  <!-- Flat Stacked Desktop Title & Content (Activates on viewports 769px and above) -->
+  <div class="sol-desktop-content-container">
+    <div class="sol-desktop-title-wrapper">
+      <span class="sol-desk-dark">{{ section.settings.title_part_1 }}</span>
+      <span class="sol-desk-accent">{{ section.settings.title_part_2 }}</span>
+    </div>
+    <div class="sol-desktop-text-wrapper">
+      {{ section.settings.intro_richtext }}
+    </div>
   </div>
 
   <div class="sol-header-container">
