@@ -97,7 +97,7 @@
   .sol-header-{{ section.id }} .sol-desktop-content-container {
     max-width: 1320px;
     margin: 0 auto;
-    padding: 60px 80px 100px 80px;
+    padding: 80px 120px 80px 120px; /* Added more left/right padding */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -132,7 +132,7 @@
   .sol-header-{{ section.id }} .sol-desktop-text-wrapper {
     max-width: 440px;
     font-family: 'Baloo Chettan 2', sans-serif;
-    text-align: left;
+    text-align: right; /* Right-align to match screenshot */
   }
 
   .sol-header-{{ section.id }} .sol-desktop-text-wrapper p {
@@ -141,6 +141,7 @@
     line-height: 1.25;
     color: var(--text-dark);
     margin: 0;
+    text-align: right; /* Right-align to match screenshot */
   }
 
   .sol-header-{{ section.id }} .sol-desktop-text-wrapper strong {
@@ -252,7 +253,11 @@
       <span class="sol-desk-accent">{{ section.settings.title_part_2 }}</span>
     </div>
     <div class="sol-desktop-text-wrapper">
-      {{ section.settings.intro_richtext }}
+      {%- if section.settings.intro_richtext != blank -%}
+        {{ section.settings.intro_richtext }}
+      {%- else -%}
+        <p>We feed your pet <strong class="sol-desk-accent">real food</strong>,<br>not processed science experiments</p>
+      {%- endif -%}
     </div>
   </div>
 
