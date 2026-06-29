@@ -406,11 +406,11 @@
         "padding_top": 0,
         "padding_bottom": 0,
         "left_curve_image": "shopify://shop_images/Vector_8_3.png",
-        "left_curve_x": -5,
+        "left_curve_x": 0,
         "left_curve_y": 100,
         "left_curve_width": 150,
         "right_curve_image": "shopify://shop_images/Vector_7_2.png",
-        "right_curve_x": -5,
+        "right_curve_x": 0,
         "right_curve_y": 300,
         "right_curve_width": 150
       }
