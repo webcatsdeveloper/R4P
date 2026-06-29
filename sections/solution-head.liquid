@@ -254,9 +254,9 @@
     </div>
     <div class="sol-desktop-text-wrapper">
       {%- if section.settings.intro_richtext != blank -%}
-        {{ section.settings.intro_richtext }}
+        {{ section.settings.intro_richtext | replace: 'real food', '<strong>real food</strong>' }}
       {%- else -%}
-        <p>We feed your pet <strong class="sol-desk-accent">real food</strong>,<br>not processed science experiments</p>
+        <p>We feed your pet <strong>real food</strong>,<br>not processed science experiments</p>
       {%- endif -%}
     </div>
   </div>
