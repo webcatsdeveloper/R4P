@@ -35,10 +35,10 @@
     padding: 0 40px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start; /* Fixed: align content to top to prevent heading from being pushed off-screen under the sticky header */
     gap: 60px;
     position: relative;
-    padding-bottom: 240px; /* Pushes HTML content above the yellow wave text */
+    padding-bottom: 220px; /* Pushes HTML content above the yellow wave text */
   }
 
   .ultra-processing-left {
@@ -190,7 +190,7 @@
      ****************************************** */
   @media screen and (max-width: 1400px) {
     .ultra-processing-container {
-      padding-bottom: 220px;
+      padding-bottom: 180px;
     }
     .ultra-processing-left {
       padding-left: 40px;
@@ -206,7 +206,7 @@
 
   @media screen and (max-width: 1200px) {
     .ultra-processing-container {
-      padding-bottom: 200px;
+      padding-bottom: 160px;
     }
     .ultra-processing-left {
       padding-left: 20px;
@@ -224,7 +224,7 @@
   @media screen and (max-width: 991px) {
     .ultra-processing-container {
       gap: 40px;
-      padding-bottom: 180px;
+      padding-bottom: 140px;
     }
     .ultra-processing-heading {
       font-size: 38px;
