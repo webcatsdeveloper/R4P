@@ -178,17 +178,17 @@
     .oab-bottom-block {
       aspect-ratio: auto;
       width: 100%;
-      background-color: #F6C45E; /* Added to color the plate background yellow and prevent white gap */
-      {% if section.settings.bg_image_mobile %}
-        background-image: url('{{ section.settings.bg_image_mobile | img_url: 'master' }}');
-      {% elsif section.settings.bg_image %}
-        background-image: url('{{ section.settings.bg_image | img_url: 'master' }}');
-      {% else %}
-        background-image: none;
-      {% endif %}
-      background-position: center bottom;
-      background-size: 100% auto;
-      background-repeat: no-repeat;
+      background-color: transparent;
+      background-image: 
+        {% if section.settings.bg_image_mobile %}
+          url('{{ section.settings.bg_image_mobile | img_url: 'master' }}'),
+        {% elsif section.settings.bg_image %}
+          url('{{ section.settings.bg_image | img_url: 'master' }}'),
+        {% endif %}
+        linear-gradient(to bottom, #F6C45E 0%, #F6C45E calc(100% - 80px), transparent calc(100% - 80px), transparent 100%);
+      background-position: center bottom, center top;
+      background-size: 100% auto, 100% 100%;
+      background-repeat: no-repeat, no-repeat;
     }
 
     .oab-bottom-block .oab-container {
