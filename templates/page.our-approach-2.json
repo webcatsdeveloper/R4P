@@ -404,7 +404,15 @@
         "text_2": "Since all nutrients are not equal, we source specific amino acid profiles to build muscle and <br class=\"oab-desktop-only\">immunity, and strictly use anti-inflammatory fats that fight disease rather than fuel it.",
         "text_3": "No GMO, No Fillers, No Synthetic <br class=\"oab-desktop-only\">Chemicals, No Preservatives, No Binders",
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "left_curve_image": "shopify://shop_images/Vector_8_3.png",
+        "left_curve_x": -5,
+        "left_curve_y": 100,
+        "left_curve_width": 150,
+        "right_curve_image": "shopify://shop_images/Vector_7_2.png",
+        "right_curve_x": -5,
+        "right_curve_y": 300,
+        "right_curve_width": 150
       }
     },
     "our_certifications": {
