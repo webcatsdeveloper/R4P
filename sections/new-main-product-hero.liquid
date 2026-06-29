@@ -759,79 +759,77 @@
 
           <!-- Dynamic Dropdowns Native Selection Framework Panels (image_ff87e4.png) -->
           <div class="pet-prod-accordions-container-stack">
-            <div class="pet-accordion-element-node">
-              <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                <span>Description</span>
-                <span class="pet-accordion-element-chevron-icon">▼</span>
-              </button>
-              <div class="pet-accordion-element-panel-slider">
-                <div class="pet-accordion-element-panel-inner-content">
-                  {%- if product.description != blank -%}
+            {%- if product.description != blank -%}
+              <div class="pet-accordion-element-node">
+                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                  <span>Description</span>
+                  <span class="pet-accordion-element-chevron-icon">▼</span>
+                </button>
+                <div class="pet-accordion-element-panel-slider">
+                  <div class="pet-accordion-element-panel-inner-content">
                     {{ product.description }}
-                  {%- else -%}
-                    <ul>
-                      <li>Optimal Zinc, Omega 3 & Omega 6 for higher immunity and cardio health</li>
-                      <li>85.7% high quality fresh animal source ingredients with 14.3% vegetables, fruits, herbs, botanicals & probiotics</li>
-                      <li>Meets FEDIAF guidelines</li>
-                      <li>Low risk of obesity</li>
-                      <li>Higher absorption & reduced stools</li>
-                      <li>Higher nutrition density, need to feed 25-35% lesser than dry kibble</li>
-                    </ul>
-                  {%- endif -%}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="pet-accordion-element-node">
-              <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                <span>Ingredients</span>
-                <span class="pet-accordion-element-chevron-icon">▼</span>
-              </button>
-              <div class="pet-accordion-element-panel-slider">
-                <div class="pet-accordion-element-panel-inner-content">
-                  {{ product.metafields.custom.ingredients | default: "Freshly caught deboned Salmon, Whole Mackerel, Sardines, Eggs, Organs and Bone vectors." }}
+            {%- endif -%}
+  
+            {%- if product.metafields.custom.ingredients != blank -%}
+              <div class="pet-accordion-element-node">
+                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                  <span>Ingredients</span>
+                  <span class="pet-accordion-element-chevron-icon">▼</span>
+                </button>
+                <div class="pet-accordion-element-panel-slider">
+                  <div class="pet-accordion-element-panel-inner-content">
+                    {{ product.metafields.custom.ingredients }}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="pet-accordion-element-node">
-              <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                <span>Detailed nutrition Analysis</span>
-                <span class="pet-accordion-element-chevron-icon">▼</span>
-              </button>
-              <div class="pet-accordion-element-panel-slider">
-                <div class="pet-accordion-element-panel-inner-content">
-                  {{ product.metafields.custom.detailed_nutrition_analysis | default: "Crude Protein 38%, Fat content 18%, Crude Ash 8%, Crude Fibre 5." }}
+            {%- endif -%}
+  
+            {%- if product.metafields.custom.detailed_nutrition_analysis != blank -%}
+              <div class="pet-accordion-element-node">
+                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                  <span>Detailed nutrition Analysis</span>
+                  <span class="pet-accordion-element-chevron-icon">▼</span>
+                </button>
+                <div class="pet-accordion-element-panel-slider">
+                  <div class="pet-accordion-element-panel-inner-content">
+                    {{ product.metafields.custom.detailed_nutrition_analysis }}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <!-- Transition Metafield Node Block Addition -->
-            <div class="pet-accordion-element-node">
-              <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                <span>Transition</span>
-                <span class="pet-accordion-element-chevron-icon">▼</span>
-              </button>
-              <div class="pet-accordion-element-panel-slider">
-                <div class="pet-accordion-element-panel-inner-content">
-                  {{ product.metafields.custom.transition | default: "Transition slowly over 7 days. Start with 25% new food mixed into 75% old food, scaling up progressively every two days." }}
+            {%- endif -%}
+  
+            {%- if product.metafields.custom.transition != blank -%}
+              <!-- Transition Metafield Node Block Addition -->
+              <div class="pet-accordion-element-node">
+                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                  <span>Transition</span>
+                  <span class="pet-accordion-element-chevron-icon">▼</span>
+                </button>
+                <div class="pet-accordion-element-panel-slider">
+                  <div class="pet-accordion-element-panel-inner-content">
+                    {{ product.metafields.custom.transition }}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <!-- Declaration Metafield Node Block Addition -->
-            <div class="pet-accordion-element-node">
-              <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                <span>Declaration</span>
-                <span class="pet-accordion-element-chevron-icon">▼</span>
-              </button>
-              <div class="pet-accordion-element-panel-slider">
-                <div class="pet-accordion-element-panel-inner-content">
-                  {{ product.metafields.custom.declaration | default: "100% human-grade materials. No added artificial colorings, synthetic binding arrays, or processed chemical flavor enhancements." }}
+            {%- endif -%}
+  
+            {%- if product.metafields.custom.declaration != blank -%}
+              <!-- Declaration Metafield Node Block Addition -->
+              <div class="pet-accordion-element-node">
+                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                  <span>Declaration</span>
+                  <span class="pet-accordion-element-chevron-icon">▼</span>
+                </button>
+                <div class="pet-accordion-element-panel-slider">
+                  <div class="pet-accordion-element-panel-inner-content">
+                    {{ product.metafields.custom.declaration }}
+                  </div>
                 </div>
               </div>
-            </div>
-
+            {%- endif -%}
           </div>
         </div>
       </div>
