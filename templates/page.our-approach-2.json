@@ -387,7 +387,7 @@
         "loop_width": 140,
         "title_part_1": "Our",
         "title_part_2": "Solution",
-        "intro_richtext": "",
+        "intro_richtext": "<p>We feed your pet real food, not processed science experiments</p>",
         "mobile_bg_color": "#ffcd67",
         "text_color_dark": "#1a1a1a",
         "text_color_accent": "#d93829"
