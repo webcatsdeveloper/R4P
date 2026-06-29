@@ -276,7 +276,9 @@
       "settings": {
         "heading": "Founder's Story",
         "native_video": "shopify://files/videos/Right4Paws v3.mp4",
-        "video_url": ""
+        "video_url": "",
+        "aspect_ratio": "21-9",
+        "custom_aspect_ratio": "56.25"
       }
     },
     "about_us_last_section_rwPK9B": {
