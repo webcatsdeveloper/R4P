@@ -701,7 +701,11 @@
 
       <div class="stagger-node sn-3">
         <p class="pet-prod-short-summary-text">
-          {{ product.description | strip_html | truncatewords: 35 | default: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" }}
+          {%- if product.metafields.custom.subheading != blank -%}
+            {{ product.metafields.custom.subheading }}
+          {%- else -%}
+            {{ product.description | strip_html | truncatewords: 35 | default: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" }}
+          {%- endif -%}
         </p>
       </div>
 
