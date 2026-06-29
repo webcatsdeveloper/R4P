@@ -219,9 +219,56 @@
       color: #333333;
     }
   }
+
+  /* Purple Left and Right curves positioning */
+  .oab-curve-left {
+    position: absolute;
+    left: {{ section.settings.left_curve_x }}%;
+    top: {{ section.settings.left_curve_y }}px;
+    width: {{ section.settings.left_curve_width }}px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .oab-curve-left img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .oab-curve-right {
+    position: absolute;
+    right: {{ section.settings.right_curve_x }}%;
+    top: {{ section.settings.right_curve_y }}px;
+    width: {{ section.settings.right_curve_width }}px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .oab-curve-right img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media screen and (max-width: 767px) {
+    .oab-curve-left, .oab-curve-right {
+      display: none !important;
+    }
+  }
 </style>
 
 <div class="oab-wrapper">
+  
+  {%- if section.settings.left_curve_image != blank -%}
+    <div class="oab-curve-left">
+      {{ section.settings.left_curve_image | image_url: width: 500 | image_tag: loading: 'lazy', alt: 'Left Purple Curve' }}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.right_curve_image != blank -%}
+    <div class="oab-curve-right">
+      {{ section.settings.right_curve_image | image_url: width: 500 | image_tag: loading: 'lazy', alt: 'Right Purple Curve' }}
+    </div>
+  {%- endif -%}
   
   <!-- TOP BLOCK (BOWL GRAPHIC + RIGHT HEADING) -->
   <div class="oab-top-block">
@@ -338,6 +385,80 @@
       "unit": "px",
       "label": "Padding Bottom",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Decorative Purple Curves"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_curve_image",
+      "label": "Left Purple Curve Image"
+    },
+    {
+      "type": "range",
+      "id": "left_curve_x",
+      "min": -20,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Left Curve X Position (From Left Edge)",
+      "default": -5
+    },
+    {
+      "type": "range",
+      "id": "left_curve_y",
+      "min": -200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Left Curve Y Position (From Top Edge)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "left_curve_width",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Left Curve Width",
+      "default": 150
+    },
+    {
+      "type": "image_picker",
+      "id": "right_curve_image",
+      "label": "Right Purple Curve Image"
+    },
+    {
+      "type": "range",
+      "id": "right_curve_x",
+      "min": -20,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Right Curve X Position (From Right Edge)",
+      "default": -5
+    },
+    {
+      "type": "range",
+      "id": "right_curve_y",
+      "min": -200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Right Curve Y Position (From Top Edge)",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "right_curve_width",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Right Curve Width",
+      "default": 150
     }
   ],
   "presets": [
