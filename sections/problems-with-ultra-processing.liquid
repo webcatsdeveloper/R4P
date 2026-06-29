@@ -38,8 +38,7 @@
     align-items: center;
     gap: 60px;
     position: relative;
-    /* Extra padding at bottom to prevent footer overlap from absolute impact text */
-    padding-bottom: 120px; 
+    padding-bottom: 240px; /* Pushes HTML content above the yellow wave text */
   }
 
   .ultra-processing-left {
@@ -190,6 +189,9 @@
      Responsive Desktop/Tablet Breakpoints
      ****************************************** */
   @media screen and (max-width: 1400px) {
+    .ultra-processing-container {
+      padding-bottom: 220px;
+    }
     .ultra-processing-left {
       padding-left: 40px;
     }
@@ -203,6 +205,9 @@
   }
 
   @media screen and (max-width: 1200px) {
+    .ultra-processing-container {
+      padding-bottom: 200px;
+    }
     .ultra-processing-left {
       padding-left: 20px;
     }
@@ -219,7 +224,7 @@
   @media screen and (max-width: 991px) {
     .ultra-processing-container {
       gap: 40px;
-      padding-bottom: 0px;
+      padding-bottom: 180px;
     }
     .ultra-processing-heading {
       font-size: 38px;
@@ -237,6 +242,7 @@
       flex-direction: column; 
       padding: 0 24px;
       gap: 0px;
+      padding-bottom: 0px; /* Reset on mobile */
     }
     
     .ultra-processing-left {
