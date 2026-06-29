@@ -25,10 +25,10 @@
   color: #1E1E1E;
 }
 
-/* LANDSCAPE VIDEO WRAPPER (16:9 Aspect Ratio) */
+/* VIDEO CONTAINER */
 .founders-video-container {
   width: 100%;
-  max-width: 1140px; /* Standard wide desktop layout */
+  max-width: 1140px;
   padding: 0 90px;
   box-sizing: border-box;
 }
@@ -36,11 +36,13 @@
 .founders-video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* Forces perfect 16:9 landscape aspect ratio */
   height: 0;
-  border-radius: 24px; /* Optional: smooth corners to match brand identity */
+  border-radius: 24px;
   overflow: hidden;
   background: #000;
+  
+  /* Default aspect ratio (can be overridden by inline style) */
+  padding-bottom: 56.25%; /* 16:9 default */
 }
 
 .founders-video-wrapper video,
@@ -50,8 +52,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border: none;
+}
+
+/* For video elements, maintain aspect ratio */
+.founders-video-wrapper video {
+  object-fit: contain;
+  background: #000;
 }
 
 /* MOBILE RESPONSIVENESS */
@@ -68,6 +75,46 @@
     padding: 0 20px;
   }
 }
+
+/* ASPECT RATIO OPTIONS */
+.founders-video-wrapper.aspect-16-9 {
+  padding-bottom: 56.25%;
+}
+
+.founders-video-wrapper.aspect-4-3 {
+  padding-bottom: 75%;
+}
+
+.founders-video-wrapper.aspect-1-1 {
+  padding-bottom: 100%;
+}
+
+.founders-video-wrapper.aspect-9-16 {
+  padding-bottom: 177.78%;
+}
+
+.founders-video-wrapper.aspect-21-9 {
+  padding-bottom: 42.86%;
+}
+
+.founders-video-wrapper.aspect-auto {
+  padding-bottom: 0;
+  height: auto;
+  min-height: 400px;
+}
+
+.founders-video-wrapper.aspect-auto video,
+.founders-video-wrapper.aspect-auto iframe {
+  position: relative;
+  height: auto;
+  min-height: 400px;
+  object-fit: contain;
+}
+
+/* CUSTOM ASPECT RATIO */
+.founders-video-wrapper.aspect-custom {
+  /* Will be set via inline style */
+}
 {%- endstyle -%}
 
 <section class="founders-story-{{ section.id }}">
@@ -79,18 +126,27 @@
       </h2>
     {%- endif -%}
 
-    <div class="founders-video-wrapper">
+    <div class="founders-video-wrapper {% if section.settings.aspect_ratio != 'custom' %}aspect-{{ section.settings.aspect_ratio }}{% else %}aspect-custom{% endif %}" 
+         {% if section.settings.aspect_ratio == 'custom' and section.settings.custom_aspect_ratio != blank %}
+         style="padding-bottom: {{ section.settings.custom_aspect_ratio }}%;"
+         {% endif %}>
       {%- if section.settings.video_url != blank -%}
         
         {%- if section.settings.video_url.type == 'youtube' -%}
-          <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?autoplay=0&rel=0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?autoplay=0&rel=0&playsinline=1" 
+                  allowfullscreen 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  loading="lazy"></iframe>
         {%- elsif section.settings.video_url.type == 'vimeo' -%}
-          <iframe src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}" allowfullscreen></iframe>
+          <iframe src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?autoplay=0&title=0&byline=0&portrait=0" 
+                  allowfullscreen 
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  loading="lazy"></iframe>
         {%- endif -%}
 
       {%- elsif section.settings.native_video != blank -%}
         
-        {{ section.settings.native_video | video_tag: controls: true, image_size: '1200x', preload: 'none' }}
+        {{ section.settings.native_video | video_tag: controls: true, image_size: '1200x', preload: 'metadata', autoplay: false, loop: false }}
 
       {%- else -%}
         {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -122,6 +178,45 @@
       "label": "Option 2: External Video Link",
       "accept": ["youtube", "vimeo"],
       "info": "Or paste a Youtube/Vimeo link here."
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Video Aspect Ratio",
+      "default": "16-9",
+      "options": [
+        {
+          "value": "16-9",
+          "label": "16:9 (Standard Widescreen)"
+        },
+        {
+          "value": "4-3",
+          "label": "4:3 (Classic TV)"
+        },
+        {
+          "value": "1-1",
+          "label": "1:1 (Square)"
+        },
+        {
+          "value": "9-16",
+          "label": "9:16 (Vertical/TikTok/Reels)"
+        },
+        {
+          "value": "21-9",
+          "label": "21:9 (Cinematic Ultrawide)"
+        },
+        {
+          "value": "custom",
+          "label": "Custom Ratio"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "custom_aspect_ratio",
+      "label": "Custom Aspect Ratio (%)",
+      "default": "56.25",
+      "info": "Enter padding-bottom percentage. Example: 56.25 for 16:9, 75 for 4:3, 100 for 1:1"
     }
   ],
   "presets": [
