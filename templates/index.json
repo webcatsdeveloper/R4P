@@ -25,6 +25,7 @@
         },
         "slide_dB6ENf": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "bg_image": "shopify://shop_images/Homepage_1.png",
             "mobile_image": "shopify://shop_images/Homepage_1_7115de9a-bad0-41f8-82da-ae1b13a87f55.png",
