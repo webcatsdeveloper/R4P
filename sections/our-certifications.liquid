@@ -130,6 +130,11 @@
   }
 
   @media screen and (max-width: 900px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: 48px !important;
+      padding-bottom: 48px !important;
+    }
+
     .cert-desktop-heading {
       display: none;
     }
@@ -140,7 +145,7 @@
       font-size: 26px;
       font-weight: 600;
       color: #000000ff;
-      line-height: 1.35;
+      line-height: 1.45;
       margin-bottom: 30px;
       text-align: center;
     }
@@ -205,7 +210,8 @@
       <span class="cert-bold-red">ISO certified plants</span><br>
       with full traceability and<br>
       are <span class="cert-bold-red">anti-biotic residue</span><br>
-      <span class="cert-bold-red">free</span> The fish we use are<br>
+      <span class="cert-bold-red">free</span><br>
+      The fish we use are<br>
       <span class="cert-bold-red">wild caught</span>
     </div>
   {% endif %}

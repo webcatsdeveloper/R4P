@@ -178,6 +178,7 @@
     .oab-bottom-block {
       aspect-ratio: auto;
       width: 100%;
+      background-color: #F6C45E; /* Added to color the plate background yellow and prevent white gap */
       {% if section.settings.bg_image_mobile %}
         background-image: url('{{ section.settings.bg_image_mobile | img_url: 'master' }}');
       {% elsif section.settings.bg_image %}
