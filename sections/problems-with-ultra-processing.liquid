@@ -320,34 +320,41 @@
     }
 
     /* ******************************************
-       Mobile Bottom Yellow Background Area
+        Mobile Bottom Yellow Background Area - Perfect Alignment
        ****************************************** */
     .ultra-processing-impact {
       display: flex;
+      flex-direction: column;  /* Stack questions and answers vertically */
+      justify-content: center;
+      align-items: center;
       position: relative;
       bottom: auto;
       left: auto;
       background-color: #FFCD68;
       width: 100vw; 
-      padding: 25px 24px 60px 24px;
-      align-items: center;
+      margin-left: -24px;      /* Ensure full viewport bleed matching container margins */
+      padding: 40px 24px 50px 24px;
       text-align: center;
       box-sizing: border-box;
-      top: -1px;
+      top: -2px;               /* Eliminates sub-pixel layout gaps */
     }
 
     .ultra-impact-black {
-      font-size: 28px;
+      font-size: 26px;
       color: #111111;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      padding-left: 0px;
+      width: 100%;
     }
 
     .ultra-impact-red {
-      font-size: 50px;
+      font-size: 36px;
       color: #d92b2b;
       padding-left: 0px; 
       font-weight: 800;
-      line-height: 0.9;
+      line-height: 1.15;
+      max-width: 320px;        /* Limits width to precisely force clean textual wrapping lines like image_af0938.png */
+      margin: 0 auto;
     }
 
     .ultra-processing-img-mobile {
