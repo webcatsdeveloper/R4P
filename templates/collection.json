@@ -374,7 +374,7 @@
         "subcategory_tab_CMkEnf": {
           "type": "subcategory_tab",
           "settings": {
-            "parent_category": "",
+            "parent_category": "Dogs",
             "tab_title": "Dry",
             "tab_image": "shopify://shop_images/Dry_food.png",
             "collection": ""
@@ -383,7 +383,7 @@
         "nested_subcategory_tab_WEFBwW": {
           "type": "nested_subcategory_tab",
           "settings": {
-            "parent_subcategory": "",
+            "parent_subcategory": "Dry",
             "tab_title": "Taster Pack",
             "tab_image": "shopify://shop_images/Trial_Pack.png",
             "collection": ""
@@ -392,7 +392,7 @@
         "subcategory_tab_QWBXed": {
           "type": "subcategory_tab",
           "settings": {
-            "parent_category": "",
+            "parent_category": "Dogs",
             "tab_title": "Wet",
             "tab_image": "shopify://shop_images/Wet_food.png",
             "collection": ""
@@ -401,7 +401,7 @@
         "subcategory_tab_nqtg3J": {
           "type": "subcategory_tab",
           "settings": {
-            "parent_category": "",
+            "parent_category": "Dogs",
             "tab_title": "Treats",
             "tab_image": "shopify://shop_images/Treats.png",
             "collection": ""

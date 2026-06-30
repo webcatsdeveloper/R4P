@@ -591,8 +591,58 @@
     return false;
   }
 
+  function injectBackButtons() {
+    const subContainers = document.querySelectorAll('#PetHub-{{ section.id }} .pet-hub-subcategories-container');
+    subContainers.forEach(container => {
+      if (container.querySelector('.pet-back-btn')) return;
+
+      const backBtn = document.createElement('button');
+      backBtn.type = 'button';
+      backBtn.className = 'pet-tab-item pet-back-btn';
+      backBtn.innerHTML = `
+        <div class="pet-tab-image-wrapper" style="border-color: #e5e5e5; background-color: #fafafa;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c70e17" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </div>
+        <span style="color: #c70e17; font-weight: 600;">Back</span>
+      `;
+
+      backBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const level = parseInt(container.getAttribute('data-level') || '2');
+        if (level === 2) {
+          // Go back to Level 1
+          container.classList.add('hidden');
+          const l1Container = document.querySelector('#PetHub-{{ section.id }} .pet-hub-tabs[data-level="1"]');
+          if (l1Container) l1Container.classList.remove('hidden');
+          
+          // Deactivate all L2 tabs when going back to L1
+          container.querySelectorAll('.pet-tab-item').forEach(t => t.classList.remove('is-active'));
+        } else if (level === 3) {
+          // Go back to Level 2
+          container.classList.add('hidden');
+          const parentGroup = container.getAttribute('data-parent-group');
+          const activeL2Tab = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"] .pet-tab-item[data-match-key="${parentGroup}"]`);
+          if (activeL2Tab) {
+            const l2Container = activeL2Tab.parentElement;
+            l2Container.classList.remove('hidden');
+          }
+          // Deactivate all L3 tabs when going back to L2
+          container.querySelectorAll('.pet-tab-item').forEach(t => t.classList.remove('is-active'));
+        }
+        filterProducts();
+      });
+
+      container.insertBefore(backBtn, container.firstChild);
+    });
+  }
+
   function initPetHub() {
-    const allTabs = document.querySelectorAll('#PetHub-{{ section.id }} .pet-tab-item');
+    injectBackButtons();
+
+    const allTabs = document.querySelectorAll('#PetHub-{{ section.id }} .pet-tab-item:not(.pet-back-btn)');
 
     allTabs.forEach(tab => {
       tab.removeEventListener('click', handleTabClick);
@@ -612,24 +662,16 @@
     this.classList.add('is-active');
 
     if (currentLevel === 1) {
-      // Hide deep layout panels completely
-      document.querySelectorAll('#PetHub-{{ section.id }} .pet-hub-subcategories-container').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('#PetHub-{{ section.id }} .pet-hub-subcategories-container .pet-tab-item').forEach(t => t.classList.remove('is-active'));
-      
-      // Display active matching child groups
       const activeL2Container = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"][data-parent-group="${matchKey}"]`);
       if (activeL2Container) {
+        parentContainer.classList.add('hidden');
         activeL2Container.classList.remove('hidden');
       }
     } 
     else if (currentLevel === 2) {
-      // Hide grandchildren panels
-      document.querySelectorAll('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"]').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"] .pet-tab-item').forEach(t => t.classList.remove('is-active'));
-      
-      // Show active grandchildren
       const activeL3Container = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"][data-parent-group="${matchKey}"]`);
       if (activeL3Container) {
+        parentContainer.classList.add('hidden');
         activeL3Container.classList.remove('hidden');
       }
     }
@@ -685,7 +727,7 @@
     let deepestActiveTab = null;
     const activeL3 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"]:not(.hidden) .pet-tab-item.is-active');
     const activeL2 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"]:not(.hidden) .pet-tab-item.is-active');
-    const activeL1 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-tabs[data-level="1"] .pet-tab-item.is-active');
+    const activeL1 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-tabs[data-level="1"]:not(.hidden) .pet-tab-item.is-active');
 
     if (activeL3) {
       deepestActiveTab = activeL3;
@@ -698,8 +740,9 @@
     // Determine if we should show products:
     let showProducts = false;
     
-    // Check if L2 is completely hidden (meaning initial load state or completely reset state)
-    const isInitialLoad = !document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"]:not(.hidden)');
+    // Check if L2 and L3 are completely hidden (meaning initial load state or completely reset state)
+    const isInitialLoad = !document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"]:not(.hidden)') &&
+                          !document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"]:not(.hidden)');
     
     if (isInitialLoad) {
       showProducts = true;
