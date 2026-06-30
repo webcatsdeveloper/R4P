@@ -57,37 +57,20 @@
     padding: 0;
   }
 
-  .naturally-fresh-media-wrap {
+  /* Style applies to both the image and the video seamlessly */
+  .naturally-fresh-image-wrapper img,
+  .naturally-fresh-image-wrapper video {
     width: 100%;
     max-width: 1000px;
+    height: auto;
+    object-fit: contain;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #0000000a;
-  }
-
-  .naturally-fresh-media-wrap img,
-  .naturally-fresh-media-wrap video {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-  }
-
-  .naturally-fresh-media-wrap iframe {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    display: block;
-    border: none;
   }
 
   @media screen and (max-width: 768px) {
     .naturally-fresh-text {
-      font-size: 26px; /* Match large Figma size */
+      font-size: 26px; 
       line-height: 1.4;
       margin-bottom: 40px;
       padding: 0 40px;
@@ -99,7 +82,8 @@
     .naturally-fresh-image-wrapper {
       padding: 0 20px;
     }
-    .naturally-fresh-media-wrap {
+    .naturally-fresh-image-wrapper img,
+    .naturally-fresh-image-wrapper video {
       border-radius: 24px;
     }
   }
@@ -120,30 +104,10 @@
     {% endif %}
 
     <div class="naturally-fresh-image-wrapper">
-      {% if section.settings.video_url != blank or section.settings.native_video != blank or section.settings.main_image != blank %}
-        <div class="naturally-fresh-media-wrap">
-          {%- if section.settings.video_url != blank -%}
-            {%- if section.settings.video_url.type == 'youtube' -%}
-              <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?autoplay=0&rel=0&playsinline=1" 
-                      allowfullscreen 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      loading="lazy"></iframe>
-            {%- elsif section.settings.video_url.type == 'vimeo' -%}
-              <iframe src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?autoplay=0&title=0&byline=0&portrait=0" 
-                      allowfullscreen 
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      loading="lazy"></iframe>
-            {%- endif -%}
-          {%- elsif section.settings.native_video != blank -%}
-            {%- if section.settings.main_image != blank -%}
-              {{ section.settings.native_video | video_tag: controls: true, image_size: '1200x', preload: 'metadata', autoplay: false, loop: false, poster: (section.settings.main_image | img_url: 'master') }}
-            {%- else -%}
-              {{ section.settings.native_video | video_tag: controls: true, image_size: '1200x', preload: 'metadata', autoplay: false, loop: false }}
-            {%- endif -%}
-          {%- elsif section.settings.main_image != blank -%}
-            <img src="{{ section.settings.main_image | img_url: 'master' }}" alt="Flakes not a pellet" loading="lazy">
-          {%- endif -%}
-        </div>
+      {% if section.settings.main_video != blank %}
+        {{ section.settings.main_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true }}
+      {% elsif section.settings.main_image %}
+        <img src="{{ section.settings.main_image | img_url: 'master' }}" alt="Flakes not a pellet" loading="lazy">
       {% endif %}
     </div>
   </div>
@@ -186,22 +150,14 @@
       "default": "Naturally fresh, scientifically preserved food made use smart, clean technology to\nlock in a long shelf life—with absolutely zero synthetic preservatives"
     },
     {
+      "type": "video",
+      "id": "main_video",
+      "label": "Main Video (Takes Priority over Image)"
+    },
+    {
       "type": "image_picker",
       "id": "main_image",
       "label": "Main Image block"
-    },
-    {
-      "type": "video",
-      "id": "native_video",
-      "label": "Option 1: Shopify Video Upload",
-      "info": "Upload your file directly to Shopify Files for premium performance."
-    },
-    {
-      "type": "video_url",
-      "id": "video_url",
-      "label": "Option 2: External Video Link",
-      "accept": ["youtube", "vimeo"],
-      "info": "Or paste a Youtube/Vimeo link here."
     },
     {
       "type": "image_picker",
