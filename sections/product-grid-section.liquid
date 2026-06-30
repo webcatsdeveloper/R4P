@@ -482,6 +482,10 @@
     height: 58px;
     font-size: 15px;
   }
+
+  .ps-card.hidden {
+    display: none !important;
+  }
 }
 {%- endstyle -%}
 
@@ -503,7 +507,7 @@
       {% for block in section.blocks %}
         <button
           class="ps-tab-btn {% if forloop.first %}active{% endif %}"
-          data-tab="tab-{{ block.id }}"
+          data-target-collection="{{ block.settings.collection | default: 'all-products' }}"
         >
           <div class="ps-tab-icon-wrap">
             {% if block.settings.tab_icon != blank %}
@@ -523,68 +527,48 @@
     </div>
 
     <div class="ps-content-wrapper">
-
-      {% for block in section.blocks %}
-        <div
-          class="ps-grid-container {% if forloop.first %}active{% endif %}"
-          id="tab-{{ block.id }}"
-        >
-
-          {% assign collection = block.settings.collection %}
-
-          {% if collection != blank %}
-
-            {% for product in collection.products limit: 4 %}
-
-              <a href="{{ product.url }}" class="ps-card">
-
-                <div class="ps-image-box">
-                  <img
-                    src="{{ product.featured_image | img_url: '600x600' }}"
-                    alt="{{ product.title }}"
-                    class="ps-prod-img"
-                    loading="lazy"
-                  >
-                </div>
-
-                <div class="ps-info">
-
-                  <h3 class="ps-title">
-
-                    {% assign words = product.title | split: ' ' %}
-
-                    {% for word in words %}
-                      {% if forloop.index == 3 %}
-                        <br>
-                      {% endif %}
-                      {{ word }}
-                    {% endfor %}
-
-                  </h3>
-
-                  <p class="ps-price">
-                    <span class="rupee">₹</span>
-
-                    <span class="amount">
-                      {{ product.price | divided_by: 100.0 | strip_trailing_zeros }}
-                    </span>
-                  </p>
-
-                  <div class="ps-shop-btn">
-                    SHOP NOW
+      <div class="ps-grid-container active" id="ps-product-grid">
+        {%- assign rendered_handles = "" -%}
+        {%- for block in section.blocks -%}
+          {%- assign collection = collections[block.settings.collection] -%}
+          {%- if collection != blank -%}
+            {%- for product in collection.products limit: 40 -%}
+              {%- unless rendered_handles contains product.handle -%}
+                {%- assign rendered_handles = rendered_handles | append: product.handle | append: "," -%}
+                
+                <a href="{{ product.url }}" class="ps-card" data-collections='[{%- for c in product.collections -%}"{{ c.handle }}"{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]'>
+                  <div class="ps-image-box">
+                    <img
+                      src="{{ product.featured_image | img_url: '600x600' }}"
+                      alt="{{ product.title }}"
+                      class="ps-prod-img"
+                      loading="lazy"
+                    >
                   </div>
-
-                </div>
-
-              </a>
-
-            {% endfor %}
-
-          {% endif %}
-
-        </div>
-      {% endfor %}
-
+                  <div class="ps-info">
+                    <h3 class="ps-title">
+                      {% assign words = product.title | split: ' ' %}
+                      {% for word in words %}
+                        {% if forloop.index == 3 %}<br>{% endif %}
+                        {{ word }}
+                      {% endfor %}
+                    </h3>
+                    <p class="ps-price">
+                      <span class="rupee">₹</span>
+                      <span class="amount">
+                        {{ product.price | divided_by: 100.0 | strip_trailing_zeros }}
+                      </span>
+                    </p>
+                    <div class="ps-shop-btn">
+                      SHOP NOW
+                    </div>
+                  </div>
+                </a>
+              {%- endunless -%}
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
     </div>
 
     <a
@@ -598,53 +582,80 @@
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-
-  const tabs = document.querySelectorAll('.ps-tab-btn');
-  const grids = document.querySelectorAll('.ps-grid-container');
-
-  tabs.forEach(tab => {
-
-    tab.addEventListener('click', () => {
-
-      const tabId = tab.getAttribute('data-tab');
-
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      grids.forEach(grid => {
-
-        if (grid.id === tabId) {
-          grid.classList.add('active');
-        } else {
-          grid.classList.remove('active');
-        }
-
-      });
-
+  function initHomeGrid() {
+    const tabs = document.querySelectorAll('.ps-tab-btn');
+    
+    tabs.forEach(tab => {
+      tab.removeEventListener('click', handleTabClick);
+      tab.addEventListener('click', handleTabClick);
     });
 
-  });
+    filterHomeProducts();
 
-  const section = document.querySelector('.product-selection-{{ section.id }}');
+    const section = document.querySelector('.product-selection-{{ section.id }}');
+    if (section) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            section.classList.add('ps-show');
+          }
+        });
+      }, {
+        threshold: 0.2
+      });
+      observer.observe(section);
+    }
+  }
 
-  const observer = new IntersectionObserver((entries) => {
+  function handleTabClick() {
+    const tabs = document.querySelectorAll('.ps-tab-btn');
+    tabs.forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+    filterHomeProducts();
+  }
 
-    entries.forEach(entry => {
+  function filterHomeProducts() {
+    const activeTab = document.querySelector('.ps-tab-btn.active');
+    if (!activeTab) return;
 
-      if (entry.isIntersecting) {
-        section.classList.add('ps-show');
+    const targetCollection = activeTab.getAttribute('data-target-collection');
+    const tabText = activeTab.querySelector('.ps-tab-text').innerText.trim().toLowerCase();
+    const isAll = tabText === 'all' || targetCollection === 'all-products' || targetCollection === 'cats-copy-1';
+    const cards = document.querySelectorAll('#ps-product-grid .ps-card');
+
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const pCollections = JSON.parse(card.getAttribute('data-collections') || '[]');
+      let show = false;
+
+      if (isAll) {
+        show = true;
+      } else {
+        show = pCollections.includes(targetCollection);
       }
 
+      if (show && visibleCount < 4) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
     });
+  }
 
-  }, {
-    threshold: 0.2
+  // Run initialization immediately or on DOMContentLoaded
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHomeGrid);
+  } else {
+    initHomeGrid();
+  }
+
+  // Also hook into Shopify Theme Editor section load/reload event
+  document.addEventListener("shopify:section:load", function(event) {
+    if (event.detail.sectionId === "{{ section.id }}") {
+      initHomeGrid();
+    }
   });
-
-  observer.observe(section);
-
-});
 </script>
 
 {% schema %}
