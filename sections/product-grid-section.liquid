@@ -503,27 +503,110 @@
       {%- endif -%}
     </h2>
 
-    <div class="ps-tabs">
-      {% for block in section.blocks %}
-        <button
-          class="ps-tab-btn {% if forloop.first %}active{% endif %}"
-          data-target-collection="{{ block.settings.collection | default: 'all-products' }}"
-        >
-          <div class="ps-tab-icon-wrap">
-            {% if block.settings.tab_icon != blank %}
-              <img
-                src="{{ block.settings.tab_icon | image_url: width: 160 }}"
-                alt="{{ block.settings.title | escape }}"
-                loading="lazy"
-                class="ps-tab-icon-img"
-              >
-            {% else %}
-              <div class="ps-tab-icon-placeholder"></div>
-            {% endif %}
-          </div>
-          <span class="ps-tab-text">{{ block.settings.title }}</span>
-        </button>
-      {% endfor %}
+    <div class="ps-tabs-wrapper" style="position: relative; width: 100%; max-width: 1280px; margin: 0 auto 72px;">
+      
+      <!-- Level 1 Tabs (Main Categories) -->
+      <div class="ps-tabs" data-level="1">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category_tab' or block.type == 'collection_tab' -%}
+            {%- assign block_title = block.settings.title | default: block.settings.tab_title -%}
+            {%- assign block_icon = block.settings.tab_icon | default: block.settings.tab_image -%}
+            {%- assign collection_handle = block.settings.collection -%}
+            {%- assign current_collection = collections[collection_handle] -%}
+            {%- assign tab_title_clean = block_title | default: current_collection.title | strip | downcase -%}
+            
+            <button class="ps-tab-btn {% if forloop.first %}active{% endif %}" 
+                    data-match-key="{{ tab_title_clean }}"
+                    data-target-collection="{{ collection_handle | default: 'all-products' }}" 
+                    {{ block.shopify_attributes }}>
+              <div class="ps-tab-icon-wrap">
+                {%- if block_icon != blank -%}
+                  <img src="{{ block_icon | image_url: width: 160 }}" alt="{{ block_title | escape }}" loading="lazy" class="ps-tab-icon-img">
+                {%- else -%}
+                  <div class="ps-tab-icon-placeholder"></div>
+                {%- endif -%}
+              </div>
+              <span class="ps-tab-text">{{ block_title | default: current_collection.title }}</span>
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <!-- Level 2 Subcategories -->
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'category_tab' or block.type == 'collection_tab' -%}
+          {%- assign block_title = block.settings.title | default: block.settings.tab_title -%}
+          {%- assign current_l1_title = block_title | default: collections[block.settings.collection].title | strip | downcase -%}
+          
+          {%- capture subcategories_l2 -%}
+            {%- for sub_block in section.blocks -%}
+              {%- assign sub_parent_clean = sub_block.settings.parent_category | strip | downcase -%}
+              {%- if sub_block.type == 'subcategory_tab' and sub_parent_clean == current_l1_title -%}
+                {%- assign sub_title = sub_block.settings.title | default: sub_block.settings.tab_title -%}
+                {%- assign sub_icon = sub_block.settings.tab_icon | default: sub_block.settings.tab_image -%}
+                {%- assign sub_collection_handle = sub_block.settings.collection -%}
+                {%- assign sub_collection = collections[sub_collection_handle] -%}
+                {%- assign sub_title_clean = sub_title | default: sub_collection.title | strip | downcase -%}
+                <button class="ps-tab-btn" 
+                        data-match-key="{{ sub_title_clean }}"
+                        data-target-collection="{{ sub_collection_handle | default: 'all-products' }}">
+                  <div class="ps-tab-icon-wrap">
+                    {%- if sub_icon != blank -%}
+                      <img src="{{ sub_icon | image_url: width: 160 }}" alt="{{ sub_title | escape }}" loading="lazy" class="ps-tab-icon-img">
+                    {%- else -%}
+                      <div class="ps-tab-icon-placeholder"></div>
+                    {%- endif -%}
+                  </div>
+                  <span class="ps-tab-text">{{ sub_title | default: sub_collection.title }}</span>
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+
+          {%- if subcategories_l2 != blank -%}
+            <div class="ps-subcategories-container ps-tabs hidden" data-level="2" data-parent-group="{{ current_l1_title }}">
+              {{ subcategories_l2 }}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <!-- Level 3 Subcategories -->
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'subcategory_tab' -%}
+          {%- assign sub_title = block.settings.title | default: block.settings.tab_title -%}
+          {%- assign current_l2_title = sub_title | default: collections[block.settings.collection].title | strip | downcase -%}
+          
+          {%- capture subcategories_l3 -%}
+            {%- for nested_block in section.blocks -%}
+              {%- assign nested_parent_clean = nested_block.settings.parent_subcategory | strip | downcase -%}
+              {%- if nested_block.type == 'nested_subcategory_tab' and nested_parent_clean == current_l2_title -%}
+                {%- assign nest_title = nested_block.settings.title | default: nested_block.settings.tab_title -%}
+                {%- assign nest_icon = nested_block.settings.tab_icon | default: nested_block.settings.tab_image -%}
+                {%- assign nest_collection_handle = nested_block.settings.collection -%}
+                {%- assign nest_collection = collections[nest_collection_handle] -%}
+                <button class="ps-tab-btn" 
+                        data-target-collection="{{ nest_collection_handle | default: 'all-products' }}">
+                  <div class="ps-tab-icon-wrap">
+                    {%- if nest_icon != blank -%}
+                      <img src="{{ nest_icon | image_url: width: 160 }}" alt="{{ nest_title | escape }}" loading="lazy" class="ps-tab-icon-img">
+                    {%- else -%}
+                      <div class="ps-tab-icon-placeholder"></div>
+                    {%- endif -%}
+                  </div>
+                  <span class="ps-tab-text">{{ nest_title | default: nest_collection.title }}</span>
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+
+          {%- if subcategories_l3 != blank -%}
+            <div class="ps-subcategories-container ps-tabs hidden" data-level="3" data-parent-group="{{ current_l2_title }}">
+              {{ subcategories_l3 }}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
     </div>
 
     <div class="ps-content-wrapper">
@@ -582,12 +665,135 @@
 </section>
 
 <script>
-  function initHomeGrid() {
-    const tabs = document.querySelectorAll('.ps-tab-btn');
+  function hasHomeChildren(tabEl) {
+    if (!tabEl) return false;
+    const matchKey = tabEl.getAttribute('data-match-key');
+    if (!matchKey) return false;
+    const parentContainer = tabEl.parentElement;
+    const level = parseInt(parentContainer.getAttribute('data-level') || '1');
+    if (level === 1) {
+      return !!document.querySelector(`#ShoppingGrid .ps-subcategories-container[data-level="2"][data-parent-group="${matchKey}"]`);
+    } else if (level === 2) {
+      return !!document.querySelector(`#ShoppingGrid .ps-subcategories-container[data-level="3"][data-parent-group="${matchKey}"]`);
+    }
+    return false;
+  }
+
+  function getHomeCollectionPool(tabEl) {
+    if (!tabEl) return [];
     
-    tabs.forEach(tab => {
-      tab.removeEventListener('click', handleTabClick);
-      tab.addEventListener('click', handleTabClick);
+    const pool = new Set();
+    
+    // Add the tab's own target collection
+    const selfCollection = tabEl.getAttribute('data-target-collection');
+    if (selfCollection) {
+      pool.add(selfCollection);
+    }
+    
+    // Find children and grandchildren to pool their collections
+    const matchKey = tabEl.getAttribute('data-match-key');
+    const parentContainer = tabEl.parentElement;
+    const level = parseInt(parentContainer.getAttribute('data-level') || '1');
+    
+    if (level === 1 && matchKey) {
+      // Find Level 2 container
+      const l2Container = document.querySelector(`#ShoppingGrid .ps-subcategories-container[data-level="2"][data-parent-group="${matchKey}"]`);
+      if (l2Container) {
+        const l2Tabs = l2Container.querySelectorAll('.ps-tab-btn:not(.ps-back-btn)');
+        l2Tabs.forEach(l2Tab => {
+          const l2Col = l2Tab.getAttribute('data-target-collection');
+          if (l2Col) {
+            pool.add(l2Col);
+          }
+          // For each Level 2 tab, check and add Level 3 grandchildren
+          const l2Key = l2Tab.getAttribute('data-match-key');
+          if (l2Key) {
+            const l3Container = document.querySelector(`#ShoppingGrid .ps-subcategories-container[data-level="3"][data-parent-group="${l2Key}"]`);
+            if (l3Container) {
+              const l3Tabs = l3Container.querySelectorAll('.ps-tab-btn:not(.ps-back-btn)');
+              l3Tabs.forEach(l3Tab => {
+                const l3Col = l3Tab.getAttribute('data-target-collection');
+                if (l3Col) {
+                  pool.add(l3Col);
+                }
+              });
+            }
+          }
+        });
+      }
+    } else if (level === 2 && matchKey) {
+      // Find Level 3 container
+      const l3Container = document.querySelector(`#ShoppingGrid .ps-subcategories-container[data-level="3"][data-parent-group="${matchKey}"]`);
+      if (l3Container) {
+        const l3Tabs = l3Container.querySelectorAll('.ps-tab-btn:not(.ps-back-btn)');
+        l3Tabs.forEach(l3Tab => {
+          const l3Col = l3Tab.getAttribute('data-target-collection');
+          if (l3Col) {
+            pool.add(l3Col);
+          }
+        });
+      }
+    }
+    
+    return Array.from(pool);
+  }
+
+  function injectHomeBackButtons() {
+    const subContainers = document.querySelectorAll('#ShoppingGrid .ps-subcategories-container');
+    subContainers.forEach(container => {
+      if (container.querySelector('.ps-back-btn')) return;
+
+      const backBtn = document.createElement('button');
+      backBtn.type = 'button';
+      backBtn.className = 'ps-tab-btn ps-back-btn';
+      backBtn.innerHTML = `
+        <div class="ps-tab-icon-wrap" style="border-color: #e5e5e5; background-color: #fafafa;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c70e17" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </div>
+        <span class="ps-tab-text" style="color: #c70e17; font-weight: 600;">Back</span>
+      `;
+
+      backBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const level = parseInt(container.getAttribute('data-level' || '2'));
+        if (level === 2) {
+          // Go back to Level 1
+          container.classList.add('hidden');
+          const l1Container = document.querySelector('#ShoppingGrid .ps-tabs[data-level="1"]');
+          if (l1Container) l1Container.classList.remove('hidden');
+          
+          // Deactivate all L2 tabs when going back to L1
+          container.querySelectorAll('.ps-tab-btn').forEach(t => t.classList.remove('active'));
+        } else if (level === 3) {
+          // Go back to Level 2
+          container.classList.add('hidden');
+          const parentGroup = container.getAttribute('data-parent-group');
+          const activeL2Tab = document.querySelector(`#ShoppingGrid .ps-subcategories-container[data-level="2"] .ps-tab-btn[data-match-key="${parentGroup}"]`);
+          if (activeL2Tab) {
+            const l2Container = activeL2Tab.parentElement;
+            l2Container.classList.remove('hidden');
+          }
+          // Deactivate all L3 tabs when going back to L2
+          container.querySelectorAll('.ps-tab-btn').forEach(t => t.classList.remove('active'));
+        }
+        filterHomeProducts();
+      });
+
+      container.insertBefore(backBtn, container.firstChild);
+    });
+  }
+
+  function initHomeGrid() {
+    injectHomeBackButtons();
+
+    const allTabs = document.querySelectorAll('#ShoppingGrid .ps-tab-btn:not(.ps-back-btn)');
+    
+    allTabs.forEach(tab => {
+      tab.removeEventListener('click', handleHomeTabClick);
+      tab.addEventListener('click', handleHomeTabClick);
     });
 
     filterHomeProducts();
@@ -607,31 +813,72 @@
     }
   }
 
-  function handleTabClick() {
-    const tabs = document.querySelectorAll('.ps-tab-btn');
-    tabs.forEach(t => t.classList.remove('active'));
+  function handleHomeTabClick() {
+    const parentContainer = this.parentElement;
+    const currentLevel = parseInt(parentContainer.getAttribute('data-level') || '1');
+    const matchKey = this.getAttribute('data-match-key');
+
+    // Toggle active status within row
+    parentContainer.querySelectorAll('.ps-tab-btn').forEach(t => t.classList.remove('active'));
     this.classList.add('active');
+
+    if (currentLevel === 1) {
+      const activeL2Container = document.querySelector(`#ShoppingGrid .ps-subcategories-container[data-level="2"][data-parent-group="${matchKey}"]`);
+      if (activeL2Container) {
+        parentContainer.classList.add('hidden');
+        activeL2Container.classList.remove('hidden');
+      }
+    } 
+    else if (currentLevel === 2) {
+      const activeL3Container = document.querySelector(`#ShoppingGrid .ps-subcategories-container[data-level="3"][data-parent-group="${matchKey}"]`);
+      if (activeL3Container) {
+        parentContainer.classList.add('hidden');
+        activeL3Container.classList.remove('hidden');
+      }
+    }
+
     filterHomeProducts();
   }
 
   function filterHomeProducts() {
-    const activeTab = document.querySelector('.ps-tab-btn.active');
-    if (!activeTab) return;
+    // 1. Find the Category Scope (active Level 1 tab collection)
+    const activeL1 = document.querySelector('#ShoppingGrid .ps-tabs[data-level="1"] .ps-tab-btn.active');
+    const scopeCollection = activeL1 ? activeL1.getAttribute('data-target-collection') : 'all-products';
 
-    const targetCollection = activeTab.getAttribute('data-target-collection');
-    const tabText = activeTab.querySelector('.ps-tab-text').innerText.trim().toLowerCase();
-    const isAll = tabText === 'all' || targetCollection === 'all-products' || targetCollection === 'cats-copy-1';
+    // 2. Find the deepest active tab across all containers
+    let deepestActiveTab = null;
+    const activeL3 = document.querySelector('#ShoppingGrid .ps-subcategories-container[data-level="3"] .ps-tab-btn.active');
+    const activeL2 = document.querySelector('#ShoppingGrid .ps-subcategories-container[data-level="2"] .ps-tab-btn.active');
+
+    if (activeL3) {
+      deepestActiveTab = activeL3;
+    } else if (activeL2) {
+      deepestActiveTab = activeL2;
+    } else if (activeL1) {
+      deepestActiveTab = activeL1;
+    }
+
+    const activeCollections = getHomeCollectionPool(deepestActiveTab);
     const cards = document.querySelectorAll('#ps-product-grid .ps-card');
 
     let visibleCount = 0;
     cards.forEach(card => {
       const pCollections = JSON.parse(card.getAttribute('data-collections') || '[]');
-      let show = false;
+      let show = true;
 
-      if (isAll) {
-        show = true;
-      } else {
-        show = pCollections.includes(targetCollection);
+      // Filter by Category Scope (Level 1 category restriction)
+      if (scopeCollection && scopeCollection !== 'all-products' && scopeCollection !== 'cats-copy-1') {
+        if (!pCollections.includes(scopeCollection)) {
+          show = false;
+        }
+      }
+
+      // Filter by active collection pool (progressive aggregate filtering)
+      if (show && activeCollections.length > 0 && !activeCollections.includes('all-products') && !activeCollections.includes('cats-copy-1')) {
+        const matchCol = pCollections.some(col => activeCollections.includes(col));
+        if (!matchCol) {
+          show = false;
+        }
       }
 
       if (show && visibleCount < 4) {
@@ -700,6 +947,84 @@
           "type": "collection",
           "id": "collection",
           "label": "Select Collection"
+        }
+      ]
+    },
+    {
+      "type": "collection_tab",
+      "name": "Collection Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "info": "Example: Dogs"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_image",
+          "label": "Tab Vector Circle Image"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Target Collection Data"
+        }
+      ]
+    },
+    {
+      "type": "subcategory_tab",
+      "name": "Subcategory Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "parent_category",
+          "label": "Parent Category Title",
+          "info": "Type the exact name of the parent block this belongs to (e.g., Dogs)."
+        },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "info": "Example: Dry"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_image",
+          "label": "Tab Vector Circle Image"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Target Collection Data"
+        }
+      ]
+    },
+    {
+      "type": "nested_subcategory_tab",
+      "name": "Nested Subcategory",
+      "settings": [
+        {
+          "type": "text",
+          "id": "parent_subcategory",
+          "label": "Parent Subcategory Title",
+          "info": "Type the exact name of the Level 2 block this belongs to (e.g., Dry)."
+        },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "info": "Example: Puppy"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_image",
+          "label": "Tab Vector Circle Image"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Target Collection Data"
         }
       ]
     }
