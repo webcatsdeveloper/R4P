@@ -1,6 +1,5 @@
 {% comment %}
-  Pet Collection Hub - Production-Ready Responsive Section
-  Matches Desktop (image_a53d69.png) and Mobile Layouts (image_a53d66.png) perfectly.
+  Pet Collection Hub - Production-Ready Responsive Section with Multi-Level Subcategories
 {% endcomment %}
 
 {% style %}
@@ -13,12 +12,12 @@
   }
 
   @media screen and (max-width: 767px) {
-  .pet-hub-section {
-    padding: 30px 20px;
+    .pet-hub-section {
+      padding: 30px 20px;
+    }
   }
-}
 
-  /* --- Top Desktop Banner (image_a53d69.png - Without Text Overlays) --- */
+  /* --- Top Desktop Banner --- */
   .pet-hub-desktop-banner {
     width: 100%;
     display: block;
@@ -32,10 +31,10 @@
     display: block;
   }
 
-  /* --- Top Mobile Banner (image_a53d66.png - Blue Background with Text) --- */
+  /* --- Top Mobile Banner --- */
   .pet-hub-mobile-banner {
     display: none;
-    background-color: #a4e4fc; /* Exact sky blue shade from image */
+    background-color: #a4e4fc;
     text-align: center;
     padding: 40px 20px 20px 20px;
     position: relative;
@@ -64,7 +63,12 @@
     display: flex;
     justify-content: center;
     gap: 70px;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
+  }
+  .pet-hub-subcategories-container {
+    margin-bottom: 25px;
+    border-top: 1px dashed #ddd;
+    padding-top: 25px;
   }
   .pet-tab-item {
     display: flex;
@@ -276,10 +280,10 @@
      ========================================== */
   @media (max-width: 768px) {
     .pet-hub-desktop-banner {
-      display: none; /* Hide clean banner asset on small viewports */
+      display: none;
     }
     .pet-hub-mobile-banner {
-      display: block; /* Shows text layout banner block from image_a53d66.png */
+      display: block;
     }
     .pet-hub-tabs-wrapper {
       padding-top: 25px;
@@ -296,7 +300,6 @@
       font-size: 12px;
     }
 
-    /* Filters transform into an overlay drawer matching image_a53d66.png layout flow */
     .pet-mobile-filter-bar {
       display: block;
     }
@@ -305,7 +308,7 @@
       padding: 0 15px;
     }
     .pet-hub-sidebar {
-      display: none; /* Controlled via active JS classes toggled below */
+      display: none;
       position: fixed;
       top: 0;
       left: 0;
@@ -333,7 +336,7 @@
       cursor: pointer;
     }
     .pet-products-grid {
-      grid-template-columns: repeat(2, 1fr); /* 2 Column Layout as per image_a53d66.png */
+      grid-template-columns: repeat(2, 1fr);
       gap: 15px;
     }
     .pet-product-image-container {
@@ -362,36 +365,21 @@
   }
 {% endstyle %}
 
-<!-- Top Desktop Clean Hero Banner (image_a53d69.png) -->
-{% comment %} <div class="pet-hub-desktop-banner">
-  {%- if section.settings.desktop_banner_image != blank -%}
-    <img src="{{ section.settings.desktop_banner_image | image_url: width: 1800 }}" alt="Pet Hub Banner" loading="eager">
-  {%- else -%}
-    <img src="https://cdn.shopify.com/s/files/1/0000/0000/files/placeholder_desktop_banner.png?v=123" alt="Desktop Banner Placeholder">
-  {%- endif -%}
-</div>
-
-<!-- Top Mobile Hero Banner Component (Visible on mobile viewports matching image_a53d66.png) -->
-<div class="pet-hub-mobile-banner">
-  <h1 id="PetMobileTitle">All Products</h1>
-  {%- if section.settings.mobile_hero_image != blank -%}
-    <img src="{{ section.settings.mobile_hero_image | image_url: width: 600 }}" class="pet-hub-banner-img" alt="Pets Hub Banner Illustration" loading="lazy">
-  {%- else -%}
-    <img src="https://cdn.shopify.com/s/files/1/0000/0000/files/placeholder_dogs_cats.png?v=123" class="pet-hub-banner-img" alt="Pets Banner Placeholder">
-  {%- endif -%}
-</div> {% endcomment %}
-
 <section class="pet-hub-section" id="PetHub-{{ section.id }}">
   
-  <!-- Tabs Navigation Panel -->
+  <!-- Tabs Navigation Panel Level 1 (Main Categories) -->
   <div class="pet-hub-tabs-wrapper">
-    <div class="pet-hub-tabs">
+    <div class="pet-hub-tabs" data-level="1">
       {%- for block in section.blocks -%}
         {%- if block.type == 'collection_tab' -%}
           {%- assign collection_handle = block.settings.collection -%}
           {%- assign current_collection = collections[collection_handle] -%}
+          {%- assign tab_title_clean = block.settings.tab_title | default: current_collection.title | strip | downcase -%}
           
-          <button class="pet-tab-item {% if forloop.first %}is-active{% endif %}" data-target-collection="{{ collection_handle | default: 'all-products' }}" {{ block.shopify_attributes }}>
+          <button class="pet-tab-item {% if forloop.first %}is-active{% endif %}" 
+                  data-match-key="{{ tab_title_clean }}"
+                  data-target-collection="{{ collection_handle | default: 'all-products' }}" 
+                  {{ block.shopify_attributes }}>
             <div class="pet-tab-image-wrapper">
               {%- if block.settings.tab_image != blank -%}
                 <img src="{{ block.settings.tab_image | image_url: width: 160 }}" alt="{{ block.settings.tab_title | escape }}" loading="lazy">
@@ -404,9 +392,79 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
+
+    <!-- Subcategories Level 2 -->
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'collection_tab' -%}
+        {%- assign current_l1_title = block.settings.tab_title | default: collections[block.settings.collection].title | strip | downcase -%}
+        
+        {%- capture subcategories_l2 -%}
+          {%- for sub_block in section.blocks -%}
+            {%- assign sub_parent_clean = sub_block.settings.parent_category | strip | downcase -%}
+            {%- if sub_block.type == 'subcategory_tab' and sub_parent_clean == current_l1_title -%}
+              {%- assign sub_collection_handle = sub_block.settings.collection -%}
+              {%- assign sub_collection = collections[sub_collection_handle] -%}
+              {%- assign sub_title_clean = sub_block.settings.tab_title | default: sub_collection.title | strip | downcase -%}
+              <button class="pet-tab-item" 
+                      data-match-key="{{ sub_title_clean }}"
+                      data-target-collection="{{ sub_collection_handle | default: 'all-products' }}">
+                <div class="pet-tab-image-wrapper">
+                  {%- if sub_block.settings.tab_image != blank -%}
+                    <img src="{{ sub_block.settings.tab_image | image_url: width: 160 }}" alt="{{ sub_block.settings.tab_title | escape }}" loading="lazy">
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {%- endif -%}
+                </div>
+                <span>{{ sub_block.settings.tab_title | default: sub_collection.title }}</span>
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- if subcategories_l2 != blank -%}
+          <div class="pet-hub-subcategories-container pet-hub-tabs hidden" data-level="2" data-parent-group="{{ current_l1_title }}">
+            {{ subcategories_l2 }}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    <!-- Subcategories Level 3 -->
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'subcategory_tab' -%}
+        {%- assign current_l2_title = block.settings.tab_title | default: collections[block.settings.collection].title | strip | downcase -%}
+        
+        {%- capture subcategories_l3 -%}
+          {%- for nested_block in section.blocks -%}
+            {%- assign nested_parent_clean = nested_block.settings.parent_subcategory | strip | downcase -%}
+            {%- if nested_block.type == 'nested_subcategory_tab' and nested_parent_clean == current_l2_title -%}
+              {%- assign nest_collection_handle = nested_block.settings.collection -%}
+              {%- assign nest_collection = collections[nest_collection_handle] -%}
+              <button class="pet-tab-item" 
+                      data-target-collection="{{ nest_collection_handle | default: 'all-products' }}">
+                <div class="pet-tab-image-wrapper">
+                  {%- if nested_block.settings.tab_image != blank -%}
+                    <img src="{{ nested_block.settings.tab_image | image_url: width: 160 }}" alt="{{ nested_block.settings.tab_title | escape }}" loading="lazy">
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {%- endif -%}
+                </div>
+                <span>{{ nested_block.settings.tab_title | default: nest_collection.title }}</span>
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- if subcategories_l3 != blank -%}
+          <div class="pet-hub-subcategories-container pet-hub-tabs hidden" data-level="3" data-parent-group="{{ current_l2_title }}">
+            {{ subcategories_l3 }}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
   </div>
 
-  <!-- Horizontal Mobile Action Bar (image_a53d66.png Rule Line implementation) -->
+  <!-- Horizontal Mobile Action Bar -->
   <div class="pet-mobile-filter-bar" onclick="toggleMobileSidebar(true)">
     <span>Fliter <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg></span>
   </div>
@@ -471,11 +529,13 @@
     <div class="pet-products-grid" id="PetProductGrid">
       {%- assign collections_to_render = "" -%}
       {%- for block in section.blocks -%}
-        {%- if block.type == 'collection_tab' and block.settings.collection != blank -%}
-          {%- assign collections_to_render = collections_to_render | append: block.settings.collection | append: "," -%}
+        {%- if block.type == 'collection_tab' or block.type == 'subcategory_tab' or block.type == 'nested_subcategory_tab' -%}
+          {%- if block.settings.collection != blank -%}
+            {%- assign collections_to_render = collections_to_render | append: block.settings.collection | append: "," -%}
+          {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
-      {%- assign collection_array = collections_to_render | split: "," -%}
+      {%- assign collection_array = collections_to_render | split: "," | uniq -%}
 
       {%- for collection_handle in collection_array -%}
         {%- assign selected_collection = collections[collection_handle] -%}
@@ -517,14 +577,42 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const tabs = document.querySelectorAll('#PetHub-{{ section.id }} .pet-tab-item');
+    const allTabs = document.querySelectorAll('#PetHub-{{ section.id }} .pet-tab-item');
     
-    tabs.forEach(tab => {
+    allTabs.forEach(tab => {
       tab.addEventListener('click', function() {
-        tabs.forEach(t => t.classList.remove('is-active'));
+        const parentContainer = this.parentElement;
+        const currentLevel = parseInt(parentContainer.getAttribute('data-level'));
+        const matchKey = this.getAttribute('data-match-key');
+
+        // Toggle active status within row
+        parentContainer.querySelectorAll('.pet-tab-item').forEach(t => t.classList.remove('is-active'));
         this.classList.add('is-active');
-        
-        // Dynamic banner update following active selection states
+
+        if (currentLevel === 1) {
+          // Hide deep layout panels completely
+          document.querySelectorAll('#PetHub-{{ section.id }} .pet-hub-subcategories-container').forEach(el => el.classList.add('hidden'));
+          document.querySelectorAll('#PetHub-{{ section.id }} .pet-hub-subcategories-container .pet-tab-item').forEach(t => t.classList.remove('is-active'));
+          
+          // Display active matching child groups
+          const activeL2Container = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"][data-parent-group="${matchKey}"]`);
+          if (activeL2Container) {
+            activeL2Container.classList.remove('hidden');
+          }
+        } 
+        else if (currentLevel === 2) {
+          // Hide grandchildren panels
+          document.querySelectorAll('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"]').forEach(el => el.classList.add('hidden'));
+          document.querySelectorAll('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"] .pet-tab-item').forEach(t => t.classList.remove('is-active'));
+          
+          // Show active grandchildren
+          const activeL3Container = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"][data-parent-group="${matchKey}"]`);
+          if (activeL3Container) {
+            activeL3Container.classList.remove('hidden');
+          }
+        }
+
+        // Title sync handler update
         const tabText = this.querySelector('span').innerText;
         const mobileTitleEl = document.getElementById('PetMobileTitle');
         if(mobileTitleEl) {
@@ -535,7 +623,14 @@
       });
     });
 
-    // Run tab collection check on startup without running aggressive criteria locks
+    // Auto load starting configurations
+    const firstL1Tab = document.querySelector('#PetHub-{{ section.id }} .pet-hub-tabs[data-level="1"] .pet-tab-item.is-active');
+    if(firstL1Tab) {
+      const initialKey = firstL1Tab.getAttribute('data-match-key');
+      const activeL2Container = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"][data-parent-group="${initialKey}"]`);
+      if (activeL2Container) activeL2Container.classList.remove('hidden');
+    }
+
     filterProducts();
   });
 
@@ -559,8 +654,18 @@
   }
 
   function filterProducts() {
-    const activeTab = document.querySelector('#PetHub-{{ section.id }} .pet-tab-item.is-active');
-    const activeCollection = activeTab ? activeTab.getAttribute('data-target-collection') : 'all-products';
+    let activeCollection = 'all-products';
+    const activeL3 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"]:not(.hidden) .pet-tab-item.is-active');
+    const activeL2 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"]:not(.hidden) .pet-tab-item.is-active');
+    const activeL1 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-tabs[data-level="1"] .pet-tab-item.is-active');
+
+    if (activeL3) {
+      activeCollection = activeL3.getAttribute('data-target-collection');
+    } else if (activeL2) {
+      activeCollection = activeL2.getAttribute('data-target-collection');
+    } else if (activeL1) {
+      activeCollection = activeL1.getAttribute('data-target-collection');
+    }
     
     const selectedTypeEl = document.querySelector('input[name="pet-type"]:checked');
     const selectedType = selectedTypeEl ? selectedTypeEl.value : null;
@@ -619,24 +724,81 @@
       "type": "image_picker",
       "id": "desktop_banner_image",
       "label": "Desktop Hero Banner Image (Clean)",
-      "info": "Upload the full widescreen graphical banner background without explicit header text matching image_a53d69.png."
+      "info": "Upload the full widescreen graphical banner background without explicit header text."
     },
     {
       "type": "image_picker",
       "id": "mobile_hero_image",
       "label": "Mobile Hero Illustration Asset",
-      "info": "Upload the transparent dog and cat product graphic asset here for mobile displays matching image_a53d66.png."
+      "info": "Upload the transparent dog and cat product graphic asset here for mobile displays."
     }
   ],
   "blocks": [
     {
       "type": "collection_tab",
-      "name": "Collection Tab",
+      "name": "Category Tab",
       "settings": [
         {
           "type": "text",
           "id": "tab_title",
-          "label": "Tab Title"
+          "label": "Tab Title",
+          "info": "Example: Dogs"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_image",
+          "label": "Tab Vector Circle Image"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Target Collection Data"
+        }
+      ]
+    },
+    {
+      "type": "subcategory_tab",
+      "name": "Subcategory Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "parent_category",
+          "label": "Parent Category Title",
+          "info": "Type the exact name of the parent block this belongs to (e.g., Dogs)."
+        },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "info": "Example: Dry"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_image",
+          "label": "Tab Vector Circle Image"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Target Collection Data"
+        }
+      ]
+    },
+    {
+      "type": "nested_subcategory_tab",
+      "name": "Nested Subcategory",
+      "settings": [
+        {
+          "type": "text",
+          "id": "parent_subcategory",
+          "label": "Parent Subcategory Title",
+          "info": "Type the exact name of the Level 2 block this belongs to (e.g., Dry)."
+        },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "info": "Example: Puppy"
         },
         {
           "type": "image_picker",
