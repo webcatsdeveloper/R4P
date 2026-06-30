@@ -236,7 +236,7 @@
           "settings": {
             "parent_subcategory": "Dry food",
             "tab_title": "breed",
-            "tab_image": "shopify://shop_images/b.png",
+            "tab_image": "shopify://shop_images/breed.png",
             "collection": ""
           }
         },
@@ -264,6 +264,15 @@
             "parent_subcategory": "wet food",
             "tab_title": "bone broth",
             "tab_image": "shopify://shop_images/b.png",
+            "collection": ""
+          }
+        },
+        "subcategory_tab_mr6HVt": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_category": "Dogs",
+            "tab_title": "Traits",
+            "tab_image": "shopify://shop_images/Trial_Pack.png",
             "collection": ""
           }
         },
@@ -322,6 +331,7 @@
         "subcategory_tab_KiyDRy",
         "nested_subcategory_tab_b8BFEQ",
         "nested_subcategory_tab_mLG6a6",
+        "subcategory_tab_mr6HVt",
         "category_tab_Mkm3iH",
         "category_tab_KfJtNT",
         "subcategory_tab_9XpcNz",
