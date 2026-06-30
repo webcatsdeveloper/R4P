@@ -57,7 +57,6 @@
     padding: 0;
   }
 
-  /* Style applies to both the image and the video seamlessly */
   .naturally-fresh-image-wrapper img,
   .naturally-fresh-image-wrapper video {
     width: 100%;
@@ -66,6 +65,7 @@
     object-fit: contain;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    outline: none; /* Removes outline ring on focus */
   }
 
   @media screen and (max-width: 768px) {
@@ -105,7 +105,11 @@
 
     <div class="naturally-fresh-image-wrapper">
       {% if section.settings.main_video != blank %}
-        {{ section.settings.main_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true }}
+        {% comment %}
+          Changed controls: true so the video can be paused/replayed.
+          Kept autoplay: true so it starts playing immediately.
+        {% endcomment %}
+        {{ section.settings.main_video | video_tag: autoplay: true, loop: true, muted: true, controls: true, playsinline: true }}
       {% elsif section.settings.main_image %}
         <img src="{{ section.settings.main_image | img_url: 'master' }}" alt="Flakes not a pellet" loading="lazy">
       {% endif %}
