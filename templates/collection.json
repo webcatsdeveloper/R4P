@@ -371,21 +371,20 @@
             "collection": "cats-copy-1"
           }
         },
+        "collection_tab_YQixjD": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "Dogs",
+            "tab_image": "shopify://shop_images/Layer_1_f05a10c9-1f6f-41de-9a51-b8a82a69a595.png",
+            "collection": "dogs"
+          }
+        },
         "subcategory_tab_CMkEnf": {
           "type": "subcategory_tab",
           "settings": {
             "parent_category": "Dogs",
             "tab_title": "Dry",
             "tab_image": "shopify://shop_images/Dry_food.png",
-            "collection": ""
-          }
-        },
-        "nested_subcategory_tab_WEFBwW": {
-          "type": "nested_subcategory_tab",
-          "settings": {
-            "parent_subcategory": "Dry",
-            "tab_title": "Taster Pack",
-            "tab_image": "shopify://shop_images/Trial_Pack.png",
             "collection": ""
           }
         },
@@ -407,12 +406,13 @@
             "collection": ""
           }
         },
-        "collection_tab_YQixjD": {
-          "type": "collection_tab",
+        "nested_subcategory_tab_WEFBwW": {
+          "type": "nested_subcategory_tab",
           "settings": {
-            "tab_title": "Dogs",
-            "tab_image": "shopify://shop_images/Layer_1_f05a10c9-1f6f-41de-9a51-b8a82a69a595.png",
-            "collection": "dogs"
+            "parent_subcategory": "Dry",
+            "tab_title": "Taster Pack",
+            "tab_image": "shopify://shop_images/Trial_Pack.png",
+            "collection": ""
           }
         },
         "collection_tab_3f6pMp": {
@@ -434,11 +434,11 @@
       },
       "block_order": [
         "collection_tab_K7yz37",
+        "collection_tab_YQixjD",
         "subcategory_tab_CMkEnf",
-        "nested_subcategory_tab_WEFBwW",
         "subcategory_tab_QWBXed",
         "subcategory_tab_nqtg3J",
-        "collection_tab_YQixjD",
+        "nested_subcategory_tab_WEFBwW",
         "collection_tab_3f6pMp",
         "collection_tab_bxVMGU"
       ],
