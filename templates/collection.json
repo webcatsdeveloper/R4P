@@ -409,7 +409,7 @@
         "nested_subcategory_tab_4mAq7Y": {
           "type": "nested_subcategory_tab",
           "settings": {
-            "parent_subcategory": "",
+            "parent_subcategory": "Dry",
             "tab_title": "Adult",
             "tab_image": "shopify://shop_images/Adult.png",
             "collection": ""
@@ -418,7 +418,7 @@
         "nested_subcategory_tab_qdDHEY": {
           "type": "nested_subcategory_tab",
           "settings": {
-            "parent_subcategory": "",
+            "parent_subcategory": "Dry",
             "tab_title": "Breeders club",
             "tab_image": "shopify://shop_images/breed.png",
             "collection": ""
