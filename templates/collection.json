@@ -388,24 +388,6 @@
             "collection": ""
           }
         },
-        "subcategory_tab_QWBXed": {
-          "type": "subcategory_tab",
-          "settings": {
-            "parent_category": "Dogs",
-            "tab_title": "Wet",
-            "tab_image": "shopify://shop_images/Wet_food.png",
-            "collection": ""
-          }
-        },
-        "subcategory_tab_nqtg3J": {
-          "type": "subcategory_tab",
-          "settings": {
-            "parent_category": "Dogs",
-            "tab_title": "Treats",
-            "tab_image": "shopify://shop_images/Treats.png",
-            "collection": ""
-          }
-        },
         "nested_subcategory_tab_WEFBwW": {
           "type": "nested_subcategory_tab",
           "settings": {
@@ -442,6 +424,24 @@
             "collection": ""
           }
         },
+        "subcategory_tab_QWBXed": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_category": "Dogs",
+            "tab_title": "Wet",
+            "tab_image": "shopify://shop_images/Wet_food.png",
+            "collection": ""
+          }
+        },
+        "subcategory_tab_nqtg3J": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_category": "Dogs",
+            "tab_title": "Treats",
+            "tab_image": "shopify://shop_images/Treats.png",
+            "collection": ""
+          }
+        },
         "collection_tab_3f6pMp": {
           "type": "collection_tab",
           "settings": {
@@ -463,12 +463,12 @@
         "collection_tab_K7yz37",
         "collection_tab_YQixjD",
         "subcategory_tab_CMkEnf",
-        "subcategory_tab_QWBXed",
-        "subcategory_tab_nqtg3J",
         "nested_subcategory_tab_WEFBwW",
         "nested_subcategory_tab_We9aA4",
         "nested_subcategory_tab_4mAq7Y",
         "nested_subcategory_tab_qdDHEY",
+        "subcategory_tab_QWBXed",
+        "subcategory_tab_nqtg3J",
         "collection_tab_3f6pMp",
         "collection_tab_bxVMGU"
       ],
