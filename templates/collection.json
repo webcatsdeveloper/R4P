@@ -436,8 +436,18 @@
         "nested_subcategory_tab_D6Nii4": {
           "type": "nested_subcategory_tab",
           "settings": {
+            "parent_subcategory": "Wet",
+            "tab_title": "wet Meals",
+            "tab_image": "shopify://shop_images/Wet_food_1.png",
+            "collection": ""
+          }
+        },
+        "nested_subcategory_tab_fXFPWn": {
+          "type": "nested_subcategory_tab",
+          "settings": {
             "parent_subcategory": "",
-            "tab_title": "",
+            "tab_title": "Bone broth",
+            "tab_image": "shopify://shop_images/Wet_food_1.png",
             "collection": ""
           }
         },
@@ -477,6 +487,7 @@
         "nested_subcategory_tab_qdDHEY",
         "subcategory_tab_QWBXed",
         "nested_subcategory_tab_D6Nii4",
+        "nested_subcategory_tab_fXFPWn",
         "subcategory_tab_nqtg3J",
         "collection_tab_3f6pMp",
         "collection_tab_bxVMGU"
