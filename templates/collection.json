@@ -445,7 +445,7 @@
         "nested_subcategory_tab_fXFPWn": {
           "type": "nested_subcategory_tab",
           "settings": {
-            "parent_subcategory": "",
+            "parent_subcategory": "Wet",
             "tab_title": "Bone broth",
             "tab_image": "shopify://shop_images/Wet_food_1.png",
             "collection": ""
