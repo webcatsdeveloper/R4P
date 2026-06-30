@@ -282,6 +282,33 @@
             "tab_icon": "shopify://shop_images/Layer_1_13_524f404e-1321-47b1-9b5a-3f7509f6769f.png",
             "collection": "cats-copy"
           }
+        },
+        "subcategory_tab_9XpcNz": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_category": "wellness",
+            "tab_title": "personal hygiene",
+            "tab_image": "shopify://shop_images/Wet_food_2.png",
+            "collection": ""
+          }
+        },
+        "subcategory_tab_TYGpiF": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_category": "wellness",
+            "tab_title": "external hygiene",
+            "tab_image": "shopify://shop_images/Wet_food_2.png",
+            "collection": ""
+          }
+        },
+        "subcategory_tab_BhTyxe": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_category": "wellness",
+            "tab_title": "supplements",
+            "tab_image": "shopify://shop_images/Wet_food_2.png",
+            "collection": ""
+          }
         }
       },
       "block_order": [
@@ -296,7 +323,10 @@
         "nested_subcategory_tab_b8BFEQ",
         "nested_subcategory_tab_mLG6a6",
         "category_tab_Mkm3iH",
-        "category_tab_KfJtNT"
+        "category_tab_KfJtNT",
+        "subcategory_tab_9XpcNz",
+        "subcategory_tab_TYGpiF",
+        "subcategory_tab_BhTyxe"
       ],
       "name": "Product Grid Selection",
       "settings": {
