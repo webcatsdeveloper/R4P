@@ -400,7 +400,7 @@
         "nested_subcategory_tab_We9aA4": {
           "type": "nested_subcategory_tab",
           "settings": {
-            "parent_subcategory": "",
+            "parent_subcategory": "Dry",
             "tab_title": "Puppy",
             "tab_image": "shopify://shop_images/Puppy.png",
             "collection": ""
