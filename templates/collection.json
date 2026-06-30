@@ -460,15 +460,6 @@
             "collection": ""
           }
         },
-        "nested_subcategory_tab_3bPAbE": {
-          "type": "nested_subcategory_tab",
-          "settings": {
-            "parent_subcategory": "Treats",
-            "tab_title": "Single ingredient",
-            "tab_image": "shopify://shop_images/Treats.png",
-            "collection": ""
-          }
-        },
         "collection_tab_3f6pMp": {
           "type": "collection_tab",
           "settings": {
@@ -484,6 +475,33 @@
             "tab_image": "shopify://shop_images/Layer_1_13_524f404e-1321-47b1-9b5a-3f7509f6769f.png",
             "collection": "cats-copy"
           }
+        },
+        "subcategory_tab_nafm8e": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_category": "Wellness",
+            "tab_title": "Personal Hygiene",
+            "tab_image": "shopify://shop_images/Wet_food_2.png",
+            "collection": ""
+          }
+        },
+        "subcategory_tab_P3TdVp": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_category": "Wellness",
+            "tab_title": "External Hygiene",
+            "tab_image": "shopify://shop_images/Wet_food_2.png",
+            "collection": ""
+          }
+        },
+        "subcategory_tab_3irRMR": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_category": "Wellness",
+            "tab_title": "Supplements",
+            "tab_image": "shopify://shop_images/Wet_food_2.png",
+            "collection": ""
+          }
         }
       },
       "block_order": [
@@ -498,9 +516,11 @@
         "nested_subcategory_tab_D6Nii4",
         "nested_subcategory_tab_fXFPWn",
         "subcategory_tab_nqtg3J",
-        "nested_subcategory_tab_3bPAbE",
         "collection_tab_3f6pMp",
-        "collection_tab_bxVMGU"
+        "collection_tab_bxVMGU",
+        "subcategory_tab_nafm8e",
+        "subcategory_tab_P3TdVp",
+        "subcategory_tab_3irRMR"
       ],
       "name": "Pet Collection Hub",
       "settings": {}
