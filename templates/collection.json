@@ -371,6 +371,33 @@
             "collection": "cats-copy-1"
           }
         },
+        "subcategory_tab_7Ki464": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_tab_id": "",
+            "tab_title": "Dry food",
+            "tab_image": "shopify://shop_images/Dry_food.png",
+            "collection": "dogs"
+          }
+        },
+        "subcategory_tab_YrtEBA": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_tab_id": "",
+            "tab_title": "Wet food",
+            "tab_image": "shopify://shop_images/Wet_food.png",
+            "collection": "dogs"
+          }
+        },
+        "subcategory_tab_NTMfPL": {
+          "type": "subcategory_tab",
+          "settings": {
+            "parent_tab_id": "",
+            "tab_title": "Treats",
+            "tab_image": "shopify://shop_images/Treats.png",
+            "collection": "dogs"
+          }
+        },
         "collection_tab_YQixjD": {
           "type": "collection_tab",
           "settings": {
@@ -398,6 +425,9 @@
       },
       "block_order": [
         "collection_tab_K7yz37",
+        "subcategory_tab_7Ki464",
+        "subcategory_tab_YrtEBA",
+        "subcategory_tab_NTMfPL",
         "collection_tab_YQixjD",
         "collection_tab_3f6pMp",
         "collection_tab_bxVMGU"
