@@ -380,6 +380,15 @@
             "collection": ""
           }
         },
+        "nested_subcategory_tab_WEFBwW": {
+          "type": "nested_subcategory_tab",
+          "settings": {
+            "parent_subcategory": "",
+            "tab_title": "Taster Pack",
+            "tab_image": "shopify://shop_images/Trial_Pack.png",
+            "collection": ""
+          }
+        },
         "subcategory_tab_QWBXed": {
           "type": "subcategory_tab",
           "settings": {
@@ -426,6 +435,7 @@
       "block_order": [
         "collection_tab_K7yz37",
         "subcategory_tab_CMkEnf",
+        "nested_subcategory_tab_WEFBwW",
         "subcategory_tab_QWBXed",
         "subcategory_tab_nqtg3J",
         "collection_tab_YQixjD",
