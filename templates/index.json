@@ -183,7 +183,7 @@
           "type": "category_tab",
           "settings": {
             "title": "All",
-            "tab_icon": "shopify://shop_images/Layer_1_1_c4a80cf5-5c56-4121-bfc9-2064ad230098.png",
+            "tab_icon": "shopify://shop_images/Layer_1_10_9d47f109-31e5-4e17-b541-726f99ec9c31.png",
             "collection": "cats-copy-1"
           }
         },
@@ -191,7 +191,7 @@
           "type": "category_tab",
           "settings": {
             "title": "Dogs",
-            "tab_icon": "shopify://shop_images/Layer_1_f05a10c9-1f6f-41de-9a51-b8a82a69a595.png",
+            "tab_icon": "shopify://shop_images/Layer_1_11_34095a9b-b836-4476-b447-1552f349f8fa.png",
             "collection": "dogs"
           }
         },
@@ -199,7 +199,7 @@
           "type": "category_tab",
           "settings": {
             "title": "Cats",
-            "tab_icon": "shopify://shop_images/Layer_1_2_3a21fd40-6acd-4f16-85fe-a78dc845f3c9.png",
+            "tab_icon": "shopify://shop_images/Layer_1_12_922704ee-165f-42c3-b7c2-90edc7a74ff8.png",
             "collection": "cats"
           }
         },
@@ -207,7 +207,7 @@
           "type": "category_tab",
           "settings": {
             "title": "Wellness",
-            "tab_icon": "shopify://shop_images/Layer_1_3_d4972e1c-5604-45b9-b89b-b9d9e85b06ef.png",
+            "tab_icon": "shopify://shop_images/Layer_1_13_524f404e-1321-47b1-9b5a-3f7509f6769f.png",
             "collection": "cats-copy"
           }
         }
