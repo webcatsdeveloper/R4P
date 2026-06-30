@@ -579,6 +579,22 @@
   document.addEventListener("DOMContentLoaded", function() {
     const allTabs = document.querySelectorAll('#PetHub-{{ section.id }} .pet-tab-item');
     
+    // State variable: starts true on load so active primary category/everything shows initially.
+    let isLeafSelected = true;
+
+    // Helper to check if a tab block has child subcategory blocks
+    function hasChildren(tabEl) {
+      const matchKey = tabEl.getAttribute('data-match-key');
+      const parentContainer = tabEl.parentElement;
+      const level = parseInt(parentContainer.getAttribute('data-level') || '1');
+      if (level === 1) {
+        return !!document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"][data-parent-group="${matchKey}"]`);
+      } else if (level === 2) {
+        return !!document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"][data-parent-group="${matchKey}"]`);
+      }
+      return false; // Level 3 is the final tier
+    }
+
     allTabs.forEach(tab => {
       tab.addEventListener('click', function() {
         const parentContainer = this.parentElement;
@@ -612,6 +628,9 @@
           }
         }
 
+        // State gating: is it a leaf node (has no child tiers)?
+        isLeafSelected = !hasChildren(this);
+
         // Title sync handler update
         const tabText = this.querySelector('span').innerText;
         const mobileTitleEl = document.getElementById('PetMobileTitle');
@@ -623,14 +642,8 @@
       });
     });
 
-    // Auto load starting configurations
-    const firstL1Tab = document.querySelector('#PetHub-{{ section.id }} .pet-hub-tabs[data-level="1"] .pet-tab-item.is-active');
-    if(firstL1Tab) {
-      const initialKey = firstL1Tab.getAttribute('data-match-key');
-      const activeL2Container = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"][data-parent-group="${initialKey}"]`);
-      if (activeL2Container) activeL2Container.classList.remove('hidden');
-    }
-
+    // Initial Load: Keep all Level 2 and Level 3 subcategories hidden by default.
+    // The product grid will show the active Level 1 category on load because isLeafSelected starts as true.
     filterProducts();
   });
 
@@ -654,25 +667,68 @@
   }
 
   function filterProducts() {
-    let activeCollection = 'all-products';
+    const emptyMsg = document.getElementById('PetNoProducts');
+    const products = document.querySelectorAll('#PetHub-{{ section.id }} .mix-target-item');
+    
+    // Find the state of the first Level 1 tab to check if initial load is active
+    const activeL1Tab = document.querySelector('#PetHub-{{ section.id }} .pet-hub-tabs[data-level="1"] .pet-tab-item.is-active');
+    
+    // Check if we are mid-navigation (a parent category is clicked but no subcategory selected)
+    // We check if the active tab at the deepest visible level has children.
+    let deepestActiveTab = null;
     const activeL3 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"]:not(.hidden) .pet-tab-item.is-active');
     const activeL2 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"]:not(.hidden) .pet-tab-item.is-active');
     const activeL1 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-tabs[data-level="1"] .pet-tab-item.is-active');
 
     if (activeL3) {
-      activeCollection = activeL3.getAttribute('data-target-collection');
+      deepestActiveTab = activeL3;
     } else if (activeL2) {
-      activeCollection = activeL2.getAttribute('data-target-collection');
+      deepestActiveTab = activeL2;
     } else if (activeL1) {
-      activeCollection = activeL1.getAttribute('data-target-collection');
+      deepestActiveTab = activeL1;
     }
+
+    // Determine if we should show products:
+    // 1. If it's the initial page load (where no subcategories are open/visible and we want to show L1 active or all)
+    // 2. Or if the deepest active tab is a leaf node (has no children).
+    let showProducts = false;
     
+    // Check if L2 is completely hidden (meaning initial load state or completely reset state)
+    const isInitialLoad = !document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"]:not(.hidden)');
+    
+    if (isInitialLoad) {
+      showProducts = true;
+    } else if (deepestActiveTab) {
+      // Check if deepest active tab has children
+      const matchKey = deepestActiveTab.getAttribute('data-match-key');
+      const parentContainer = deepestActiveTab.parentElement;
+      const level = parseInt(parentContainer.getAttribute('data-level') || '1');
+      let hasChildren = false;
+      if (level === 1) {
+        hasChildren = !!document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"][data-parent-group="${matchKey}"]`);
+      } else if (level === 2) {
+        hasChildren = !!document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"][data-parent-group="${matchKey}"]`);
+      }
+      showProducts = !hasChildren;
+    }
+
+    if (!showProducts) {
+      products.forEach(product => product.classList.add('hidden'));
+      emptyMsg.innerText = "Please select a subcategory to view products.";
+      emptyMsg.classList.remove('hidden');
+      return;
+    }
+
+    let activeCollection = 'all-products';
+    if (deepestActiveTab) {
+      activeCollection = deepestActiveTab.getAttribute('data-target-collection');
+    }
+
     const selectedTypeEl = document.querySelector('input[name="pet-type"]:checked');
     const selectedType = selectedTypeEl ? selectedTypeEl.value : null;
     const priceRange = document.getElementById('pet-price-range').value;
     const checkedWeights = Array.from(document.querySelectorAll('input[name="pet-weight"]:checked')).map(el => el.value.toLowerCase());
 
-    const products = document.querySelectorAll('#PetHub-{{ section.id }} .mix-target-item');
     let visibleCount = 0;
 
     products.forEach(product => {
@@ -710,9 +766,12 @@
       }
     });
 
-    const emptyMsg = document.getElementById('PetNoProducts');
-    if (visibleCount === 0) emptyMsg.classList.remove('hidden');
-    else emptyMsg.classList.add('hidden');
+    if (visibleCount === 0) {
+      emptyMsg.innerText = "No products found matching those filter selections.";
+      emptyMsg.classList.remove('hidden');
+    } else {
+      emptyMsg.classList.add('hidden');
+    }
   }
 </script>
 
