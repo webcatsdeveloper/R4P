@@ -229,6 +229,7 @@
         "card_jeUWdp": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/113_1_1.jpg",
             "is_featured": false
           }
         }
