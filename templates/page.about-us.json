@@ -222,6 +222,7 @@
         "card_mVtAK3": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/IMG_20250610_180508.jpg",
             "is_featured": true
           }
         }
