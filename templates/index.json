@@ -71,8 +71,8 @@
       ],
       "name": "Pet Selector Section",
       "settings": {
-        "heading": "Let's find what's right for your little one",
-        "subheading": "Tell us a bit about them and we'll guide you to the right nutrition plan!",
+        "heading": "So, which furry friend are we shopping for today?",
+        "subheading": "Choose from our range of complete nutrition, indulgences & wellness essentials, all made to do right by them!",
         "left_curve": "shopify://shop_images/Vector_5.png",
         "right_curve": "shopify://shop_images/Isolation_Mode_1.png"
       }
