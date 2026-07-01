@@ -541,35 +541,66 @@
       {%- endfor -%}
       {%- assign collection_array = collections_to_render | split: "," | uniq -%}
 
+      {%- assign product_collection_map = "" -%}
+      {%- for b in section.blocks -%}
+        {%- if b.type == 'category_tab' or b.type == 'collection_tab' or b.type == 'subcategory_tab' or b.type == 'nested_subcategory_tab' -%}
+          {%- assign b_col_handle = b.settings.collection | default: b.settings.tab_title | handleize -%}
+          {%- if b_col_handle != blank -%}
+            {%- assign b_col = collections[b_col_handle] -%}
+            {%- if b_col != blank -%}
+              {%- for p in b_col.products limit: 40 -%}
+                {%- assign product_collection_map = product_collection_map | append: p.handle | append: ":" | append: b_col_handle | append: "," -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- assign rendered_handles = "" -%}
       {%- for collection_handle in collection_array -%}
         {%- assign selected_collection = collections[collection_handle] -%}
         {%- for product in selected_collection.products limit: 40 -%}
-          
-          {%- assign p_type = "Dry" -%}
-          {%- if product.tags contains 'Wet' or product.tags contains 'wet' -%}
-            {%- assign p_type = "Wet" -%}
-          {%- endif -%}
-          
-          {%- assign weight_tags = "" -%}
-          {%- for variant in product.variants -%}
-            {%- assign weight_tags = weight_tags | append: variant.title | append: "," | append: variant.weight | append: "g," -%}
-          {%- endfor -%}
-
-          <div class="pet-product-card mix-target-item" 
-               data-collections='[{%- for c in product.collections -%}"{{ c.handle }}"{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]'
-               data-type="{{ p_type }}"
-               data-price="{{ product.price | money_without_currency | replace: ',', '' }}"
-               data-weight='{{ weight_tags | downcase }}'>
+          {%- assign handle_query = product.handle | prepend: "[" | append: "]" -%}
+          <!-- DEBUG PRODUCT: {{ product.handle }} | query: {{ handle_query }} | rendered: {{ rendered_handles }} -->
+          {%- unless rendered_handles contains handle_query -%}
+            {%- assign rendered_handles = rendered_handles | append: handle_query | append: "," -%}
             
-            <a href="{{ product.url }}" class="pet-product-image-container">
-              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
-            </a>
+            {%- assign p_type = "Dry" -%}
+            {%- if product.tags contains 'Wet' or product.tags contains 'wet' -%}
+              {%- assign p_type = "Wet" -%}
+            {%- endif -%}
             
-            <h4 class="pet-product-title">{{ product.title }}</h4>
-            <div class="pet-product-price">{{ product.price | money }}</div>
-            <a href="{{ product.url }}" class="pet-product-btn">Shop Now</a>
-          </div>
+            {%- assign weight_tags = "" -%}
+            {%- for variant in product.variants -%}
+              {%- assign weight_tags = weight_tags | append: variant.title | append: "," | append: variant.weight | append: "g," -%}
+            {%- endfor -%}
 
+            {%- assign prod_cols_array = "" -%}
+            {%- assign map_items = product_collection_map | split: "," -%}
+            {%- for item in map_items -%}
+              {%- assign parts = item | split: ":" -%}
+              {%- if parts[0] == product.handle and parts[1] != blank -%}
+                {%- assign prod_cols_array = prod_cols_array | append: parts[1] | append: "," -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- assign uniq_cols = prod_cols_array | split: "," | uniq -%}
+            {%- assign first_col = true -%}
+
+            <div class="pet-product-card mix-target-item" 
+                 data-collections='[{%- for c in uniq_cols -%}{%- if c != blank -%}{%- unless first_col -%},{%- endunless -%}"{{ c }}"{%- assign first_col = false -%}{%- endif -%}{%- endfor -%}]'
+                 data-type="{{ p_type }}"
+                 data-price="{{ product.price | money_without_currency | replace: ',', '' }}"
+                 data-weight='{{ weight_tags | downcase }}'>
+              
+              <a href="{{ product.url }}" class="pet-product-image-container">
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+              </a>
+              
+              <h4 class="pet-product-title">{{ product.title }}</h4>
+              <div class="pet-product-price">{{ product.price | money }}</div>
+              <a href="{{ product.url }}" class="pet-product-btn">Shop Now</a>
+            </div>
+          {%- endunless -%}
         {%- endfor -%}
       {%- endfor -%}
       

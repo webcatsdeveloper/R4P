@@ -619,39 +619,71 @@
 
     <div class="ps-content-wrapper">
       <div class="ps-grid-container active" id="ps-product-grid-{{ section.id }}">
+        {%- assign product_collection_map = "" -%}
+        {%- for b in section.blocks -%}
+          {%- if b.type == 'category_tab' or b.type == 'collection_tab' or b.type == 'subcategory_tab' or b.type == 'nested_subcategory_tab' -%}
+            {%- assign b_col_handle = b.settings.collection | default: b.settings.tab_title | handleize -%}
+            {%- if b_col_handle != blank -%}
+              {%- assign b_col = collections[b_col_handle] -%}
+              {%- if b_col != blank -%}
+                {%- for p in b_col.products limit: 40 -%}
+                  {%- assign product_collection_map = product_collection_map | append: p.handle | append: ":" | append: b_col_handle | append: "," -%}
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- assign rendered_handles = "" -%}
         {%- for block in section.blocks -%}
           {%- assign collection_handle = block.settings.collection -%}
           {%- assign collection = collections[collection_handle] -%}
           {%- if collection != blank -%}
             {%- for product in collection.products limit: 40 -%}
-              <a href="{{ product.url }}" class="ps-card" data-collections='[{%- for c in product.collections -%}"{{ c.handle }}"{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]'>
-                <div class="ps-image-box">
-                  <img
-                    src="{{ product.featured_image | img_url: '600x600' }}"
-                    alt="{{ product.title }}"
-                    class="ps-prod-img"
-                    loading="lazy"
-                  >
-                </div>
-                <div class="ps-info">
-                  <h3 class="ps-title">
-                    {% assign words = product.title | split: ' ' %}
-                    {% for word in words %}
-                      {% if forloop.index == 3 %}<br>{% endif %}
-                      {{ word }}
-                    {% endfor %}
-                  </h3>
-                  <p class="ps-price">
-                    <span class="rupee">₹</span>
-                    <span class="amount">
-                      {{ product.price | divided_by: 100.0 | strip_trailing_zeros }}
-                    </span>
-                  </p>
-                  <div class="ps-shop-btn">
-                    SHOP NOW
+              {%- assign handle_query = product.handle | prepend: "[" | append: "]" -%}
+              {%- unless rendered_handles contains handle_query -%}
+                {%- assign rendered_handles = rendered_handles | append: handle_query | append: "," -%}
+                
+                {%- assign prod_cols_array = "" -%}
+                {%- assign map_items = product_collection_map | split: "," -%}
+                {%- for item in map_items -%}
+                  {%- assign parts = item | split: ":" -%}
+                  {%- if parts[0] == product.handle and parts[1] != blank -%}
+                    {%- assign prod_cols_array = prod_cols_array | append: parts[1] | append: "," -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- assign uniq_cols = prod_cols_array | split: "," | uniq -%}
+                {%- assign first_col = true -%}
+                
+                <a href="{{ product.url }}" class="ps-card" data-collections='[{%- for c in uniq_cols -%}{%- if c != blank -%}{%- unless first_col -%},{%- endunless -%}"{{ c }}"{%- assign first_col = false -%}{%- endif -%}{%- endfor -%}]'>
+                  <div class="ps-image-box">
+                    <img
+                      src="{{ product.featured_image | img_url: '600x600' }}"
+                      alt="{{ product.title }}"
+                      class="ps-prod-img"
+                      loading="lazy"
+                    >
                   </div>
-                </div>
-              </a>
+                  <div class="ps-info">
+                    <h3 class="ps-title">
+                      {% assign words = product.title | split: ' ' %}
+                      {% for word in words %}
+                        {% if forloop.index == 3 %}<br>{% endif %}
+                        {{ word }}
+                      {% endfor %}
+                    </h3>
+                    <p class="ps-price">
+                      <span class="rupee">₹</span>
+                      <span class="amount">
+                        {{ product.price | divided_by: 100.0 | strip_trailing_zeros }}
+                      </span>
+                    </p>
+                    <div class="ps-shop-btn">
+                      SHOP NOW
+                    </div>
+                  </div>
+                </a>
+              {%- endunless -%}
             {%- endfor -%}
           {%- endif -%}
         {%- endfor -%}
