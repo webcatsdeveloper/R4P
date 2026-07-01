@@ -375,10 +375,11 @@
           {%- assign collection_handle = block.settings.collection -%}
           {%- assign current_collection = collections[collection_handle] -%}
           {%- assign tab_title_clean = block.settings.tab_title | default: current_collection.title | strip | downcase -%}
+          {%- assign target_collection = collection_handle | default: tab_title_clean | handleize | default: 'all-products' -%}
           
           <button class="pet-tab-item {% if forloop.first %}is-active{% endif %}" 
                   data-match-key="{{ tab_title_clean }}"
-                  data-target-collection="{{ collection_handle | default: 'all-products' }}" 
+                  data-target-collection="{{ target_collection }}" 
                   {{ block.shopify_attributes }}>
             <div class="pet-tab-image-wrapper">
               {%- if block.settings.tab_image != blank -%}
@@ -405,9 +406,10 @@
               {%- assign sub_collection_handle = sub_block.settings.collection -%}
               {%- assign sub_collection = collections[sub_collection_handle] -%}
               {%- assign sub_title_clean = sub_block.settings.tab_title | default: sub_collection.title | strip | downcase -%}
+              {%- assign sub_target_collection = sub_collection_handle | default: sub_title_clean | handleize | default: 'all-products' -%}
               <button class="pet-tab-item" 
                       data-match-key="{{ sub_title_clean }}"
-                      data-target-collection="{{ sub_collection_handle | default: 'all-products' }}">
+                      data-target-collection="{{ sub_target_collection }}">
                 <div class="pet-tab-image-wrapper">
                   {%- if sub_block.settings.tab_image != blank -%}
                     <img src="{{ sub_block.settings.tab_image | image_url: width: 160 }}" alt="{{ sub_block.settings.tab_title | escape }}" loading="lazy">
@@ -440,8 +442,10 @@
             {%- if nested_block.type == 'nested_subcategory_tab' and nested_parent_clean == current_l2_title -%}
               {%- assign nest_collection_handle = nested_block.settings.collection -%}
               {%- assign nest_collection = collections[nest_collection_handle] -%}
+              {%- assign nest_title_clean = nested_block.settings.tab_title | default: nest_collection.title | strip | downcase -%}
+              {%- assign nest_target_collection = nest_collection_handle | default: nest_title_clean | handleize | default: 'all-products' -%}
               <button class="pet-tab-item" 
-                      data-target-collection="{{ nest_collection_handle | default: 'all-products' }}">
+                      data-target-collection="{{ nest_target_collection }}">
                 <div class="pet-tab-image-wrapper">
                   {%- if nested_block.settings.tab_image != blank -%}
                     <img src="{{ nested_block.settings.tab_image | image_url: width: 160 }}" alt="{{ nested_block.settings.tab_title | escape }}" loading="lazy">
@@ -552,7 +556,7 @@
           {%- endfor -%}
 
           <div class="pet-product-card mix-target-item" 
-               data-collections='["{{ collection_handle }}"]'
+               data-collections='[{%- for c in product.collections -%}"{{ c.handle }}"{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]'
                data-type="{{ p_type }}"
                data-price="{{ product.price | money_without_currency | replace: ',', '' }}"
                data-weight='{{ weight_tags | downcase }}'>
@@ -596,29 +600,43 @@
     if (!tabEl) return [];
     
     const pool = new Set();
-    
-    // Add the tab's own target collection
-    const selfCollection = tabEl.getAttribute('data-target-collection');
-    if (selfCollection) {
-      pool.add(selfCollection);
-    }
-    
-    // Find children and grandchildren to pool their collections
     const matchKey = tabEl.getAttribute('data-match-key');
     const parentContainer = tabEl.parentElement;
     const level = parseInt(parentContainer.getAttribute('data-level') || '1');
     
-    if (level === 1 && matchKey) {
-      // Find Level 2 container
+    if (level === 3) {
+      // Level 3: Just the tab's own target collection
+      const col = tabEl.getAttribute('data-target-collection');
+      if (col) pool.add(col);
+    } 
+    else if (level === 2 && matchKey) {
+      // Level 2: check for Level 3 children
+      const l3Container = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"][data-parent-group="${matchKey}"]`);
+      if (l3Container) {
+        // Pool only Level 3 children's target collections
+        const l3Tabs = l3Container.querySelectorAll('.pet-tab-item:not(.pet-back-btn)');
+        l3Tabs.forEach(l3Tab => {
+          const l3Col = l3Tab.getAttribute('data-target-collection');
+          if (l3Col) pool.add(l3Col);
+        });
+      } else {
+        // No Level 3 children: use Level 2 tab's own collection
+        const col = tabEl.getAttribute('data-target-collection');
+        if (col) pool.add(col);
+      }
+    } 
+    else if (level === 1 && matchKey) {
+      // Level 1: L1 collection + all Level 2/3 descendant collections
+      const col = tabEl.getAttribute('data-target-collection');
+      if (col) pool.add(col);
+
       const l2Container = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"][data-parent-group="${matchKey}"]`);
       if (l2Container) {
         const l2Tabs = l2Container.querySelectorAll('.pet-tab-item:not(.pet-back-btn)');
         l2Tabs.forEach(l2Tab => {
           const l2Col = l2Tab.getAttribute('data-target-collection');
-          if (l2Col) {
-            pool.add(l2Col);
-          }
-          // For each Level 2 tab, check and add Level 3 grandchildren
+          if (l2Col) pool.add(l2Col);
+
           const l2Key = l2Tab.getAttribute('data-match-key');
           if (l2Key) {
             const l3Container = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"][data-parent-group="${l2Key}"]`);
@@ -626,23 +644,9 @@
               const l3Tabs = l3Container.querySelectorAll('.pet-tab-item:not(.pet-back-btn)');
               l3Tabs.forEach(l3Tab => {
                 const l3Col = l3Tab.getAttribute('data-target-collection');
-                if (l3Col) {
-                  pool.add(l3Col);
-                }
+                if (l3Col) pool.add(l3Col);
               });
             }
-          }
-        });
-      }
-    } else if (level === 2 && matchKey) {
-      // Find Level 3 container
-      const l3Container = document.querySelector(`#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"][data-parent-group="${matchKey}"]`);
-      if (l3Container) {
-        const l3Tabs = l3Container.querySelectorAll('.pet-tab-item:not(.pet-back-btn)');
-        l3Tabs.forEach(l3Tab => {
-          const l3Col = l3Tab.getAttribute('data-target-collection');
-          if (l3Col) {
-            pool.add(l3Col);
           }
         });
       }
@@ -784,14 +788,11 @@
     const emptyMsg = document.getElementById('PetNoProducts');
     const products = document.querySelectorAll('#PetHub-{{ section.id }} .mix-target-item');
     
-    // 1. Find the Category Scope (active Level 1 tab collection)
-    const activeL1 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-tabs[data-level="1"] .pet-tab-item.is-active');
-    const scopeCollection = activeL1 ? activeL1.getAttribute('data-target-collection') : 'all-products';
-
-    // 2. Find the deepest active tab across all containers
+    // 1. Find the deepest active tab across all containers
     let deepestActiveTab = null;
     const activeL3 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="3"] .pet-tab-item.is-active');
     const activeL2 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-subcategories-container[data-level="2"] .pet-tab-item.is-active');
+    const activeL1 = document.querySelector('#PetHub-{{ section.id }} .pet-hub-tabs[data-level="1"] .pet-tab-item.is-active');
 
     if (activeL3) {
       deepestActiveTab = activeL3;
@@ -818,15 +819,8 @@
 
       let show = true;
 
-      // Filter by Category Scope (Level 1 category restriction)
-      if (scopeCollection && scopeCollection !== 'all-products') {
-        if (!pCollections.includes(scopeCollection)) {
-          show = false;
-        }
-      }
-
       // Filter by active collection pool (progressive aggregate filtering)
-      if (show && activeCollections.length > 0 && !activeCollections.includes('all-products')) {
+      if (activeCollections.length > 0 && !activeCollections.includes('all-products')) {
         const matchCol = pCollections.some(col => activeCollections.includes(col));
         if (!matchCol) {
           show = false;
