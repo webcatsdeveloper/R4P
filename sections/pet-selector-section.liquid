@@ -380,7 +380,7 @@
   <div class="pet-selector-container">
 
     <h2 class="pet-selector-heading">
-      {{ section.settings.heading | replace: "what's right", "<span>what's right</span>" }}
+     {{ section.settings.heading | replace: '[', '<span>' | replace: ']', '</span>' }}
     </h2>
 
     <p class="pet-selector-subheading">
@@ -484,12 +484,12 @@ document.addEventListener("DOMContentLoaded", function () {
   "name": "Pet Selector Section",
   "settings": [
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "So, which furry friend are we shopping for today?",
-      "info": "Highlight 'furry friend' automatically in red."
-    },
+  "type": "text",
+  "id": "heading",
+  "label": "Heading",
+  "default": "So, which [furry friend] are we shopping for today?",
+  "info": "Wrap any words in square brackets [like this] to highlight them in red."
+},
     {
       "type": "text",
       "id": "subheading",
