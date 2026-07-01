@@ -306,7 +306,7 @@
           "settings": {
             "parent_category": "wellness",
             "tab_title": "external hygiene",
-            "tab_image": "shopify://shop_images/Wet_food_2.png",
+            "tab_image": "shopify://shop_images/Personal_Hygiene.png",
             "collection": ""
           }
         },
@@ -315,7 +315,7 @@
           "settings": {
             "parent_category": "wellness",
             "tab_title": "supplements",
-            "tab_image": "shopify://shop_images/Wet_food_2.png",
+            "tab_image": "shopify://shop_images/Personal_Hygiene.png",
             "collection": ""
           }
         }
