@@ -703,7 +703,7 @@
           "type": "faq_entry",
           "settings": {
             "question": "What is Bioavailability? What is the difference between bio-availability of Processed vs Minimally processed",
-            "answer": "<p>Detailed response data layer content layout structure goes here placeholder.</p>"
+            "answer": "<p>Bioavailability describes the extent to which nutrients are actually available for a dog to absorb and use.</p>\n\n<p>Bioavailability depends on the food type, as well as other factors like the levels of other nutrients that might be present.</p>\n\n<p>The bioavailability of processed pet food ingredients is lower than that of ingredients that are minimally processed, like our products.</p>\n\n<p>For example, processed protein sources provide <strong>3.5 kcal per gram</strong>, whereas the unprocessed equivalent provides <strong>4 kcal per gram</strong>.</p>\n\n<p>This equates to an expected <strong>13% increase</strong> in nutrient availability from fresh, whole foods compared to processed alternatives.</p>\n\n<p>This is one of the reasons why minimally processed foods tend to be better for our pets.</p>\n\n<p>It is also common for dogs on a minimally processed food diet to show improved digestion and decreased poo volumes.</p>"
           }
         }
       },
