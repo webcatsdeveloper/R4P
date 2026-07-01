@@ -219,13 +219,6 @@
             "is_featured": false
           }
         },
-        "card_mVtAK3": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/IMG_20250610_180508.jpg",
-            "is_featured": true
-          }
-        },
         "card_jeUWdp": {
           "type": "card",
           "settings": {
@@ -240,7 +233,6 @@
         "card_M3VgPA",
         "card_daVw78",
         "card_N3qN99",
-        "card_mVtAK3",
         "card_jeUWdp"
       ],
       "name": "Nutrition Story & Cards",
