@@ -233,6 +233,13 @@
             "is_featured": false
           }
         },
+        "card_tWcn3e": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/DSC_3336_1.jpg",
+            "is_featured": false
+          }
+        },
         "card_rbWaLC": {
           "type": "card",
           "settings": {
@@ -249,6 +256,7 @@
         "card_N3qN99",
         "card_jeUWdp",
         "card_xxRgdq",
+        "card_tWcn3e",
         "card_rbWaLC"
       ],
       "name": "Nutrition Story & Cards",
