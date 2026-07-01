@@ -523,9 +523,9 @@
       "name": "Trust Section",
       "settings": {
         "heading": "The Origin STORY",
-        "subtext": "Be a part of a space where pet parents come together to learn, share, and care better.",
+        "subtext": "Nope, we weren't built in a boardroom. We began with a few dogs, a lot of questions, and an unwavering commitment to doing right by them.",
         "btn1_label": "ABOUT US",
-        "btn1_link": "",
+        "btn1_link": "shopify://pages/about-us",
         "btn2_label": "",
         "btn2_link": "",
         "image": "shopify://shop_images/story.jpg"
