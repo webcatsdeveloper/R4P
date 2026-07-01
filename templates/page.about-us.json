@@ -226,18 +226,18 @@
             "is_featured": true
           }
         },
-        "card_rbWaLC": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/WhatsApp_Image_2026-06-29_at_1.53.11_PM.jpg",
-            "is_featured": true
-          }
-        },
         "card_xxRgdq": {
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/194_1_1.jpg",
             "is_featured": false
+          }
+        },
+        "card_rbWaLC": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-29_at_1.53.11_PM.jpg",
+            "is_featured": true
           }
         }
       },
@@ -248,8 +248,8 @@
         "card_daVw78",
         "card_N3qN99",
         "card_jeUWdp",
-        "card_rbWaLC",
-        "card_xxRgdq"
+        "card_xxRgdq",
+        "card_rbWaLC"
       ],
       "name": "Nutrition Story & Cards",
       "settings": {
