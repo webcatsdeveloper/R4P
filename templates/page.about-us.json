@@ -230,7 +230,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/WhatsApp_Image_2026-06-29_at_1.53.11_PM.jpg",
-            "is_featured": false
+            "is_featured": true
           }
         }
       },
