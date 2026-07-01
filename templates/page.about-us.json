@@ -246,6 +246,13 @@
             "image": "shopify://shop_images/WhatsApp_Image_2026-06-29_at_1.53.11_PM.jpg",
             "is_featured": true
           }
+        },
+        "card_4KUEy3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/20260131_160453_1_1.jpg",
+            "is_featured": false
+          }
         }
       },
       "block_order": [
@@ -257,7 +264,8 @@
         "card_jeUWdp",
         "card_xxRgdq",
         "card_tWcn3e",
-        "card_rbWaLC"
+        "card_rbWaLC",
+        "card_4KUEy3"
       ],
       "name": "Nutrition Story & Cards",
       "settings": {
