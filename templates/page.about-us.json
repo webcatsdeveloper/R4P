@@ -208,13 +208,14 @@
         "card_daVw78": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/ea3f7f14acfe612cb8ea2d3da3b972c2ea0175ad.png",
+            "image": "shopify://shop_images/IMG_20250610_180508.jpg",
             "is_featured": true
           }
         },
         "card_N3qN99": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/P1246843.jpg",
             "is_featured": false
           }
         },
