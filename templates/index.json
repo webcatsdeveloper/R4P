@@ -208,7 +208,7 @@
           "type": "nested_subcategory_tab",
           "settings": {
             "parent_subcategory": "Dry food",
-            "tab_title": "Trial pack",
+            "tab_title": "Taster pack",
             "tab_image": "shopify://shop_images/Trial_Pack.png",
             "collection": ""
           }
