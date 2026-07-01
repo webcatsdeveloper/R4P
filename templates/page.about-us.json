@@ -191,10 +191,10 @@
             "is_featured": false
           }
         },
-        "card_frixhX": {
+        "card_4KUEy3": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/P1247007.jpg",
+            "image": "shopify://shop_images/20260131_160453_1_1.jpg",
             "is_featured": true
           }
         },
@@ -240,10 +240,10 @@
             "is_featured": true
           }
         },
-        "card_4KUEy3": {
+        "card_frixhX": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/20260131_160453_1_1.jpg",
+            "image": "shopify://shop_images/P1247007.jpg",
             "is_featured": false
           }
         },
@@ -257,14 +257,14 @@
       },
       "block_order": [
         "card_P3Hjzp",
-        "card_frixhX",
+        "card_4KUEy3",
         "card_M3VgPA",
         "card_daVw78",
         "card_N3qN99",
         "card_jeUWdp",
         "card_xxRgdq",
         "card_tWcn3e",
-        "card_4KUEy3",
+        "card_frixhX",
         "card_rbWaLC"
       ],
       "name": "Nutrition Story & Cards",
