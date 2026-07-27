@@ -771,7 +771,51 @@
                 </button>
                 <div class="pet-accordion-element-panel-slider">
                   <div class="pet-accordion-element-panel-inner-content">
-                    {{ product.description }}
+                    {{ product.metafields.custom.description }}
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- if product.metafields.custom.key_features != blank -%}
+              <div class="pet-accordion-element-node">
+                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                  <span>Key features</span>
+                  <span class="pet-accordion-element-chevron-icon">▼</span>
+                </button>
+                <div class="pet-accordion-element-panel-slider">
+                  <div class="pet-accordion-element-panel-inner-content">
+                    {{ product.metafields.custom.key_features}}
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- if product.metafields.custom.benefits != blank -%}
+              <!-- Transition Metafield Node Block Addition -->
+              <div class="pet-accordion-element-node">
+                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                  <span>Benefits</span>
+                  <span class="pet-accordion-element-chevron-icon">▼</span>
+                </button>
+                <div class="pet-accordion-element-panel-slider">
+                  <div class="pet-accordion-element-panel-inner-content">
+                    {{ product.metafields.custom.benefits }}
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- if product.metafields.custom.usp != blank -%}
+              <!-- Declaration Metafield Node Block Addition -->
+              <div class="pet-accordion-element-node">
+                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
+                  <span>USP</span>
+                  <span class="pet-accordion-element-chevron-icon">▼</span>
+                </button>
+                <div class="pet-accordion-element-panel-slider">
+                  <div class="pet-accordion-element-panel-inner-content">
+                    {{ product.metafields.custom.usp }}
                   </div>
                 </div>
               </div>
@@ -791,49 +835,8 @@
               </div>
             {%- endif -%}
   
-            {%- if product.metafields.custom.detailed_nutrition_analysis != blank -%}
-              <div class="pet-accordion-element-node">
-                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                  <span>Detailed nutrition Analysis</span>
-                  <span class="pet-accordion-element-chevron-icon">▼</span>
-                </button>
-                <div class="pet-accordion-element-panel-slider">
-                  <div class="pet-accordion-element-panel-inner-content">
-                    {{ product.metafields.custom.detailed_nutrition_analysis }}
-                  </div>
-                </div>
-              </div>
-            {%- endif -%}
-  
-            {%- if product.metafields.custom.transition != blank -%}
-              <!-- Transition Metafield Node Block Addition -->
-              <div class="pet-accordion-element-node">
-                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                  <span>Transition</span>
-                  <span class="pet-accordion-element-chevron-icon">▼</span>
-                </button>
-                <div class="pet-accordion-element-panel-slider">
-                  <div class="pet-accordion-element-panel-inner-content">
-                    {{ product.metafields.custom.transition }}
-                  </div>
-                </div>
-              </div>
-            {%- endif -%}
-  
-            {%- if product.metafields.custom.declaration != blank -%}
-              <!-- Declaration Metafield Node Block Addition -->
-              <div class="pet-accordion-element-node">
-                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                  <span>Declaration</span>
-                  <span class="pet-accordion-element-chevron-icon">▼</span>
-                </button>
-                <div class="pet-accordion-element-panel-slider">
-                  <div class="pet-accordion-element-panel-inner-content">
-                    {{ product.metafields.custom.declaration }}
-                  </div>
-                </div>
-              </div>
-            {%- endif -%}
+          
+            
           </div>
         </div>
       </div>
