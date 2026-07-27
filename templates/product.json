@@ -534,6 +534,10 @@
       "settings": {
         "dog_hero_image": "shopify://shop_images/Rectangle_124.png",
         "raw_product_image": "shopify://shop_images/Rectangle_129.png",
+        "feat_icon_1": "shopify://shop_images/Group_59516_3.png",
+        "feat_icon_2": "shopify://shop_images/Group_59515_2.png",
+        "feat_icon_3": "shopify://shop_images/Group_59528_1.png",
+        "feat_icon_4": "shopify://shop_images/Group_59529_1.png",
         "heading_text": "The<br>Science<br>Behind It",
         "node_text_1": "MFC<br>process",
         "node_text_2": "Better<br>nutrient<br>retention",
