@@ -154,7 +154,7 @@
   .pet-prod-review-slider-card {
     background-color: #fbf1e7;
     border-radius: 28px;
-    padding: 40px 40px 20px 40px;
+    padding: 0;
     position: relative;
     overflow: hidden;
     min-height: 290px;
@@ -168,29 +168,24 @@
 
   .pet-prod-review-track-wrapper {
     position: relative;
+    display: flex;
     width: 100%;
     flex-grow: 1;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
   }
 
   /* Target 2: Setup slide layout structures to handle seamless transitions and smooth offsets */
   .pet-prod-review-slide {
-    display: none;
+    display: grid !important;
     grid-template-columns: 1fr 180px;
     gap: 20px;
     align-items: center;
     width: 100%;
     height: 100%;
-    opacity: 0;
-    transform: translateX(15px);
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  /* Target 2: Slide animation behavior properties triggered cleanly on active states */
-  .pet-prod-review-slide.is-open,
-  .pet-prod-review-slide.is-active {
-    display: grid;
-    opacity: 1;
-    transform: translateX(0);
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 40px 40px 0 40px;
   }
 
   .pet-prod-review-text-content {
@@ -237,7 +232,8 @@
     display: flex;
     gap: 8px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-left: 40px;
     z-index: 5;
   }
 
@@ -656,13 +652,9 @@
 
     /* MODIFIED: Re-arranged column stacking context on mobile slide frames */
     .pet-prod-review-slide { 
-      display: grid !important;
       grid-template-columns: 1fr; 
       gap: 10px; 
       padding: 40px 30px 0 30px !important;
-      opacity: 1 !important;
-      transform: translateX(0) !important;
-      transition: none !important;
     }
     .pet-prod-review-pagination-dots {
       margin-left: 30px !important;
@@ -973,21 +965,9 @@
 
   /* --- Review Slider Functionality Core --- */
   function switchReviewSlide(targetIndex) {
-    if (window.innerWidth <= 991) {
-      const trackWrapper = document.querySelector('.pet-prod-review-track-wrapper');
-      if (trackWrapper) {
-        trackWrapper.style.transform = `translateX(-${targetIndex * 100}%)`;
-      }
-    } else {
-      const slides = document.querySelectorAll('.pet-prod-review-slide');
-      slides.forEach((slide) => {
-        slide.classList.remove('is-active');
-        if (parseInt(slide.getAttribute('data-review-index')) === targetIndex) {
-          setTimeout(() => {
-            slide.classList.add('is-active');
-          }, 50);
-        }
-      });
+    const trackWrapper = document.querySelector('.pet-prod-review-track-wrapper');
+    if (trackWrapper) {
+      trackWrapper.style.transform = `translateX(-${targetIndex * 100}%)`;
     }
 
     const dots = document.querySelectorAll('.pet-prod-review-pagination-dot');
