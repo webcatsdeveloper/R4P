@@ -83,6 +83,14 @@
     animation: dynamicMainImageReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
+  .pet-prod-main-image-slider-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: inherit; /* Inherit the border-radius of the display frame */
+  }
+
   .pet-prod-main-image-track {
     display: flex;
     width: 100%;
@@ -704,18 +712,20 @@
     <!-- LEFT COLUMN - CONTAINER GRAPHIC AREA & REVIEW SLIDER -->
     <div class="pet-prod-media-gallery-container">
       <div class="pet-prod-main-display-frame">
-        <div class="pet-prod-main-image-track" id="PetHeroImageTrack">
-          {%- if product.media.size > 0 -%}
-            {%- for media in product.media -%}
-              <div class="pet-prod-image-slide" data-image-index="{{ forloop.index0 }}">
-                <img src="{{ media | image_url: width: 800 }}" data-media-id="{{ media.id }}" alt="{{ product.title | escape }}">
+        <div class="pet-prod-main-image-slider-wrapper">
+          <div class="pet-prod-main-image-track" id="PetHeroImageTrack">
+            {%- if product.media.size > 0 -%}
+              {%- for media in product.media -%}
+                <div class="pet-prod-image-slide" data-image-index="{{ forloop.index0 }}">
+                  <img src="{{ media | image_url: width: 800 }}" data-media-id="{{ media.id }}" alt="{{ product.title | escape }}">
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              <div class="pet-prod-image-slide" data-image-index="0">
+                <img src="https://cdn.shopify.com/s/files/1/0000/0000/files/placeholder_taster_pack.png?v=1" alt="Template Display Frame Asset">
               </div>
-            {%- endfor -%}
-          {%- else -%}
-            <div class="pet-prod-image-slide" data-image-index="0">
-              <img src="https://cdn.shopify.com/s/files/1/0000/0000/files/placeholder_taster_pack.png?v=1" alt="Template Display Frame Asset">
-            </div>
-          {%- endif -%}
+            {%- endif -%}
+          </div>
         </div>
 
         <!-- Interactive Pagination Dots Array Line -->
@@ -1034,13 +1044,14 @@
 
   function initPetImageSlider() {
     const sliderCard = document.querySelector('.pet-prod-main-display-frame');
+    const wrapper = document.querySelector('.pet-prod-main-image-slider-wrapper');
     const trackWrapper = document.getElementById('PetHeroImageTrack');
-    if (sliderCard && trackWrapper) {
+    if (sliderCard && trackWrapper && wrapper) {
       let startX = 0;
       let currentX = 0;
       let diffX = 0;
       let isDragging = false;
-      let containerWidth = sliderCard.offsetWidth;
+      let containerWidth = wrapper.offsetWidth;
 
       sliderCard.addEventListener('touchstart', (e) => {
         stopPetImageAutoplay();
@@ -1048,7 +1059,7 @@
         diffX = 0;
         isDragging = true;
         trackWrapper.style.transition = 'none';
-        containerWidth = sliderCard.offsetWidth || 300;
+        containerWidth = wrapper.offsetWidth || 300;
       }, { passive: true });
 
       sliderCard.addEventListener('touchmove', (e) => {
