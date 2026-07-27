@@ -842,7 +842,7 @@
               <div class="pet-accordion-element-node is-open">
                 <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
                   <span>Description</span>
-                  <span class="pet-accordion-element-chevron-icon">▲</span>
+                  <span class="pet-accordion-element-chevron-icon">▼</span>
                 </button>
                 <div class="pet-accordion-element-panel-slider" style="max-height: none;">
                   <div class="pet-accordion-element-panel-inner-content">
@@ -1035,16 +1035,38 @@
   function executeAccordionToggleTrigger(buttonNode) {
     const containerNode = buttonNode.closest('.pet-accordion-element-node');
     const displayPanel = containerNode.querySelector('.pet-accordion-element-panel-slider');
-    const chevronIcon = buttonNode.querySelector('.pet-accordion-element-chevron-icon');
 
     if (containerNode.classList.contains('is-open')) {
-      displayPanel.style.maxHeight = '0px';
+      // Transition out of max-height: none on load smoothly
+      if (displayPanel.style.maxHeight === 'none' || displayPanel.style.maxHeight === '') {
+        displayPanel.style.maxHeight = displayPanel.scrollHeight + 'px';
+        displayPanel.offsetHeight; // force reflow
+      }
+      setTimeout(() => {
+        displayPanel.style.maxHeight = '0px';
+      }, 10);
       containerNode.classList.remove('is-open');
-      chevronIcon.innerText = '▼';
     } else {
+      // Close all other open accordions in the same container stack
+      const siblingNodes = containerNode.parentElement.querySelectorAll('.pet-accordion-element-node.is-open');
+      siblingNodes.forEach(sibling => {
+        if (sibling !== containerNode) {
+          const siblingPanel = sibling.querySelector('.pet-accordion-element-panel-slider');
+          if (siblingPanel) {
+            if (siblingPanel.style.maxHeight === 'none' || siblingPanel.style.maxHeight === '') {
+              siblingPanel.style.maxHeight = siblingPanel.scrollHeight + 'px';
+              siblingPanel.offsetHeight; // force reflow
+            }
+            setTimeout(() => {
+              siblingPanel.style.maxHeight = '0px';
+            }, 10);
+          }
+          sibling.classList.remove('is-open');
+        }
+      });
+
       displayPanel.style.maxHeight = displayPanel.scrollHeight + "px";
       containerNode.classList.add('is-open');
-      chevronIcon.innerText = '▲';
     }
   }
 </script>
