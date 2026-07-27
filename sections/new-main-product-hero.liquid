@@ -551,14 +551,29 @@
     /* Assign structural orders to render everything sequentially, sending the review card to the bottom */
     .pet-prod-main-display-frame { 
       order: 1; 
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .pet-prod-main-display-frame img {
+      object-fit: contain;
     }
     .pet-prod-dynamic-thumbnails-strip { 
       order: 2; 
       margin-top: -10px; 
       margin-bottom: 10px; 
+      justify-content: center;
     }
     .pet-prod-meta-buy-column { 
       order: 3; 
+      align-items: center;
+      text-align: center;
+    }
+    .pet-prod-rating-row-layout {
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
     }
     
     /* MODIFIED: Adjusted padding to let the image snap perfectly flush with the bottom border mask */
@@ -568,9 +583,68 @@
       padding: 40px 30px 0 30px !important;
     }
 
-    .pet-prod-price-and-weight-flex-row { gap: 20px; justify-content: space-between; }
-    .pet-prod-action-form-matrix, .pet-prod-footer-meta-block { max-width: 100%; }
-    .pet-prod-variant-pill-wrapper { margin-top: 0; }
+    .pet-prod-price-and-weight-flex-row {
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0 30px 0;
+      width: 100%;
+    }
+    .pet-prod-price-inner-stack {
+      align-items: center;
+    }
+    .pet-prod-variant-pill-wrapper {
+      margin-top: 0;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pet-prod-qty-and-subscribe-row-flex {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+    }
+    .pet-prod-qty-selector-engine {
+      width: 130px;
+      box-sizing: border-box;
+    }
+    .pet-btn-black-subscribe {
+      width: 100%;
+    }
+
+    .pet-prod-action-form-matrix, .pet-prod-footer-meta-block {
+      max-width: 100%;
+      width: 100%;
+      align-items: center;
+    }
+
+    .pet-prod-promo-coupon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+    }
+    .pet-prod-promo-coupon-container a {
+      margin-left: 0;
+      display: inline-block;
+    }
+
+    .pet-prod-pdf-guide-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+    }
+    .pet-prod-pdf-guide-row a {
+      margin-left: 0;
+      display: inline-block;
+    }
     
     /* MODIFIED: Re-arranged column stacking context on mobile slide frames */
     .pet-prod-review-slide { 
@@ -743,7 +817,7 @@
             </div>
 
             <button type="button" class="pet-functional-btn pet-btn-outline-cart" onclick="triggerAddToCartAjaxAction(this)">Add To Cart</button>
-            <button type="button" class="pet-functional-btn pet-btn-solid-buy" onclick="triggerDirectInstantCheckoutAction()">Buy It Now</button>
+            <button type="button" class="pet-functional-btn pet-btn-solid-buy" onclick="triggerDirectInstantCheckoutAction()">Buy Now</button>
           </div>
         </form>
 
@@ -756,21 +830,21 @@
           <div class="pet-prod-pdf-guide-row">
             Still in doubt Download our Feeding guide 
             {%- if section.settings.uploaded_feeding_guide_pdf != blank -%}
-              <a href="{{ section.settings.uploaded_feeding_guide_pdf }}" target="_blank">Download PDF ↗</a>
+              <a href="{{ section.settings.uploaded_feeding_guide_pdf }}" target="_blank">Download PDF 📄</a>
             {%- else -%}
-              <a href="#fallback" onclick="alert('Assign documentation links inside the Shopify customization panel options block.'); return false;">Download PDF ↗</a>
+              <a href="#fallback" onclick="alert('Assign documentation links inside the Shopify customization panel options block.'); return false;">Download PDF 📄</a>
             {%- endif -%}
           </div>
 
           <!-- Dynamic Dropdowns Native Selection Framework Panels (image_ff87e4.png) -->
           <div class="pet-prod-accordions-container-stack">
             {%- if product.description != blank -%}
-              <div class="pet-accordion-element-node">
+              <div class="pet-accordion-element-node is-open">
                 <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
                   <span>Description</span>
-                  <span class="pet-accordion-element-chevron-icon">▼</span>
+                  <span class="pet-accordion-element-chevron-icon">▲</span>
                 </button>
-                <div class="pet-accordion-element-panel-slider">
+                <div class="pet-accordion-element-panel-slider" style="max-height: none;">
                   <div class="pet-accordion-element-panel-inner-content">
                     {{ product.metafields.custom.description }}
                   </div>
