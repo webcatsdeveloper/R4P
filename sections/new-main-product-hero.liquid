@@ -83,14 +83,29 @@
     animation: dynamicMainImageReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  /* Target 1: Modified image width rule to display at full absolute boundary size */
-  .pet-prod-main-display-frame img {
+  .pet-prod-main-image-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+  }
+
+  .pet-prod-image-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pet-prod-image-slide img {
     width: 100%;
     height: 100%;
     max-width: 100%;
     max-height: 100%;
     object-fit: cover; /* Ensures beautiful full coverage framing across layouts */
-    transition: opacity 0.25s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   /* Slider Dots Layer */
@@ -553,7 +568,7 @@
       padding: 20px;
       box-sizing: border-box;
     }
-    .pet-prod-main-display-frame img {
+    .pet-prod-image-slide img {
       object-fit: contain;
     }
     .pet-prod-dynamic-thumbnails-strip { 
@@ -689,13 +704,20 @@
     <!-- LEFT COLUMN - CONTAINER GRAPHIC AREA & REVIEW SLIDER -->
     <div class="pet-prod-media-gallery-container">
       <div class="pet-prod-main-display-frame">
-        {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
-        {%- if featured_media != blank -%}
-          <img id="PetHeroPrimaryImageDisplay" src="{{ featured_media | image_url: width: 800 }}" data-media-id="{{ featured_media.id }}" alt="{{ product.title | escape }}">
-        {%- else -%}
-          <img id="PetHeroPrimaryImageDisplay" src="https://cdn.shopify.com/s/files/1/0000/0000/files/placeholder_taster_pack.png?v=1" alt="Template Display Frame Asset">
-        {%- endif -%}
-        
+        <div class="pet-prod-main-image-track" id="PetHeroImageTrack">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+              <div class="pet-prod-image-slide" data-image-index="{{ forloop.index0 }}">
+                <img src="{{ media | image_url: width: 800 }}" data-media-id="{{ media.id }}" alt="{{ product.title | escape }}">
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <div class="pet-prod-image-slide" data-image-index="0">
+              <img src="https://cdn.shopify.com/s/files/1/0000/0000/files/placeholder_taster_pack.png?v=1" alt="Template Display Frame Asset">
+            </div>
+          {%- endif -%}
+        </div>
+
         <!-- Interactive Pagination Dots Array Line -->
         <div class="pet-prod-carousel-dots" id="PetImageCarouselDotsContainer">
           {%- if product.media.size > 0 -%}
@@ -935,10 +957,11 @@
 
 <script>
   let currentPetImageIndex = 0;
+  let petImageAutoplayInterval = null;
+  let isPetImageAutoplayRunning = false;
 
   function syncActivePetThumbnail(element) {
     if (!element) return;
-    const targetUrl = element.getAttribute('data-src');
     const index = parseInt(element.getAttribute('data-index')) || 0;
     currentPetImageIndex = index;
 
@@ -946,13 +969,10 @@
     nodes.forEach(n => n.classList.remove('active'));
     element.classList.add('active');
 
-    const displayImg = document.getElementById('PetHeroPrimaryImageDisplay');
-    if (displayImg && targetUrl) {
-      displayImg.style.opacity = '0.4';
-      setTimeout(() => {
-        displayImg.src = targetUrl;
-        displayImg.style.opacity = '1';
-      }, 120);
+    // Slide the main image track
+    const imageTrack = document.getElementById('PetHeroImageTrack');
+    if (imageTrack) {
+      imageTrack.style.transform = `translateX(-${index * 100}%)`;
     }
 
     const dots = document.querySelectorAll('.pet-prod-carousel-dot');
@@ -960,11 +980,103 @@
       if (dIdx === index) dot.classList.add('active');
       else dot.classList.remove('active');
     });
+
+    if (!isPetImageAutoplayRunning) {
+      startPetImageAutoplay();
+    }
   }
 
   function jumpToPetImageIndex(index) {
-    const matchingThumb = document.querySelector(`.pet-prod-thumbnail-node[data-index="${index}"]`);
-    if (matchingThumb) syncActivePetThumbnail(matchingThumb);
+    currentPetImageIndex = index;
+    const imageTrack = document.getElementById('PetHeroImageTrack');
+    if (imageTrack) {
+      imageTrack.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    const dots = document.querySelectorAll('.pet-prod-carousel-dot');
+    dots.forEach((dot, dIdx) => {
+      if (dIdx === index) dot.classList.add('active');
+      else dot.classList.remove('active');
+    });
+
+    const thumbs = document.querySelectorAll('.pet-prod-thumbnail-node');
+    thumbs.forEach((thumb) => {
+      if (parseInt(thumb.getAttribute('data-index')) === index) {
+        thumb.classList.add('active');
+      } else {
+        thumb.classList.remove('active');
+      }
+    });
+
+    if (!isPetImageAutoplayRunning) {
+      startPetImageAutoplay();
+    }
+  }
+
+  function startPetImageAutoplay() {
+    stopPetImageAutoplay();
+    petImageAutoplayInterval = setInterval(() => {
+      const slides = document.querySelectorAll('.pet-prod-image-slide');
+      if (slides.length <= 1) return;
+      currentPetImageIndex = (currentPetImageIndex + 1) % slides.length;
+      isPetImageAutoplayRunning = true;
+      jumpToPetImageIndex(currentPetImageIndex);
+      isPetImageAutoplayRunning = false;
+    }, 4000);
+  }
+
+  function stopPetImageAutoplay() {
+    if (petImageAutoplayInterval) {
+      clearInterval(petImageAutoplayInterval);
+      petImageAutoplayInterval = null;
+    }
+  }
+
+  function initPetImageSlider() {
+    const sliderCard = document.querySelector('.pet-prod-main-display-frame');
+    const trackWrapper = document.getElementById('PetHeroImageTrack');
+    if (sliderCard && trackWrapper) {
+      let startX = 0;
+      let currentX = 0;
+      let diffX = 0;
+      let isDragging = false;
+      let containerWidth = sliderCard.offsetWidth;
+
+      sliderCard.addEventListener('touchstart', (e) => {
+        stopPetImageAutoplay();
+        startX = e.touches[0].clientX;
+        diffX = 0;
+        isDragging = true;
+        trackWrapper.style.transition = 'none';
+        containerWidth = sliderCard.offsetWidth || 300;
+      }, { passive: true });
+
+      sliderCard.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX;
+        diffX = startX - currentX;
+        const baseTranslate = -currentPetImageIndex * 100;
+        const dragTranslate = baseTranslate - (diffX / containerWidth * 100);
+        trackWrapper.style.transform = `translateX(${dragTranslate}%)`;
+      }, { passive: true });
+
+      sliderCard.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        trackWrapper.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+        const slides = document.querySelectorAll('.pet-prod-image-slide');
+        if (slides.length > 1 && Math.abs(diffX) > 50) {
+          if (diffX > 0) {
+            currentPetImageIndex = (currentPetImageIndex + 1) % slides.length;
+          } else {
+            currentPetImageIndex = (currentPetImageIndex - 1 + slides.length) % slides.length;
+          }
+        }
+        jumpToPetImageIndex(currentPetImageIndex);
+        startPetImageAutoplay();
+      });
+    }
+    startPetImageAutoplay();
   }
 
   /* --- Review Slider Functionality Core --- */
@@ -1058,17 +1170,22 @@
     startReviewAutoplay();
   }
 
-  // Initialize on load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initReviewSlider);
-  } else {
+  // Initialize both sliders
+  function initAllSliders() {
+    initPetImageSlider();
     initReviewSlider();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllSliders);
+  } else {
+    initAllSliders();
   }
 
   // Handle Shopify customizer reloads
   document.addEventListener('shopify:section:load', (event) => {
-    if (event.detail.sectionId === '{{ section.id }}' || event.target.contains(document.querySelector('.pet-prod-review-slider-card'))) {
-      initReviewSlider();
+    if (event.detail.sectionId === '{{ section.id }}' || event.target.contains(document.querySelector('.pet-prod-main-display-frame')) || event.target.contains(document.querySelector('.pet-prod-review-slider-card'))) {
+      initAllSliders();
     }
   });
 
