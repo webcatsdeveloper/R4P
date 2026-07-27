@@ -172,27 +172,38 @@
   }
 
   .science-icon-circle {
-    width: 50px;
-    height: 50px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    border: 1.5px solid #ffffff;
+    border: 2px solid #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
   }
 
-  .science-icon-circle svg,
-  .science-icon-circle img {
-    width: 24px;
-    height: 24px;
+  .science-icon-circle.has-image {
+    border: none;
+  }
+
+  .science-icon-circle svg {
+    width: 44px;
+    height: 44px;
     object-fit: contain;
-    fill: currentColor;
+  }
+
+  .science-icon-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
   }
 
   .science-icon-label {
     color: #ffffff;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 500;
     line-height: 1.4;
     margin: 0;
@@ -248,8 +259,9 @@
     }
     .science-bottom-features-card {
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding: 35px 20px;
+      row-gap: 35px;
+      column-gap: 15px;
+      padding: 40px 24px !important;
     }
     .science-title-card {
       padding: 24px 16px !important;
@@ -261,19 +273,30 @@
       font-size: 22px !important;
       line-height: 1.15;
     }
+    .science-icon-circle {
+      width: 80px !important;
+      height: 80px !important;
+    }
+    .science-icon-circle.has-image {
+      width: 80px !important;
+      height: 80px !important;
+    }
+    .science-icon-circle svg {
+      width: 38px !important;
+      height: 38px !important;
+    }
+    .science-icon-label {
+      font-size: 13px !important;
+      line-height: 1.35 !important;
+      max-width: 120px !important;
+      margin: 0 auto;
+    }
     .science-hero-node {
       width: 85px;
       height: 85px;
     }
     .science-hero-node p {
       font-size: 9px;
-    }
-    /* Reset text constraints on mobile layout for better fluid scaling */
-    .science-icon-node:nth-child(1) .science-icon-label,
-    .science-icon-node:nth-child(2) .science-icon-label,
-    .science-icon-node:nth-child(3) .science-icon-label,
-    .science-icon-node:nth-child(4) .science-icon-label {
-      max-width: 100%;
     }
   }
 {% endstyle %}
@@ -323,41 +346,57 @@
 
       <div class="science-bottom-features-card">
         <div class="science-icon-node">
-          <div class="science-icon-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 8c0-2-2-2-2-4"></path>
-              <path d="M12 8c0-2-2-2-2-4"></path>
-              <path d="M7 8c0-2-2-2-2-4"></path>
-              <path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path>
-              <path d="M12 22a7 7 0 0 0 7-7"></path>
-            </svg>
+          <div class="science-icon-circle{% if section.settings.feat_icon_1 != blank %} has-image{% endif %}">
+            {%- if section.settings.feat_icon_1 != blank -%}
+              <img src="{{ section.settings.feat_icon_1 | image_url: width: 180 }}" alt="{{ section.settings.feat_label_1 | escape }}">
+            {%- else -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 8c0-2-2-2-2-4"></path>
+                <path d="M12 8c0-2-2-2-2-4"></path>
+                <path d="M7 8c0-2-2-2-2-4"></path>
+                <path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path>
+                <path d="M12 22a7 7 0 0 0 7-7"></path>
+              </svg>
+            {%- endif -%}
           </div>
           <p class="science-icon-label">{{ section.settings.feat_label_1 | default: "Controlled low-temperature dehydration" }}</p>
         </div>
 
         <div class="science-icon-node">
-          <div class="science-icon-circle">
-            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="science-icon-circle{% if section.settings.feat_icon_2 != blank %} has-image{% endif %}">
+            {%- if section.settings.feat_icon_2 != blank -%}
+              <img src="{{ section.settings.feat_icon_2 | image_url: width: 180 }}" alt="{{ section.settings.feat_label_2 | escape }}">
+            {%- else -%}
+              <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            {%- endif -%}
           </div>
           <p class="science-icon-label">{{ section.settings.feat_label_2 | default: "Preserves amino acids & micronutrients" }}</p>
         </div>
 
         <div class="science-icon-node">
-          <div class="science-icon-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 8c0-2-2-2-2-4"></path>
-              <path d="M12 8c0-2-2-2-2-4"></path>
-              <path d="M7 8c0-2-2-2-2-4"></path>
-              <path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path>
-              <path d="M12 22a7 7 0 0 0 7-7"></path>
-            </svg>
+          <div class="science-icon-circle{% if section.settings.feat_icon_3 != blank %} has-image{% endif %}">
+            {%- if section.settings.feat_icon_3 != blank -%}
+              <img src="{{ section.settings.feat_icon_3 | image_url: width: 180 }}" alt="{{ section.settings.feat_label_3 | escape }}">
+            {%- else -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 8c0-2-2-2-2-4"></path>
+                <path d="M12 8c0-2-2-2-2-4"></path>
+                <path d="M7 8c0-2-2-2-2-4"></path>
+                <path d="M5 12h14v2a7 7 0 0 1-14 0v-2z"></path>
+                <path d="M12 22a7 7 0 0 0 7-7"></path>
+              </svg>
+            {%- endif -%}
           </div>
           <p class="science-icon-label">{{ section.settings.feat_label_3 | default: "Reduced nutrient loss" }}</p>
         </div>
 
         <div class="science-icon-node">
-          <div class="science-icon-circle">
-            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="science-icon-circle{% if section.settings.feat_icon_4 != blank %} has-image{% endif %}">
+            {%- if section.settings.feat_icon_4 != blank -%}
+              <img src="{{ section.settings.feat_icon_4 | image_url: width: 180 }}" alt="{{ section.settings.feat_label_4 | escape }}">
+            {%- else -%}
+              <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            {%- endif -%}
           </div>
           <p class="science-icon-label">{{ section.settings.feat_label_4 | default: "Higher nutritional density" }}</p>
         </div>
@@ -385,6 +424,30 @@
       "type": "image_picker",
       "id": "raw_product_image",
       "label": "Right Row Product Image"
+    },
+    {
+      "type": "header",
+      "content": "Feature Icons (Optional Upload)"
+    },
+    {
+      "type": "image_picker",
+      "id": "feat_icon_1",
+      "label": "Feature 1 Icon Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "feat_icon_2",
+      "label": "Feature 2 Icon Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "feat_icon_3",
+      "label": "Feature 3 Icon Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "feat_icon_4",
+      "label": "Feature 4 Icon Image"
     },
     {
       "type": "header",
