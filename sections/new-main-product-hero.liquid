@@ -83,12 +83,29 @@
     animation: dynamicMainImageReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
+  /* Desktop: show static image, hide slider */
+  .pet-prod-static-image-wrapper {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pet-prod-static-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    transition: opacity 0.25s ease;
+  }
+
   .pet-prod-main-image-slider-wrapper {
+    display: none;
     width: 100%;
     height: 100%;
     overflow: hidden;
     position: relative;
-    border-radius: inherit; /* Inherit the border-radius of the display frame */
+    border-radius: inherit;
   }
 
   .pet-prod-main-image-track {
@@ -113,7 +130,7 @@
     height: 100%;
     max-width: 100%;
     max-height: 100%;
-    object-fit: cover; /* Ensures beautiful full coverage framing across layouts */
+    object-fit: cover;
   }
 
   /* Slider Dots Layer */
@@ -576,6 +593,12 @@
       padding: 20px;
       box-sizing: border-box;
     }
+    .pet-prod-static-image-wrapper {
+      display: none;
+    }
+    .pet-prod-main-image-slider-wrapper {
+      display: block;
+    }
     .pet-prod-image-slide img {
       object-fit: contain;
     }
@@ -712,6 +735,17 @@
     <!-- LEFT COLUMN - CONTAINER GRAPHIC AREA & REVIEW SLIDER -->
     <div class="pet-prod-media-gallery-container">
       <div class="pet-prod-main-display-frame">
+        <!-- Desktop Layout: Static Image (Previous Layout) -->
+        <div class="pet-prod-static-image-wrapper">
+          {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+          {%- if featured_media != blank -%}
+            <img id="PetHeroPrimaryImageDisplay" src="{{ featured_media | image_url: width: 800 }}" data-media-id="{{ featured_media.id }}" alt="{{ product.title | escape }}">
+          {%- else -%}
+            <img id="PetHeroPrimaryImageDisplay" src="https://cdn.shopify.com/s/files/1/0000/0000/files/placeholder_taster_pack.png?v=1" alt="Template Display Frame Asset">
+          {%- endif -%}
+        </div>
+
+        <!-- Mobile Layout: Sliding Carousel Track (Touch Drag & Auto Slide) -->
         <div class="pet-prod-main-image-slider-wrapper">
           <div class="pet-prod-main-image-track" id="PetHeroImageTrack">
             {%- if product.media.size > 0 -%}
@@ -972,6 +1006,7 @@
 
   function syncActivePetThumbnail(element) {
     if (!element) return;
+    const targetUrl = element.getAttribute('data-src');
     const index = parseInt(element.getAttribute('data-index')) || 0;
     currentPetImageIndex = index;
 
@@ -979,7 +1014,17 @@
     nodes.forEach(n => n.classList.remove('active'));
     element.classList.add('active');
 
-    // Slide the main image track
+    // Update Desktop static image
+    const displayImg = document.getElementById('PetHeroPrimaryImageDisplay');
+    if (displayImg && targetUrl) {
+      displayImg.style.opacity = '0.4';
+      setTimeout(() => {
+        displayImg.src = targetUrl;
+        displayImg.style.opacity = '1';
+      }, 120);
+    }
+
+    // Slide Mobile main image track
     const imageTrack = document.getElementById('PetHeroImageTrack');
     if (imageTrack) {
       imageTrack.style.transform = `translateX(-${index * 100}%)`;
@@ -998,24 +1043,32 @@
 
   function jumpToPetImageIndex(index) {
     currentPetImageIndex = index;
+
+    // Slide Mobile main image track
     const imageTrack = document.getElementById('PetHeroImageTrack');
     if (imageTrack) {
       imageTrack.style.transform = `translateX(-${index * 100}%)`;
     }
 
-    const dots = document.querySelectorAll('.pet-prod-carousel-dot');
-    dots.forEach((dot, dIdx) => {
-      if (dIdx === index) dot.classList.add('active');
-      else dot.classList.remove('active');
-    });
-
+    // Update Desktop static image and thumbnails active class
     const thumbs = document.querySelectorAll('.pet-prod-thumbnail-node');
     thumbs.forEach((thumb) => {
       if (parseInt(thumb.getAttribute('data-index')) === index) {
         thumb.classList.add('active');
+        const targetUrl = thumb.getAttribute('data-src');
+        const displayImg = document.getElementById('PetHeroPrimaryImageDisplay');
+        if (displayImg && targetUrl) {
+          displayImg.src = targetUrl;
+        }
       } else {
         thumb.classList.remove('active');
       }
+    });
+
+    const dots = document.querySelectorAll('.pet-prod-carousel-dot');
+    dots.forEach((dot, dIdx) => {
+      if (dIdx === index) dot.classList.add('active');
+      else dot.classList.remove('active');
     });
 
     if (!isPetImageAutoplayRunning) {
@@ -1025,6 +1078,8 @@
 
   function startPetImageAutoplay() {
     stopPetImageAutoplay();
+    if (window.innerWidth > 991) return; // Only auto-slide on mobile responsive screens
+
     petImageAutoplayInterval = setInterval(() => {
       const slides = document.querySelectorAll('.pet-prod-image-slide');
       if (slides.length <= 1) return;
