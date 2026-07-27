@@ -968,7 +968,12 @@
   }
 
   /* --- Review Slider Functionality Core --- */
+  let currentReviewIndex = 0;
+  let reviewAutoplayInterval = null;
+  let isAutoplayRunning = false;
+
   function switchReviewSlide(targetIndex) {
+    currentReviewIndex = targetIndex;
     const trackWrapper = document.querySelector('.pet-prod-review-track-wrapper');
     if (trackWrapper) {
       trackWrapper.style.transform = `translateX(-${targetIndex * 100}%)`;
@@ -981,7 +986,91 @@
         dot.classList.add('is-active');
       }
     });
+
+    if (!isAutoplayRunning) {
+      startReviewAutoplay();
+    }
   }
+
+  function startReviewAutoplay() {
+    stopReviewAutoplay();
+    reviewAutoplayInterval = setInterval(() => {
+      const slides = document.querySelectorAll('.pet-prod-review-slide');
+      if (slides.length <= 1) return;
+      currentReviewIndex = (currentReviewIndex + 1) % slides.length;
+      isAutoplayRunning = true;
+      switchReviewSlide(currentReviewIndex);
+      isAutoplayRunning = false;
+    }, 4000);
+  }
+
+  function stopReviewAutoplay() {
+    if (reviewAutoplayInterval) {
+      clearInterval(reviewAutoplayInterval);
+      reviewAutoplayInterval = null;
+    }
+  }
+
+  function initReviewSlider() {
+    const sliderCard = document.querySelector('.pet-prod-review-slider-card');
+    const trackWrapper = document.querySelector('.pet-prod-review-track-wrapper');
+    if (sliderCard && trackWrapper) {
+      let startX = 0;
+      let currentX = 0;
+      let diffX = 0;
+      let isDragging = false;
+      let containerWidth = sliderCard.offsetWidth;
+
+      sliderCard.addEventListener('touchstart', (e) => {
+        stopReviewAutoplay();
+        startX = e.touches[0].clientX;
+        diffX = 0;
+        isDragging = true;
+        trackWrapper.style.transition = 'none';
+        containerWidth = sliderCard.offsetWidth || 300;
+      }, { passive: true });
+
+      sliderCard.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX;
+        diffX = startX - currentX;
+        const baseTranslate = -currentReviewIndex * 100;
+        const dragTranslate = baseTranslate - (diffX / containerWidth * 100);
+        trackWrapper.style.transform = `translateX(${dragTranslate}%)`;
+      }, { passive: true });
+
+      sliderCard.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        trackWrapper.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+        const slides = document.querySelectorAll('.pet-prod-review-slide');
+        if (slides.length > 1 && Math.abs(diffX) > 50) {
+          if (diffX > 0) {
+            currentReviewIndex = (currentReviewIndex + 1) % slides.length;
+          } else {
+            currentReviewIndex = (currentReviewIndex - 1 + slides.length) % slides.length;
+          }
+        }
+        switchReviewSlide(currentReviewIndex);
+        startReviewAutoplay();
+      });
+    }
+    startReviewAutoplay();
+  }
+
+  // Initialize on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReviewSlider);
+  } else {
+    initReviewSlider();
+  }
+
+  // Handle Shopify customizer reloads
+  document.addEventListener('shopify:section:load', (event) => {
+    if (event.detail.sectionId === '{{ section.id }}' || event.target.contains(document.querySelector('.pet-prod-review-slider-card'))) {
+      initReviewSlider();
+    }
+  });
 
   function executeLocalQuantityOffset(amount) {
     const inputNode = document.getElementById('PetHeroFormQuantityInput');
