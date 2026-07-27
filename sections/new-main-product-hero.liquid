@@ -154,7 +154,7 @@
   .pet-prod-review-slider-card {
     background-color: #fbf1e7;
     border-radius: 28px;
-    padding: 40px 40px 20px 40px;
+    padding: 0;
     position: relative;
     overflow: hidden;
     min-height: 290px;
@@ -185,6 +185,7 @@
     height: 100%;
     flex-shrink: 0;
     box-sizing: border-box;
+    padding: 40px 40px 0 40px;
   }
 
   .pet-prod-review-text-content {
@@ -231,7 +232,8 @@
     display: flex;
     gap: 8px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-left: 40px;
     z-index: 5;
   }
 
@@ -575,7 +577,7 @@
     .pet-prod-review-slider-card { 
       order: 4; 
       margin-top: 20px; 
-      padding: 40px 30px 0 30px !important;
+      padding: 0 !important;
     }
 
     .pet-prod-price-and-weight-flex-row {
@@ -645,6 +647,11 @@
     .pet-prod-review-slide { 
       grid-template-columns: 1fr; 
       gap: 10px; 
+      padding: 40px 30px 0 30px !important;
+    }
+    .pet-prod-review-pagination-dots {
+      margin-left: 30px !important;
+      margin-bottom: 20px !important;
     }
     .pet-prod-review-graphic-container { 
       justify-content: center; 
