@@ -385,7 +385,7 @@
             "parent_category": "Dogs",
             "tab_title": "Dry",
             "tab_image": "shopify://shop_images/Dry_food.png",
-            "collection": "dry-copy"
+            "collection": "dog-1"
           }
         },
         "nested_subcategory_tab_WEFBwW": {
@@ -394,7 +394,7 @@
             "parent_subcategory": "Dry",
             "tab_title": "Taster Pack",
             "tab_image": "shopify://shop_images/Trial_Pack.png",
-            "collection": "dog-1"
+            "collection": "dry-copy"
           }
         },
         "nested_subcategory_tab_We9aA4": {
