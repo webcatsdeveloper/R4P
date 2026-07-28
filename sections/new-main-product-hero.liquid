@@ -850,8 +850,11 @@
 
       <div class="stagger-node sn-2">
         <div class="pet-prod-rating-row-layout">
-          <div class="pet-prod-rating-stars-element">★★★★☆</div>
-          <span class="pet-prod-rating-numerical-count">4 reviews</span>
+          <!-- Start of Judge.me code -->
+          <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'>
+            {{ product.metafields.judgeme.badge }}
+          </div>
+          <!-- End of Judge.me code -->
         </div>
       </div>
 
