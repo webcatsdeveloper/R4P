@@ -337,6 +337,17 @@
   .pet-prod-rating-row-layout .jdgm-preview-badge .jm-star-rating__font-icon::after {
     color: #e52d27 !important;
   }
+  
+  .pet-prod-rating-row-layout .jdgm-widget,
+  .pet-prod-rating-row-layout .jdgm-prev-badge {
+    display: block !important;
+  }
+  
+  .pet-prod-rating-row-layout .jdgm-prev-badge__text {
+    font-size: 12px;
+    color: #666666;
+    margin-left: 8px;
+  }
   .pet-prod-rating-numerical-count {
     font-size: 12px;
     color: #666666;
@@ -862,7 +873,20 @@
         <div class="pet-prod-rating-row-layout">
           <!-- Start of Judge.me code -->
           <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'>
-            {{ product.metafields.judgeme.badge }}
+            {% if product.metafields.judgeme.badge != blank %}
+              {{ product.metafields.judgeme.badge }}
+            {% else %}
+              <div class="jdgm-prev-badge" data-average-rating="0.00" data-number-of-reviews="0">
+                <span class="jdgm-prev-badge__stars">
+                  <span class="jm-star-rating__font-icon">&#x2606;</span>
+                  <span class="jm-star-rating__font-icon">&#x2606;</span>
+                  <span class="jm-star-rating__font-icon">&#x2606;</span>
+                  <span class="jm-star-rating__font-icon">&#x2606;</span>
+                  <span class="jm-star-rating__font-icon">&#x2606;</span>
+                </span>
+                <span class="jdgm-prev-badge__text">0 reviews</span>
+              </div>
+            {% endif %}
           </div>
           <!-- End of Judge.me code -->
         </div>
