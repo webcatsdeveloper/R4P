@@ -165,6 +165,13 @@ strong,
 em {
   font-family: 'Degular Demo', sans-serif !important;
 }
+
+/* Ensure Judge.me icons render correctly despite the global font override */
+.jdgm-star,
+.jdgm-star::before,
+.jdgm-star::after {
+  font-family: 'judgeme-font' !important;
+}
 </style>
   </head>
 
