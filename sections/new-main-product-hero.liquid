@@ -915,15 +915,15 @@
 
           <!-- Dynamic Dropdowns Native Selection Framework Panels (image_ff87e4.png) -->
           <div class="pet-prod-accordions-container-stack">
-            {%- if product.description != blank -%}
-              <div class="pet-accordion-element-node is-open">
+            {%- if product.metafields.custom.description != blank -%}
+              <div class="pet-accordion-element-node">
                 <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                  <span>Description</span>
+                  <span>Key features</span>
                   <span class="pet-accordion-element-chevron-icon">▼</span>
                 </button>
-                <div class="pet-accordion-element-panel-slider" style="max-height: none;">
+                <div class="pet-accordion-element-panel-slider">
                   <div class="pet-accordion-element-panel-inner-content">
-                    {{ product.metafields.custom.description }}
+                    {{ product.metafields.custom.description}}
                   </div>
                 </div>
               </div>
