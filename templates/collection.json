@@ -376,7 +376,7 @@
           "settings": {
             "tab_title": "Dogs",
             "tab_image": "shopify://shop_images/Layer_1_11_34095a9b-b836-4476-b447-1552f349f8fa.png",
-            "collection": "dogs"
+            "collection": ""
           }
         },
         "subcategory_tab_CMkEnf": {
@@ -385,7 +385,7 @@
             "parent_category": "Dogs",
             "tab_title": "Dry",
             "tab_image": "shopify://shop_images/Dry_food.png",
-            "collection": "dog-1"
+            "collection": "dogs"
           }
         },
         "nested_subcategory_tab_WEFBwW": {
