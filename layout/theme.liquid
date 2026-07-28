@@ -169,8 +169,11 @@ em {
 /* Ensure Judge.me icons render correctly despite the global font override */
 .jdgm-star,
 .jdgm-star::before,
-.jdgm-star::after {
-  font-family: 'judgeme-font' !important;
+.jdgm-star::after,
+.jm-star-rating__font-icon,
+.jm-star-rating__font-icon::before,
+.jm-star-rating__font-icon::after {
+  font-family: 'judgeme-font', 'JudgemeStar', monospace !important;
 }
 </style>
   </head>
