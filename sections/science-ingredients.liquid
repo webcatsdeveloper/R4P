@@ -92,9 +92,10 @@
 
 .sci-ing-large-card img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  height: auto;      /* Instead of 100% */
+  display: block;    /* Fix the typo */
+  object-fit: contain; /* or remove object-fit completely */
+}k;
 }
 
 /* MOBILE ARCHITECTURE: ROW 1 ELEMENTS SIDE-BY-SIDE, ROW 2 LARGE IMAGE */
