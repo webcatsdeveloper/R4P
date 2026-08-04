@@ -1051,20 +1051,24 @@
               </div>
             {%- endif -%}
 
-            {%- if product.metafields.custom.what_s_in_it_for_you != blank -%}
-              <div class="pet-accordion-element-node">
-                <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                  <span>What's in it for you?</span>
-                  <span class="pet-accordion-element-chevron-icon">▼</span>
-                </button>
-                <div class="pet-accordion-element-panel-slider">
-                  <div class="pet-accordion-element-panel-inner-content">
-                    {{ product.metafields.custom.what_s_in_it_for_you }}
-                  </div>
-                </div>
-              </div>
-            {%- endif -%}
-  
+           {%- if product.metafields.custom.what_s_in_it_for_you != blank -%}
+  <div class="pet-accordion-element-node">
+    <button
+      class="pet-accordion-element-trigger-bar"
+      type="button"
+      onclick="executeAccordionToggleTrigger(this)"
+    >
+      <span>What's in it for you?</span>
+      <span class="pet-accordion-element-chevron-icon">▼</span>
+    </button>
+
+    <div class="pet-accordion-element-panel-slider">
+      <div class="pet-accordion-element-panel-inner-content">
+        {{ product.metafields.custom.what_s_in_it_for_you | metafield_tag }}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
           
             
           </div>
