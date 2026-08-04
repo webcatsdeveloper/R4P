@@ -217,15 +217,13 @@
 
   /* Target 2: Setup slide layout structures to handle seamless transitions and smooth offsets */
   .pet-prod-review-slide {
-    display: grid !important;
-    grid-template-columns: 1fr 180px;
-    gap: 20px;
-    align-items: center;
+    display: flex !important;
+    align-items: center !important;
     width: 100%;
-    height: 100%;
     flex-shrink: 0;
     box-sizing: border-box;
-    padding: 40px 40px 0 40px;
+    padding: 40px 220px 0 40px;
+    position: relative;
   }
 
   .pet-prod-review-text-content {
@@ -252,29 +250,37 @@
   }
 
   .pet-prod-review-graphic-container {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    width: 280px;
+    height: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    height: 100%;
-    align-self: end;
+    pointer-events: none;
+    z-index: 1;
   }
 
   .pet-prod-review-graphic-container img,
   .pet-prod-review-graphic-container svg {
-    max-height: 240px;
-    width: auto;
-    object-fit: contain;
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: contain !important;
+    object-position: bottom right !important;
     display: block;
     margin-bottom: -20px; /* Merges evenly with border radius mask limits */
   }
 
   .pet-prod-review-pagination-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     gap: 8px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    margin-left: 40px;
     z-index: 5;
+    margin: 0;
   }
 
   .pet-prod-review-pagination-dot {
@@ -454,6 +460,14 @@
     font-weight: 600;
     color: #111111;
     background: transparent;
+    padding: 0 !important;
+    margin: 0 !important;
+    -moz-appearance: textfield;
+  }
+  .pet-prod-qty-value-input-node::-webkit-outer-spin-button,
+  .pet-prod-qty-value-input-node::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
   .pet-prod-qty-value-input-node:focus {
     outline: none;
@@ -725,17 +739,24 @@
 
     /* MODIFIED: Re-arranged column stacking context on mobile slide frames */
     .pet-prod-review-slide { 
-      grid-template-columns: 1fr; 
-      gap: 10px; 
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
       padding: 40px 30px 0 30px !important;
     }
     .pet-prod-review-pagination-dots {
-      margin-left: 30px !important;
-      margin-bottom: 20px !important;
+      display: none !important;
     }
     .pet-prod-review-graphic-container { 
-      justify-content: center; 
-      margin-bottom: 0px;
+      position: relative !important;
+      right: auto !important;
+      bottom: auto !important;
+      width: 100% !important;
+      height: auto !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: flex-end !important;
+      margin-top: auto !important;
     }
     
     /* MODIFIED: Restored generous height and bottom boundary placement matching Figma */
@@ -743,8 +764,9 @@
     .pet-prod-review-graphic-container svg { 
       margin-bottom: 0 !important; 
       max-height: 270px !important; 
-      width: auto;
-      object-fit: contain;
+      width: auto !important;
+      object-fit: contain !important;
+      object-position: bottom center !important;
     }
   }
 {% endstyle %}
@@ -960,7 +982,7 @@
             {%- if product.metafields.custom.description != blank -%}
               <div class="pet-accordion-element-node">
                 <button class="pet-accordion-element-trigger-bar" type="button" onclick="executeAccordionToggleTrigger(this)">
-                  <span>Description</span>
+                  <span>Key features</span>
                   <span class="pet-accordion-element-chevron-icon">▼</span>
                 </button>
                 <div class="pet-accordion-element-panel-slider">
